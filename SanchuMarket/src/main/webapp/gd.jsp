@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-s
+와우
+이게 수정이 된다고?!
 </body>
 </html>
