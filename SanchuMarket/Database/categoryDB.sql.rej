@@ -1,0 +1,13 @@
+diff a/SanchuMarket/Database/categoryDB.sql b/SanchuMarket/Database/categoryDB.sql	(rejected hunks)
+@@ -43,6 +43,11 @@
+ 	'����'
+ );
+ 
++insert into category values(
++	(select COALESCE(max(c_idx)+1,1) from category) ,
++	'��Ƽ/�̿�'
++);
++
+ 
+ 
+ ------ ��ȸ��
