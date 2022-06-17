@@ -1,6 +1,6 @@
 /*
 --실수 했을때 테이블 드랍용
-drop table category
+drop table category cascade constraints
 
 
 create table category

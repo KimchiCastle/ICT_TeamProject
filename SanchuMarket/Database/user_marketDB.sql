@@ -1,6 +1,6 @@
 /*
 --실수 했을때 테이블 드랍용
-drop table user_market
+drop table user_market cascade constraints
 
 --회원 테이블 생성, user는 예약어라 사용불가. user_market으로 대체
 
@@ -86,6 +86,24 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		'admin123@gmail.com', --메일
 		'일반회원'			  --회원등급
 		);
+
+insert into user_market 
+values( (select nvl(max(u_idx)+1,1) from user_market),		  
+		'haha',   	 	 	  --아이디
+		'1234',	    		  --비번
+		'김하하',	    	  --이름
+		'하하',		   		  --닉네임
+		'1993-06-18', 		  --생년월일
+		'서울시 마포구',	  --주소
+		sysdate,			  --가입일자
+		0,					  --평점
+		'안녕난하하야',		  --자기소개
+		null,				  --사진
+		'010-4567-8901',	  --전화번호
+		'haha12@naver.com',   --메일
+		'일반회원'			  --회원등급
+		);
+
 
 
 ---조회용
