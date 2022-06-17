@@ -1,6 +1,6 @@
 /*
 --실수 했을때 테이블 드랍용
-drop table product
+drop table product cascade constraints
 
 ---상품테이블
 
@@ -14,6 +14,7 @@ create table product
 	p_price		int			  not null,	--상품가격
 	p_condition varchar2(100), 			--상품상태
 	p_exp		varchar2(4000),			--상품설명
+	p_location	varchar2(500),			--거래지역
 	p_click		int,		   			--조회수
 	p_status	varchar2(100)  			--거래상태
 )
@@ -45,7 +46,8 @@ values( (select nvl(max(p_idx)+1,1) from product),
 		sysdate,		--등록일자
 		130000,			--가격
 		'거의신품',		--상품상태
-		'직거래만 합니다.',	-- 상품설명
+		'직거래만 합니다.',	--상품설명
+		'서울시 마포구',	--거래지역
 		10,				--조회수
 		'거래가능'		--거래상태
 		);
