@@ -4,9 +4,9 @@ drop table JJim cascade constraints
 
 create table jjim
 (
-	j_idx	int,		   --찜관리번호(pk)
-	p_idx	int,		   --상품번호(fk)
-	u_id	varchar2(100)  --회원아이디
+	j_idx	int, 	 --찜관리번호(pk)
+	p_idx	int,	 --상품번호(fk)
+	u_idx	int		 --회원아이디(fk)
 )
 
 
@@ -21,6 +21,11 @@ alter table jjim
 alter table jjim
 	add constraint fk_jjim_p_idx foreign key(p_idx)
 	references product(p_idx);
+
+--회원테이블
+alter table jjim
+	add constraint fk_jjim_u_idx foreign key(u_idx)
+	references user_market(u_idx);
 
 
 
