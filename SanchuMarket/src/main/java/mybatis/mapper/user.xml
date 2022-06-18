@@ -5,8 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="member">
 	
 	<!-- 회원목록 조회  -->
-	<select id="member_list" resultType="vo.MemberVo">
-		select * from member order by m_idx
+	<select id="user_list" resultType="vo.UserVo">
+		select * from user_market order by u_idx
+	</select>
+	
+	<select id="user_list_one" resultType="vo.UserVo">
+		select * from user_market order by u_idx
 	</select>
 	
 	
