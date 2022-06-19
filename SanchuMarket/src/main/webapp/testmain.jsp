@@ -16,7 +16,7 @@
 	}
 	
 	#recent{
-		margin-left: 100px;
+		position: absolute;
 		float: left;
 		position: sticky;
 		top: 100px;
