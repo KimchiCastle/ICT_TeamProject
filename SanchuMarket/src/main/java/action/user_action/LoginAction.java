@@ -1,4 +1,4 @@
-package action;
+package action.user_action;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import vo.UserVo;
 /**
  * Servlet implementation class LoginAction
  */
-@WebServlet("/login.do")
+@WebServlet("/user/login.do")
 public class LoginAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,32 +26,15 @@ public class LoginAction extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");//특수문자 들어와도 인코딩 해야함 
 
-		String m_id = request.getParameter("m_id");
-		String m_pwd = request.getParameter("m_pwd");
-		
-		UserVo user = null;
-		
-		//session tracking 1.
-		if(user==null) {
-			
-			response.sendRedirect("login_form.do?reason=fail_id");
-			return;
-		}
-		
-		//session tracking 2.
-		//dao로 가져온 user정보는 vo형이므로 getter씀
-		if(user.getU_pwd().equals(m_pwd)==false){
-			
-		  //비번만 틀렸을때 id는 로그인창에 남기기 위해 parameter로넘겨줌
-			response.sendRedirect("login_form.do?reason=fail_pwd&m_id="+m_id);
-			return;
-		}
+		String u_id = request.getParameter("u_id");
+	
+		UserVo user =  UserDao.getInstance().selectOneById(u_id);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user );
 		
 		//경로 지정 주의
-		response.sendRedirect("../photo/list.do");
+		response.sendRedirect("main.do");
 	}
 
 }

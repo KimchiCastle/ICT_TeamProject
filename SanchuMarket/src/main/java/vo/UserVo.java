@@ -18,7 +18,34 @@ public class UserVo {
   String u_tel;
   String u_mail;
   String u_grade;
+  String u_ip;
   
+  public UserVo() {
+		
+	}
+  
+
+
+public UserVo(String u_id, String u_pwd, String u_name, String u_nickname, String u_birth, String u_addr,
+		int u_like, String u_profile, String u_photo, String u_tel, String u_mail, String u_grade, String u_ip) {
+	
+	this.u_id = u_id;
+	this.u_pwd = u_pwd;
+	this.u_name = u_name;
+	this.u_nickname = u_nickname;
+	this.u_birth = u_birth;
+	this.u_addr = u_addr;
+	this.u_like = u_like;
+	this.u_profile = u_profile;
+	this.u_photo = u_photo;
+	this.u_tel = u_tel;
+	this.u_mail = u_mail;
+	this.u_grade = u_grade;
+	this.u_ip = u_ip;
+}
+
+
+
 public int getU_idx() {
 	return u_idx;
 }

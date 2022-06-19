@@ -31,6 +31,9 @@ alter table product
 	add constraint fk_product_u_idx foreign key(u_idx)
 	references user_market(u_idx);
 
+--외래키 삭제	
+ALTER TABLE product DROP CONSTRAINT fk_product_u_idx;
+
 --카테고리 테이블
 alter table product
 	add constraint fk_product_c_idx foreign key(c_idx)

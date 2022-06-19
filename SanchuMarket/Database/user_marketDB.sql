@@ -19,7 +19,8 @@ create table user_market
 	u_photo		varchar2(2000),			 -- 회원사진
 	u_tel		varchar2(100)  not null, -- 전화번호
 	u_mail		varchar2(100)  not null, -- 이메일
-	u_grade		varchar2(100)  default '일반회원' -- 회원등급
+	u_grade		varchar2(100)  default '일반회원', -- 회원등급
+	u_ip		varchar2(100) 
 )
 
 ---------------------- 제약조건 ---------------------
@@ -46,8 +47,6 @@ alter table user_market
 alter table user_market
 	add constraint ck_user_market_u_garde 
 	check( u_grade in( '일반회원','사업자','관리자' ) )
-
-
 	
 ---------------------- 샘플데이터 ----------------------
 
@@ -66,7 +65,8 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		null,				  --사진
 		'010-1234-5678',	  --전화번호
 		'hongkill@gmail.com', --메일
-		'일반회원'			  --회원등급
+		'일반회원'	,		  --회원등급
+		'111-111-111'   --ip
 		);
 
 
@@ -84,7 +84,8 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		null,				  --사진
 		'010-1234-5678',	  --전화번호
 		'admin123@gmail.com', --메일
-		'일반회원'			  --회원등급
+		'일반회원',			  --회원등급
+		'111-111-111'   --ip
 		);
 
 insert into user_market 
@@ -101,14 +102,14 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		null,				  --사진
 		'010-4567-8901',	  --전화번호
 		'haha12@naver.com',   --메일
-		'일반회원'			  --회원등급
+		'일반회원'	,		  --회원등급
+		'111-111-111'   --ip
 		);
 
 
 
 ---조회용
-select * from user_market
-
+select * from user_market pk_user_maket_u_idx;
 
 
 
