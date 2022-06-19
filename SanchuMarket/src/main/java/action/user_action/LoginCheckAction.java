@@ -1,4 +1,4 @@
-package action;
+package action.user_action;
 
 import java.io.IOException;
 
@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDao;
+import vo.UserVo;
+
 /**
- * Servlet implementation class EnrollFormAction
+ * Servlet implementation class LoginCheckAction
  */
-@WebServlet("/enroll_form.do")
-public class EnrollFormAction extends HttpServlet {
+@WebServlet("/user/login_check.do")
+public class LoginCheckAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -23,10 +26,17 @@ public class EnrollFormAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//forward
-		String forward_page = "";
-		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
-		disp.forward(request, response);
+
+		String u_id = request.getParameter("u_id");
+		String u_pwd = request.getParameter("u_pwd");
+		
+		UserVo user =  UserDao.getInstance().selectOneById(u_id);
+		
+		boolean bResult = (user==null || !u_pwd.equals(user.getU_pwd()));
+		
+				
+		response.setContentType("text; charset=utf-8");
+		response.getWriter().print(bResult);
 
 	}
 

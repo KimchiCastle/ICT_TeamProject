@@ -1,4 +1,4 @@
-package action;
+package action.user_action;
 
 import java.io.IOException;
 
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EnrollAction
+ * Servlet implementation class EnrollFormAction
  */
-@WebServlet("/enroll.do")
-public class EnrollAction extends HttpServlet {
+@WebServlet("/enroll_form.do")
+public class EnrollFormAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -24,7 +24,7 @@ public class EnrollAction extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		//forward
-		String forward_page = "";
+		String forward_page = "enroll_form.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
 		disp.forward(request, response);
 

@@ -1,4 +1,4 @@
-package action;
+package action.user_action;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginFormAction
  */
-@WebServlet("/login_form.do")
+@WebServlet("/user/login_form.do")
 public class LoginFormAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
