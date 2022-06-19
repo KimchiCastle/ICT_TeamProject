@@ -12,7 +12,6 @@
 		text-align: center;
 		width: 100px;
 		border: 1px solid black;
-		position: sticky;
 		padding: 3px;
 	}
 	
@@ -24,7 +23,6 @@
 		margin-top: 10px;
 		width: 100%;
 		
-		text-align: center;
 	}
 	#top_button{
 		background: white;
@@ -40,6 +38,7 @@
 </head>
 <body>
 
+<div>
 	<div id="floater">
 		<span>최근 본 상품</span>
 		<div id="recentBanner">
@@ -64,6 +63,7 @@
 		<button id="top_button" onclick="window.scrollTo(0,0);">TOP</button>
 		
 	</div>
+</div>
 
 
 </body>
