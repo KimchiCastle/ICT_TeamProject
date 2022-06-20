@@ -43,6 +43,11 @@ insert into category values(
 	'가전'
 );
 
+insert into category values(
+	(select nvl(max(c_idx)+1,1) from category) ,
+	'뷰티/미용'
+);
+
 
 
 ------ 조회용
