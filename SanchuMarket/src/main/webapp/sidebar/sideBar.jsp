@@ -9,6 +9,7 @@
 
 <style type="text/css">
 	#floater{
+		
 		text-align: center;
 		width: 100px;
 		border: 1px solid black;
