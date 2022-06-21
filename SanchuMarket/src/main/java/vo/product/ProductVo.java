@@ -1,13 +1,22 @@
 package vo.product;
 
-import java.sql.Date;
-
 public class ProductVo {
 	
-	int p_idx, u_idx, c_idx, p_price, p_click;
-	String p_name, p_condition, p_exp, p_status;
-	Date p_date;
+	int p_idx; // 상품번호
+	int u_idx; // 회원번호
+	int c_idx; // 카테고리번호
 	
+	String p_name; // 상품명
+	String p_date; // 상품등록일
+	int p_price; // 상품가격
+	
+	String p_condition; // 상품상태
+	String p_exp; // 상품설명
+	String p_location; // 거래지역
+	
+	int p_click; // 조회수
+	
+	String p_status; // 거래상태
 	public ProductVo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -68,10 +77,10 @@ public class ProductVo {
 	public void setP_status(String p_status) {
 		this.p_status = p_status;
 	}
-	public Date getP_date() {
+	public String getP_date() {
 		return p_date;
 	}
-	public void setP_date(Date p_date) {
+	public void setP_date(String p_date) {
 		this.p_date = p_date;
 	}
 	
