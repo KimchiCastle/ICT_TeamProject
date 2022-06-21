@@ -9,6 +9,9 @@
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+<!-- daum API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <style type="text/css">
 	#root {
 		/* 		background: #ccffcc; */
@@ -35,6 +38,7 @@
 	#title {
 		font-size: 40px;
 	}
+	
 	
 	.pro_info {
 		font-size: 17px;
@@ -71,6 +75,13 @@
 		height: 150px;
 		resize: none;
 	}
+	
+	#addrfind{
+		
+		background: white;
+		cursor: pointer;
+		
+	}	
 	
 	#p_condition {
 		width: 15px;
@@ -119,6 +130,43 @@
 	}
 	
 </script>
+
+<!-- 주소API -->
+<script type="text/javascript">
+
+	//다음에서 제공하는 주소 API
+	function addrFind() {
+		
+		var width = 500; //팝업의 너비
+		var height = 300; //팝업의 높이
+		
+		
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	         
+	            $("#p_location").val(data.address);
+	        },
+	    
+	    	theme: {
+		        searchBgColor: "#7dd87d", //검색창 배경색
+		        queryTextColor: "white" //검색창 글자색
+		    },
+		    
+		    width: width, 
+		    height: height
+		    
+	    
+	    
+	    }).open({
+	        left: (window.screen.width / 2) - (width / 2),
+	        top: (window.screen.height / 2) - (height / 2) - 200
+	    });
+		
+	}
+
+
+</script>
+
 
 
 
@@ -180,9 +228,15 @@
 			$("#p_price").focus();
 			return;
 		} 
-	
+		/* 가격 콤마 제거 */
+		p_price = p_price.replace(/,/g, "");
 		
 		
+		$.ajax({
+			
+			
+			
+		})
 		
 		
 		
@@ -301,9 +355,9 @@
 
 	<div id="root">
 		전체 div
-		<div id="recent">
-			<%@ include file="../sidebar/sideBar.jsp"%>
-		</div>
+	<%-- 	<div id="recent">
+			<%@ include file="../main/header1.jsp"%>
+		</div> --%>
 		<div id="insert_box">
 			<span id="title">상품등록</span>
 
@@ -389,7 +443,12 @@
 				<tr>
 					<td width="30%;" align="left" style="vertical-align: top;"><span
 						class="pro_info">거래지역<span style="color: red">*</span></span></td>
-
+					
+					<td align="left">
+						<input type="button" id="addrfind" value="주소찾기" onclick="addrFind();">
+						<br>
+						<input type="text" id="p_location" class="input-tag" readonly="readonly">
+					</td>
 
 
 				</tr>
