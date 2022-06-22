@@ -13,12 +13,15 @@
 		width: 1200px;
 		margin: auto;
 		margin-top: 20px;
+		padding-right: 20px;
 	}
-	#title{
+	#collapse{
 		text-align: center;
-		color: cccccc;
+		width: 600px;
+		margin: auto;
 	}
 	th{
+		margin:auto;
 		text-align: center;
 	}
 	td{
@@ -28,22 +31,13 @@
 </style>
 </head>
 <body>
-	<div id="box">
-		<h1 id="title">마이 페이지</h1>
-		<table>
-		<hr>
-		
-		<table>
-			<tr>
-				<td>
-					<input class="btn"  type="button" value="내 판매목록" onclick="">
-					<input class="btn"  type="button" value="내 정보" onclick="">
-				</td>
-			</tr>
-		</table>
+	<jsp:include page="index.jsp"/>
+	<div id="box" align="center" width="600px" >
+		<table id="collapse"  border="1" style="border-collapse:collapse; font-size:8pt"
+				 bordercolor="navy" cellpadding="4" cellspacing="0" >
 		
 		<hr>
-			<tr>
+			<tr >
 				<th>사진</th>
 				<th>상품명</th>
 				<th>가격</th>
@@ -59,14 +53,20 @@
 					<font color="red">등록된 상품이 없습니다</font>
 				</td>
 			</c:if>
-			<tr>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
+			<!-- data 있는 경우-->
+			<c:forEach var="vo" items="${list }">
+				<tr>
+					<th><img src="../images/${vo.img}" width="100" height="90"></th>
+					<th>${vo.p_name }</th>
+					<th>${vo.price }</th>
+					<th>${vo.p_status }</th>
+					<th>${vo.p_date }</th>
+					<th>
+						<input type="button" value="상세정보보기" onclick=""><br>
+						<input type="button" value="삭제하기" onclick="">
+					</th>
+				</tr>
+			</c:forEach>
 			<br><hr><br>
 			<table>
 				<tr>
@@ -81,3 +81,14 @@
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
