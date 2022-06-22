@@ -61,7 +61,7 @@
 	
 	.input-tag:focus{
 		outline: none;
-		border: 1px solid green;
+		border: 1px solid black;
 	}
 	
 	
@@ -76,10 +76,14 @@
 		resize: none;
 	}
 	
-	#addrfind{
+	/* 주소버튼 */
+	#addrfind, #myaddr{
 		
 		background: white;
 		cursor: pointer;
+		border: 1px solid black;
+		width: 80px;
+		height: 30px;
 		
 	}	
 	
@@ -111,23 +115,46 @@
 
 
 	function send() {
-		$("#ajaxFile").click();
+		$("#imageFile").click();
 	}
-
-	function ajaxFileChange() {
-		// 파일이 선택되면 업로드를 진행한다.
-		photo_upload(); 
-	}
-
-	function photo_upload(){
-		
-/* 		if( ("#ajaxFile1")[0].files[0]==undefined) return; */
 	
-		alert('호출완료!');
+	$(function(){
 		
-
+		$("#imageFile").on('change',function(){
+			
+			imgcheck(this);
+			
+		})
 		
+	});
+	
+	function imgcheck(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        $('#preview1').attr('src', e.target.result);
+	        $('#preview1').show();
+	        alert($('#imageFile').val());
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
 	}
+	
+
+	function send2() {
+		$("#imageFile2").click();
+	}
+	
+	$(function(){
+		
+		$("#imageFile2").on('change',function(){
+			
+			imgcheck2(this);
+			
+		})
+		
+	});
+
 	
 </script>
 
@@ -183,6 +210,8 @@
 		
 		var p_condition = $("#p_condition").val();
 		
+		var p_location = $("#p_location").val().trim();
+		
 		var p_price = $("#p_price").val().trim();
 		
 		var p_exp = $("#p_exp").val().trim();
@@ -202,15 +231,14 @@
 			return;
 		}
 		
-
 		
-		if(p_exp==''){
-			
-			alert('상품 설명이 비어있습니다. (필수입력, 공백불가)');
-			$("#p_exp").val('');
-			$("#p_exp").focus();
-			return;
+		if(p_location==''){
+			alert('거래지역을 입력해 주세요.');
+			$("#p_location").val('');
+			$("#p_location").focus();
+			return;			
 		}
+		
 		
 		if(p_price==''){
 			
@@ -220,6 +248,16 @@
 			return;
 		}
 		
+		
+		if(p_exp==''){
+			
+			alert('상품 설명이 비어있습니다. (필수입력, 공백불가)');
+			$("#p_exp").val('');
+			$("#p_exp").focus();
+			return;
+		}
+		
+
 		
 		
 		if( regular_han.test(p_price) ){
@@ -231,13 +269,39 @@
 		/* 가격 콤마 제거 */
 		p_price = p_price.replace(/,/g, "");
 		
+		if(p_price<100){
+			alert('가격은 100원 이상 입력해주세요.');
+			$("#p_price").val('');
+			$("#p_price").focus();
+			return;
+		}
 		
-		$.ajax({
-			
-			
-			
-		})
 		
+		if(confirm('등록 하시겠습니까?')==false) return;
+		
+		
+		
+/* 		$.ajax({
+			
+			url 	 : 'insert.do',
+			dataType : 'json',
+			data	 : {
+				'c_idx'	  : c_idx,
+				'p_name'  : p_name,
+				'p_exp'   : p_exp,
+				'p_price' : p_price,
+				
+				},
+			success  : function(res){
+				
+			},
+			error	 : function(err){
+				alert(err.responseText);
+			}
+			
+			
+		});
+		 */
 		
 		
 	}
@@ -378,10 +442,10 @@
 							style="color: red">*</span></span></td>
 					<td width="70%;" align="left">
 						<div>
-							<input type="image" id="imgup_1" onclick="send();"
-								src="../imgdata/upload_img.png" width="150px" height="150px">
+							<input type="image" id="imgup_1" onclick="send();" 
+								src="../imgdata/image_upload.png" width="150px" height="150px">
 
-							<img id="preview" style="display: none;" width="150px"
+							<img id="preview1"  width="150px" style="display: none;"
 								height="150px">
 
 
@@ -445,9 +509,10 @@
 						class="pro_info">거래지역<span style="color: red">*</span></span></td>
 					
 					<td align="left">
+						<input type="button" id="myaddr" value="내주소" >
 						<input type="button" id="addrfind" value="주소찾기" onclick="addrFind();">
 						<br>
-						<input type="text" id="p_location" class="input-tag" readonly="readonly">
+						<input type="text" id="p_location" class="input-tag" style="margin-top: 5px;" readonly="readonly">
 					</td>
 
 
