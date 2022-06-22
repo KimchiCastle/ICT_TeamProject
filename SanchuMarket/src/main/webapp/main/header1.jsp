@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,7 +162,7 @@ li, ul{
 </header>
 	<!-- 메인콘텐츠 -->
 	<div class="content">
-		<%@include file="content.jsp" %>
+		<%@include file="content.jsp" %> 
 	</div>
 	
 

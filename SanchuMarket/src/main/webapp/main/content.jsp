@@ -29,7 +29,7 @@ padding-left: 15px;
 
 .product_list{
 	width: 187px;
-	height: 260px;
+	height: 260px; 
 	border: 1px solid #20de07;
 	margin-right: 15px;
 	margin-bottom: 15px;
@@ -75,7 +75,7 @@ padding-left: 15px;
 			<div id="p_photo">사진</div>
 			<div class="price_tag">
 				<div id="p_name">제목</div>
-				<div id="p_price">가격</div>
+				<div id="p_price">가격</div> 
 			</div>
 		</div>
 	</c:forEach>
