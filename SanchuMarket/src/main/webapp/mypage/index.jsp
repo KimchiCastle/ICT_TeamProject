@@ -20,7 +20,7 @@
     </style>
   </head>
   
-  <div id="box" align="center" width="600px" >
+  <div id="box" align="center" width="1200px" >
   <body>
   <hr width="600" border="1" noshade color="black">
   <center>
@@ -29,15 +29,15 @@
       </font>
   </center>
   <hr width="600" border="1" noshade color="navy">
-  <center>
-      <a href="list.do?category=com001">내 판매 물품</a> |
-      <a href="list.do?category=ele002">내 정보 수정</a> 
+  
+      <a href="mypage_list.jsp" >내 판매 물품</a> |
+      <a href="mypage_modify.jsp">내 정보 수정</a> 
 
-  </center>
+  
   <hr width="600" border="1" noshade color="navy">
   <div style="width:600px; text-align:right; margin:auto;">
   	<!-- 로그인이 안된경우 -->
-  	<c:if test="${empty user }">
+  	<c:if test="${empty sessionScopeuser }">
   		<input type="button" value="로그인"
   				onclick="location.href='../member/login_form.do';">
   	</c:if>
@@ -51,11 +51,11 @@
   </div>
   <hr width="600" border="1" noshade color="navy">
   
-  <!-- 관리자인 경우 노출되는 메뉴 -->
-  <c:if test="${user.m_grade eq '관리자'  }">
+  <!-- 회원인 경우 노출되는 메뉴 -->
+  <c:if test="${not empty sessionScope.user }">
   	<div style="width:600px;  margin:auto;">
   		<input type="button" value="상품등록"
-  				onclick="location.href='insert_form.do?category=${param.category}';">
+  				onclick="location.href='/product/insert.do';">
   	</div>
   <hr width="600" border="1" noshade color="navy">
   </c:if>
