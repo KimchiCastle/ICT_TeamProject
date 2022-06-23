@@ -45,8 +45,17 @@ alter table user_market
 
 --------check 제약--------
 alter table user_market
-	add constraint ck_user_market_u_garde 
+	add constraint ck_user_market_u_grade 
 	check( u_grade in( '일반회원','사업자','관리자' ) )
+	
+---check제약 조건명 수정---	
+ALTER TABLE user_market 
+   RENAME CONSTRAINT ck_user_market_u_garde TO
+                     ck_user_market_u_grade;
+	
+	
+--우편번호 column추가
+alter table user_market add postcode varchar2(50); 
 	
 ---------------------- 샘플데이터 ----------------------
 
