@@ -20,8 +20,8 @@
 .main_content{
 margin-top: 131px;
 width: 1020px;
-height: 1175px;
-border: 1px solid white; 
+height: 1150px;
+border: 1px solid black; 
 padding-top: 10px;
 padding-left: 15px;
 
@@ -70,9 +70,9 @@ padding-left: 15px;
 	<div class="main_content">
 	<h3 style="margin: 0px;">최근 올라온 상품</h3><br>
 	<!-- 상품리스트 -->
-	<c:forEach begin="1" end="100" >
+	<c:forEach  begin="1" end="100" varStatus="i" step="1">
 		<div class="product_list" onclick="list_click()">
-			<div id="p_photo">사진</div>
+			<div id="p_photo">${ i.count }</div>
 			<div class="price_tag">
 				<div id="p_name">제목</div>
 				<div id="p_price">가격</div> 

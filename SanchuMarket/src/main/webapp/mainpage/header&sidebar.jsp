@@ -160,10 +160,7 @@ li, ul{
 		<%@include file="../sidebar/sideBar.jsp" %>
 	</div>
 </header>
-	<!-- 메인콘텐츠 -->
-	<div class="content">
-		<%@include file="content.jsp" %> 
-	</div>
+	
 	
 
 
