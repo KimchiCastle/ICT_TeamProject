@@ -17,7 +17,7 @@ import vo.UserVo;
 /**
  * Servlet implementation class EnrollAction
  */
-@WebServlet("/enroll.do")
+@WebServlet("/user/enroll.do")
 public class EnrollAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
