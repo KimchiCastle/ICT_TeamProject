@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class EnrollFormAction
  */
-@WebServlet("/enroll_form.do")
+@WebServlet("/user/enroll_form.do")
 public class EnrollFormAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
