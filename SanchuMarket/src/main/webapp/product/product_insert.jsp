@@ -54,8 +54,11 @@
 		color: black;
 		font-size: 15px;
 		border-radius: 5px;
-		
-		
+	}
+	
+	.img_preview{
+		display: inline;
+	}
 		
 	}
 	
@@ -85,7 +88,23 @@
 		width: 80px;
 		height: 30px;
 		
-	}	
+	}
+	/*  */
+	.chk_style{
+	width:30px;
+	height:30px;
+	/* position:absolute; */
+	font-size:20px;
+	outline:none;
+	border:none;
+	border-radius:15px;
+    right:5px;
+    bottom:85px;
+    z-index:999;
+    background-color:rgba(0,0,0,0.5);
+    color:#ffcccc;
+	}
+	
 	
 	#p_condition {
 		width: 15px;
@@ -132,14 +151,14 @@
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
-	        $('#preview1').attr('src', e.target.result);
-	        $('#preview1').show();
-	        alert($('#imageFile').val());
+	        $('#imgup_1').attr('src', e.target.result);
+	      	$('#imgup_2').show();
 	        }
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
-	
+
+	/*  */
 
 	function send2() {
 		$("#imageFile2").click();
@@ -155,6 +174,101 @@
 		
 	});
 
+	function imgcheck2(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        $('#imgup_2').attr('src', e.target.result);
+	      	$('#imgup_3').show();
+	       
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+
+	
+	function send3() {
+		$("#imageFile3").click();
+	}
+	
+	$(function(){
+		
+		$("#imageFile3").on('change',function(){
+			
+			imgcheck3(this);
+			
+		})
+		
+	});
+
+	function imgcheck3(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        $('#imgup_3').attr('src', e.target.result);
+	      	$('#imgup_4').show();
+	       
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	
+	function send4() {
+		$("#imageFile4").click();
+	}
+	
+	$(function(){
+		
+		$("#imageFile4").on('change',function(){
+			
+			imgcheck4(this);
+			
+		})
+		
+	});
+
+	function imgcheck4(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        $('#imgup_4').attr('src', e.target.result);
+	      	$('#imgup_5').show();
+	       
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	
+	
+	function send5() {
+		$("#imageFile5").click();
+	}
+	
+	$(function(){
+		
+		$("#imageFile5").on('change',function(){
+			
+			imgcheck5(this);
+			
+		})
+		
+	});
+
+	function imgcheck5(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	        $('#imgup_5').attr('src', e.target.result);
+	       
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	
 	
 </script>
 
@@ -413,8 +527,12 @@
 </head>
 <body>
 	<!-- 파일업로드 용 폼 -->
-	<form enctype="multipart/form-data" id="imageFile1" method="post">
+	<form enctype="multipart/form-data" id="image" method="post">
 		<input type="file" id="imageFile" style="display: none;">
+		<input type="file" id="imageFile2" style="display: none;">
+		<input type="file" id="imageFile3" style="display: none;">
+		<input type="file" id="imageFile4" style="display: none;">
+		<input type="file" id="imageFile5" style="display: none;">
 	</form>
 
 	<div id="root">
@@ -442,23 +560,31 @@
 							style="color: red">*</span></span></td>
 					<td width="70%;" align="left">
 						<div>
-							<input type="image" id="imgup_1" onclick="send();" 
-								src="../imgdata/image_upload.png" width="150px" height="150px">
+							<div class="img_preview" >
+								<input type="image" id="imgup_1" onclick="send();"
+									src="../imgdata/image_upload.png" width="150px" height="150px">
+								<input type="button" class="chk_style" value="x">
+							</div>
 
-							<img id="preview1"  width="150px" style="display: none;"
-								height="150px">
+							<div class="img_preview">
+								<input type="image" id="imgup_2" onclick="send2();"
+									src="../imgdata/image_upload.png" width="150px" height="150px">
+							</div>
 
+							<div class="img_preview">
+								<input type="image" id="imgup_3" onclick="send3();"
+									src="../imgdata/image_upload.png" width="150px" height="150px">
+							</div>
 
+							<div class="img_preview">
+								<input type="image" id="imgup_4" onclick="send4();"
+									src="../imgdata/image_upload.png" width="150px" height="150px">
+							</div>
 
-							<!-- 							<img id="imgup_2" onclick="send();"
-								src="../imgdata/upload_img.png" width="150px" height="150px">
-							<img id="imgup_3" onclick="send();"
-								src="../imgdata/upload_img.png" width="150px" height="150px">
-							<img id="imgup_4" onclick="send();"
-								src="../imgdata/upload_img.png" width="150px" height="150px">
-							<img id="imgup_5" onclick="send();"
-								src="../imgdata/upload_img.png" width="150px" height="150px">
- -->
+							<div class="img_preview">
+								<input type="image" id="imgup_5" onclick="send5();"
+									src="../imgdata/image_upload.png" width="150px" height="150px">
+							</div>
 
 
 						</div>

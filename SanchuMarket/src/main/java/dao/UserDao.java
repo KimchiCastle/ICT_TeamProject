@@ -39,6 +39,8 @@ public class UserDao {
 		
 		list = sqlsession.selectList("user.user_list");
 		
+		sqlsession.close();
+		
 		return list;
 	}
 	
@@ -50,10 +52,12 @@ public class UserDao {
 		
 		user = sqlsession.selectOne("user.user_idx", u_idx);
 		
+		sqlsession.close();
+		
 		return user;
 	}
 	
-	//로그인시 유저 존재 조회(ajax)
+	//회원가입시 유저 존재 조회(ajax)
 	public UserVo selectOneById(String u_id){
 		
 		UserVo user = null;
@@ -61,6 +65,21 @@ public class UserDao {
 		SqlSession sqlsession = factory.openSession();
 		
 		user = sqlsession.selectOne("user.check_id", u_id);
+		
+		sqlsession.close();
+		
+		return user;
+	}
+	
+	public UserVo selectOneByNickname(String u_nickname){
+		
+		UserVo user = null;
+		
+		SqlSession sqlsession = factory.openSession();
+		
+		user = sqlsession.selectOne("user.check_nickname", u_nickname);
+		
+		sqlsession.close();
 		
 		return user;
 	}
@@ -72,6 +91,8 @@ public class UserDao {
 		SqlSession sqlsession = factory.openSession();
 
 		res = sqlsession.selectOne("user.user_insert", vo);
+		
+		sqlsession.close();
 		
 		return res;
 	}

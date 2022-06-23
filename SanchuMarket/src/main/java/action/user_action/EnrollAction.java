@@ -17,7 +17,7 @@ import vo.UserVo;
 /**
  * Servlet implementation class EnrollAction
  */
-@WebServlet("/enroll.do")
+@WebServlet("/user/enroll.do")
 public class EnrollAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,8 @@ public class EnrollAction extends HttpServlet {
 		  String u_name = request.getParameter("u_name");
 		  String u_nickname = request.getParameter("u_nickname");
 		  String u_birth = request.getParameter("birth");
-		  String u_addr = request.getParameter("u_addr");
+		  String u_addr = request.getParameter("addr");
+		  int postcode = Integer.parseInt(request.getParameter("postcode"));
 		  int u_like = Integer.parseInt(request.getParameter("u_like"));
 		  String u_profile = request.getParameter("u_profile");
 		  String u_photo = request.getParameter("u_photo");
@@ -44,8 +45,9 @@ public class EnrollAction extends HttpServlet {
 		  String u_grade = request.getParameter("u_grade");
 		  String u_ip = request.getRemoteAddr();
 		  
-		  UserVo vo = new UserVo(u_id, u_pwd, u_name, u_nickname, u_birth, u_addr, u_like, u_profile, u_photo, u_tel, u_mail, u_grade, u_ip);
-		  
+		 
+		  UserVo vo = new UserVo(u_id, u_pwd, u_name, u_nickname, u_birth, u_addr, u_tel, u_mail, u_ip, postcode);
+				  
 		  UserDao.getInstance().insert(vo);
 
 		//forward

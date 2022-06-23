@@ -9,11 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
+import dao.UserDao;
+import vo.UserVo;
+
 /**
- * Servlet implementation class EnrollFormAction
+ * Servlet implementation class CheckNicknameAction
  */
-@WebServlet("/user/enroll_form.do")
-public class EnrollFormAction extends HttpServlet {
+@WebServlet("/user/check_nickname.do")
+public class CheckNicknameAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -22,12 +27,24 @@ public class EnrollFormAction extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		//forward
-		String forward_page = "enroll_form.jsp";
-		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
-		disp.forward(request, response);
-
+		
+		request.setCharacterEncoding("utf-8");
+		
+		String u_nickname = request.getParameter("u_nickname");
+		
+		UserVo vo = UserDao.getInstance().selectOneByNickname(u_nickname);
+		
+		JSONObject json = new JSONObject();
+		
+		String result = "";
+		
+		//닉네임 존재하지 않을때 가입 가능
+		if(vo==null) {
+			result = "Y";
+		}
+		
+		response.setContentType("text; charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 }

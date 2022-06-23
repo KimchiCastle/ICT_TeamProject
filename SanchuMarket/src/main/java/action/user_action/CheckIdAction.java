@@ -15,8 +15,8 @@ import vo.UserVo;
 /**
  * Servlet implementation class LoginCheckAction
  */
-@WebServlet("/user/login_check.do")
-public class LoginCheckAction extends HttpServlet {
+@WebServlet("/user/check_id.do")
+public class CheckIdAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -26,17 +26,21 @@ public class LoginCheckAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		request.setCharacterEncoding("utf-8");
 
 		String u_id = request.getParameter("u_id");
-		String u_pwd = request.getParameter("u_pwd");
 		
-		UserVo user =  UserDao.getInstance().selectOneById(u_id);
+		UserVo vo =  UserDao.getInstance().selectOneById(u_id);
 		
-		boolean bResult = (user==null || !u_pwd.equals(user.getU_pwd()));
+		String result = "";
 		
-				
+		//아이디 존재하지 않을때 가입 가능
+		if(vo==null) {
+			result = "Y";
+		}
+		
 		response.setContentType("text; charset=utf-8");
-		response.getWriter().print(bResult);
+		response.getWriter().print(result);
 
 	}
 
