@@ -69,10 +69,10 @@
 
 </style>
 	<script>
-	  var idFlag = false;
+	    var idFlag = false;
 	    var pwFlag = false;
-	    var authFlag = false;
 	    var submitFlag = false;
+	    var nickFlag = false;
 	
 	
 		//유효성검사를 해주는 각 flag들이 1이 되어야 회원가입이 진행됨
@@ -91,7 +91,7 @@
 	    	
 	    	 $("#u_pwd").blur(function() {
 	            pwFlag = false;
-	            checkPswd1();
+	            checkPwd();
 	        }).keyup(function(event) {
 	            checkShiftUp(event);
 	        }).keypress(function(event) {
@@ -100,8 +100,8 @@
 	            checkShiftDown(event);
 	        });
 	    	
-	    	 $("#check_u_pwd").blur(function() {
-	             checkPswd2();
+	    	 $("#u_pwd2").blur(function() {
+	             checkPwd2();
 	         }).keyup(function(event) {
 	             checkShiftUp(event);
 	         }).keypress(function(event) {
@@ -111,7 +111,7 @@
 	         });
 	    	 
 	    	$("#u_nickname").blur(function(){
-	    		checkNickname();
+	    		checkNickname("first");
 	    	})
 	    	$("#u_tel").blur(function(){
 	    		checkTel();
@@ -123,7 +123,7 @@
 	    		checkBirth();
 	    	})
 	    })
-	    
+//-------------이름 유효성 체크 함수------------------------------------ 	    
     	function checkName(){
     		
     		var oMsg = $("#nameMsg");
@@ -132,7 +132,7 @@
    	        var name = $("#u_name").val();
    	        var oInput = $("#u_name");
 			if(name==""){
-				showErrorMsg(oMsg,"이름을 입력하세요.");
+				showErrorMsg(oMsg,"필수정보입니다.");
 		        setFocusToInputObject(oInput);
 				return false;
 			}
@@ -146,16 +146,104 @@
 		    hideMsg(oMsg);
 	        return true;
     	 }
+
+
+
+
+//-------------비밀번호 유효성 체크 함수------------------------------------ 	
+
+	    function checkPwd() {
+	        if(pwFlag) return true;
+
+	        var pwd1 = $("#u_pwd1").val();
+	        var oMsg = $("#pwd1Msg");
+	        var oInput = $("#u_pwd1");
+
+	        if (pwd1 == "") {
+	            showErrorMsg(oMsg,"필수정보입니다.");
+	            setFocusToInputObject(oInput);
+	            return false;
+	        }
+	      
+	        //밑의 isValidPwd 함수 호출
+	        if (!isValidPwd(pwd1)) {
+	            showErrorMsg(oMsg,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+	            setFocusToInputObject(oInput);
+	            return false;
+	        }
+	    }
+	    
+//----------------비밀번호 일치 확인 함수-----------------------
+	    function checkPwd2() {
+	       
+	        $("#pwd2").on(propertychange change keyup paste input, function(){
+	        	
+	    		var pwd1 = $("#u_pwd1");
+     	        var pwd2 = $("#u_pwd2");
+     	        var oMsg = $("#pwd2Msg");
+			
+			        if (pwd2.val() == "") {
+			            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+			            setFocusToInputObject(pwd2);
+			            return false;
+			        }
+			        if (pwd1.val() != pwd2.val()) {
+			            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+			            setFocusToInputObject(pwd2);
+			            return false;
+			        } else {
+			            oMsg.html("비밀번호가 일치합니다");
+			            hideMsg(oMsg);
+			            return true;
+			        }
+			        return true;
+			    });
+	        }
+	        		
+//-------------비밀번호 유효성 체크 함수(boolean반환)------------------------------------
+		function isValidPwd(str) {
+		        var cnt = 0;
+		        if (str == "") {
+		            return false;
+		        }
 		
+		        var retVal = checkSpace(str);
+		        if (retVal) {
+		            return false;
+		        }
+		        if (str.length < 8) {
+		            return false;
+		        }
+		        
+		        //전체 글자수 중복된 단어 제한
+		        for (var i = 0; i < str.length; ++i) {
+		            if (str.charAt(0) == str.substring(i, i + 1))
+		                ++cnt;
+		        }
+		        if (cnt == str.length) {
+		            return false;
+		        }
+		
+		        var isPW = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#\$%\^&\*\(\)_\+|\{\}:"<>\?]{8,16}$/;
+		        if (!isPW.test(str)) {
+		            return false;
+		        }
+		
+		        return true;
+		    }
+
+//-------------이메일 유효성 체크 함수------------------------------------ 		
 	    function checkEmail(){
 	    	
     	   var email = $("#u_email").val();
            var oMsg = $("#emailMsg");
+           var oInput = $("#u_email");
 
-           if (email == "") {
-               hideMsg(oMsg);
-               return true;
-           }
+           if ( email == "") {
+         	  showErrorMsg(oMsg,"필수정보입니다.");
+               setFocusToInputObject(oInput);	         
+               return false;
+             }
 
            var isEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
            var isHan = /[ㄱ-ㅎ가-힣]/g;
@@ -168,9 +256,7 @@
            return true;
 	    }
 	    
-	    
-	  
-	  
+//-------------id유효성 체크 함수------------------------------------  	  
 	  	function checkId(event){
 	  		
 	  		if(idFlag) return true;
@@ -180,7 +266,7 @@
 	        var oInput = $("#u_id");
 
 	        if ( id == "") {
-        	  showErrorMsg(oMsg,"아이디를 입력하세요.");
+        	  showErrorMsg(oMsg,"필수정보입니다.");
               setFocusToInputObject(oInput);	         
               return false;
             }
@@ -193,30 +279,126 @@
 	        }
 
 	        idFlag = false;
-	        var key = $("#token_sjoin").val();
 	                
 	        $.ajax({
 	            type:"GET",
-	            url: "/user/login_check.do?id=" + id,
+	            url: "check_id.do?u_id=" + id,
 	            success : function(data) {
-
+					//db에 존재하는 아이디 없으면 data=y 넘어옴
 	                if (data == "Y") {
+	                	//checkId함수에 들어온 인자 first
+	                	//blur함수로 처음 입력시 first가 들어옴
 	                    if (event == "first") {
 	                        showSuccessMsg(oMsg, "사용 가능한 아이디입니다.");
 	                    } else {
 	                        hideMsg(oMsg);
 	                    }
 	                    idFlag = true;
-	                } else {
-	                    showErrorMsg(oMsg, "이미 사용중이거나 탈퇴한 아이디입니다.");
+	                } else { 
+	                	
+	                    showErrorMsg(oMsg, "이미 사용중인 아이디입니다.");
 	                    setFocusToInputObject(oInput);
 	                }
 	            }
 	        });
 	        return true;
-	    }
+	      }
+	  	  }
+//--------------닉네임 유효성 체크 함수------------------------
+  
+			function checkNickname(event){
 	  		
-	  	}
+	  		if(nickFlag) return true;
+
+	        var nickname = $("#u_nickname").val();
+	        var oMsg = $("#nickMsg");
+	        var oInput = $("#u_nickname");
+
+	        if ( nickname == "") {
+        	  showErrorMsg(oMsg,"필수정보입니다.");
+              setFocusToInputObject(oInput);	         
+              return false;
+            }
+
+	        var nonchar = /[^가-힣a-zA-Z0-9]/gi;
+
+	        if (!nonchar.test(nickname)) {
+	            showErrorMsg(oMsg,"한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
+	            setFocusToInputObject(oInput);
+	            return false;
+	        }
+
+	        nickFlag = false;
+	                
+	        $.ajax({
+	            type:"GET",
+	            url: "check_nickname.do?u_nickname=" + nickname,
+	            success : function(data) {
+					//db에 존재하는 닉네임 없으면 data=y 넘어옴
+	                if (data == "Y") {
+	                	//checkNick함수에 들어온 인자 first
+	                	//blur함수로 처음 입력시 first가 들어옴
+	                    if (event == "first") {
+	                        showSuccessMsg(oMsg, "사용 가능한 닉네임입니다.");
+	                    } else {
+	                        hideMsg(oMsg);
+	                    }
+	                    nickFlag = true;
+	                } else { 
+	                	
+	                    showErrorMsg(oMsg, "이미 사용중인 닉네임입니다.");
+	                    setFocusToInputObject(oInput);
+	                }
+	            }
+	        });
+	        return true;
+	      }
+	  	  }
+
+//-------------주소 체크 함수------------------------------------
+
+   function checkAddr(){
+	    	
+    	   var addr = $("#u_addr").val();
+           var oMsg = $("#addrMsg");
+           var oInput = $("#u_addr");
+
+           if ( addr == "") {
+         	  showErrorMsg(oMsg,"필수정보입니다.");
+               setFocusToInputObject(oInput);	         
+               return false;
+             }
+
+           hideMsg(oMsg);
+           return true;
+	    }
+   
+//------------전화번호 체크 함수(인증 구현시 삭제 예정)------------------------------
+
+   function checkTel(){
+	    	
+    	   var tel = $("#u_tel").val();
+           var oMsg = $("#telMsg");
+           var oInput = $("#u_tel");
+
+           if ( tel == "") {
+         	  showErrorMsg(oMsg,"필수정보입니다.");
+               setFocusToInputObject(oInput);	         
+               return false;
+             }
+           
+           var isTel = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+           if (!isTel.test(tel)){
+        	   showErrorMsg(oMsg,"형식에 맞지 않는 전화번호입니다.");
+               setFocusToInputObject(oInput);	         
+               return false;
+           }
+
+           hideMsg(oMsg);
+           return true;
+	    }
+   
+//-------------메시지 표시------------------------------------  
 	    function hideMsg(obj) {
         	obj.hide();
        }
@@ -238,7 +420,7 @@
 	            obj.focus();
 	        }
 	    }
-	    
+//-------------shift/capslock/spacebar 대응------------------------------------  
 	    var isShift = false;
 	    
 	    function checkShiftUp(e) {
@@ -274,12 +456,20 @@
 	        }
 	     }
 
+	    function checkSpace(str) {
+	        if (str.search(/\s/) != -1) {
+	            return true;
+	        } else {
+	            return false;
+	        }
+	    }
+
 	</script> 
 
 </head>
 <body>
 
-		<form>
+		<form id="enroll_form" method="post" action="enroll.do">
 			<div id="content">
 				     <!--span은 정렬이 안됨-->
 			 <div id="title-wrap"><span id="title">상추마켓</span></div>
@@ -313,8 +503,9 @@
 			      <td style="vertical-align: middle;">비밀번호</td>
 			      <td colspan="2">	
 			       <input type="password" class="form-control"  id="u_pwd" name="u_pwd">
-			       <input type="password" class="form-control"  id="check_u_pwd" name="ch_u_pwd">
-			       <span id="pwdMsg" style="display:none"></span>
+			       <span id="pwd1Msg" style="display:none">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+			       <input type="password" class="form-control"  id="u_pwd2"">
+			       <span id="pwd2Msg" style="display:none"></span>
 			      </td>
 			    </tr>
 			    
@@ -327,18 +518,18 @@
 			    
 			    <tr>
 			       <td style="vertical-align: middle;">전화번호</td>
-			       <td colspan="2"> <input type="text" class="form-control" id="u_tel" name="u_tel" readonly>
-			        <span id="telMsg" style="display:none"></span>
+			       <td colspan="2"> <input type="text" class="form-control" id="u_tel" name="u_tel">
+			        <span id="telMsg" style="dislay:none"></span>
 			       </td>
 			     </tr>
 			     
 			     <tr>
 				   <td style="vertical-align: middle;">주소</td>
 			       <td colspan="2">
-			       <input type="text" id="sample2_postcode" style="margin-bottom:5px;"readonly>
+			       <input type="text" id="sample2_postcode" name="postcode" style="margin-bottom:5px;"readonly>
 					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample2_address" style="width:295px; margin-bottom:5px;" readonly><br>
-					<input type="text" id="sample2_detailAddress" placeholder="상세주소" style="width:295px;">
+					<input type="text" id="sample2_address" name="address"style="width:295px; margin-bottom:5px;" readonly><br>
+					<input type="text" id="sample2_detailAddress" name="detailAddress" placeholder="상세주소" style="width:295px;">
 					<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
 				    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 				</div>
