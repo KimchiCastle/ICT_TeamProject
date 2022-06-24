@@ -115,8 +115,6 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		'111-111-111'   --ip
 		);
 
-
-
 ---Á¶È¸¿ë
 select * from user_market pk_user_maket_u_idx;
 

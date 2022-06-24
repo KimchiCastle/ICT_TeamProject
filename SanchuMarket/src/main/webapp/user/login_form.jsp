@@ -5,9 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
 
-<script>
+<!-- <script>
 
 	$("#login").keypress(function(e){
 		if(e.keyCode == 13){
@@ -62,17 +61,21 @@
 		      alert(msg);
 	      })
 
-	}//end login
-</script>
+	}//end login 
+</script>-->
+</head>
+
 <body>
 
-<form>
-	<input id="u_id">
+<!-- <form>
+	 <input id="u_id">
 	<input id="u_pwd">
 	<input type="button" id="login" value="로그인" onclick="login(this.form);">
-	<span id="check_msg"></span>
+	<span id="check_msg"></span> 
 
-</form>
+</form> -->
+
+
 
 </body>
 </html>
