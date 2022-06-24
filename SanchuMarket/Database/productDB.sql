@@ -58,6 +58,14 @@ values( (select nvl(max(p_idx)+1,1) from product),
 ------ Á¶È¸¿ë
 select * from product
 
+	select * from product order by u_idx
+
+
+
+
+
+
+
 
 
 */

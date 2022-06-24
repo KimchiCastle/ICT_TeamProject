@@ -23,6 +23,8 @@ public class MainPageListAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		
+		
 		//forward
 		String forward_page = "mainpage_list.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(forward_page);

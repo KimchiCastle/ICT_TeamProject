@@ -9,15 +9,23 @@
 
 <style type="text/css">
 	#floater{
-		
 		text-align: center;
 		width: 100px;
-		border: 1px solid black;
+		height: 300px;
 		padding: 3px;
+		
 	}
 	
 	#recentBanner{
+		border: 1px solid black;
 		text-align: center;
+		width: 100%;
+		height:250px;
+	}
+	
+	#text_p{
+		padding-top: 	5px;
+		padding-bottom: 5px;
 	}
 	
 	#top_move{
@@ -39,30 +47,33 @@
 </head>
 <body>
 
-<div>
-	<div id="floater">
-		<span>최근 본 상품</span>
+<div id="floater">
+	<div>
 		<div id="recentBanner">
+			<div  id="text_p">
+				<span>최근 본 상품</span>
+			</div>
 			<div class="recentView" id="recentView">
 				<div>
-					<a href="#"><img src="http://via.placeholder.com/50x50"></a>
+					<a href="#"><img src="http://via.placeholder.com/60x60"></a>
 				</div>
 				<div>
-					<a href="#"><img src="http://via.placeholder.com/50x50"></a>
+					<a href="#"><img src="http://via.placeholder.com/60x60"></a>
 				</div>
 				<div>
-					<a href="#"><img src="http://via.placeholder.com/50x50"></a>
+					<a href="#"><img src="http://via.placeholder.com/60x60"></a>
+				</div>
+				<div>
+					<button onclick="slider(-1)">&lt;</button>
+					<span id="now">1</span>/<span id="total">1</span>
+					<button onclick="slider(1)">&gt;</button>
 				</div>
 			</div>
 		</div>
-		<button onclick="slider(-1)">&lt;</button>
-		<span id="now">1</span>/<span id="total">1</span>
-		<button onclick="slider(1)">&gt;</button>
 
 	</div>
-	<div id="top_move">
+		<div id="top_move">
 		<button id="top_button" onclick="window.scrollTo(0,0);">TOP</button>
-		
 	</div>
 </div>
 
