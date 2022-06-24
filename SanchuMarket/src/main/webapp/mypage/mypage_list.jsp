@@ -1,84 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<style type="text/css">
-	#box{
-		width: 1200px;
-		margin: auto;
-		margin-top: 20px;
-		padding-right: 20px;
-	}
-	#collapse{
-		text-align: center;
-		width: 600px;
-		margin: auto;
-	}
-	th{
-		margin:auto;
-		text-align: center;
-	}
-	td{
-		text-indent: 10px;
-	}
 
-</style>
 </head>
 <body>
-	<jsp:include page="index.jsp"/>
-	<div id="box" align="center" width="600px" >
-		<table id="collapse"  border="1" style="border-collapse:collapse; font-size:8pt"
-				 bordercolor="navy" cellpadding="4" cellspacing="0" >
-		
-		<hr>
-			<tr >
-				<th>»çÁø</th>
-				<th>»óÇ°¸í</th>
-				<th>°¡°İ</th>
-				<th>ÆÇ¸Å»óÅÂ</th>
-				<th>¿Ã¸°³¯Â¥</th>
-				<th>±â´É</th>
-			</tr>
-			<br>
-			
-			<!-- data¾ø´Â °æ¿ì -->
-			<c:if test="${empty list}">
-				<td colspan="6" align="center">
-					<font color="red">µî·ÏµÈ »óÇ°ÀÌ ¾ø½À´Ï´Ù</font>
-				</td>
-			</c:if>
-			<!-- data ÀÖ´Â °æ¿ì-->
-			<c:forEach var="vo" items="${list }">
+	<jsp:include page="mypage_main.jsp" />
+	<form>
+		<div id="box" align="center">
+			<table id="table" class="table table-hover" align="center" >
+				<br>
 				<tr>
-					<th><img src="../images/${vo.img}" width="100" height="90"></th>
-					<th>${vo.p_name }</th>
-					<th>${vo.price }</th>
-					<th>${vo.p_status }</th>
-					<th>${vo.p_date }</th>
-					<th>
-						<input type="button" value="»ó¼¼Á¤º¸º¸±â" onclick=""><br>
-						<input type="button" value="»èÁ¦ÇÏ±â" onclick="">
-					</th>
+					<th>ì‚¬ì§„</th>
+					<th>ìƒí’ˆëª…</th>
+					<th>ê°€ê²©</th>
+					<th>íŒë§¤ìƒíƒœ</th>
+					<th>ì˜¬ë¦°ë‚ ì§œ</th>
+					<th>ê¸°ëŠ¥</th>
 				</tr>
-			</c:forEach>
-			<br><hr><br>
-			<table>
-				<tr>
-					<td>
-						<input class="btn btn-info" type="button" value="È¸¿øÁ¤º¸¼öÁ¤" onclick="">
-						<input class="btn btn-danger" type="button" value="È¸¿øÅ»Åğ" onclick="">
-						<input class="btn"  type="button" value="µ¹¾Æ°¡±â" onclick="">
-					</td>
-				</tr>
+				<br>
+
+				<!-- dataì—†ëŠ” ê²½ìš° -->
+				<c:if test="${empty list}">
+					<tr>
+						<td colspan="6" align="center">
+						<font color="red">ë“±ë¡ëœ ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤</font></td>
+					</tr>
+				</c:if>
+				<!-- data ìˆëŠ” ê²½ìš°-->
+				<c:forEach var="vo" items="${list }">
+					<tr>
+						<td><img src="../images/${vo.img}" ></td>
+						<td>${vo.p_name }</td>
+						<td>${vo.price }</td>
+						<td>${vo.p_status }</td>
+						<td>${vo.p_date }</td>
+						<td align="center">
+							<input id="button" type="button" value="ìƒì„¸ì •ë³´ë³´ê¸°"onclick=""><br> 
+							<input id="button" type="button" value="ì‚­ì œí•˜ê¸°" onclick="">
+						</td>
+					</tr>
+				</c:forEach>
 			</table>
-		</table>
-	</div>
+			<div>
+			<!-- íšŒì›ì¸ ê²½ìš° ë…¸ì¶œë˜ëŠ” ë©”ë‰´ -->
+			  <c:if test="${not empty sessionScope.user }">
+			  	<div>
+			  		<input type="button" value="ìƒí’ˆë“±ë¡"
+			  				onclick="location.href='/product/insert.do';">
+			  	</div>
+			  </c:if>
+			</div>
+		</div>
+	</form>
 </body>
 </html>
 

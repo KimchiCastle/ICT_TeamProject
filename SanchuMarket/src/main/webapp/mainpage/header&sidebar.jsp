@@ -77,9 +77,11 @@ header{
 
 
 .side{
-	float: right;
-	margin-top:190px;
-	margin-right: 350px;
+	display: flex;
+	padding-top: 130px;
+	position: fixed;
+	top: 70px;
+	right: calc(50% - 650px);
 }
 
 li, ul{
@@ -137,7 +139,7 @@ li, ul{
 		<a class="logo" href=""><img src="../image/상추마켓.png" width="200" height="50"></a>
 	<!-- 검색창 -->
 		<div class="search">
-			<input id="search" type="text" >
+			<input id="search" name="search" type="text" >
 		</div>
 	<!-- 판매,마이페이지 버튼 -->
 		<div class="btn_place">
@@ -155,11 +157,11 @@ li, ul{
 			</div>
 		</div>
 	</div>
+</header>
 	<!-- 고정형 사이드바 -->
 	<div class="side">
 		<%@include file="../sidebar/sideBar.jsp" %>
 	</div>
-</header>
 	
 	
 
