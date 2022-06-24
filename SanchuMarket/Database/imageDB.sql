@@ -7,6 +7,7 @@ drop table image cascade constraints
 create table image
 (
 	p_idx		int, 			--상품번호
+	sumimage	varchar2(4000),	--썸네일 사진
 	imageFile1	varchar2(4000), --사진1
 	imageFile2	varchar2(4000), --사진2
 	imageFile3	varchar2(4000), --사진3
