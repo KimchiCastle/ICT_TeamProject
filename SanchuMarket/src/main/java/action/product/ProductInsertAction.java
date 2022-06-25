@@ -1,5 +1,6 @@
 package action.product;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -8,10 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import dao.product.ProductDao;
+import vo.product.ProductVo;
+
 /**
  * Servlet implementation class ProductInsertAction
  */
-@WebServlet("/product/insert.do")
+@WebServlet("/product/product_insert.do")
 public class ProductInsertAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,27 +32,68 @@ public class ProductInsertAction extends HttpServlet {
 		//1. request encoding 하기
 		request.setCharacterEncoding("utf-8");
 		
+		//절대 경로 구하기.
+		String path = request.getServletContext().getRealPath("/imgdata/");
+		
+		//파일 최대 등록사이즈
+		int max_size = 1024 * 1024 * 10; 
+		
+		//파일등록하기 위한 MultipartRequest생성, request로 부터 위임받음
+		MultipartRequest mr = new MultipartRequest(request, path, max_size, "utf-8", new DefaultFileRenamePolicy());
+		
+		String sumimage = "no_image";
+		String imageFile1 = "no_image";
+		String imageFile2 = "no_image";
+		String imageFile3 = "no_image";
+		String imageFile4 = "no_image";
+		String imageFile5 = "no_image";
+		
 		//2. parameter 받기
-		//제목
-		String p_name = request.getParameter("p_name");
+		int u_idx = 1; // 회원정보는 나중에 세션에서 받아와야함.
+		int c_idx	  		= Integer.parseInt(mr.getParameter("c_idx"));
+		String p_name 		= mr.getParameter("p_name");
+		int	p_price			= Integer.parseInt(mr.getParameter("p_price"));
+		String p_condition	= mr.getParameter("p_condition");
+		String p_exp		= mr.getParameter("p_exp");
+		String p_location	= mr.getParameter("p_location");
 		
-		//카테고리번호
-		int c_idx = Integer.parseInt(request.getParameter("c_idx"));
-
-		//상품상태
-		String p_condition = request.getParameter("p_condition");
+		String p_status = "거래가능";
 		
-		
-		
-		//가격		
-		int p_price = Integer.parseInt(request.getParameter("p_price"));
-		
-		//상품설명
-		String p_exp = request.getParameter("p_exp").replaceAll("\r\n", "<br>");
+		ProductVo vo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location, p_location, p_status);
 		
 		
 		
+		int res = ProductDao.getinstance().insert(vo);
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		File f1 = mr.getFile("sumimage");
+		if(f1!=null) {
+			sumimage = f1.getName();
+		}
+		File f2 = mr.getFile("imageFile1");
+		if(f2!=null) {
+			imageFile1 = f1.getName();
+		}
+		File f3 = mr.getFile("imageFile2");
+		if(f3!=null) {
+			imageFile2 = f1.getName();
+		}
+		File f4 = mr.getFile("imageFile3");
+		if(f4!=null) {
+			imageFile3 = f1.getName();
+		}
+		File f5 = mr.getFile("imageFile5");
+		if(f5!=null) {
+			imageFile5 = f1.getName();
+		}
+	
 
 	}
 
