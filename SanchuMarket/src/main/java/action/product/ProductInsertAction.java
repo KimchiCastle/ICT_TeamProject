@@ -64,7 +64,12 @@ public class ProductInsertAction extends HttpServlet {
 		
 		ProductVo vo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location, p_location, p_status);
 		
-		/* int res = ProductDao.getinstance().insert(vo); */
+		
+		//충돌방지..
+		
+		int res = ProductDao.getinstance().insert(vo); 
+		
+		
 		
 		
 		File f1 = mr.getFile("sumimage");
@@ -94,6 +99,8 @@ public class ProductInsertAction extends HttpServlet {
 		
 		
 		ImageVo vo2 = new ImageVo(sumimage, imageFile1, imageFile2, imageFile3, imageFile4, imageFile5);
+		
+		
 		
 		int res2 = ImageDao.getInstance().insert(vo2);
 		

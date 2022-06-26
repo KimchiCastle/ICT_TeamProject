@@ -45,7 +45,7 @@ insert into product
 values( (select nvl(max(p_idx)+1,1) from product),
 		1,				--회원번호
 		1,				--카테고리번호
-		'한복팝니다.',  --제목
+		'한복팝니다.',  --제
 		sysdate,		--등록일자
 		130000,			--가격
 		'거의신품',		--상품상태
