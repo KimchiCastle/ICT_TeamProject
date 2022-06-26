@@ -120,7 +120,7 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		);
 
 ---Á¶È¸¿ë
-select * from user_market pk_user_maket_u_idx;
+select * from user_market;
 
 
 
