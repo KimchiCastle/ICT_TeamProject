@@ -1,5 +1,6 @@
 package action.product;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import dao.image.ImageDao;
 import dao.product.ProductDao;
+import vo.image.ImageVo;
 import vo.product.ProductVo;
 
 /**
@@ -54,23 +57,14 @@ public class ProductInsertAction extends HttpServlet {
 		String p_name 		= mr.getParameter("p_name");
 		int	p_price			= Integer.parseInt(mr.getParameter("p_price"));
 		String p_condition	= mr.getParameter("p_condition");
-		String p_exp		= mr.getParameter("p_exp");
+		String p_exp		= mr.getParameter("p_exp").replaceAll("\r\n", "<br>");
 		String p_location	= mr.getParameter("p_location");
 		
 		String p_status = "거래가능";
 		
 		ProductVo vo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location, p_location, p_status);
 		
-		
-		
-		int res = ProductDao.getinstance().insert(vo);
-		
-		
-		
-		
-		
-		
-		
+		/* int res = ProductDao.getinstance().insert(vo); */
 		
 		
 		File f1 = mr.getFile("sumimage");
@@ -79,21 +73,30 @@ public class ProductInsertAction extends HttpServlet {
 		}
 		File f2 = mr.getFile("imageFile1");
 		if(f2!=null) {
-			imageFile1 = f1.getName();
+			imageFile1 = f2.getName();
 		}
 		File f3 = mr.getFile("imageFile2");
 		if(f3!=null) {
-			imageFile2 = f1.getName();
+			imageFile2 = f3.getName();
 		}
 		File f4 = mr.getFile("imageFile3");
 		if(f4!=null) {
-			imageFile3 = f1.getName();
+			imageFile3 = f4.getName();
 		}
-		File f5 = mr.getFile("imageFile5");
+		File f5 = mr.getFile("imageFile4");
 		if(f5!=null) {
-			imageFile5 = f1.getName();
+			imageFile4 = f5.getName();
 		}
-	
+		File f6 = mr.getFile("imageFile5");
+		if(f6!=null) {
+			imageFile5 = f6.getName();
+		}
+		
+		
+		ImageVo vo2 = new ImageVo(sumimage, imageFile1, imageFile2, imageFile3, imageFile4, imageFile5);
+		
+		int res2 = ImageDao.getInstance().insert(vo2);
+		
 
 	}
 

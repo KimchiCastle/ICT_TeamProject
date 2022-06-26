@@ -55,6 +55,9 @@ public class ProductDao {
 		
 		res = sqlSession.insert("product.product_insert",vo);
 		
+		
+		sqlSession.close();
+		
 		return res;
 	}
 	
