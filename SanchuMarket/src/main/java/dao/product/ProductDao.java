@@ -39,7 +39,6 @@ public class ProductDao {
 		// 1.SqlSession얻어오기
 		SqlSession sqlSession = factory.openSession();
 
-		
 
 		// 3.닫기
 		sqlSession.close();
@@ -47,4 +46,22 @@ public class ProductDao {
 		return list;
 	}
 
+	public int insert(ProductVo vo) {
+		// TODO Auto-generated method stub
+		
+		int res = 0;
+		
+		SqlSession sqlSession = factory.openSession(true);
+		
+		res = sqlSession.insert("product.product_insert",vo);
+		
+		
+		sqlSession.close();
+		
+		return res;
+	}
+	
+	
+	
+	
 }

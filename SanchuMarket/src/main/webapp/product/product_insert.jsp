@@ -19,31 +19,33 @@
 		height: 100%;
 	}
 	
+	/* 실제 전체 div */
 	#insert_box {
-		width: 850px;
+		width: 1020px;
 		margin: auto;
-		margin-top: 30px;
+		padding-top : 160px;
 		/* 		background: gray; */
 		min-height: 1000px;
 		text-align: center;
 	}
 	
-	#recent {
-		float: left;
-		position: sticky;
-		top: 100px;
-		left: 1200px;
+	/* 인클루드 한 메인프레임 */
+	#mainframe {
+		position : absolute;
+		z-index: 999;
 	}
+	
 	
 	#title {
 		font-size: 40px;
 	}
 	
-	
+	/* span태그 */
 	.pro_info {
-		font-size: 17px;
+		font-size: 21px;
 	}
 	
+	/* 전체 인풋태그 css */
 	.input-tag {
 		display: inline-block;
 		height: 30px;
@@ -56,19 +58,20 @@
 		border-radius: 5px;
 	}
 	
+	/* 이미지 미리보기 css */
 	.img_preview{
 	
 		margin: 10px;
-		display: inline;
+		display: inline-block;
 		position: relative;
 		
-		width: 155px;
-		height: 155px;
+/* 		width: 155px;
+		height: 155px; */
 		
 /* 		border: 2px solid black; */
 	
 	}
-	/*  */
+	/* 미리보기 삭제버튼 css */
 	.chk_style{
 	width:30px;
 	height:30px;
@@ -83,19 +86,32 @@
     background-color:rgba(0,0,0,0.5);
     color:#ffcccc;
 	}
+	
 		
+	/* 미리보기 삭제 css */
+	#del_img1, #del_img2, #del_img3, #del_img4, #del_img5,#del_sum{
+		cursor: pointer;
+		display: none;
 	}
+	
+	/* 이미지 미리보기 css */
+	#imgup_1,#imgup_2, #imgup_3, #imgup_4, #imgup_5,#imgup_sum {
+		cursor: pointer;
+		display: none;
+	}
+	
 	
 	.input-tag:focus{
 		outline: none;
 		border: 1px solid black;
 	}
 	
-	
+	/* 제목입력창 넓이 */
 	#p_name {
 		width: 450px;
 	}
 	
+	/* 제품설명 textarea css */
 	#p_exp {
 		padding: 15px;
 		width: 550px;
@@ -114,23 +130,10 @@
 		
 	}
 	
-	
-	
+	/* 상품 상태 */
 	#p_condition {
 		width: 15px;
 		height: 15px;
-	}
-	
-	
-	
-	#del_img1, #del_img2, #del_img3, #del_img4, #del_img5{
-		cursor: pointer;
-		display: none;
-	}
-	
-	#imgup_1,#imgup_2, #imgup_3, #imgup_4, #imgup_5 {
-		cursor: pointer;
-		display: none;
 	}
 	
 	input {
@@ -139,89 +142,210 @@
 	
 	/* 테이블 간의 간격 */
 	td {
+		width: 1020px;
 		padding: 0.8em 1.4em 0.5em 0.8em;
 	}
+	
+	.td1{
+		width: 20%;
+	}
+	
+	.td2{
+		width: 80%;
+	}
+	
+	
 </style>
 
-<!-- 이미지미리보기 -->
+<!-- 이미지 추가버튼 스크립트 -->
 <script type="text/javascript">
 	
-	var preview_array  = [false, false, false, false, false];
+	var preview_array  = [false, false, false, false, false, false];
+	
+	var img_number = 0;
 	
 	function img_preview() {
 		
+
 		for(var i=0; i<preview_array.length; i++){
-				
-			/* i가0일때 */
+			
+			
+			/* i가 0일때 */
 			if(i==0){
-				/* 1번사진이 비어있으면 */
+				
+				/* 5번사진 비어있으면 */
 				if(preview_array[0]==false){
+					
+					/* 섬네일사진 */
+					/* 5번사진 인풋태그 호출 */
+					
+					send_0();
+					
+					
+					
+					return;
+				}
+			}
+			
+			
+			
+			/* i가0일때 */
+			if(i==1){
+				
+				/* 1번사진이 비어있으면 */
+				if(preview_array[1]==false){
 					
 					/* 1번사진 인풋태그 호출 */
 					send_1();
+					
+					
 					return;
 				}
 			}
 			
 			/* i가 1일때 */
-			if(i==1){
+			if(i==2){
 				
 				/* 2번사진 비어있으면 */
-				if(preview_array[1]==false){
+				if(preview_array[2]==false){
 					
 					/* 2번사진 인풋태그 호출 */
 					send_2();
+					
 					return;
 				}
 			}
 			
 			/* i가 2일때 */
-			if(i==2){
+			if(i==3){
 				
 				/* 3번사진 비어있으면 */
-				if(preview_array[2]==false){
+				if(preview_array[3]==false){
 					
 					/* 3번사진 인풋태그 호출 */
 					send_3();
+					
+					
 					return;
 				}
 			}
 			
 			/* i가 3일때 */
-			if(i==3){
+			if(i==4){
 				
 				/* 4번사진 비어있으면 */
-				if(preview_array[3]==false){
+				if(preview_array[4]==false){
 					
 					/* 4번사진 인풋태그 호출 */
 					send_4();
+					
+
 					return;
 				}
 			}
 			
 			/* i가 4일때 */
-			if(i==4){
+			if(i==5){
 				
 				/* 5번사진 비어있으면 */
-				if(preview_array[4]==false){
+				if(preview_array[5]==false){
 					
 					/* 5번사진 인풋태그 호출 */
 					send_5();
+					
+					
 					return;
 				}
 			}
+					
+		}/*  for end */
 		
-			
-		}
+	}/* 프리뷰 end */
+</script>	
+
+<!-- 이미지 미리보기 -->
+<script type="text/javascript">	
+
+	/* 섬네일사진 */
+	
+	function send_0() {
+		
+		
+		
+		$("#sumimage").click();
+		
 	}
+	
+	$(function(){
 		
+		$("#sumimage").on('change',function(){
+			
+			/* 파일선택 취소했을때 */
+			if( $("#sumimage")[0].files[0]==undefined) {
+				
+				return;
+			}
+			
+			imgcheck0(this);
+			
+		})
+		
+	});
+
+	function imgcheck0(input) {
+		
+		/* 이미지 확장자 파일체크 */
+		var file_kind = input.value.lastIndexOf('.');
+		var file_name = input.value.substring(file_kind+1,input.length);
+		var file_type = file_name.toLowerCase();
+
+		var check_array = new Array( 'jpg','gif','png','jpeg' );
+
+		$('#sumimage').val();
+		
+		if(check_array.indexOf(file_type)==-1){
+			
+			/* 사용자에게 알려주고 */
+			alert('이미지 파일만 선택할 수 있습니다.');
+			
+			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
+			$('#sumimage').val('');
+			
+			return;
+		
+		} 
+
+		
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+		        $('#imgup_sum').attr('src', e.target.result);
+		        
+		        
+		        
+				$('#imgup_sum').show();
+		        $("#del_sum").show();
+		       
+				preview_array[0] = true;
+				
+				/* 이미지넘버 변경 */
+			
+				$("#img_number").html('('+ img_number + '/6)');
+			
+			
+	        }
+	        
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	
 	
 	/* 1번사진 */
 	
 	function send_1() {
+
 		$("#imageFile1").click();
-		
-		
 		
 	}
 	
@@ -229,13 +353,40 @@
 		
 		$("#imageFile1").on('change',function(){
 			
-			imgcheck(this);
+			/* 파일선택 취소했을때 */
+			if( $("#imageFile1")[0].files[0]==undefined) {
+				return;
+			}
+			
+			imgcheck1(this);
 			
 		})
 		
 	});
 	
-	function imgcheck(input) {
+	function imgcheck1(input) {
+		
+		/* 이미지 확장자 파일체크 */
+		var file_kind = input.value.lastIndexOf('.');
+		var file_name = input.value.substring(file_kind+1,input.length);
+		var file_type = file_name.toLowerCase();
+
+		var check_array = new Array( 'jpg','gif','png','jpeg' );
+
+		
+		if(check_array.indexOf(file_type)==-1){
+			
+			alert('이미지 파일만 선택할 수 있습니다.');
+			
+			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
+			$('#imageFile1').val('');
+			
+			return;
+		
+		} 
+		
+		
+		
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
@@ -247,10 +398,13 @@
 	        	$("#imgup_1").show();
 	        	$("#del_img1").show();
 	        	
-	        	preview_array[0] = true;
+	        	preview_array[1] = true;
+				
+	        	/* 이미지넘버 변경 */
+				$("#img_number").html('('+ img_number + '/6)');
 	        	
-	        	/* $('#imgup_2').show(); */
 	        }
+	        
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
@@ -265,6 +419,11 @@
 		
 		$("#imageFile2").on('change',function(){
 			
+			/* 파일선택 취소했을때 */
+			if( $("#imageFile2")[0].files[0]==undefined) {
+				return;
+			}
+			
 			imgcheck2(this);
 			
 		})
@@ -274,20 +433,42 @@
 	
 	
 	function imgcheck2(input) {
+		
+		/* 이미지 확장자 파일체크 */
+		var file_kind = input.value.lastIndexOf('.');
+		var file_name = input.value.substring(file_kind+1,input.length);
+		var file_type = file_name.toLowerCase();
+
+		var check_array = new Array( 'jpg','gif','png','jpeg' );
+
+		
+		if(check_array.indexOf(file_type)==-1){
+			
+			alert('이미지 파일만 선택할 수 있습니다.');
+			
+			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
+			$('#imageFile2').val('');
+			
+			return;
+		
+		} 
+		
+		
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
 				$('#imgup_2').attr('src', e.target.result);
 				
 				
-				
 				$("#imgup_2").show();
 				$("#del_img2").show();
 				
-				preview_array[1] = true;
-
+				preview_array[2] = true;
+	        	/* 이미지넘버 변경 */
+				$("#img_number").html('('+ img_number + '/6)');
 	       
 	        }
+	        
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
@@ -303,6 +484,11 @@
 		
 		$("#imageFile3").on('change',function(){
 			
+			/* 파일선택 취소했을때 */
+			if( $("#imageFile3")[0].files[0]==undefined){
+				return;
+			}
+			
 			imgcheck3(this);
 			
 		})
@@ -310,6 +496,27 @@
 	});
 
 	function imgcheck3(input) {
+		
+		/* 이미지 확장자 파일체크 */
+		var file_kind = input.value.lastIndexOf('.');
+		var file_name = input.value.substring(file_kind+1,input.length);
+		var file_type = file_name.toLowerCase();
+
+		var check_array = new Array( 'jpg','gif','png','jpeg' );
+
+		
+		if(check_array.indexOf(file_type)==-1){
+			
+			alert('이미지 파일만 선택할 수 있습니다.');
+			
+			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
+			$('#imageFile3').val('');
+			
+			return;
+		
+		}
+		
+		
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
@@ -319,8 +526,9 @@
 				$("#imgup_3").show();
 				$("#del_img3").show();
 				
-				preview_array[2] = true;
-				
+				preview_array[3] = true;
+	        	/* 이미지넘버 변경 */
+				$("#img_number").html('('+ img_number + '/6)');
 	       
 	        }
 	        reader.readAsDataURL(input.files[0]);
@@ -338,6 +546,11 @@
 		
 		$("#imageFile4").on('change',function(){
 			
+			/* 파일선택 취소했을때 */
+			if( $("#imageFile4")[0].files[0]==undefined){
+				return;
+			}
+			
 			imgcheck4(this);
 			
 		})
@@ -345,17 +558,39 @@
 	});
 
 	function imgcheck4(input) {
+		
+		/* 이미지 확장자 파일체크 */
+		var file_kind = input.value.lastIndexOf('.');
+		var file_name = input.value.substring(file_kind+1,input.length);
+		var file_type = file_name.toLowerCase();
+
+		var check_array = new Array( 'jpg','gif','png','jpeg' );
+
+		
+		if(check_array.indexOf(file_type)==-1){
+			
+			alert('이미지 파일만 선택할 수 있습니다.');
+			
+			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
+			$('#imageFile4').val('');
+			
+			return;
+		
+		}
+		
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
+	        	
 				$('#imgup_4').attr('src', e.target.result);
 				
 				$("#imgup_4").show();
 				$("#del_img4").show();
 				
-				preview_array[3] = true;
+				preview_array[4] = true;
+	        	/* 이미지넘버 변경 */
+				$("#img_number").html('('+ img_number + '/6)');
 				
-
 	       
 	        }
 	        reader.readAsDataURL(input.files[0]);
@@ -367,11 +602,18 @@
 	
 	function send_5() {
 		$("#imageFile5").click();
+		
 	}
 	
 	$(function(){
 		
 		$("#imageFile5").on('change',function(){
+			
+			/* 파일선택 취소했을때 */
+			if( $("#imageFile5")[0].files[0]==undefined){
+				
+				return;
+			}
 			
 			imgcheck5(this);
 			
@@ -380,16 +622,41 @@
 	});
 
 	function imgcheck5(input) {
+		
+		/* 이미지 확장자 파일체크 */
+		var file_kind = input.value.lastIndexOf('.');
+		var file_name = input.value.substring(file_kind+1,input.length);
+		var file_type = file_name.toLowerCase();
+
+		var check_array = new Array( 'jpg','gif','png','jpeg' );
+
+		
+		if(check_array.indexOf(file_type)==-1){
+			
+			alert('이미지 파일만 선택할 수 있습니다.');
+			
+			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
+			$('#imageFile5').val('');
+			
+			return;
+		
+		}
+		
+		
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
-	        $('#imgup_5').attr('src', e.target.result);
-	        
-	        
-			preview_array[4] = true;
-	        
-			$('#imgup_5').show();
-	        $("#del_img5").show();
+		        	
+		        $('#imgup_5').attr('src', e.target.result);
+		        
+		        
+				$('#imgup_5').show();
+		        $("#del_img5").show();
+				
+		        preview_array[5] = true;
+	        	
+		        /* 이미지넘버 변경 */
+				$("#img_number").html('('+ img_number + '/6)');
 	       
 	        }
 	        reader.readAsDataURL(input.files[0]);
@@ -397,63 +664,112 @@
 	}
 	
 	
+
+	
+	
 </script>
 
 
 <!-- 이미지미리보기삭제 -->
 <script type="text/javascript">
+	
+	function del_sum() {
+		alert('썸네일이미지 지움');
+		/* 실제 DB에 들어가는 input value 지움 */
+		$('#sumimage').val('');
+		
+		$('#imgup_sum').hide();
+		$("#del_sum").hide(); 
+		
+		/* 썸네일 비움 */
+		preview_array[0] = false;
+		
+		
+		img_number--;
+		$("#img_number").html('('+ img_number + '/6)');
+		
+		return;
+	}
+
+
 	function del_img1() {
 		alert('1번이미지 지움');
+		
+		$('#imageFile1').val('');
+
+		
 		$('#imgup_1').hide();
 		$("#del_img1").hide();
 		
 		/* 1번사진 비움 */
-		preview_array[0] = false;
-		
+		preview_array[1] = false;
+		img_number--;
+		$("#img_number").html('('+ img_number + '/6)');
 		return;
 	}
+	
 	function del_img2() {
 		alert('2번이미지 지움');
+		
+		$('#imageFile2').val('');
+		
 		$('#imgup_2').hide();
 		$("#del_img2").hide();
 		
 		/* 2번사진 비움 */
-		preview_array[1] = false;
-		
+		preview_array[2] = false;
+		img_number--;
+		$("#img_number").html('('+ img_number + '/6)');
 		return;
 	}
+	
 	function del_img3() {
 		alert('3번이미지 지움');
+		
+		$('#imageFile3').val('');
+		
 		$('#imgup_3').hide();
 		$("#del_img3").hide(); 
 		
 		/* 3번사진 비움 */
-		preview_array[2] = false;
-		 
+		preview_array[3] = false;
+		img_number--;
+		$("#img_number").html('('+ img_number + '/6)'); 
 		 
 		return;
 	}
 	function del_img4() {
 		alert('4번이미지 지움');
+		
+		$('#imageFile4').val('');
+		
 		$('#imgup_4').hide();
 		$("#del_img4").hide();
 		
 		/* 4번사진 비움 */
-		preview_array[3] = false;
-		 
-		 
+		preview_array[4] = false;
+		img_number--;
+		$("#img_number").html('('+ img_number + '/6)');
+
 		return;
 	}
 	function del_img5() {
 		alert('5번이미지 지움');
 		
+		$('#imageFile5').val('');
+		
 		$('#imgup_5').hide();
 		$("#del_img5").hide(); 
 		
 		/* 5번사진 비움 */
-		preview_array[4] = false;
+		preview_array[5] = false;
+		img_number--;
+		$("#img_number").html('('+ img_number + '/6)');
+		
 		return;
 	}
+	
+
 
 </script>
 
@@ -517,7 +833,13 @@
 		
 		var p_exp = $("#p_exp").val().trim();
 		
- 		
+		var sumimage = $("#sumimage").val();
+		
+ 		if(sumimage==''){
+ 			alert('섬네일 이미지를 등록해주세요.');
+ 			return;
+ 		}
+		
 		if(p_name==''){
 			
 			alert('제목이 비어있습니다. (필수입력, 공백불가)');
@@ -527,7 +849,7 @@
 		}
 		
 		if(c_idx==0){
-			alert('카테고리를 선택하세요. (필수입력)');
+			alert('카테고리를 선택하세요. ');
 			$("#c_idx").focus();
 			return;
 		}
@@ -543,7 +865,7 @@
 		
 		if(p_price==''){
 			
-			alert('가격이 비어있습니다. (필수입력, 공백불가)');
+			alert('가격이 비어있습니다.');
 			$("#p_price").val('');
 			$("#p_price").focus();
 			return;
@@ -552,7 +874,7 @@
 		
 		if(p_exp==''){
 			
-			alert('상품 설명이 비어있습니다. (필수입력, 공백불가)');
+			alert('상품 설명이 비어있습니다. ');
 			$("#p_exp").val('');
 			$("#p_exp").focus();
 			return;
@@ -580,29 +902,36 @@
 		
 		if(confirm('등록 하시겠습니까?')==false) return;
 		
+		var form = $("#imgform")[0];
+		var formData = new FormData(form);
 		
+		formData.append('sumimage',$('#sumimage')[0].files[0]);
+		formData.append('imageFile1',$('#imageFile1')[0].files[0]);
+		formData.append('imageFile2',$('#imageFile2')[0].files[0]);
+		formData.append('imageFile3',$('#imageFile3')[0].files[0]);
+		formData.append('imageFile4',$('#imageFile4')[0].files[0]);
+		formData.append('imageFile5',$('#imageFile5')[0].files[0]);
+		formData.append('p_name',p_name);			// 상품명
+		formData.append('c_idx',c_idx);				// 카테고리번호
+		formData.append('p_location',p_location);	// 지역
+		formData.append('p_condition',p_condition);	// 상품상태
+		formData.append('p_price',p_price);			// 가격
+		formData.append('p_exp',p_exp);				// 상품설명
 		
-/* 		$.ajax({
+ 	 	$.ajax({
 			
-			url 	 : 'insert.do',
+			url 	 : 'product_insert.do',
+			type	 : 'POST',
+			data	 : formData,
+			processData : false,
+			contentType : false,
 			dataType : 'json',
-			data	 : {
-				'c_idx'	  : c_idx,
-				'p_name'  : p_name,
-				'p_exp'   : p_exp,
-				'p_price' : p_price,
-				
-				},
 			success  : function(res){
-				
-			},
-			error	 : function(err){
-				alert(err.responseText);
+				alert('성공!')
 			}
 			
-			
-		});
-		 */
+		}); 
+		
 		
 		
 	}
@@ -642,7 +971,7 @@
 			p_price = comma(uncomma(p_price));
 			
 			
-			console.log(p_price);
+			/* console.log(p_price); */
 			
 			$("#p_price").val(p_price);
 
@@ -707,26 +1036,26 @@
 	})
 	
 	
-	
 </script>
 
 
 </head>
 <body>
 	<!-- 파일업로드 용 폼 -->
-	<form enctype="multipart/form-data" id="image" method="post">
-		<input type="file" id="imageFile1" style="display: none;">
-		<input type="file" id="imageFile2" style="display: none;">
-		<input type="file" id="imageFile3" style="display: none;">
-		<input type="file" id="imageFile4" style="display: none;">
-		<input type="file" id="imageFile5" style="display: none;">
+	<form enctype="multipart/form-data" id="imgform" method="post">
+		<input type="file" id="sumimage"   style="display: none;" accept=".gif, .jpg, .jpeg, .png">
+		<input type="file" id="imageFile1" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
+		<input type="file" id="imageFile2" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
+		<input type="file" id="imageFile3" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
+		<input type="file" id="imageFile4" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
+		<input type="file" id="imageFile5" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
 	</form>
 
 	<div id="root">
-		전체 div
-	<%-- 	<div id="recent">
-			<%@ include file="../main/header1.jsp"%>
-		</div> --%>
+	
+	 	<div id="mainframe">
+			<%@ include file="../mainpage/header&sidebar.jsp"%>
+		</div> 
 		<div id="insert_box">
 			<span id="title">상품등록</span>
 
@@ -734,7 +1063,7 @@
 				<!-- 기본정보 -->
 				<tr>
 					<td colspan="2" align="left"><span class="pro_info">기본정보</span>
-						&nbsp;&nbsp;&nbsp; <span style="font-size: 10px; color: red">*필수항목</span></td>
+						&nbsp;&nbsp;&nbsp; <span style="font-size: 14px; color: red">*필수항목</span></td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr></td>
@@ -742,49 +1071,62 @@
 
 				<!-- 상품이미지 -->
 				<tr>
-					<td width="30%;" align="left" style="vertical-align: top;"><span
-						class="pro_info">상품이미지</span> <span class="pro_info">(0/5)<span
-							style="color: red">*</span></span></td>
-					<td width="70%;" align="left">
+					<td class="td1" align="left" style="vertical-align: top;"><span
+						class="pro_info">상품이미지</span> 
+						<span class="pro_info" id="img_number">(0/6)</span>
+						<span style="color: red">*</span>
+						</td>
+					<td class="td2" align="left">
 					
-					
+						<!-- 이미지 등록 영역 -->
 						<div>
+						
 							<input type="image" id="imgup" onclick="img_preview();"
-						src="../imgdata/image_upload.png" width="150px" height="150px">
+								src="../imgdata/image_upload.png" width="150px" height="150px">
 							<br>
+							
+							<div class="img_preview" >
+								<input type="image" id="imgup_sum" onclick="send_0();"
+									src="" width="150px" height="150px">
+								<!-- 삭제버튼 -->
+								<input type="button" id="del_sum" class="chk_style" value="x" onclick="del_sum();">
+							</div>
+							
+								
 							<div class="img_preview" >
 								<input type="image" id="imgup_1" onclick="send_1();"
-									src="../imgdata/image_upload.png" width="150px" height="150px">
+									src="" width="150px" height="150px">
 								<!-- 삭제버튼 -->
 								<input type="button" id="del_img1" class="chk_style" value="x" onclick="del_img1();">
 							</div>
-
+							
 							<div class="img_preview">
 								<input type="image" id="imgup_2" onclick="send_2();"
-									src="../imgdata/image_upload.png" width="150px" height="150px">
+									src="" width="150px" height="150px">
 								<input type="button" id="del_img2" class="chk_style" value="x" onclick="del_img2();">
 							</div>
 
 							<div class="img_preview">
 								<input type="image" id="imgup_3" onclick="send_3();"
-									src="../imgdata/image_upload.png" width="150px" height="150px">
+									src="" width="150px" height="150px">
 								<input type="button" id="del_img3" class="chk_style" value="x" onclick="del_img3();">
 							</div>
 
 							<div class="img_preview">
 								<input type="image" id="imgup_4" onclick="send_4();"
-									src="../imgdata/image_upload.png" width="150px" height="150px">
+									src="" width="150px" height="150px">
 								<input type="button" id="del_img4" class="chk_style" value="x" onclick="del_img4();">
 							</div>
 
 							<div class="img_preview">
 								<input type="image" id="imgup_5" onclick="send_5();"
-									src="../imgdata/image_upload.png" width="150px" height="150px">
+									src="" width="150px" height="150px">
 								<input type="button" id="del_img5" class="chk_style" value="x" onclick="del_img5();">
 							</div>
-
-
+								
 						</div>
+
+
 					</td>
 				</tr>
 
@@ -794,9 +1136,9 @@
 				
 				<!-- 제목  -->
 				<tr>
-					<td width="30%;" align="left" style="vertical-align: top;"><span
+					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">제목<span style="color: red">*</span></span></td>
-					<td width="70%;" align="left"><input maxlength="40" oninput="numberMaxLength(this);"
+					<td class="td2" align="left"><input maxlength="40" oninput="numberMaxLength(this);"
 						type="text" id="p_name" name="p_name" class="input-tag"
 						placeholder="제목을 입력하세요." >
 						&nbsp;&nbsp; <span class="pro_info" id="name_length">0/40</span></td>
@@ -808,9 +1150,9 @@
 				
 				<!-- 카테고리 -->
 				<tr>
-					<td width="30%;" align="left" style="vertical-align: top;"><span
+					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">카테고리<span style="color: red">*</span></span></td>
-					<td width="70%;" align="left"><select class="input-tag"
+					<td class="td2" align="left"><select class="input-tag"
 						id="c_idx" name="c_idx" style="width: 30%;">
 							<option value="0">카테고리 선택</option>
 							<option value="1">남성의류</option>
@@ -828,7 +1170,7 @@
 				
 				<!-- 거래지역 -->
 				<tr>
-					<td width="30%;" align="left" style="vertical-align: top;"><span
+					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">거래지역<span style="color: red">*</span></span></td>
 					
 					<td align="left">
@@ -847,9 +1189,9 @@
 				
 				<!-- 상품상태 -->
 				<tr>
-					<td width="30%;" align="left" style="vertical-align: top;"><span
+					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">상품상태<span style="color: red">*</span></span></td>
-					<td width="70%;" align="left"><input type="radio"
+					<td class="td2" align="left"><input type="radio"
 						name="p_condition" id="p_condition" value="중고상품" checked="checked">
 						<span class="pro_info">중고상품</span> <input type="radio"
 						name="p_condition" id="p_condition" value="새상품"> <span
@@ -862,9 +1204,9 @@
 				
 				<!-- 가격  -->
 				<tr>	
-					<td width="30%;" align="left" style="vertical-align: top;"><span
+					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">가격<span style="color: red">*</span></span></td>
-					<td width="70%;" align="left"><input type="text" id="p_price" maxlength="11"
+					<td class="td2" align="left"><input type="text" id="p_price" maxlength="11"
 						name="p_price" class="input-tag" placeholder="가격"
 						oninput="numberMaxLength(this);" style="width: 30%;"> &nbsp; <span class="pro_info">원</span>
 						<br>
@@ -878,10 +1220,12 @@
 				
 				<!-- 상품설명 -->
 				<tr>
-					<td width="30%;" align="left" style="vertical-align: top;"><span
+					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">상품설명<span style="color: red">*</span></span></td>
 					<td align="left"><span style="font-size: 18px;"
-						id="exp_length">0/1000</span> <textarea class="input-tag"
+						id="exp_length">0/1000</span>
+						<br>
+						<textarea class="input-tag"
 							id="p_exp" name="p_exp" maxlength="1000"
 							oninput="numberMaxLength(this);"
 							placeholder="구입연도, 브랜드, 사용감, 하자유무 등 필요한 정보를 넣어주세요. &#13;&#10;구매자의 문의를 좀더 줄일 수 있습니다."></textarea>
@@ -902,15 +1246,9 @@
 
 			</table>
 
-
-
 		</div>
 
-
-
 	</div>
-
-
 
 </body>
 </html>
