@@ -92,6 +92,8 @@
 	            checkId("first");
 	    	})
 	    	
+	    	
+	    	
 	    	 $("#u_pwd").blur(function() {
 	            pwFlag = false;
 	            checkPwd();
