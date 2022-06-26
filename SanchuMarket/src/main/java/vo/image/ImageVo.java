@@ -16,10 +16,9 @@ public class ImageVo {
 	}
 	
 
-	public ImageVo(int p_idx, String sumimage, String imageFile1, String imageFile2, String imageFile3,
+	public ImageVo(String sumimage, String imageFile1, String imageFile2, String imageFile3,
 			String imageFile4, String imageFile5) {
 		super();
-		this.p_idx = p_idx;
 		this.sumimage = sumimage;
 		this.imageFile1 = imageFile1;
 		this.imageFile2 = imageFile2;

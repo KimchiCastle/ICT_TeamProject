@@ -6,6 +6,7 @@ drop table image cascade constraints
 
 create table image
 (
+	
 	p_idx		int, 			--상품번호
 	sumimage	varchar2(4000),	--썸네일 사진
 	imageFile1	varchar2(4000), --사진1
@@ -23,6 +24,18 @@ alter table image
 
 
 select * from image
+
+
+insert into product 
+values(
+select max(p_idx) from product,
+cat123.gif,
+wow123.jpg
+
+)
+
+
+
 
 
 */
