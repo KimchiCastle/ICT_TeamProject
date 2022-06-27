@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/media/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
 
 body{
@@ -136,7 +136,7 @@ li, ul{
 <!-- 고정헤더 -->
 	<div class="header">
 	<!-- 로고 -->
-		<a class="logo" href=""><img src="../image/상추마켓.png" width="200" height="50"></a>
+		<a class="logo"><img src="../image/상추마켓.png" width="200" height="50" onclick="location.href='../mainpage/list.do'"></a>
 	<!-- 검색창 -->
 		<div class="search">
 			<input id="search" name="search" type="text" >

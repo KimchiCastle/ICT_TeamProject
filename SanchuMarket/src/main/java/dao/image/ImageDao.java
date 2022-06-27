@@ -1,5 +1,7 @@
 package dao.image;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -63,6 +65,21 @@ public class ImageDao {
 		sqlSession.close();
 		
 		return vo;
+	}
+
+	public List<ImageVo> selectList() {
+		// TODO Auto-generated method stub
+		List<ImageVo> list = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		list = sqlSession.selectList("image_list_p_idx");
+		
+		sqlSession.close();
+		
+		
+		
+		return list;
 	}
 	
 	

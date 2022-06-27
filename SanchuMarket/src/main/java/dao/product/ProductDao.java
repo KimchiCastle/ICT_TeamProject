@@ -39,12 +39,15 @@ public class ProductDao {
 		// 1.SqlSession얻어오기
 		SqlSession sqlSession = factory.openSession();
 
+		list = sqlSession.selectList("product.image_list_p_idx");
 
 		// 3.닫기
 		sqlSession.close();
 
 		return list;
 	}
+	
+	
 
 	// 상품등록 메서드
 	public int insert(ProductVo vo) {

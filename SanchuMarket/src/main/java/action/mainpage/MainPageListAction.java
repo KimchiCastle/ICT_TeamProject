@@ -27,13 +27,17 @@ public class MainPageListAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//전체목록 가져오기
-		List<ProductVo> list = ProductDao.getinstance().selectList();
+		List<ProductVo> list 	= ProductDao.getinstance().selectList();
 		
 		request.setAttribute("list", list);
 		
+		/*
+		 * for( ProductVo vo : list) { System.out.println(vo.getP_idx()); }
+		 */
+		
 		
 		//forward
-		String forward_page = "mainpage_list.jsp";
+		String forward_page = "content.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
 		disp.forward(request, response);
 
