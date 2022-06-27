@@ -45,7 +45,7 @@ insert into product
 values( (select nvl(max(p_idx)+1,1) from product),
 		1,				--회원번호
 		1,				--카테고리번호
-		'한복팝니다.',  --제목
+		'한복팝니다.',  --제
 		sysdate,		--등록일자
 		130000,			--가격
 		'거의신품',		--상품상태
@@ -54,12 +54,41 @@ values( (select nvl(max(p_idx)+1,1) from product),
 		10,				--조회수
 		'거래가능'		--거래상태
 		);
+		
+		
+insert into product 
+values( (select nvl(max(p_idx)+1,1) from product),
+		1,				--회원번호
+		2,				--카테고리번호
+		'여성옷팝니다.',  --제목
+		sysdate,		--등록일자
+		30000,			--가격
+		'중고',		--상품상태
+		'직거래만 합니다.',	--상품설명
+		'서울시 분당구',	--거래지역
+		2,				--조회수
+		'거래가능'		--거래상태
+		);
+insert into product 
+values( (select nvl(max(p_idx)+1,1) from product),
+		1,				--회원번호
+		2,				--카테고리번호
+		'여성옷팝니다.',  --제목
+		sysdate,		--등록일자
+		30000,			--가격
+		'중고',		--상품상태
+		'직거래만 합니다.',	--상품설명
+		'서울시 분당구',	--거래지역
+		0,				--조회수
+		'거래가능'		--거래상태
+		);
 
 ------ 조회용
 select * from product
 
-	select * from product order by u_idx
+update product set p_click=0 where p_idx=5
 
+select p_idx from product when
 
 
 

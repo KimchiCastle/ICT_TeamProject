@@ -70,11 +70,14 @@
 </style>
 	<script>
 	    var idFlag = false;
-	    var pwFlag = false;
+	    var pwdFlag = false;
 	    var submitFlag = false;
-	    var nickFlag = false;
-	
-	
+	  /*   var nickFlag = false;
+	    var emailFlag = false;
+	    var addrFlag = false;
+		var birthFlag = false;
+		var telFlag = false; */
+		
 		//유효성검사를 해주는 각 flag들이 1이 되어야 회원가입이 진행됨
 	    $(document).ready(function(){
 	    	
@@ -88,6 +91,8 @@
 	    		idFlag = false;
 	            checkId("first");
 	    	})
+	    	
+	    	
 	    	
 	    	 $("#u_pwd").blur(function() {
 	            pwFlag = false;
@@ -147,9 +152,6 @@
 	        return true;
     	 }
 
-
-
-
 //-------------비밀번호 유효성 체크 함수------------------------------------ 	
 
 	    function checkPwd() {
@@ -198,6 +200,7 @@
 			        }
 			        return true;
 			    });
+	        		pwdFlag = true;
 	        }
 	        		
 //-------------비밀번호 유효성 체크 함수(boolean반환)------------------------------------
@@ -224,8 +227,8 @@
 		            return false;
 		        }
 		
-		        var isPW = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#\$%\^&\*\(\)_\+|\{\}:"<>\?]{8,16}$/;
-		        if (!isPW.test(str)) {
+		        var isPwd = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#\$%\^&\*\(\)_\+|\{\}:"<>\?]{8,16}$/;
+		        if (!isPwd.test(str)) {
 		            return false;
 		        }
 		
@@ -355,7 +358,7 @@
 	      }
 	  	  }
 
-//-------------주소 체크 함수------------------------------------
+//-------------주소 유무 체크 함수------------------------------------
 
    function checkAddr(){
 	    	
