@@ -96,6 +96,35 @@ public class UserDao {
 		
 		return res;
 	}
+
+	public int update(UserVo vo) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		//1.SqlSession얻기
+		SqlSession sqlSession = factory.openSession(true);//auto commit
+		
+		//2.실행
+		res = sqlSession.update("user.user_update",vo);
+		//3.닫기
+		sqlSession.close();
+		
+		return res;
+	}
+
+	public List<UserVo> selectList(int u_idx) {
+		// TODO Auto-generated method stub
+		List<UserVo>list = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		list = sqlSession.selectList("product.product_user_list",u_idx);
+		
+		sqlSession.close();
+		
+
+		return list;
+	}
 		
 	
 	
