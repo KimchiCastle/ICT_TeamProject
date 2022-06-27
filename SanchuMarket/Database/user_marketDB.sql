@@ -74,8 +74,9 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		null,				  --사진
 		'010-1234-5678',	  --전화번호
 		'hongkill@gmail.com', --메일
-		'일반회원'	,		  --회원등급
-		'111-111-111'   --ip
+		'일반회원',		  --회원등급
+		'111-111-111',   --ip
+		'25231'           --postcode
 		);
 
 
@@ -94,7 +95,8 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		'010-1234-5678',	  --전화번호
 		'admin123@gmail.com', --메일
 		'일반회원',			  --회원등급
-		'111-111-111'   --ip
+		'111-111-111',   --ip
+		'23231'           --postcode
 		);
 
 insert into user_market 
@@ -112,13 +114,13 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		'010-4567-8901',	  --전화번호
 		'haha12@naver.com',   --메일
 		'일반회원'	,		  --회원등급
-		'111-111-111'   --ip
+		'111-111-111' ,  --ip
+		'25251'           --postcode
+		
 		);
 
-
-
 ---조회용
-select * from user_market pk_user_maket_u_idx;
+select * from user_market;
 
 
 

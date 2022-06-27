@@ -31,7 +31,7 @@ padding-left: 15px;
 	width: 187px;
 	height: 260px; 
 	border: 1px solid #20de07;
-	margin-right: 15px;
+	margin-right: 14px;
 	margin-bottom: 15px;
 	float: left;
 }
@@ -42,14 +42,30 @@ padding-left: 15px;
 	border: 1px solid #d3d3d3;
 }
 .price_tag{
-	width: 165px;
+	width: 173px;
 	height: 51px;
-	padding: 10px 10px;
+	padding: 10px 6px 10px 6px;
 	border: 1px solid #d3d3d3;
 }
 
 #p_name{
 	margin-bottom: 10px;
+}
+
+#p_price{
+	float: left;
+	font-size: 15px;
+	margin-top: 2px;
+	font-weight: bold;
+}
+
+#p_date{
+ float: right;
+ font-size: 12px;
+ font-weight: bold;
+ text-align: right;
+ margin-top: 4px;
+ color: #878793;
 }
 
 </style>
@@ -75,7 +91,8 @@ padding-left: 15px;
 			<div id="p_photo">${ i.count }</div>
 			<div class="price_tag">
 				<div id="p_name">제목</div>
-				<div id="p_price">가격</div> 
+				<div id="p_price">100,000,000원</div>
+				<div id="p_date">2022-06-23</div> 
 			</div>
 		</div>
 	</c:forEach>
