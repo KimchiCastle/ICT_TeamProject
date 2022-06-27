@@ -20,7 +20,7 @@ create table user_market
 	u_tel		varchar2(100)  not null, -- 전화번호
 	u_mail		varchar2(100)  not null, -- 이메일
 	u_grade		varchar2(100)  default '일반회원', -- 회원등급
-	u_ip		varchar2(100) 
+	u_ip		varchar2(100),
 )
 
 ---------------------- 제약조건 ---------------------
@@ -54,7 +54,8 @@ ALTER TABLE user_market
                      ck_user_market_u_grade;
 	
 	
---우편번호 column추가
+-----------반드시 할것우편번호 column추가-------------
+
 alter table user_market add postcode varchar2(50); 
 	
 ---------------------- 샘플데이터 ----------------------

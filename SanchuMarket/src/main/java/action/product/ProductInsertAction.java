@@ -60,9 +60,22 @@ public class ProductInsertAction extends HttpServlet {
 		String p_exp		= mr.getParameter("p_exp").replaceAll("\r\n", "<br>");
 		String p_location	= mr.getParameter("p_location");
 		
+		
+		
+		
 		String p_status = "거래가능";
 		
 		ProductVo vo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location, p_location, p_status);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		/* int res = ProductDao.getinstance().insert(vo); */
 		

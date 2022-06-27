@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import service.MyBatisConnector;
 import vo.image.ImageVo;
+import vo.product.ProductVo;
 
 public class ImageDao {
 
@@ -47,6 +48,21 @@ public class ImageDao {
 		
 		
 		return res;
+	}
+
+	public ImageVo selectOne(int p_idx) {
+		// TODO Auto-generated method stub
+		
+		ImageVo vo = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		vo = sqlSession.selectOne("image.image_selectOne", p_idx);
+		
+		//connection ´Ý±â
+		sqlSession.close();
+		
+		return vo;
 	}
 	
 	

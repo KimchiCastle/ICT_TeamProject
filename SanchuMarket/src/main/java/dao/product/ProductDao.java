@@ -46,6 +46,7 @@ public class ProductDao {
 		return list;
 	}
 
+	// 상품등록 메서드
 	public int insert(ProductVo vo) {
 		// TODO Auto-generated method stub
 		
@@ -59,6 +60,22 @@ public class ProductDao {
 		sqlSession.close();
 		
 		return res;
+	}
+	
+	//상품 1개 조회 메서드
+	public ProductVo selectOne(int p_idx) {
+		// TODO Auto-generated method stub
+		
+		ProductVo vo = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		vo = sqlSession.selectOne("product.product_selectOne", p_idx);
+		
+		//connection 닫기
+		sqlSession.close();
+		
+		return vo;
 	}
 	
 	

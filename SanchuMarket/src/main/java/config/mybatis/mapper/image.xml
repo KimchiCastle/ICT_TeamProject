@@ -16,7 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 #{imageFile5}
 		 )
 	</insert>
-		
+	
+	
+		<!-- 상품목록 1개 에 대한 이미지 -->
+	<select id="image_selectOne" parameterType="int" resultType="vo.image.ImageVo">
+		select * from image where p_idx=#{p_idx}
+	</select>	
 	
 	
 </mapper>
