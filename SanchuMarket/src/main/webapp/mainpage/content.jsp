@@ -85,7 +85,16 @@ padding-left: 15px;
 	<!-- 메인콘텐츠 -->
 	<div class="main_content">
 	<h3 style="margin: 0px;">최근 올라온 상품</h3><br>
+	
+	<!-- 데이터 없는 경우 -->
+	<c:if test="${ empty list }">
+		<div id="empty_msg">등록 된 상품이 없습니다.</div>
+	</c:if>
+	
+	
+	
 	<!-- 상품리스트 -->
+	<!-- 데이터 있는 경우 -->
 	<c:forEach  begin="1" end="100" varStatus="i" step="1">
 		<div class="product_list" onclick="list_click()">
 			<div id="p_photo">${ i.count }</div>
