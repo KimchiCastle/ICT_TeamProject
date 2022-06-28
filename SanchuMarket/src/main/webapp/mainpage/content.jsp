@@ -119,7 +119,7 @@ padding-left: 15px;
 			
 			<div class="price_tag">
 				<div id="p_name">${ vo.p_name }</div>
-				<div id="p_price">${ vo.p_price }</div>
+				<div id="p_price"><fmt:formatNumber pattern="#,###" value="${ vo.p_price }"/>원</div>
 				<div id="p_date" class="p_date">${ vo.p_date }</div> 
 			</div>
 		</div>
