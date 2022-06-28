@@ -1017,8 +1017,14 @@
 		
 	}
 
-	
-	
+	/* 상품등록 취소  */	
+	function procancel(){
+		
+		if(confirm('상품등록을 취소하시겠습니까?')==false) return;
+		
+		location.href='../mainpage/list.do';
+		
+	}
 
 </script>
 
@@ -1320,9 +1326,9 @@
 				
 				<!-- 등록 취소버튼 -->
 				<tr>
-					<td colspan="2"><input type="button" value="등록하기"
-						onclick="proInfoSend();"> <input type="button"
-						value="취소하기"></td>
+					<td colspan="2">
+						<input type="button" value="등록하기" onclick="proInfoSend();"> 
+						<input type="button" value="취소하기" onclick="procancel()"></td>
 				</tr>
 
 			</table>
