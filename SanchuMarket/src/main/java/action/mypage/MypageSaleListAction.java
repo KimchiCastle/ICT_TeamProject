@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UserDao;
-import vo.UserVo;
+import dao.user.UserDao;
+import vo.user.UserVo;
 
 /**
  * Servlet implementation class MypageSaleListAction
