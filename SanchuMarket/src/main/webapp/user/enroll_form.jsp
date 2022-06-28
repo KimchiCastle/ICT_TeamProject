@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,59 +11,184 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script> 
 <style type="text/css">
   
-  body{
-     width: 800px;
-     height: 800px; 
-     margin: auto;
-  }
-  
-  #title{
-	 font-size: 30px; 
-	 font-weight: bold;
-	 color: #1f6f78;
-	 line-height: 5;
-	 cursor: pointer;
-	  }
-  
-  #title-wrap{
-    text-align:center;
-  }  
-  
-  .table{
-     width: 100%;
-     height: 100%; 
-     font-size: 15px; 
-  }
-  
-  td{
-    width: 30%;
-  }
-  
-  .form-control{
-    height: 40px;
-    width: 300px;
-  }
-  
-  #enroll_btn{
-    width: 50%;
+  html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background: #f5f6f7;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+#logo {
+    width: 240px;
+    height: 44px;
+    cursor: pointer;
+}
+
+#header {
+    padding-top: 62px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+#wrapper {
+    position: relative;
+    height: 100%;
+}
+
+#content {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 460px;
+}
+
+
+
+
+/* 입력폼 */
+
+
+h3 {
+    margin: 19px 0 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.box {
+    display: block;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 14px 10px 14px;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+}
+
+.int {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 29px;
+    border: none;
+    background: #fff;
+    font-size: 15px;
+}
+
+input {
+    font-family: Dotum,'돋움',Helvetica,sans-serif;    
+}
+
+.box.int_id {
+    padding-right: 110px;
+}
+
+.box.int_pass {
+    padding-right: 40px;
+}
+
+.box.int_pass_check {
+    padding-right: 40px;
+}
+
+.step_url {
+    /*@naver.com*/
+    position: absolute;
+    top: 16px;
+    right: 13px;
+    font-size: 15px;
+    color: #8e8e8e;
+}
+
+.pswdImg {
+    width: 18px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+#bir_wrap {
+    display: table;
+    width: 100%;
+}
+
+#bir_yy {
+    display: table-cell;
+    width: 147px;
+    
+}
+
+#bir_mm {
+    display: table-cell;
+    width: 147px;
+    vertical-align: middle;
+}
+
+#bir_dd {
+    display: table-cell;
+    width: 147px;
+}
+
+#bir_mm, #bir_dd {
+    padding-left: 10px;
+}
+
+select {
+    width: 100%;
+    height: 29px;
+    font-size: 15px;
+    background: #fff url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
+    background-size: 20px 8px;
+    -webkit-appearance: none;
+    display: inline-block;
+    text-align: start;
+    border: none;
+    cursor: default;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+
+/* 에러메세지 */
+
+.error_next_box {
+    margin-top: 9px;
+    font-size: 12px;
+    color: red;    
+    display: none;
+}
+
+#alertTxt {
+    position: absolute;
+    top: 19px;
+    right: 38px;
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+/* 버튼 */
+
+.btn_area {
+    margin: 30px 0 91px;
+}
+
+#btnJoin {
+    width: 100%;
     padding: 21px 0 17px;
     border: 0;
     cursor: pointer;
-    background-color: #aeccc6;
+    color: #fff;
+    background-color: #08a600;
     font-size: 20px;
-    font-weight: 600;
-    align: center;
-    margin-left: 100px;
-   } 
-  
-   #enroll_btn.hover {
-      color: #bbe9db;
-   }
-  
-  .btn_area {
-    margin: 30px 50px 20px 91px;
-   }
-   
+    font-weight: 400;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
   
 
 </style>
@@ -216,7 +340,7 @@
 		            return false;
 		        }
 		
-		        var isPwd = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#\$%\^&\*\(\)_\+|\{\}:"<>\?]{8,16}$/;
+		        var isPwd = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#$%\^&\*\(\)_\+|\{\}:"<>\?]{8,16}$/;
 		        if (!isPwd.test(pwd1)) {
 		            return false;
 		        }
@@ -498,7 +622,7 @@
 
 		  //enrollAction에서 실패시 redirect되는 parameter 받기
 		  function showMessage(){
-			  if("${ param.reason eq 'failed_enroll'}" == "true"){
+			  if("false" == "true"){
 				  alert('회원가입에 실패했습니다. 관리자에게 문의하세요');
 				  return;
 			  } 
@@ -511,89 +635,127 @@
 
 </head>
 <body>
+<form id="enroll_form" method="post" action="enroll.do">
+	<div id="header">
+           <span id="title">상추마켓</span>
+        </div>
 
-		<form id="enroll_form" method="post" action="enroll.do">
-			<div id="content">
-				     <!--span은 정렬이 안됨-->
-			 <div id="title-wrap"><span id="title">상추마켓</span></div>
-			 <table class="table" border="1"> 
-			    
-			    <tr>
-			      <td style="vertical-align: middle; width: 20%;">이름</td>	
-			      <td colspan="2"><input type="text" class="form-control" id="u_name" name="u_name"></td>
-			      <td><span id="nameMsg" style="display:none"></span></td>
-			    </tr>
-			    	
-			    <tr>
-			      <td style="vertical-align: middle;">이메일</td>
-			      <td colspan="2"><input type="text" class="form-control" id="u_email" name="u_email"></td>
-			      <td><span id="emailMsg" style="display:none"></span></td>
-			    </tr>
-			    
-			    <tr>
-			      <td style="vertical-align: middle;">아이디</td>
-			      <td colspan="2"><input type="text" class="form-control" id="u_id" name="u_id"></td>
-			      <td><span id="idMsg" style="display:none"></span></td>	
-			    </tr>
-			  
-			    <tr>
-			      <td style="vertical-align: middle;">비밀번호</td>
-			      <td  colspan="2">
-				      <input type="password" class="form-control" id="u_pwd1" autocomplete="off">
-				      <input type="password" class="form-control" id="u_pwd2" autocomplete="off"> 
-			      
-			      </td>
-			      <td>
-				      <span id="pwd1Msg"></span>
-				      <span id="pwd2Msg"></span>
-			      </td>
-			    </tr>
-			    
-			     <tr>
-			      <td style="vertical-align: middle;">닉네임</td>
-			      <td colspan="2"><input type="text" class="form-control" id="u_nickname" name="u_nickname"></td>
-				  <td><span id="nickMsg" style="display:none"></span></td>	
-			    </tr>
-			    
-			    <tr>
-			       <td style="vertical-align: middle;">전화번호</td>
-			       <td colspan="2"> <input type="text" class="form-control" id="u_tel" name="u_tel"></td>
-			       <td><span id="telMsg" style="dislay:none"></span></td>
-			    </tr>
-			     
-			     <tr>
-				   <td style="vertical-align: middle;">주소</td>
-			       <td colspan="3">
-			       <input type="text" id="sample2_postcode" name="postcode" style="margin-bottom:5px;"readonly>
-					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample2_address" name="address"style="width:295px; margin-bottom:5px;" readonly><br>
-					<input 	type="text" id="sample2_detailAddress" name="detailAddress" placeholder="상세주소" style="width:295px;">
-					<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-				    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-				    </div>
-				    <span id="addrMsg" style="display:none"></span>
-			       </td>
-			     </tr>
-			   
-			     <tr>
-			       <td style="vertical-align: middle;">생년월일</td>
-			       <td colspan="3">
+
+        <!-- wrapper -->
+        <div id="wrapper">
+
+            <!-- content-->
+            <div id="content">
+
+                <!-- ID -->
+                <div>
+                    <h3 class="join_title">
+                        <label for="u_id">아이디</label>
+                    </h3>
+                    <span class="box int_id">
+                        <input type="text" id="u_id" name="u_id" class="int" maxlength="20">
+                    </span>
+                    <span class="error_next_box" id="idMsg"></span>
+                </div>
+
+                <!-- PWD1 -->
+                <div>
+                    <h3 class="join_title"><label for="u_pwd1">비밀번호</label></h3>
+                    <span class="box int_pass">
+                        <input type="text" id="u_pwd1" name="u_pwd1" class="int" maxlength="20" autocomplete="off">
+                    </span>
+                    <span class="error_next_box" id="pwd1Msg"></span>
+                </div>
+
+                <!-- PWD2 -->
+                <div>
+                    <h3 class="join_title"><label for="u_pwd2">비밀번호 재확인</label></h3>
+                    <span class="box int_pass_check">
+                        <input type="text" id="u_pwd2" name="u_pwd2" class="int" maxlength="20" autocomplete="off">
+                    </span>
+                    <span class="error_next_box" id="pwd2Msg"></span>
+                </div>
+
+                <!-- NAME -->
+                <div>
+                    <h3 class="join_title"><label for="name">이름</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="u_name" name="u_name" class="int" maxlength="20">
+                    </span>
+                    <span class="error_next_box" id="nameMsg"></span>
+                </div>
+                
+                <!-- NICKNAME -->
+                <div>
+                    <h3 class="join_title"><label for="name">닉네임</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="u_nickname" name="u_nickname" class="int" maxlength="20">
+                    </span>
+                    <span class="error_next_box" id="nickMsg"></span>
+                </div>
+
+                <!-- BIRTH -->
+                <div>
+                    <h3 class="join_title"><label>생년월일</label></h3>
 			      	  <input type="date" name="u_birth" id="u_birth" required> 
-			      	  <span id="birthMsg" style="display:none"></span>
-				   </td>
-			     </tr>
-			
-			    <tr>	 
-				   <td colspan="4">
-				   <div class="btn_area">
-                   <button type="button" id="enroll_btn" class="btn-type btn_primary"><span>가입하기</span></button>
-                   </div>
-				   </td>
-			    </tr>
-	   </table>
-	   </div>
-	</form>
+                    <span class="error_next_box" id="birthMsg"></span>    
+                </div>
 
+                <!-- EMAIL -->
+                <div>
+                    <h3 class="join_title"><label for="email">이메일<span class="optional">(선택)</span></label></h3>
+                    <span class="box int_email">
+                        <input type="text" id="u_email" name="u_email" class="int" maxlength="100" placeholder="선택입력">
+                    </span>
+                    <span class="error_next_box" id="emailMsg"></span>    
+                </div>
+
+                <!-- MOBILE -->
+                <div>
+                    <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
+                    <span class="box int_mobile">
+                        <input type="tel" id="u_tel" name="u_tel" class="int" maxlength="16" placeholder="전화번호 입력">
+                    </span>
+                    <span class="error_next_box" id="telMsg"></span>    
+                </div>
+                
+			    
+				 	 <h3 class="join_title"><label>주소</label></h3>
+				   
+				    <span class="box int_addr">
+				          <input type="text" class="int" id="sample2_postcode" name="postcode" style="float:left"readonly>
+					   	  <input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" style="clear:both">
+					</span>
+					
+					<span class="box int_addr2">    
+					      <input type="text" class="int" id="sample2_address" name="address" readonly>
+					</span>   
+					
+					 <span id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+					   	  <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+					 </span>
+					
+					 
+					   	  <span id="addrMsg" style="display:none"></span>
+			  
+			     
+
+
+                <!-- JOIN BTN-->
+                <div class="btn_area">
+                    <button type="button" id="enroll_btn">
+                        <span>가입하기</span>
+                    </button>
+                </div>
+
+                
+
+            </div> 
+            <!-- content-->
+
+        </div> 
+        <!-- wrapper -->
+    </body>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

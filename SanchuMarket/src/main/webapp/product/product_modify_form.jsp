@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>물품등록</title>
+<title>상품수정</title>
 
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -162,7 +162,7 @@
 	
 	var preview_array  = [false, false, false, false, false, false];
 	
-	
+	var img_number = 0;
 	
 	function img_preview() {
 		
@@ -181,6 +181,8 @@
 					
 					send_0();
 					
+					
+					
 					return;
 				}
 			}
@@ -196,6 +198,7 @@
 					/* 1번사진 인풋태그 호출 */
 					send_1();
 					
+					
 					return;
 				}
 			}
@@ -208,6 +211,7 @@
 					
 					/* 2번사진 인풋태그 호출 */
 					send_2();
+					
 					return;
 				}
 			}
@@ -220,6 +224,8 @@
 					
 					/* 3번사진 인풋태그 호출 */
 					send_3();
+					
+					
 					return;
 				}
 			}
@@ -232,6 +238,7 @@
 					
 					/* 4번사진 인풋태그 호출 */
 					send_4();
+					
 
 					return;
 				}
@@ -245,6 +252,7 @@
 					
 					/* 5번사진 인풋태그 호출 */
 					send_5();
+					
 					
 					return;
 				}
@@ -263,33 +271,28 @@
 	function send_0() {
 		
 		
+		
 		$("#sumimage").click();
-	
-			
+		
 	}
 	
-		$(function(){
+	$(function(){
+		
+		$("#sumimage").on('change',function(){
 			
-			$("#sumimage").on('change',function(){
+			/* 파일선택 취소했을때 */
+			if( $("#sumimage")[0].files[0]==undefined) {
 				
-				if( $("#sumimage")[0].files[0]==undefined) {
-					
-					
-					return;
-				
-				}
-				
-
-				
-				imgcheck0(this);
-				
-			})
+				return;
+			}
 			
-		});
+			imgcheck0(this);
+			
+		})
+		
+	});
 
 	function imgcheck0(input) {
-		
-		
 		
 		/* 이미지 확장자 파일체크 */
 		var file_kind = input.value.lastIndexOf('.');
@@ -304,7 +307,7 @@
 			
 			/* 사용자에게 알려주고 */
 			alert('이미지 파일만 선택할 수 있습니다.');
-
+			
 			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
 			$('#sumimage').val('');
 			
@@ -319,20 +322,14 @@
 		        $('#imgup_sum').attr('src', e.target.result);
 		        
 		        
+		        
 				$('#imgup_sum').show();
 		        $("#del_sum").show();
 		       
 				preview_array[0] = true;
 				
 				/* 이미지넘버 변경 */
-				var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-				
-				
+			
 				$("#img_number").html('('+ img_number + '/6)');
 			
 			
@@ -358,8 +355,6 @@
 			
 			/* 파일선택 취소했을때 */
 			if( $("#imageFile1")[0].files[0]==undefined) {
-				
-				
 				return;
 			}
 			
@@ -382,7 +377,6 @@
 		if(check_array.indexOf(file_type)==-1){
 			
 			alert('이미지 파일만 선택할 수 있습니다.');
-			
 			
 			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
 			$('#imageFile1').val('');
@@ -407,14 +401,7 @@
 	        	preview_array[1] = true;
 				
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-	        	
-	        	$("#img_number").html('('+ img_number + '/6)');
+				$("#img_number").html('('+ img_number + '/6)');
 	        	
 	        }
 	        
@@ -434,7 +421,6 @@
 			
 			/* 파일선택 취소했을때 */
 			if( $("#imageFile2")[0].files[0]==undefined) {
-				
 				return;
 			}
 			
@@ -460,7 +446,6 @@
 			
 			alert('이미지 파일만 선택할 수 있습니다.');
 			
-			
 			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
 			$('#imageFile2').val('');
 			
@@ -480,13 +465,6 @@
 				
 				preview_array[2] = true;
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-	        	
 				$("#img_number").html('('+ img_number + '/6)');
 	       
 	        }
@@ -508,7 +486,6 @@
 			
 			/* 파일선택 취소했을때 */
 			if( $("#imageFile3")[0].files[0]==undefined){
-				
 				return;
 			}
 			
@@ -532,8 +509,6 @@
 			
 			alert('이미지 파일만 선택할 수 있습니다.');
 			
-			
-			
 			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
 			$('#imageFile3').val('');
 			
@@ -553,12 +528,6 @@
 				
 				preview_array[3] = true;
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
 				$("#img_number").html('('+ img_number + '/6)');
 	       
 	        }
@@ -579,7 +548,6 @@
 			
 			/* 파일선택 취소했을때 */
 			if( $("#imageFile4")[0].files[0]==undefined){
-				
 				return;
 			}
 			
@@ -603,7 +571,6 @@
 			
 			alert('이미지 파일만 선택할 수 있습니다.');
 			
-			
 			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
 			$('#imageFile4').val('');
 			
@@ -622,12 +589,6 @@
 				
 				preview_array[4] = true;
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
 				$("#img_number").html('('+ img_number + '/6)');
 				
 	       
@@ -674,7 +635,6 @@
 			
 			alert('이미지 파일만 선택할 수 있습니다.');
 			
-			
 			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
 			$('#imageFile5').val('');
 			
@@ -694,12 +654,7 @@
 		        $("#del_img5").show();
 				
 		        preview_array[5] = true;
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
+	        	
 		        /* 이미지넘버 변경 */
 				$("#img_number").html('('+ img_number + '/6)');
 	       
@@ -728,13 +683,9 @@
 		
 		/* 썸네일 비움 */
 		preview_array[0] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
 		
+		
+		img_number--;
 		$("#img_number").html('('+ img_number + '/6)');
 		
 		return;
@@ -752,13 +703,7 @@
 		
 		/* 1번사진 비움 */
 		preview_array[1] = false;
-		
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
+		img_number--;
 		$("#img_number").html('('+ img_number + '/6)');
 		return;
 	}
@@ -773,12 +718,7 @@
 		
 		/* 2번사진 비움 */
 		preview_array[2] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
+		img_number--;
 		$("#img_number").html('('+ img_number + '/6)');
 		return;
 	}
@@ -793,12 +733,7 @@
 		
 		/* 3번사진 비움 */
 		preview_array[3] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
+		img_number--;
 		$("#img_number").html('('+ img_number + '/6)'); 
 		 
 		return;
@@ -813,12 +748,7 @@
 		
 		/* 4번사진 비움 */
 		preview_array[4] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
+		img_number--;
 		$("#img_number").html('('+ img_number + '/6)');
 
 		return;
@@ -833,12 +763,7 @@
 		
 		/* 5번사진 비움 */
 		preview_array[5] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
+		img_number--;
 		$("#img_number").html('('+ img_number + '/6)');
 		
 		return;
@@ -912,7 +837,6 @@
 		
  		if(sumimage==''){
  			alert('섬네일 이미지를 등록해주세요.');
- 			$("#imgup").focus();
  			return;
  		}
 		
@@ -955,7 +879,9 @@
 			$("#p_exp").focus();
 			return;
 		}
+		
 
+		
 		
 		if( regular_han.test(p_price) ){
 			alert('숫자만 입력 가능합니다.');
@@ -963,7 +889,6 @@
 			$("#p_price").focus();
 			return;
 		} 
-
 		/* 가격 콤마 제거 */
 		p_price = p_price.replace(/,/g, "");
 		
@@ -1002,29 +927,17 @@
 			contentType : false,
 			dataType : 'json',
 			success  : function(res){
-				
-				if(res.res==true){
-					alert('물품등록 성공!');
-					location.href='../mainpage/list.do';
-				}
-				
-			},error	: function(err){
-				alert('물품등록에 실패했습니다. 관리자에게 문의하세요.');
+				alert('성공!')
 			}
 			
 		}); 
 		
 		
+		
 	}
 
-	/* 상품등록 취소  */	
-	function procancel(){
-		
-		if(confirm('상품등록을 취소하시겠습니까?')==false) return;
-		
-		location.href='../mainpage/list.do';
-		
-	}
+	
+	
 
 </script>
 
@@ -1144,7 +1057,7 @@
 			<%@ include file="../mainpage/header&sidebar.jsp"%>
 		</div> 
 		<div id="insert_box">
-			<span id="title">상품등록</span>
+			<span id="title">상품수정</span>
 
 			<table style="margin-top: 30px;">
 				<!-- 기본정보 -->
@@ -1326,9 +1239,9 @@
 				
 				<!-- 등록 취소버튼 -->
 				<tr>
-					<td colspan="2">
-						<input type="button" value="등록하기" onclick="proInfoSend();"> 
-						<input type="button" value="취소하기" onclick="procancel()"></td>
+					<td colspan="2"><input type="button" value="등록하기"
+						onclick="proInfoSend();"> <input type="button"
+						value="취소하기"></td>
 				</tr>
 
 			</table>

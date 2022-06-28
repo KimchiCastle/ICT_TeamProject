@@ -34,9 +34,9 @@ wow123.jpg
 
 )
 
-
-
-
+select * from image
+select p_idx, sumimage from image 
+select * from product
 
 */
 
