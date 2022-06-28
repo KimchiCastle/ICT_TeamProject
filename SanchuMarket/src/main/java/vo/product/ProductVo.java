@@ -1,5 +1,9 @@
 package vo.product;
 
+import java.util.List;
+
+import vo.image.ImageVo;
+
 public class ProductVo {
 	
 	int p_idx;
@@ -14,7 +18,18 @@ public class ProductVo {
 	String p_click;		//상품조회수
 	String p_status;	//거래상태
 	
+	List<ImageVo> image_list;
 	
+	public List<ImageVo> getImage_list() {
+		return image_list;
+	}
+
+
+	public void setImage_list(List<ImageVo> image_list) {
+		this.image_list = image_list;
+	}
+
+
 	//기본생성자
 	public ProductVo() {
 		// TODO Auto-generated constructor stub
