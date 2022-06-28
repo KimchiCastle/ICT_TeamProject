@@ -6,6 +6,10 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 
 function del(c_idx){
@@ -43,12 +47,18 @@ $(document).ready(function(){
 	
 });
 </script>
+<style type="text/css">
+	
+
+	
+</style>
 </head>
 <body>
 	<jsp:include page="mypage_main.jsp" />
 	<form>
 		<div id="box" align="center">
-			<table id="table" class="table table-hover" align="center" >
+			<table id="table" class="table table-hover" align="center" width="600" border="1"
+			 style="border-collapse:collapse;" cellpadding="4" cellspacing="0">
 				<br>
 				<tr>
 					<th>선택</th>
