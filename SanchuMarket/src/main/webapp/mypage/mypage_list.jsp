@@ -6,7 +6,43 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<script type="text/javascript">
 
+function del(c_idx){
+	
+	if(confirm("정말 삭제하시겠습니까?")==false)return;
+	
+	location.href = "product_delete.do?p_idx=" + p_idx ; //CartDeleteAction
+}
+
+
+//jQuery 초기화
+$(document).ready(function(){
+	
+	$("#check_all").click(function(){
+		
+		var checked = $(this).is(":checked");
+		//console.log(checked);
+		$("input[name='p_idx']").prop("checked",checked);
+		
+	});
+	
+	//각각의 체크박스가 클릭되면 
+	$("input[name='p_idx']").click(function(){
+		
+		//체크박스의 총 갯수 : length
+		//체크박스중 체크된 박스 갯수 : length 
+		var total_count = $("input[name='p_idx']").length;
+		var checked_count = $("input[name='p_idx']:checked").length;
+		
+		if(total_count==checked_count)
+			$("#check_all").prop("checked",true);
+		else if (total_count!=checked_count)
+			$("#check_all").prop("checked",false);
+	});
+	
+});
+</script>
 </head>
 <body>
 	<jsp:include page="mypage_main.jsp" />
@@ -15,6 +51,7 @@
 			<table id="table" class="table table-hover" align="center" >
 				<br>
 				<tr>
+					<th>선택</th>
 					<th>사진</th>
 					<th>상품명</th>
 					<th>가격</th>
@@ -27,21 +64,22 @@
 				<!-- data없는 경우 -->
 				<c:if test="${empty list}">
 					<tr>
-						<td colspan="6" align="center">
+						<td colspan="7" align="center">
 						<font color="red">등록된 상품이 없습니다</font></td>
 					</tr>
 				</c:if>
 				<!-- data 있는 경우-->
 				<c:forEach var="vo" items="${list }">
 					<tr>
+						<td><input type="checkbox" name="p_idx" value="${vo.p_idx}"></td>
 						<td><img src="../images/${vo.img}" ></td>
 						<td>${vo.p_name }</td>
 						<td>${vo.price }</td>
 						<td>${vo.p_status }</td>
 						<td>${vo.p_date }</td>
 						<td align="center">
-							<input id="button" type="button" value="상세정보보기"onclick=""><br> 
-							<input id="button" type="button" value="삭제하기" onclick="">
+							<input id="button" type="button" value="상세정보보기"onclick="location.href='/product/detail.do';"><br> 
+							<input id="button" type="button" value="삭제하기" onclick="del('${vo.p_idx}');">
 						</td>
 					</tr>
 				</c:forEach>

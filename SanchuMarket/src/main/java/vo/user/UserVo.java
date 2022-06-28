@@ -41,6 +41,11 @@ public UserVo(String u_id, String u_pwd, String u_name, String u_nickname, Strin
 	this.postcode = postcode;
 }
 
+
+public UserVo(int u_idx2, String u_name2, String u_id2, String u_pwd2, String u_zipcode, String u_addr2) {
+	// TODO Auto-generated constructor stub
+}
+
 public int getU_idx() {
 	return u_idx;
 }

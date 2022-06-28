@@ -1,6 +1,5 @@
 package action.product;
 
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -41,6 +42,9 @@ public class ProductInsertAction extends HttpServlet {
 		//파일 최대 등록사이즈
 		int max_size = 1024 * 1024 * 10; 
 		
+		
+		System.out.println(path);
+		
 		//파일등록하기 위한 MultipartRequest생성, request로 부터 위임받음
 		MultipartRequest mr = new MultipartRequest(request, path, max_size, "utf-8", new DefaultFileRenamePolicy());
 		
@@ -52,7 +56,7 @@ public class ProductInsertAction extends HttpServlet {
 		String imageFile5 = "no_image";
 		
 		//2. parameter 받기
-		int u_idx = 1; // 회원정보는 나중에 세션에서 받아와야함.
+		int u_idx = 3; // 회원정보는 나중에 세션에서 받아와야함.
 		int c_idx	  		= Integer.parseInt(mr.getParameter("c_idx"));
 		String p_name 		= mr.getParameter("p_name");
 		int	p_price			= Integer.parseInt(mr.getParameter("p_price"));
@@ -103,6 +107,27 @@ public class ProductInsertAction extends HttpServlet {
 		
 		
 		int res2 = ImageDao.getInstance().insert(vo2);
+
+		JSONObject json = new JSONObject();
+		
+		
+		System.out.println(res);
+		System.out.println(res2);
+		
+		boolean bResult = false;
+		
+		if(res==1 && res2==1) {
+			
+			bResult = true;
+			
+			
+			
+		}
+		
+		json.put("res", bResult);
+		
+		response.setContentType("text/json; charset=utf-8;");
+		response.getWriter().print(json.toJSONString(json));
 		
 
 	}

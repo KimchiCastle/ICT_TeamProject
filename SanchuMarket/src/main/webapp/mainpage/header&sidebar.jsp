@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/media/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
 
 body{
@@ -24,6 +24,7 @@ header{
 	width: 100%;
 	height: 130px;
 	background-color: white;
+	z-index: 888;
 }
 
 .header{
@@ -35,12 +36,14 @@ header{
 	margin-top: 20px;
 	height: 54px;
 	float: left;
+	z-index: 889;
 }
 
 .logo{
 	width: 200px;
 	float: left;
 	margin-left: 70px;
+	cursor: pointer;
 }
 .search{
 	width: 500px;
@@ -64,6 +67,7 @@ header{
 	width: 260px;
 	float: left;
 	align-items: center;
+	cursor: pointer;
 }
 
 .btn{  
@@ -136,14 +140,14 @@ li, ul{
 <!-- 고정헤더 -->
 	<div class="header">
 	<!-- 로고 -->
-		<a class="logo" href=""><img src="../image/상추마켓.png" width="200" height="50"></a>
+		<a class="logo"><img src="../image/상추마켓.png" width="200" height="50" onclick="location.href='../mainpage/list.do'"></a>
 	<!-- 검색창 -->
 		<div class="search">
 			<input id="search" name="search" type="text" >
 		</div>
 	<!-- 판매,마이페이지 버튼 -->
 		<div class="btn_place">
-			<a class="btn" href=""><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>
+			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>
 			 &nbsp;&nbsp;|&nbsp;
 			<a class="btn" href=""><img src="../image/mypage.png" width="30px">&nbsp;마이페이지</a>
 		</div>
@@ -163,7 +167,7 @@ li, ul{
 		<%@include file="../sidebar/sideBar.jsp" %>
 	</div>
 	
-	
+	<!--  -->
 
 
 

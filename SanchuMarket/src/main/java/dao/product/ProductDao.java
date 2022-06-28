@@ -39,13 +39,33 @@ public class ProductDao {
 		// 1.SqlSession얻어오기
 		SqlSession sqlSession = factory.openSession();
 
+		list = sqlSession.selectList("product.product_list");
 
 		// 3.닫기
 		sqlSession.close();
 
 		return list;
 	}
+	
+	public List<ProductVo> selectList(int u_idx) {
+		// TODO Auto-generated method stub
+		
+		List<ProductVo> list = null;
 
+		// 1.SqlSession얻어오기
+		SqlSession sqlSession = factory.openSession();
+
+		list = sqlSession.selectList("product.product_user_idx",u_idx);
+
+		// 3.닫기
+		sqlSession.close();
+		
+		
+		return list;
+	}
+	
+
+	// 상품등록 메서드
 	public int insert(ProductVo vo) {
 		// TODO Auto-generated method stub
 		
@@ -61,6 +81,23 @@ public class ProductDao {
 		return res;
 	}
 	
+	//상품 1개 조회 메서드
+	public ProductVo selectOne(int p_idx) {
+		// TODO Auto-generated method stub
+		
+		ProductVo vo = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		vo = sqlSession.selectOne("product.product_selectOne", p_idx);
+		
+		//connection 닫기
+		sqlSession.close();
+		
+		return vo;
+	}
+
+
 	
 	
 	

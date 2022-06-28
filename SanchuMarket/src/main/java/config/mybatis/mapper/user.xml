@@ -26,6 +26,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                               #{u_birth}, #{u_addr}, sysdate, 0, #{u_profile},
 									   '', #{u_tel}, #{u_mail}, '일반회원', #{u_ip}
 	</insert> 
+	
+	<update id="user_update" parameterType="vo.UserVo">
+		update user 
+			set 
+				u_name=#{u_name},
+				u_id=#{u_id},
+				u_pwd=#{u_pwd},
+				u_zipcode=#{u_zipcode},
+				u_addr=#{u_addr)
+		where u_idx=#{ u_idx }
+	</update>
 		
 	
 	
