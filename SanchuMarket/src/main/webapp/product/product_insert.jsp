@@ -1002,7 +1002,7 @@
 			dataType : 'json',
 			success  : function(res){
 				alert('성공!')
-				location.href='../mainpage/content.jsp';
+				location.href='../mainpage/list.do';
 			},
 			error	 : function(err){
 				alert('상품등록에 실패했습니다. 관리자에게 문의해주세요.');
