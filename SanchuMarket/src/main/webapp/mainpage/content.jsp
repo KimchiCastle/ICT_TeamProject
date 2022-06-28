@@ -8,8 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
+
+
 .main{
 	display:block;
 	margin-left: auto;
@@ -48,7 +50,7 @@ padding-left: 15px;
 #img{
 	height: 100%;
  	position: absolute; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
-  	left: 50%; /* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
+  	left: 50%; 			/* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
   	transform: translateX(-50%);
 }
 .price_tag{
@@ -87,6 +89,8 @@ padding-left: 15px;
 		return;
 	}
 
+
+	
 </script>
 
 
@@ -115,11 +119,8 @@ padding-left: 15px;
 			
 			<div class="price_tag">
 				<div id="p_name">${ vo.p_name }</div>
-				<div id="p_price">${ vo.p_price }</div>
-				<div id="p_date" class="p_date">
-					<fmt:parseDate value="${ vo.p_date }" var="date" pattern="yyyy-MM-dd"/>
-					<fmt:formatDate value="${ date }" pattern="yyyy-MM-dd"/>
-				</div> 
+				<div id="p_price"><fmt:formatNumber pattern="#,###" value="${ vo.p_price }"/>원</div>
+				<div id="p_date" class="p_date">${ vo.p_date }</div> 
 			</div>
 		</div>
 	</c:forEach>

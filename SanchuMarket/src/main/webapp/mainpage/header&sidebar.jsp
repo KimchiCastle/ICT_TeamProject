@@ -24,6 +24,7 @@ header{
 	width: 100%;
 	height: 130px;
 	background-color: white;
+	z-index: 888;
 }
 
 .header{
@@ -35,6 +36,7 @@ header{
 	margin-top: 20px;
 	height: 54px;
 	float: left;
+	z-index: 889;
 }
 
 .logo{

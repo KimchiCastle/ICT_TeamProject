@@ -61,7 +61,7 @@ values( (select nvl(max(p_idx)+1,1) from product),
 		1,				--회원번호
 		2,				--카테고리번호
 		'여성옷팝니다.',  --제목
-		sysdate,		--등록일자
+		to_date('1970-12-31 12:00:00','yyyy-mm-dd hh24:mi:ss'),		--등록일자
 		30000,			--가격
 		'중고',		--상품상태
 		'직거래만 합니다.',	--상품설명
@@ -88,13 +88,23 @@ select * from product
 
 update product set p_click=0 where p_idx=5
 
+select p_idx from product when
+
+select 
+    p.*,
+    floor((sysdate-p_date)*24) as hour,floor(((sysdate-p_date)*24-floor((sysdate-p_date)*24))*60) as minute 
+from (select * from product) p
+
+select
+	p.* ,
+	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+from (select * from product) p order by p_idx desc
 
 
 
 
-select * from product where u_idx=3
 
-select * from user_market
+select * from product 
 
 
 */
