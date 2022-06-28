@@ -39,7 +39,7 @@ public class ProductDao {
 		// 1.SqlSession얻어오기
 		SqlSession sqlSession = factory.openSession();
 
-		list = sqlSession.selectList("product.image_list_p_idx");
+		list = sqlSession.selectList("product.product_list");
 
 		// 3.닫기
 		sqlSession.close();

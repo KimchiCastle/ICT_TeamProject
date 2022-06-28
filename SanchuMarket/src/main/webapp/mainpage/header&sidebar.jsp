@@ -41,6 +41,7 @@ header{
 	width: 200px;
 	float: left;
 	margin-left: 70px;
+	cursor: pointer;
 }
 .search{
 	width: 500px;
@@ -64,6 +65,7 @@ header{
 	width: 260px;
 	float: left;
 	align-items: center;
+	cursor: pointer;
 }
 
 .btn{  
@@ -143,7 +145,7 @@ li, ul{
 		</div>
 	<!-- 판매,마이페이지 버튼 -->
 		<div class="btn_place">
-			<a class="btn" href=""><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>
+			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>
 			 &nbsp;&nbsp;|&nbsp;
 			<a class="btn" href=""><img src="../image/mypage.png" width="30px">&nbsp;마이페이지</a>
 		</div>
