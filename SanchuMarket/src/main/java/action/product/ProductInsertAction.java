@@ -41,6 +41,9 @@ public class ProductInsertAction extends HttpServlet {
 		//파일 최대 등록사이즈
 		int max_size = 1024 * 1024 * 10; 
 		
+		
+		System.out.println(path);
+		
 		//파일등록하기 위한 MultipartRequest생성, request로 부터 위임받음
 		MultipartRequest mr = new MultipartRequest(request, path, max_size, "utf-8", new DefaultFileRenamePolicy());
 		
