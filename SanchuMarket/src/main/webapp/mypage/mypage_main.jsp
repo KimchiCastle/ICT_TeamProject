@@ -9,14 +9,31 @@
   <head>
   <meta http-equiv="Content-Type" 
   		content="text/html; charset=UTF-8">
-    <title></title>
+    <title>마이페이지</title>
 
     
     <!-- Bootstrap 3.x -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+	
+	#main_box {
+	width: 800px;
+	margin: auto;
+}
+#box {
+	width: 700px;
+	margin: auto;
+}
 
+#table {
+	text-align: center;
+	width: 600px;
+	margin: auto;
+}
+
+</style>
   </head>
   
   
@@ -38,7 +55,7 @@
 
   	<!-- 로그인이 안된경우 -->
   	<c:if test="${empty sessionScopeuser }">
-  		<input id="button" type="button" value="로그인"
+  		<input id="button" type="button" value="로그인" style="float: right;"
   				onclick="location.href='../member/login_form.do';">
   	</c:if>
   	

@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -69,15 +71,33 @@
 		alert('수정이 완료되었습니다.')
 	}
 </script>
-
+<style type="text/css">
+	
+	th {
+		text-align: center;
+	}
+	
+	input {
+		display: inline;
+		float: left;
+		margin-left: 5px;
+	}
+	#button{
+		align-content: center;	
+	}
+	
+</style>
 
 </head>
 <body>
 	<jsp:include page="mypage_main.jsp" />
 	<form>
 		<div id="box">
-			<table id="table" >
-
+		<div class="panel">
+				<div class="panel-heading" align="center"><h4>회원가입</h4></div>
+				<div class="panel-body">
+			<table id="table"  class="table table-stiped">
+			
 				<input type="hidden" name="u_idx" value="${vo.u_idx }">
 
 				<tr>
@@ -106,15 +126,22 @@
 				</tr>
 
 			</table>
-			<div id="button">
-				<input class="btn btn-info" type="button" value="수정하기"onclick="send(this.form);"> 
-				<input class="btn btn-danger" type="button" value="회원탈퇴" onclick="탈퇴">
 			</div>
-		</div>
-
+			</div>
+			<div align="center">
+			<table id="bt_table">
+				<tr>
+					<td >
+						<input class="btn btn-info" type="button" value="수정하기"onclick="send(this.form);"> 
+						<input class="btn btn-danger" type="button" value="회원탈퇴" onclick="탈퇴">
+					</td>
+				</tr>
+			</table>
+			</div>
 		<br>
 		<hr>
-
+		</div>
+		
 	</form>
 </body>
 </html>
