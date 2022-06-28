@@ -41,7 +41,9 @@ public class MainPageListAction extends HttpServlet {
 			int p_tim = Integer.parseInt(p_time[i]);
 			String p_ti = "1년전";
 			System.out.println(p_tim);
-			if( p_tim < 60) {
+			if( p_tim <10) {
+				p_ti="방금전";
+			}else if( p_tim < 60) {
 				p_ti = String.format("%d초전", p_tim);
 			}else if(p_tim <3600) {
 				p_ti = Integer.toString(p_tim/60);
