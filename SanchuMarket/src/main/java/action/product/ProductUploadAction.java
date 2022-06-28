@@ -2,11 +2,15 @@ package action.product;
 
 import java.io.IOException;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import dao.image.ImageDao;
 import dao.product.ProductDao;
@@ -33,15 +37,22 @@ public class ProductUploadAction extends HttpServlet {
 		
 		int p_idx = Integer.parseInt(request.getParameter("p_idx"));
 		
-		ProductVo vo = ProductDao.getinstance().selectOne(p_idx);
+		ProductVo productVo = ProductDao.getinstance().selectOne(p_idx);
 		
-		String p_exp = vo.getP_exp().replaceAll("<br>", "\r\n");
+		String p_exp = productVo.getP_exp().replaceAll("<br>", "\r\n");
 		
-		vo.setP_exp(p_exp);
+		productVo.setP_exp(p_exp);
 		
 		
-		ImageVo vo2 = ImageDao.getInstance().selectOne(p_idx);
-
+		ImageVo imageVo = ImageDao.getInstance().selectOne(p_idx);
+		
+		request.setAttribute("productVo", productVo);
+		request.setAttribute("imageVo", imageVo);
+		
+		
+		String forward_page = "product_modify_form.jsp";
+		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
+		disp.forward(request, response);
 		
 		
 	}

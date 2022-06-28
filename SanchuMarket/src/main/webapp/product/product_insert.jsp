@@ -912,6 +912,7 @@
 		
  		if(sumimage==''){
  			alert('섬네일 이미지를 등록해주세요.');
+ 			$("#imgup").focus();
  			return;
  		}
 		
@@ -1001,12 +1002,17 @@
 			contentType : false,
 			dataType : 'json',
 			success  : function(res){
-				alert('성공!')
-				location.href='../mainpage/list.do';
+				
+				if(res.res==true){
+					alert('물품등록 성공!');
+					location.href='../mainpage/list.do';
+				}
+				
+			},error	: function(err){
+				alert('물품등록에 실패했습니다. 관리자에게 문의하세요.');
 			}
 			
 		}); 
-		
 		
 		
 	}
