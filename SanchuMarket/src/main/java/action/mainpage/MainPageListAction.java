@@ -29,8 +29,9 @@ public class MainPageListAction extends HttpServlet {
 		//전체목록 가져오기
 		List<ProductVo> list 	= ProductDao.getinstance().selectList();
 		
-		request.setAttribute("list", list);
 		
+		request.setAttribute("list", list);
+		 
 		/*
 		 * for( ProductVo vo : list) { System.out.println(vo.getP_idx()); }
 		 */

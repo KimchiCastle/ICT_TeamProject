@@ -40,6 +40,11 @@ padding-left: 15px;
 	width: 185px;
 	height: 185px;
 	border: 1px solid #d3d3d3;
+ 	overflow: hidden;
+}
+
+#img{
+
 }
 .price_tag{
 	width: 173px;
@@ -99,7 +104,7 @@ padding-left: 15px;
 	<c:forEach  var="vo" items="${ list }">
 		<div class="product_list" onclick="list_click()">
 		<c:forEach var="image" items="${ vo.image_list }">
-			<div id="p_photo">${ image.sumimage }</div>
+			<div id="p_photo"><img id="img" src="../imgdata/${ image.sumimage }" ></div>
 		</c:forEach>
 			
 			<div class="price_tag">
