@@ -17,8 +17,19 @@ public class ProductVo {
 	String p_location;	//거래지역
 	String p_click;		//상품조회수
 	String p_status;	//거래상태
+	String p_time;		//몇초, 몇분, 몇시간, 몇일 전
 	
 	List<ImageVo> image_list;
+	
+	public String getP_time() {
+		return p_time;
+	}
+
+
+	public void setP_time(String p_time) {
+		this.p_time = p_time;
+	}
+
 	 
 	public List<ImageVo> getImage_list() {
 		return image_list;

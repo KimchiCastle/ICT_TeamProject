@@ -21,7 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원목록 조회  -->
 	<select id="product_list"  resultMap="product_map" >
-		select * from product 
+		select
+			p.* ,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		from (select * from product) p order by p_idx desc
 	</select>
 	
 	<select id="image_list_p_idx" resultType="vo.image.ImageVo">
