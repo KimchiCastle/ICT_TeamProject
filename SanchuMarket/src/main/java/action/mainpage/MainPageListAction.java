@@ -35,7 +35,7 @@ public class MainPageListAction extends HttpServlet {
 		 * for( ProductVo vo : list) { System.out.println(vo.getP_idx()); }
 		 */
 		
-		
+		 
 		//forward
 		String forward_page = "content.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
