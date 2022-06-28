@@ -27,6 +27,7 @@ alter table jjim
 	add constraint fk_jjim_u_idx foreign key(u_idx)
 	references user_market(u_idx);
 
-
+select * from jjim where u_idx=1
+insert into jjim values( 1,1,1)
 
 */

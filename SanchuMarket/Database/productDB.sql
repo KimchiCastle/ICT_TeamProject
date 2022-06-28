@@ -16,7 +16,7 @@ create table product
 	p_exp		varchar2(4000),			--상품설명
 	p_location	varchar2(500),			--거래지역
 	p_click		int,		   			--조회수
-	p_status	varchar2(100)  			--거래상태
+	p_status	varchar2(100)  			--거래상태 (거래가능,판매완료)
 )
 
 ---------------------- 제약조건 ---------------------
