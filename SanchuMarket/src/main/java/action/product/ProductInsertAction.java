@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -106,6 +108,27 @@ public class ProductInsertAction extends HttpServlet {
 		
 		
 		int res2 = ImageDao.getInstance().insert(vo2);
+
+		JSONObject json = new JSONObject();
+		
+		
+		System.out.println(res);
+		System.out.println(res2);
+		
+		boolean bResult = false;
+		
+		if(res==1 && res2==1) {
+			
+			bResult = true;
+			
+			
+			
+		}
+		
+		json.put("res", bResult);
+		
+		response.setContentType("text/json; charset=utf-8;");
+		response.getWriter().print(json.toJSONString(json));
 		
 
 	}
