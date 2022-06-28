@@ -88,13 +88,13 @@ select * from product
 
 update product set p_click=0 where p_idx=5
 
-select p_idx from product when
 
 
 
 
+select * from product where u_idx=3
 
-
+select * from user_market
 
 
 */
