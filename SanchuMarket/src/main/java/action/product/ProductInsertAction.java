@@ -1,6 +1,5 @@
 package action.product;
 
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -57,7 +56,7 @@ public class ProductInsertAction extends HttpServlet {
 		String imageFile5 = "no_image";
 		
 		//2. parameter 받기
-		int u_idx = 1; // 회원정보는 나중에 세션에서 받아와야함.
+		int u_idx = 3; // 회원정보는 나중에 세션에서 받아와야함.
 		int c_idx	  		= Integer.parseInt(mr.getParameter("c_idx"));
 		String p_name 		= mr.getParameter("p_name");
 		int	p_price			= Integer.parseInt(mr.getParameter("p_price"));

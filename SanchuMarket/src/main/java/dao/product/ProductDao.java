@@ -47,6 +47,22 @@ public class ProductDao {
 		return list;
 	}
 	
+	public List<ProductVo> selectList(int u_idx) {
+		// TODO Auto-generated method stub
+		
+		List<ProductVo> list = null;
+
+		// 1.SqlSession얻어오기
+		SqlSession sqlSession = factory.openSession();
+
+		list = sqlSession.selectList("product.product_user_idx",u_idx);
+
+		// 3.닫기
+		sqlSession.close();
+		
+		
+		return list;
+	}
 	
 
 	// 상품등록 메서드
@@ -80,7 +96,8 @@ public class ProductDao {
 		
 		return vo;
 	}
-	
+
+
 	
 	
 	
