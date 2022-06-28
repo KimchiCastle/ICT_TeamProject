@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -40,11 +41,15 @@ padding-left: 15px;
 	width: 185px;
 	height: 185px;
 	border: 1px solid #d3d3d3;
- 	overflow: hidden;
+	overflow: hidden;
+	position: relative;
 }
 
 #img{
-
+	height: 100%;
+ 	position: absolute; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
+  	left: 50%; /* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
+  	transform: translateX(-50%);
 }
 .price_tag{
 	width: 173px;
@@ -84,6 +89,7 @@ padding-left: 15px;
 
 </script>
 
+
 </head>
 <body>
 <%@include file="header&sidebar.jsp" %> 
@@ -110,7 +116,10 @@ padding-left: 15px;
 			<div class="price_tag">
 				<div id="p_name">${ vo.p_name }</div>
 				<div id="p_price">${ vo.p_price }</div>
-				<div id="p_date">${ vo.p_date }</div> 
+				<div id="p_date" class="p_date">
+					<fmt:parseDate value="${ vo.p_date }" var="date" pattern="yyyy-MM-dd"/>
+					<fmt:formatDate value="${ date }" pattern="yyyy-MM-dd"/>
+				</div> 
 			</div>
 		</div>
 	</c:forEach>
