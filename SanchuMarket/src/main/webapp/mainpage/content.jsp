@@ -81,7 +81,7 @@ padding-left: 15px;
 
 </head>
 <body>
-<%@include file="header&sidebar.jsp" %>
+<%@include file="header&sidebar.jsp" %> 
 <div class="main">
 	<!-- 메인콘텐츠 -->
 	<div class="main_content">

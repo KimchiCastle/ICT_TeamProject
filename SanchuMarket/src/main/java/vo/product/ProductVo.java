@@ -19,7 +19,7 @@ public class ProductVo {
 	String p_status;	//거래상태
 	
 	List<ImageVo> image_list;
-	
+	 
 	public List<ImageVo> getImage_list() {
 		return image_list;
 	}
