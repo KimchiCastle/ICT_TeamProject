@@ -13,21 +13,27 @@
 
 
 .main{
-	display:block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 1020px;
+	width: 100%;
 	border: 1px solid white;
+	
 }
 
 .main_content{
 margin-top: 131px;
 width: 1020px;
 height: 1150px;
-border: 1px solid black; 
 padding-top: 10px;
 padding-left: 15px;
+margin-left: 50%;
+transform: translateX(-50%);
 
+}
+
+.a_tag{
+	text-decoration: none;
+	color: black;
 }
 
 .product_list{
@@ -38,6 +44,7 @@ padding-left: 15px;
 	margin-bottom: 15px;
 	float: left;
 }
+
 
 #p_photo{
 	width: 185px;
@@ -58,10 +65,15 @@ padding-left: 15px;
 	height: 51px;
 	padding: 10px 6px 10px 6px;
 	border: 1px solid #d3d3d3;
+	background-color: white;
 }
 
 #p_name{
 	margin-bottom: 10px;
+	width: 170px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #p_price{
@@ -82,21 +94,11 @@ padding-left: 15px;
 
 </style>
 
-<script type="text/javascript">
 
-	function list_click() {
-		alert('클릭했다');
-		return;
-	}
-
-
-	
-</script>
 
 
 </head>
 <body>
-<%@include file="header&sidebar.jsp" %> 
 <div class="main">
 	<!-- 메인콘텐츠 -->
 	<div class="main_content">
@@ -108,21 +110,25 @@ padding-left: 15px;
 	</c:if>
 	
 	
-	
 	<!-- 상품리스트 -->
 	<!-- 데이터 있는 경우 -->
 	<c:forEach  var="vo" items="${ list }">
-		<div class="product_list" onclick="list_click()">
+	
+	<div class="product_list">
+	<a class="a_tag" href="../product/insert_form.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
+	
 		<c:forEach var="image" items="${ vo.image_list }">
-			<div id="p_photo"><img id="img" src="../imgdata/${ image.sumimage }" ></div>
+			<div id="p_photo"><img id="img" src="../imgdata/${ image.sumimage }"></div>
 		</c:forEach>
 			
 			<div class="price_tag">
-				<div id="p_name">${ vo.p_name }</div>
+				<div id="p_name"><span>${ vo.p_name }</span></div>
 				<div id="p_price"><fmt:formatNumber pattern="#,###" value="${ vo.p_price }"/>원</div>
 				<div id="p_date" class="p_date">${ vo.p_date }</div> 
 			</div>
-		</div>
+	</a>
+	</div>
+	
 	</c:forEach>
 	
 	</div>

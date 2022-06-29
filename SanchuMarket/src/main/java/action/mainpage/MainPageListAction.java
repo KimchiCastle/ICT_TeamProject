@@ -1,9 +1,6 @@
 package action.mainpage;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -78,7 +75,7 @@ public class MainPageListAction extends HttpServlet {
 		
 		 
 		//forward
-		String forward_page = "content.jsp";
+		String forward_page = "mainpage_list.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
 		disp.forward(request, response);
 

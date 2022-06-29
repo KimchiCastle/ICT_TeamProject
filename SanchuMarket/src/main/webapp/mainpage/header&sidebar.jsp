@@ -25,6 +25,9 @@ header{
 	height: 130px;
 	background-color: white;
 	z-index: 888;
+	left: 50%;
+	transform: translateX(-50%);
+	
 }
 
 .header{
@@ -142,7 +145,7 @@ li, ul{
 	<!-- 로고 -->
 		<a class="logo"><img src="../image/상추마켓.png" width="200" height="50" onclick="location.href='../mainpage/list.do'"></a>
 	<!-- 검색창 -->
-		<div class="search">
+		<div class="search" >
 			<input id="search" name="search" type="text" >
 		</div>
 	<!-- 판매,마이페이지 버튼 -->
