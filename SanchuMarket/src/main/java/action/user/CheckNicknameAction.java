@@ -32,9 +32,9 @@ public class CheckNicknameAction extends HttpServlet {
 		
 		String u_nickname = request.getParameter("u_nickname");
 		
-		UserVo vo = UserDao.getInstance().selectOneByNickname(u_nickname);
+		System.out.println(u_nickname);
 		
-		JSONObject json = new JSONObject();
+		UserVo vo = UserDao.getInstance().selectOneByNickname(u_nickname);
 		
 		String result = "";
 		

@@ -214,7 +214,7 @@ select {
 	            checkId("first");
 	    	})
 	    	
-	    	 $("#u_pwd").blur(function() {
+	    	$("#u_pwd1").blur(function() {
 	            pwdFlag = false;
 	            checkPwd();
 	        }).keyup(function(event) {
@@ -223,7 +223,7 @@ select {
 	            checkCapslock(event);
 	        }).keydown(function(event) {
 	            checkShiftDown(event);
-	        });
+	        }); 
 	    	
 	    	 $("#u_pwd2").blur(function() {
 	             checkPwd2();
@@ -236,7 +236,7 @@ select {
 	         });
 	    	 
 	    	$("#u_nickname").blur(function(){
-	    		checkNickname();
+	    		checkNickname("first");
 	    	})
 	    	$("#u_tel").blur(function(){
 	    		checkTel();
@@ -263,7 +263,6 @@ select {
 	    }); 
 	     
 	    
-//-------------submit 함수--------------------------
     	
       
 	//-------------이름 유효성 체크 함수------------------------------------ 	    
@@ -292,8 +291,9 @@ select {
     	 }
 
 //-------------비밀번호 유효성 체크 함수------------------------------------ 	
-
-	      function checkPwd() {
+	  
+  			function checkPwd(){
+	     
 	
 	        if(pwdFlag) return true;
 
@@ -312,10 +312,13 @@ select {
 	            showErrorMsg(oMsg,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 	            setFocusToInputObject(oInput);
 	            return false;
+	        }else{
+	        	showSuccessMsg(oMsg,"사용 가능한 비밀번호입니다.");
+	        	hideMsg(oMsg);
+	        	return true;
 	        }
-	    } 
-	    
-	        		
+	   
+  			}  		
 //-------------비밀번호 유효성 체크 함수(boolean반환)------------------------------------
 		function isValidPwd(pwd1) {
 		        var cnt = 0;
@@ -333,14 +336,14 @@ select {
 		        
 		        //전체 글자수 중복된 단어 제한
 		        for (var i = 0; i < pwd1.length; ++i) {
-		            if (str.charAt(0) == str.substring(i, i + 1))
+		            if (pwd1.charAt(0) == pwd1.substring(i, i + 1))
 		                ++cnt;
 		        }
 		        if (cnt == pwd1.length) {
 		            return false;
 		        }
 		
-		        var isPwd = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#$%\^&\*\(\)_\+|\{\}:"<>\?]{8,16}$/;
+		        var isPwd = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[.$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
 		        if (!isPwd.test(pwd1)) {
 		            return false;
 		        }
@@ -351,7 +354,6 @@ select {
 //----------------비밀번호 일치 확인 함수-----------------------
   	function checkPwd2() {
       
-       $("#pwd2").on( "change keyup paste", function(){
        	
    		var pwd1 = $("#u_pwd1");
    	        var pwd2 = $("#u_pwd2");
@@ -372,7 +374,6 @@ select {
 	            return true;
 	        }
 	        return true;
-	    });
        		pwdFlag = true;
        } 
 
@@ -457,8 +458,6 @@ select {
   
 			function checkNickname(event){
 	  		
-	  		if(nickFlag) return true;
-
 	        var nickname = $("#u_nickname").val();
 	        var oMsg = $("#nickMsg");
 	        var oInput = $("#u_nickname");
@@ -469,15 +468,14 @@ select {
               return false;
             }
 
-	        var nonchar = /[^가-힣a-zA-Z0-9]/gi;
+	        var nonchar = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
 
 	        if (!nonchar.test(nickname)) {
-	            showErrorMsg(oMsg,"한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
+	            showErrorMsg(oMsg,"한글과 영문만 입력가능합니다. (특수기호, 공백 사용 불가)");
 	            setFocusToInputObject(oInput);
 	            return false;
 	        }
 
-	        nickFlag = false;
 	                
 	        $.ajax({
 	            type:"GET",
@@ -487,10 +485,11 @@ select {
 	                if (data == "Y") {
 	                	 if (event == "first") {
 	                		 showSuccessMsg(oMsg, "사용 가능한 닉네임입니다.");
+	                		 hideMsg
 	                     } else {
 	                         hideMsg(oMsg);//호출하고 직후만 메시지 띄우려고..?
 	                     }
-	                    nickFlag = true;
+	                   
 	                } else { 
 	                    showErrorMsg(oMsg, "이미 사용중인 닉네임입니다.");
 	                    setFocusToInputObject(oInput);
@@ -543,6 +542,13 @@ select {
            hideMsg(oMsg);
            return true;
 	    }
+	    
+//-------------생일 체크 함수-------------------------------
+		function checkBirth(){
+	
+	
+		}
+
    
 //-------------메시지 표시, 가입버튼 활성화---------------------- 
 		function submitClose() {
@@ -662,7 +668,7 @@ select {
                 <div>
                     <h3 class="join_title"><label for="u_pwd1">비밀번호</label></h3>
                     <span class="box int_pass">
-                        <input type="text" id="u_pwd1" name="u_pwd1" class="int" maxlength="20" autocomplete="off">
+                        <input type="password" id="u_pwd1" name="u_pwd1" class="int" maxlength="20" autocomplete="off">
                     </span>
                     <span class="error_next_box" id="pwd1Msg"></span>
                 </div>
@@ -671,7 +677,7 @@ select {
                 <div>
                     <h3 class="join_title"><label for="u_pwd2">비밀번호 재확인</label></h3>
                     <span class="box int_pass_check">
-                        <input type="text" id="u_pwd2" name="u_pwd2" class="int" maxlength="20" autocomplete="off">
+                        <input type="password" id="u_pwd2" name="u_pwd2" class="int" maxlength="20" autocomplete="off">
                     </span>
                     <span class="error_next_box" id="pwd2Msg"></span>
                 </div>
