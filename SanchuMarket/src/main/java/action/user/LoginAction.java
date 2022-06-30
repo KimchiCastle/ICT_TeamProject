@@ -27,14 +27,15 @@ public class LoginAction extends HttpServlet {
 		request.setCharacterEncoding("utf-8");//특수문자 들어와도 인코딩 해야함 
 
 		String u_id = request.getParameter("u_id");
+		String u_pwd = request.getParameter("u_pwd");
 	
-		UserVo user =  UserDao.getInstance().selectOneById(u_id);
+		UserVo user =  UserDao.getInstance().selectOneByIdPwd(u_id,u_pwd);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user );
 		
 		//경로 지정 주의
-		response.sendRedirect("main.do");
+		response.sendRedirect("../mainpage/list.do");
 	}
 
 }

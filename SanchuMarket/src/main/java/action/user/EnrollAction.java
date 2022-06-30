@@ -32,33 +32,34 @@ public class EnrollAction extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		  String u_id = request.getParameter("u_id");
-		  String u_pwd = request.getParameter("u_pwd");
+		  String u_pwd = request.getParameter("u_pwd1");
 		  String u_name = request.getParameter("u_name");
 		  String u_nickname = request.getParameter("u_nickname");
-		  String u_birth = request.getParameter("birth");
-		  String u_addr = request.getParameter("addr");
-		  int postcode = Integer.parseInt(request.getParameter("postcode"));
-		  int u_like = Integer.parseInt(request.getParameter("u_like"));
-		  String u_profile = request.getParameter("u_profile");
-		  String u_photo = request.getParameter("u_photo");
+		  String u_birth = request.getParameter("u_birth");
+		  String addr = request.getParameter("address");
+		  String detail_addr = request.getParameter("detail");
+		  String postcode = request.getParameter("postcode");
 		  String u_tel = request.getParameter("u_tel");
-		  String u_mail = request.getParameter("u_mail");
-		  String u_grade = request.getParameter("u_grade");
+		  String u_mail = request.getParameter("u_email");
 		  String u_ip = request.getRemoteAddr();
 		  
-		 
-		  UserVo vo = new UserVo(u_id, u_pwd, u_name, u_nickname, u_birth, u_addr, u_tel, u_mail, u_ip, postcode);
-				  
+		  //u_addr = 기본 주소 + 상세 주소 
+		  StringBuilder sb = new StringBuilder();
+		  sb.append(addr).append(" ").append(detail_addr);
+		  String u_addr = sb.toString();
+		  
+		  UserVo vo = new UserVo(u_id, u_pwd, u_name, u_nickname, u_birth, u_addr,
+		  postcode, u_tel, u_mail, u_ip);
+		  
 		  int res = UserDao.getInstance().insert(vo);
 		  
-		  System.out.printf("회원가입 성공실패여부 : %d",res);
-			
-		  if(res==0) {
-			 response.sendRedirect("/mainpage/list.do");
+		  if(res==1) {
+			  response.sendRedirect("../mainpage/list.do");
 		  }else {
-			 response.sendRedirect("enroll.do?reason=failed_enroll");
-			 return;
+			  
+			  response.sendRedirect("enroll_form.do?reason=failed_enroll");
+			  return;
 		  }
+		  
 	}
-
 }
