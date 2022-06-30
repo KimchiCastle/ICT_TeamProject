@@ -30,7 +30,7 @@ public class UserDao {
 		factory = MyBatisConnector.getInstance().getSqlSessionFactory();
 	}
 	
-	//관리자 조회
+	//관리자 전체 회원 조회
 	public List<UserVo> selectList(){
 		
 		List<UserVo> list = null;
@@ -41,6 +41,19 @@ public class UserDao {
 		
 		sqlsession.close();
 		
+		return list;
+	}
+	
+	public List<UserVo> selectList(int u_idx) {
+
+		List<UserVo>list = null;
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		list = sqlSession.selectList("product.product_user_list",u_idx);
+		
+		sqlSession.close();
+
 		return list;
 	}
 	
@@ -57,7 +70,7 @@ public class UserDao {
 		return user;
 	}
 	
-	//회원가입시 유저 존재 조회(ajax)
+	//회원가입시 아이디 중복 방지
 	public UserVo selectOneById(String u_id){
 		
 		UserVo user = null;
@@ -71,6 +84,7 @@ public class UserDao {
 		return user;
 	}
 	
+	//회원가입시 닉네임 중복 방지
 	public UserVo selectOneByNickname(String u_nickname){
 		
 		UserVo user = null;
@@ -84,13 +98,32 @@ public class UserDao {
 		return user;
 	}
 	
+	//회원가입시 이메일 중복 방지
+	public UserVo selectOneByEmail(String email) {
+		
+		UserVo user = null;
+		
+		SqlSession sqlsession = factory.openSession();
+		
+		user = sqlsession.selectOne("user.check_email", email);
+		
+		sqlsession.close();
+		
+		return user;
+	}
+	
+	//로그인
+	public UserVo selectOneByIdPwd(String u_id, String u_pwd) {
+		return null;
+	}
+		
 	public int insert(UserVo vo) {
 		
 		int res = 0;
 		
-		SqlSession sqlsession = factory.openSession();
+		SqlSession sqlsession = factory.openSession(true);
 
-		res = sqlsession.selectOne("user.user_insert", vo);
+		res = sqlsession.insert("user.user_insert", vo);
 		
 		sqlsession.close();
 		
@@ -98,34 +131,30 @@ public class UserDao {
 	}
 
 	public int update(UserVo vo) {
-		// TODO Auto-generated method stub
+
 		int res = 0;
 		
-		//1.SqlSession얻기
 		SqlSession sqlSession = factory.openSession(true);//auto commit
 		
-		//2.실행
 		res = sqlSession.update("user.user_update",vo);
-		//3.닫기
+
 		sqlSession.close();
 		
 		return res;
 	}
-
-	public List<UserVo> selectList(int u_idx) {
-		// TODO Auto-generated method stub
-		List<UserVo>list = null;
-		
-		SqlSession sqlSession = factory.openSession();
-		
-		list = sqlSession.selectList("product.product_user_list",u_idx);
-		
-		sqlSession.close();
-		
-
-		return list;
-	}
-		
 	
+	public int delete(String u_id) {
+		
+		int res = 0;
+		
+		SqlSession sqlsession = factory.openSession(true);
+		
+		res = sqlsession.delete("user.withdraw_account", u_id);
+		
+		sqlsession.close();
+		
+		return res;
+		
+	}
 	
 }

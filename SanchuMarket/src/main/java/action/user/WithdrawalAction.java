@@ -8,12 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.user.UserDao;
+import vo.user.UserVo;
 
 /**
- * Servlet implementation class LoginFormAction
+ * Servlet implementation class WithdrawalAction
  */
-@WebServlet("/user/login_form.do")
-public class LoginFormAction extends HttpServlet {
+@WebServlet("/user/withdraw.do")
+public class WithdrawalAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -23,11 +27,17 @@ public class LoginFormAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//forward
-		String forward_page = "login_form.jsp";
-		RequestDispatcher disp = request.getRequestDispatcher(forward_page);
-		disp.forward(request, response);
+		
+		HttpSession session = request.getSession();
+		
+		UserVo user = (UserVo)session.getAttribute("user");
+		String u_id = user.getU_id();
+		UserDao.getInstance().delete(u_id);
+	
+		session.invalidate(); 
 
+		response.sendRedirect("../mainpage/list.do");
+		
 	}
 
 }

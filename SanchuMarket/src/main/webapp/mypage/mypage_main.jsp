@@ -56,7 +56,7 @@
   	<!-- 로그인이 안된경우 -->
   	<c:if test="${empty sessionScopeuser }">
   		<input id="button" type="button" value="로그인" style="float: right;"
-  				onclick="location.href='../member/login_form.do';">
+  				onclick="location.href='../user/login_form.do';">
   	</c:if>
   	
   	<!-- 로그인이 된 경우 -->
