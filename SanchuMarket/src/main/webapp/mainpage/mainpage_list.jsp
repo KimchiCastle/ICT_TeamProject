@@ -15,8 +15,14 @@ body{
 </head>
 <body>
 <div class="body">
-<%@include file="header&sidebar.jsp" %>
-<%@include file="content.jsp" %>
+		<%@include file="header&sidebar.jsp"%>
+</div>
+<div style="padding-top: 140px; width: 1035px; margin: auto; ">
+	<h3 style="margin: 0px; padding-left: 15px;">최근 올라온 상품</h3>
+</div>
+
+	<div style="margin-top: 0px;">
+		<%@include file="content.jsp"%>
 </div>
 </body>
 </html>
