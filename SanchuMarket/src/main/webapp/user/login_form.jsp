@@ -111,9 +111,6 @@
 	}//end login 
 </script>
 
-  <!-- Custom styles for this template -->
-<!--  <link href="signin.css" rel="stylesheet"> -->
-
 </head>
 
 <body class="text-center">
