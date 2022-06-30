@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +58,10 @@
 			</div>
 			<div class="recentView" id="recentView">
 				<div>
+					<c:forEach var="string" items="${ cookielist }">
+					${ string }<br>
+					</c:forEach>
+									
 					<a href="#"><img src="http://via.placeholder.com/60x60"></a>
 				</div>
 				<div>
