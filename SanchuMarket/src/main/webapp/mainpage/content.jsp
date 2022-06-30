@@ -16,12 +16,12 @@
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
-	border: 1px solid white;
+	border: 1px solid #f7f7f7;
 	
 }
 
 .main_content{
-margin-top: 131px;
+/* margin-top: 131px; */
 width: 1020px;
 height: 1150px;
 padding-top: 10px;
@@ -102,8 +102,7 @@ transform: translateX(-50%);
 <div class="main">
 	<!-- 메인콘텐츠 -->
 	<div class="main_content">
-	<h3 style="margin: 0px;">최근 올라온 상품</h3><br>
-	
+		
 	<!-- 데이터 없는 경우 -->
 	<c:if test="${ empty list }">
 		<div id="empty_msg">등록 된 상품이 없습니다.</div>
