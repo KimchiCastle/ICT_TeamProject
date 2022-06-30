@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.product.ProductDao;
+import vo.product.ProductVo;
+
 /**
  * Servlet implementation class ProductInsertFormAction
  */
@@ -28,32 +31,44 @@ public class ProductInsertFormAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		//1.인코딩 설정
+		request.setCharacterEncoding("utf-8");
+		
+		//---- 쿠키 설정 ---
 		
 		String p_idx = request.getParameter("p_idx");
 		String p_name = request.getParameter("p_name");
 		
-		/*
-		 * System.out.println(p_idx); System.out.println(p_name);
-		 */
-		
 		Cookie cookie = new Cookie(URLEncoder.encode(p_name,"utf-8"), p_idx);
 		
+		//쿠키 응답하기
 		response.addCookie(cookie);
 		
 		Cookie cookie_array[] = request.getCookies();
 		
-		List<String> cookielist = new ArrayList<String>();
+		List<ProductVo> cookielist = null;
+				
+				
 		
 		if(cookie_array != null) {
 			
+			
+			
 			for(Cookie cookie2 : cookie_array) {
+				
+				
 				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
 				String cookievalue = cookie2.getValue();
 				System.out.println("쿠키값입니다.");
 				System.out.println(cookiename);
 				System.out.println(cookievalue);
 				
-				cookielist.add(cookiename);
+				if(!cookiename.equals("JSESSIONID")) {
+				
+					cookielist = ProductDao.getinstance().selectList2(Integer.parseInt(p_idx));
+					
+				}
+				
 				
 			}
 			
@@ -62,6 +77,9 @@ public class ProductInsertFormAction extends HttpServlet {
 		
 		request.setAttribute("cookielist", cookielist);
 		
+		
+		
+		// ---------------------
 		//forward
 		String forward_page = "product_insert.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(forward_page);

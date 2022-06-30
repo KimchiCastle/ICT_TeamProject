@@ -1,11 +1,14 @@
 package action.mainpage;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,6 +75,35 @@ public class MainPageListAction extends HttpServlet {
 		/*
 		 * for( ProductVo vo : list) { System.out.println(vo.getP_idx()); }
 		 */
+		
+		
+		//-------------------- ÄíÅ° ±Á±â -------------------------
+		Cookie cookie_array[] = request.getCookies();
+		
+		List<String> cookielist = new ArrayList<String>();
+		
+		if(cookie_array != null) {
+			
+			
+			for(Cookie cookie2 : cookie_array) {
+				
+				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
+				String cookievalue = cookie2.getValue();
+				System.out.println("ÄíÅ°°ªÀÔ´Ï´Ù.");
+				System.out.println(cookiename);
+				System.out.println(cookievalue);
+				
+				if(!cookiename.equals("JSESSIONID")) {
+				
+					cookielist.add(cookiename);
+				}
+			}
+		}
+		// ±¸¿î ÄíÅ° ¸®½ºÆ® request binding
+		request.setAttribute("cookielist", cookielist);
+		
+		
+		
 		
 		 
 		//forward
