@@ -43,7 +43,10 @@
 		height: 40px;
 		cursor: pointer;
 	}
-	
+	.recentimg{
+		width: 60px;
+		height: 60px;
+	}
 	
 </style>
 
@@ -57,19 +60,13 @@
 				<span>최근 본 상품</span>
 			</div>
 			<div class="recentView" id="recentView">
-				<div>
-					<c:forEach var="string" items="${ cookielist }">
-					${ string }<br>
-					</c:forEach>
-									
-					<a href="#"><img src="http://via.placeholder.com/60x60"></a>
-				</div>
-				<div>
-					<a href="#"><img src="http://via.placeholder.com/60x60"></a>
-				</div>
-				<div>
-					<a href="#"><img src="http://via.placeholder.com/60x60"></a>
-				</div>
+			<c:forEach var="cookielist" items="${ cookielist }">
+				<c:forEach var="recentimg" items="${ cookielist.image_list }">
+					<div>
+						<a href="#"><img class="recentimg" src="../imgdata/${ recentimg.sumimage }"></a>
+					</div>
+				</c:forEach>
+			</c:forEach>
 				<div>
 					<button onclick="slider(-1)">&lt;</button>
 					<span id="now">1</span>/<span id="total">1</span>
