@@ -23,7 +23,7 @@ margin: auto;
 		
 		<div>
 		<hr>
-		<h3 style="margin: 0px; padding-left: 15px;">판매자가 올린 상품</h3>
+		<h3 style="margin: 0px; padding-left: 15px;">판매자가 올린 상품입니다.</h3>
 		
 		</div>
 		<%@ include file="../mainpage/content.jsp" %>
