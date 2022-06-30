@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상추마켓</title>
+<link href="../image/상추.png" rel="shortcut icon" type="image/x-icon">
+
 <style type="text/css">
 body{
 	margin: 0px;
