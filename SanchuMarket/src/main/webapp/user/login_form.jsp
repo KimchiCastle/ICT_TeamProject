@@ -137,13 +137,6 @@
     <button class="w-50 btn btn-md" type="submit" >로그인</button>
     </div>
     
-    
-    
-    
-    
-    
-    
-    
     <p class="mt-5 mb-3 text-muted" align="center">한국 ICT 인재개발원</p>
   
   </div>
