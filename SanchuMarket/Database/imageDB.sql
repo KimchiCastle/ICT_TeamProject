@@ -3,6 +3,9 @@
 --실수 했을때 테이블 드랍용
 drop table image cascade constraints
 
+--이미지 테이블 데이터 전체삭제 (실제 파일은 삭제 안됨!!)
+delete from image
+
 
 create table image
 (
