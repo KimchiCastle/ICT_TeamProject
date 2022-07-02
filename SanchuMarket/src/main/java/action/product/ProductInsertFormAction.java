@@ -64,8 +64,9 @@ public class ProductInsertFormAction extends HttpServlet {
 				System.out.println(cookievalue);
 				
 				if(!cookiename.equals("JSESSIONID")) {
-				
-					cookielist = ProductDao.getinstance().selectList2(Integer.parseInt(p_idx));
+					
+					System.out.println("쿠키리스트포장중");
+					cookielist = ProductDao.getinstance().selectList2(Integer.parseInt(cookievalue));
 					
 				}
 				
