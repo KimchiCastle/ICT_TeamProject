@@ -20,6 +20,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 		from (select * from product) p where u_idx=#{u_idx} order by p_idx desc
 	</select>
+	
+	
+	<select id="product_p_idx" resultMap="product_map">
+		select
+			p.* ,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		from (select * from product) p where p_idx=#{p_idx}
+	</select>
 
 
 	<!-- 회원목록 조회  -->

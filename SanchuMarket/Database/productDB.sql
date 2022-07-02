@@ -2,6 +2,10 @@
 --실수 했을때 테이블 드랍용
 drop table product cascade constraints
 
+--테이블 데이터 전체삭제
+delete from product
+
+
 ---상품테이블
 
 create table product
