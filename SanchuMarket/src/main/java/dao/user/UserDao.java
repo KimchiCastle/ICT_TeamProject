@@ -70,7 +70,7 @@ public class UserDao {
 		return user;
 	}
 	
-	//회원가입시 아이디 중복 방지
+	//회원가입시 아이디 중복 방지, 로그인
 	public UserVo selectOneById(String u_id){
 		
 		UserVo user = null;
@@ -110,11 +110,6 @@ public class UserDao {
 		sqlsession.close();
 		
 		return user;
-	}
-	
-	//로그인
-	public UserVo selectOneByIdPwd(String u_id, String u_pwd) {
-		return null;
 	}
 		
 	public int insert(UserVo vo) {

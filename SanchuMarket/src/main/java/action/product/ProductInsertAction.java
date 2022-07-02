@@ -120,8 +120,6 @@ public class ProductInsertAction extends HttpServlet {
 			
 			bResult = true;
 			
-			
-			
 		}
 		
 		json.put("res", bResult);

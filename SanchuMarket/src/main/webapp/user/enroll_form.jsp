@@ -7,13 +7,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <style type="text/css">
   
-  html {
+html {
     height: 100%;
 }
 
@@ -21,7 +23,7 @@ body {
     margin: 0;
     height: 100%;
     background: #f5f6f7;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
+    font-family: 'Gowun Dodum', sans-serif;
 }
 
 #header {
@@ -49,7 +51,7 @@ body {
 
 h3 {
     margin: 19px 0 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -76,7 +78,7 @@ h3 {
 }
 
 input {
-    font-family: Dotum,'돋움',Helvetica,sans-serif;    
+     font-family: 'Gowun Dodum', sans-serif;
 }
 
 .box.int_id {
@@ -123,7 +125,7 @@ select {
     text-align: start;
     border: none;
     cursor: default;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
+    font-family: 'Gowun Dodum', sans-serif;
 }
 
 /* 에러메세지 */
@@ -142,6 +144,7 @@ select {
     font-size: 12px;
     color: red;
     display: none;
+    font-family: 'Gowun Dodum', sans-serif;
 }
 
 /* 버튼 */

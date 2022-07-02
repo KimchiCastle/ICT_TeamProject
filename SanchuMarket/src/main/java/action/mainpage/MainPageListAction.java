@@ -1,17 +1,15 @@
 package action.mainpage;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.product.ProductDao;
 import vo.product.ProductVo;
@@ -40,7 +38,7 @@ public class MainPageListAction extends HttpServlet {
 			p_time[i] = list.get(i).getP_time();
 			int p_tim = Integer.parseInt(p_time[i]);
 			String p_ti = "1년전";
-			/* System.out.println(p_tim); */
+			System.out.println(p_tim);
 			if( p_tim <10) {
 				p_ti="방금전";
 			}else if( p_tim < 60) {
@@ -76,34 +74,14 @@ public class MainPageListAction extends HttpServlet {
 		 * for( ProductVo vo : list) { System.out.println(vo.getP_idx()); }
 		 */
 		
+		//session받아서 처리해주세용
+		HttpSession session = request.getSession();
 		
-		//-------------------- 쿠키 굽기 -------------------------
-		Cookie cookie_array[] = request.getCookies();
-		
-		List<String> cookielist = new ArrayList<String>();
-		
-		if(cookie_array != null) {
+		if(session.getAttribute("user")==null) {
 			
+		}else {
 			
-			for(Cookie cookie2 : cookie_array) {
-				
-				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
-				String cookievalue = cookie2.getValue();
-				System.out.println("쿠키값입니다.");
-				System.out.println(cookiename);
-				System.out.println(cookievalue);
-				
-				if(!cookiename.equals("JSESSIONID")) {
-				
-					cookielist.add(cookiename);
-				}
-			}
 		}
-		// 구운 쿠키 리스트 request binding
-		request.setAttribute("cookielist", cookielist);
-		
-		
-		
 		
 		 
 		//forward

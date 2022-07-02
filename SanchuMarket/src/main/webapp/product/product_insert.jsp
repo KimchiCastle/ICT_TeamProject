@@ -11,8 +11,14 @@
 
 <!-- daum API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
 <style type="text/css">
+	body{
+	  font-family: 'Gowun Dodum', sans-serif;
+	}
 	#root {
 		/* 		background: #ccffcc; */
 		width: 100%;

@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>상품수정</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -13,6 +16,10 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style type="text/css">
+	body{
+	  font-family: 'Gowun Dodum', sans-serif;
+	}
+	
 	#root {
 		/* 		background: #ccffcc; */
 		width: 100%;
