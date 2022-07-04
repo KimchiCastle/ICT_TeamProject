@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.product.ProductDao;
+import util.MyCookieList;
 import vo.product.ProductVo;
 
 /**
@@ -68,6 +69,17 @@ public class MainPageListAction extends HttpServlet {
 			
 		}
 		
+		
+		/*
+		 * List<ProductVo> cookielist=null; try { cookielist =
+		 * MyCookieList.getCookieList(request); } catch (Exception e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * 
+		 * System.out.println(cookielist.size());
+		 * 
+		 * request.setAttribute("cookielist", cookielist);
+		 */
+	
 		request.setAttribute("list", list);
 		 
 		/*

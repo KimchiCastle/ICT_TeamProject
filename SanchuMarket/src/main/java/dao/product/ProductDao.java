@@ -66,20 +66,20 @@ public class ProductDao {
 	}
 	
 	//상품정보 넘김
-	public List<ProductVo> selectList2(int p_idx) {
+	public ProductVo selectList2(int p_idx) {
 		// TODO Auto-generated method stub
-		List<ProductVo> list = null;
+		ProductVo vo = null;
 
 		// 1.SqlSession얻어오기
 		SqlSession sqlSession = factory.openSession();
 
-		list = sqlSession.selectList("product.product_p_idx",p_idx);
+		vo = sqlSession.selectOne("product.product_p_idx",p_idx);
 
 		// 3.닫기
 		sqlSession.close();
 		
 		
-		return list;
+		return vo;
 	}
 
 
