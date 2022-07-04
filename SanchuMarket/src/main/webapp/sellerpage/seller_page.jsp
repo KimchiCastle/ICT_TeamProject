@@ -13,8 +13,8 @@
 		font-family: 'Gowun Dodum', sans-serif;
 	}
 	.i{
-		background-color:#ccffcc;
-		padding-top: 140px;
+		/* background-color:#ccffcc; */
+		padding-top: 145px;
 		width: 1050px;
 		margin: auto;
 	}
@@ -26,7 +26,7 @@
 </div>
 <div class="i">
 	<div>
-		<div style="background-color: #ffcccc; display: inline-block; height: 150px; width: 150px;">
+		<div style="background-color: #ffcccc; display: inline-block; height: 300px; width: 100%;">
 		</div>
 
 		<div>
