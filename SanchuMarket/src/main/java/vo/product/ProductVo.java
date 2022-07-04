@@ -21,6 +21,11 @@ public class ProductVo {
 	
 	List<ImageVo> image_list;
 	
+	
+	
+	
+	
+	
 	public String getP_time() {
 		return p_time;
 	}
@@ -60,12 +65,6 @@ public class ProductVo {
 		this.p_click = p_click;
 		this.p_status = p_status;
 	}
-
-
-
-
-
-
 
 
 	public int getP_idx() {
@@ -154,6 +153,18 @@ public class ProductVo {
 
 	public void setP_status(String p_status) {
 		this.p_status = p_status;
+	}
+	
+	
+	//제대로 리스트가 저장 됐는지 출력용
+	public void list() {
+		
+		for(ImageVo vo : image_list) {
+			
+			System.out.println(vo.getSumimage().toString());
+			
+		}
+		
 	}
 	
 	
