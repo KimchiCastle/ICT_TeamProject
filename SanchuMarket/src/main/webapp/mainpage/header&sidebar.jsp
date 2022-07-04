@@ -52,7 +52,7 @@ header{
 	margin-left: 70px;
 	cursor: pointer;
 }
-.search{
+.searchtext{
 	width: 450px;
 	height: 39px;
 	float: left;
@@ -61,7 +61,7 @@ header{
 	margin-top: 10px;
 	border: 2px solid #20de07;
 }
-#search{
+#searchtext{
 	float: left;
 	width: 400px;
 	padding-left: 10px;
@@ -153,18 +153,16 @@ li, ul{
 
 <script type="text/javascript">
 
-function search_1(f) {
+function send1() {
 	
-	var search = f.search.value.trim();
+	var search1 = document.getElementById('searchtext').value;
 	//검색어가 비었을 때 전체검색
-	if(search==""){
-		alert('d');
-		return;
-	}
 	
-	if( search !="" ){		
-		location.href = "list.do?search=" + search + encodeURIComponent(search);
-	}else if( search == "" ){
+	
+	if( search1 !="" ){		
+		location.href = "list.do?searchtext=" + encodeURIComponent(search1);
+	}
+	if( search1 == "" ){
 		location.href = "list.do";
 	}
 	
@@ -185,11 +183,13 @@ function search_1(f) {
 	<!-- 로고 -->
 		<a class="logo"><img src="../image/상추마켓.png" width="200" height="50" onclick="location.href='../mainpage/list.do'"></a>
 	<!-- 검색창 -->
-	<form onsubmit="return false;">
-		<div class="search" >
-			<input id="search" name="search" type="text" ><img id="searchicon" src="../image/saerch-icon.png" onclick="search_1(this.form);">
+	
+		<div class="searchtext" >
+			<input id="searchtext" name="searchtext" type="text" >
+			<img id="searchicon" src="../image/saerch-icon.png" onclick="send1();">
+
 		</div>
-	</form>
+	
 	<!-- 판매,마이페이지 버튼 -->
 		<div class="btn_place">
 			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>

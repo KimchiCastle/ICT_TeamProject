@@ -27,6 +27,12 @@ public class MainPageListAction extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		
 		//전체목록 가져오기
 		List<ProductVo> list 	= ProductDao.getinstance().selectList();
 		
