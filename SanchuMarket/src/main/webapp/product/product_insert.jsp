@@ -76,9 +76,24 @@
 	
 	}
 	/* 미리보기 삭제버튼 css */
+	#sum_style{
+		text-align:center;
+		width:75px;
+		height:20spx;
+	    position:absolute; 
+		font-size:12px;
+		outline:none;
+		border:none;
+		border-radius:15px;
+	    right:70px;
+	    bottom:130px;
+	    /* z-index:1; */
+	    background-color:rgba(0,0,0,0.5);
+	    color:white;
+	}
 	.chk_style{
 		width:30px;
-		height:30px;
+		height:28px;
 	    position:absolute; 
 		font-size:20px;
 		outline:none;
@@ -164,14 +179,9 @@
 	}
 	#img_zone{
 		margin: auto; 
-		min-width: 65%; 
+		width: 65%; 
 		min-height: 50px;
-	/* 	background-color: black; */
-	}
-	#img_zone:empty:before{
-		content: attr(data-placeholder);
-		color: #999;
-		font-size: .9em;
+		/* background-color: black; */
 	}
 	
 </style>
@@ -738,7 +748,7 @@
 <script type="text/javascript">
 	
 	function del_sum() {
-		alert('썸네일이미지 지움');
+		/* alert('썸네일이미지 지움'); */
 		/* 실제 DB에 들어가는 input value 지움 */
 		$('#sumimage').val('');
 		
@@ -762,7 +772,7 @@
 
 
 	function del_img1() {
-		alert('1번이미지 지움');
+		/* alert('1번이미지 지움'); */
 		
 		$('#imageFile1').val('');
 		
@@ -784,7 +794,7 @@
 	}
 	
 	function del_img2() {
-		alert('2번이미지 지움');
+		/* alert('2번이미지 지움'); */
 		
 		$('#imageFile2').val('');
 		
@@ -805,7 +815,7 @@
 	}
 	
 	function del_img3() {
-		alert('3번이미지 지움');
+		/* alert('3번이미지 지움'); */
 		
 		$('#imageFile3').val('');
 		$("#img_preview3").css("display","none");
@@ -825,7 +835,7 @@
 		return;
 	}
 	function del_img4() {
-		alert('4번이미지 지움');
+		/* alert('4번이미지 지움'); */
 		
 		$('#imageFile4').val('');
 		$("#img_preview4").css("display","none");
@@ -845,7 +855,7 @@
 		return;
 	}
 	function del_img5() {
-		alert('5번이미지 지움');
+		/* alert('5번이미지 지움'); */
 		
 		$('#imageFile5').val('');
 		$("#img_preview5").css("display","none");
@@ -932,7 +942,7 @@
 		var sumimage = $("#sumimage").val();
 		
  		if(sumimage==''){
- 			alert('섬네일 이미지를 등록해주세요.');
+ 			alert('대표 이미지를 반드시 등록해주세요.');
  			$("#imgup").focus();
  			return;
  		}
@@ -1123,7 +1133,7 @@
 
 			var p_name = $(this).val().length;
 
-			console.log(p_name);
+			/* console.log(p_name); */
 
 			$("#name_length").html(p_name + '/40')
 
@@ -1189,12 +1199,11 @@
 					<td class="td2" align="left">
 					
 						<!-- 이미지 등록 영역 -->
-						<div id="img_zone"   >
-							
-							
+						<div id="img_zone">
 							<div id="img_preview0" >
 								<input type="image" id="imgup_sum" onclick="send_0();"
 									src="" width="150px" height="150px">
+								<span id="sum_style" >대표 이미지</span>
 								<!-- 삭제버튼 -->
 								<input type="button" id="del_sum" class="chk_style" value="x" onclick="del_sum();">
 							</div>
