@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.product.ProductDao;
 import vo.product.ProductVo;
@@ -76,6 +77,15 @@ public class MainPageListAction extends HttpServlet {
 		/*
 		 * for( ProductVo vo : list) { System.out.println(vo.getP_idx()); }
 		 */
+		
+		//session받아서 처리해주세용
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("user")==null) {
+			
+		}else {
+			
+		}
 		
 		 
 		//forward

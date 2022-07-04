@@ -6,12 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <style type="text/css">
   
-  html {
+html {
     height: 100%;
 }
 
@@ -19,12 +23,7 @@ body {
     margin: 0;
     height: 100%;
     background: #f5f6f7;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
-}
-#logo {
-    width: 240px;
-    height: 44px;
-    cursor: pointer;
+    font-family: 'Gowun Dodum', sans-serif;
 }
 
 #header {
@@ -52,7 +51,7 @@ body {
 
 h3 {
     margin: 19px 0 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -79,7 +78,7 @@ h3 {
 }
 
 input {
-    font-family: Dotum,'돋움',Helvetica,sans-serif;    
+     font-family: 'Gowun Dodum', sans-serif;
 }
 
 .box.int_id {
@@ -94,8 +93,8 @@ input {
     padding-right: 40px;
 }
 
-.step_url {
-    /*@naver.com*/
+/* .step_url {
+    
     position: absolute;
     top: 16px;
     right: 13px;
@@ -112,33 +111,8 @@ input {
     right: 16px;
     margin-top: -10px;
     cursor: pointer;
-}
+} */
 
-#bir_wrap {
-    display: table;
-    width: 100%;
-}
-
-#bir_yy {
-    display: table-cell;
-    width: 147px;
-    
-}
-
-#bir_mm {
-    display: table-cell;
-    width: 147px;
-    vertical-align: middle;
-}
-
-#bir_dd {
-    display: table-cell;
-    width: 147px;
-}
-
-#bir_mm, #bir_dd {
-    padding-left: 10px;
-}
 
 select {
     width: 100%;
@@ -151,7 +125,7 @@ select {
     text-align: start;
     border: none;
     cursor: default;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
+    font-family: 'Gowun Dodum', sans-serif;
 }
 
 /* 에러메세지 */
@@ -170,6 +144,7 @@ select {
     font-size: 12px;
     color: red;
     display: none;
+    font-family: 'Gowun Dodum', sans-serif;
 }
 
 /* 버튼 */
@@ -194,14 +169,54 @@ select {
 </style>
 	<script>
 	
-		//유효성검사를 해주는 각 flag들이 1이 되어야 회원가입이 진행됨
-	   $(document).ready(function(){ 
-		   
-		    let idFlag = false;
-		    let pwdFlag = false;
-		    let submitFlag
-	    	
-	    	setTimeout(showMessage,100);
+	
+	
+	
+	 //birth datepicker 초기화
+	  $.datepicker.setDefaults({
+        dateFormat: 'yy-mm-dd',
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        showMonthAfterYear: true,
+        yearSuffix: '년',
+        yearRange: 'c-100:c+0'
+    });
+	 
+	 $( function() {
+	    $( "#u_birth" ).datepicker({
+	    	 changeMonth: true,
+	    	 changeYear: true,
+	    	 showButtonPanel: true,
+	    	 maxDate: new Date
+		        
+		  });
+	  });
+	 
+	 
+	 //enrollAction에서 실패시 redirect되는 parameter 받기
+	  function showMessage(){
+		  if("${param.reason}" == "failed_enroll"){
+			  alert('회원가입에 실패했습니다. 관리자에게 문의하세요');
+			  return false;
+		  } 
+	   idFlag = false;
+	   pwdFlag = false;
+	   submitFlag = false;
+	  }
+	 
+	  let idFlag = false;
+	  let pwdFlag = false;
+	  let submitFlag = false;
+	
+	 $(document).ready(function(){ 
+		 
+		 	 //회원가입 실패시 enroll_form.do?reason=failed_enroll 받기
+			 setTimeout(showMessage,100);
 	    	
 	    	$("#u_name").blur(function(){
 	    		checkName();
@@ -247,25 +262,13 @@ select {
 	    	$("#u_birth").change(function(){
 	    		checkBirth();
 	    	})
-	    	
-	    	
-	        $("#enroll_btn").click(function(event) {
-	              
-               submitClose();
-               
-               if(idFlag && pwFlag) {
-              	 $("#enroll_form").submit();
-               }else {
-                  submitOpen();
-                  return false;
-               }
-	        });
-	    }); 
-	     
+	    });
+	 
+	
 	    
     	
       
-	//-------------이름 유효성 체크 함수------------------------------------ 	    
+		//이름 유효성 체크 함수   
     	function checkName(){
     		
     		var oMsg = $("#nameMsg");
@@ -290,8 +293,7 @@ select {
 	        return true;
     	 }
 
-//-------------비밀번호 유효성 체크 함수------------------------------------ 	
-	  
+			//비밀번호1 유효성 체크 함수
   			function checkPwd(){
 	     
 	
@@ -319,7 +321,7 @@ select {
 	        }
 	   
   			}  		
-//-------------비밀번호 유효성 체크 함수(boolean반환)------------------------------------
+		//비밀번호 유효성 체크 함수(checkPwd()에 boolean반환)
 		function isValidPwd(pwd1) {
 		        var cnt = 0;
 		        if (pwd1 == "") {
@@ -351,7 +353,7 @@ select {
 		        return true;
 		    } 
 	    
-//----------------비밀번호 일치 확인 함수-----------------------
+	//비밀번호 일치 여부 확인
   	function checkPwd2() {
       
        	
@@ -377,7 +379,7 @@ select {
        		pwdFlag = true;
        } 
 
-//-------------이메일 유효성 체크 함수------------------------------------ 		
+		//이메일 유효성 체크 함수
 	    function checkEmail(){
 	    	
     	   var email = $("#u_email").val();
@@ -396,12 +398,34 @@ select {
                showErrorMsg(oMsg,"올바른 이메일 형식이 아닙니다.");
                return false;
            }
+           
+           
+	        $.ajax({
+	            type:"GET",
+	            url: "check_email.do?u_mail=" + email,
+	            success : function(data) {
+					//db에 존재하는 닉네임 없으면 data=y 넘어옴
+	                if (data == "Y") {
+	                	 if (event == "first") {
+	                		 showSuccessMsg(oMsg, "사용 가능한 이메일입니다.");
+	                		
+	                     } else {
+	                         hideMsg(oMsg);//호출하고 직후만 메시지 띄우려고..?
+	                     }
+	                   
+	                } else { 
+	                    showErrorMsg(oMsg, "이미 사용중인 이메일입니다.");
+	                    setFocusToInputObject(oInput);
+	                }
+	            }//end success
+	        });//end ajax
 
            hideMsg(oMsg);
            return true;
 	    }
 	    
-//-------------id유효성 체크 함수------------------------------------  	  
+		
+		//id유효성 체크 함수
 	  	function checkId(event){
 	  		
 	  		if(idFlag) return true;
@@ -454,8 +478,7 @@ select {
 	        return true;
 	      }//end function
 	  	  
-//--------------닉네임 유효성 체크 함수------------------------
-  
+			//닉네임 유효성 체크 함수
 			function checkNickname(event){
 	  		
 	        var nickname = $("#u_nickname").val();
@@ -485,7 +508,7 @@ select {
 	                if (data == "Y") {
 	                	 if (event == "first") {
 	                		 showSuccessMsg(oMsg, "사용 가능한 닉네임입니다.");
-	                		 hideMsg
+	                		
 	                     } else {
 	                         hideMsg(oMsg);//호출하고 직후만 메시지 띄우려고..?
 	                     }
@@ -500,8 +523,7 @@ select {
 	      }//end function
 	  	
 
-//-------------주소 유무 체크 함수------------------------------------
-
+	//주소 유무 체크 함수
    function checkAddr(){
 	    	
     	   var addr = $("#u_addr").val();
@@ -518,8 +540,7 @@ select {
            return true;
 	    }
    
-//------------전화번호 체크 함수(인증 구현시 삭제 예정)------------------------------
-
+	//전화번호 체크 함수(인증 구현시 삭제 예정)
    function checkTel(){
 	    	
     	   var tel = $("#u_tel").val();
@@ -543,14 +564,15 @@ select {
            return true;
 	    }
 	    
-//-------------생일 체크 함수-------------------------------
+		//생일 체크 함수
 		function checkBirth(){
 	
-	
+			let birth = $("#u_bitrh").val();
+			console.log(birth);
 		}
 
    
-//-------------메시지 표시, 가입버튼 활성화---------------------- 
+	   //메시지 표시, 가입버튼 활성화
 		function submitClose() {
         submitFlag = true;
         $("#enroll_btn").attr("disabled",true);
@@ -581,7 +603,7 @@ select {
 	            obj.focus();
 	        }
 	    }
-//-------------shift/capslock/spacebar 대응------------------------------------  
+	  //shift/capslock/spacebar 대응
 	    var isShift = false;
 	    
 	    function checkShiftUp(e) {
@@ -625,27 +647,25 @@ select {
 	        }
 	    } 
 	    
-
-		  //enrollAction에서 실패시 redirect되는 parameter 받기
-		  function showMessage(){
-			  if("false" == "true"){
-				  alert('회원가입에 실패했습니다. 관리자에게 문의하세요');
-				  return;
-			  } 
-		   idFlag = false;
-		   pwdFlag = false;
-		   submitFlag = false;
-		  }
-
+ 	    //회원가입 실행
+ 	    function submit(){ 
+ 	    	
+	        if(idFlag && pwdFlag) {
+	           submitClose();
+	       	   $("#enroll_form").submit();
+	        }else {
+	           submitOpen();
+	           return false;
+	        }
+        }
 	</script> 
 
 </head>
 <body>
 <form id="enroll_form" method="post" action="enroll.do">
 	<div id="header">
-           <span id="title">상추마켓</span>
+           <span id="title">회원가입</span>
         </div>
-
 
         <!-- wrapper -->
         <div id="wrapper">
@@ -695,7 +715,7 @@ select {
                 <div>
                     <h3 class="join_title"><label for="name">닉네임</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="u_nickname" name="u_nickname" class="int" maxlength="20">
+                        <input type="text" id="u_nickname" name="u_nickname" class="int" maxlength="20" required>
                     </span>
                     <span class="error_next_box" id="nickMsg"></span>
                 </div>
@@ -703,35 +723,37 @@ select {
                 <!-- BIRTH -->
                 <div>
                     <h3 class="join_title"><label>생년월일</label></h3>
-			      	  <input type="date" name="u_birth" id="u_birth" required> 
+			      	  <input type="text" name="u_birth" id="u_birth" required> 
                     <span class="error_next_box" id="birthMsg"></span>    
                 </div>
 
                 <!-- EMAIL -->
                 <div>
-                    <h3 class="join_title"><label for="email">이메일<span class="optional">(선택)</span></label></h3>
+                    <h3 class="join_title"><label for="email">이메일</label></h3>
                     <span class="box int_email">
-                        <input type="text" id="u_email" name="u_email" class="int" maxlength="100" placeholder="선택입력">
+                        <input type="text" id="u_email" name="u_email" class="int" maxlength="100" required>
                     </span>
                     <span class="error_next_box" id="emailMsg"></span>    
                 </div>
 
-                <!-- MOBILE -->
+                <!-- TEL -->
                 <div>
                     <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
                     <span class="box int_mobile">
-                        <input type="tel" id="u_tel" name="u_tel" class="int" maxlength="16" placeholder="전화번호 입력">
+                        <input type="tel" id="u_tel" name="u_tel" class="int" maxlength="16" required>
                     </span>
                     <span class="error_next_box" id="telMsg"></span>    
                 </div>
                 
-			    
+			    <!-- ADDRESS -->
 				 	 <h3 class="join_title"><label>주소</label></h3>
 				   
-				    <span class="box int_addr">
-				          <input type="text" class="int" id="sample2_postcode" name="postcode" style="float:left"readonly>
-					   	  <input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" style="clear:both">
-					</span>
+				    <div style="display:inline-block; height: 50px;">
+				    <!-- <span class="box int_addr"> -->
+				          <input type="text"  id="sample2_postcode" name="postcode" readonly>
+					   	  <input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
+					<!-- </span> -->
+					</div>
 					
 					<span class="box int_addr2">    
 					      <input type="text" class="int" id="sample2_address" name="address" readonly>
@@ -741,28 +763,28 @@ select {
 					   	  <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 					 </span>
 					
+					<span class="box int_addr2">    
+					      <input type="text" class="int" id="sample2_detailAddress" name="detail" >
+					</span>  
 					 
-					   	  <span id="addrMsg" style="display:none"></span>
+					 <span id="addrMsg" style="display:none"></span>
 			  
 			     
 
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="button" id="enroll_btn">
+                    <button type="button" id="enroll_btn" onclick="submit();">
                         <span>가입하기</span>
                     </button>
                 </div>
 
-                
-
             </div> 
             <!-- content-->
 
-
-
         </div> 
         <!-- wrapper -->
+        </form>
     </body>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

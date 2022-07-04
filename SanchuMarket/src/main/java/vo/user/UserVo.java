@@ -1,7 +1,5 @@
 package vo.user;
 
-import java.util.Date;
-
 public class UserVo {
 	
   int u_idx;
@@ -11,14 +9,14 @@ public class UserVo {
   String u_nickname;
   String u_birth;
   String u_addr;
-  int u_like;//
+  int u_like;
   String u_profile;
-  String u_photo;//
+  String u_photo;
   String u_tel;
   String u_mail;
   String u_grade;
   String u_ip;
-  int postcode;
+  String postcode;
   String u_regdate;
   
   public UserVo() {
@@ -26,8 +24,8 @@ public class UserVo {
 	}
   
 //insert¿ë
-public UserVo(String u_id, String u_pwd, String u_name, String u_nickname, String u_birth, String u_addr, String u_tel,
-		String u_mail, String u_ip, int postcode) {
+public UserVo(String u_id, String u_pwd, String u_name, String u_nickname, String u_birth, String u_addr, String postcode, String u_tel,
+		String u_mail, String u_ip) {
 	super();
 	this.u_id = u_id;
 	this.u_pwd = u_pwd;
@@ -64,10 +62,10 @@ public String getU_ip() {
 public void setU_ip(String u_ip) {
 	this.u_ip = u_ip;
 }
-public int getPostcode() {
+public String getPostcode() {
 	return postcode;
 }
-public void setPostcode(int postcode) {
+public void setPostcode(String postcode) {
 	this.postcode = postcode;
 }
 public String getU_id() {

@@ -8,8 +8,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+ body{
+   font-family: 'Gowun Dodum', sans-serif;
+ }
+</style>
+
 <script type="text/javascript">
 
 	function find(f) {
@@ -70,6 +79,33 @@
 		f.submit();
 		alert('수정이 완료되었습니다.')
 	}
+	
+		
+		//탈퇴 
+		function withdraw(f){
+			
+			//실행 전 세션 존재 확인
+			if(${user} == null){
+				alert('세션이 만료됐습니다.\n로그인 창으로 이동합니다.');
+				location.href = "../user/login_form.do";
+			} 
+			
+			Swal.fire({
+			  title: '정말 탈퇴하시겠습니까?',
+			  text: "탈퇴시 계정을 다시 복구시킬 수 없습니다.",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '탈퇴',
+			  cancelButtonText: '취소'
+			}).then((result) => {
+			  if (result.value) {
+		          location.href='../user/withdraw.do';
+			  }
+			})
+		}
+	
 </script>
 <style type="text/css">
 	
@@ -133,7 +169,7 @@
 				<tr>
 					<td >
 						<input class="btn btn-info" type="button" value="수정하기"onclick="send(this.form);"> 
-						<input class="btn btn-danger" type="button" value="회원탈퇴" onclick="탈퇴">
+						<input class="btn btn-danger" type="button" value="회원탈퇴" onclick="withdraw();">
 					</td>
 				</tr>
 			</table>

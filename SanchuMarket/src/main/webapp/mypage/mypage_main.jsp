@@ -16,11 +16,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--font-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style type="text/css">
 	
-	#main_box {
-	width: 800px;
-	margin: auto;
+body{
+font-family: 'Gowun Dodum', sans-serif;
+}	
+	
+#main_box {
+width: 800px;
+margin: auto;
 }
 #box {
 	width: 700px;
@@ -56,7 +65,7 @@
   	<!-- 로그인이 안된경우 -->
   	<c:if test="${empty sessionScopeuser }">
   		<input id="button" type="button" value="로그인" style="float: right;"
-  				onclick="location.href='../member/login_form.do';">
+  				onclick="location.href='../user/login_form.do';">
   	</c:if>
   	
   	<!-- 로그인이 된 경우 -->
