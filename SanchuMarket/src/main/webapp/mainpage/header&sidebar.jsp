@@ -156,7 +156,7 @@ li, ul{
 		<div class="btn_place">
 			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>
 			 &nbsp;&nbsp;|&nbsp;
-			<a class="btn" href=""><img src="../image/mypage.png" width="30px">&nbsp;마이페이지</a>
+			<a class="btn" onclick="location.href='../mypage/list.do'"><img src="../image/mypage.png" width="30px">&nbsp;마이페이지</a>
 		</div>
 	<!-- 반응형 네비게이션 바 -->
 		<div class="navi_bar">
