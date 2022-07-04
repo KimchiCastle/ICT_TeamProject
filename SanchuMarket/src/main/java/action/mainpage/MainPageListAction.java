@@ -31,8 +31,6 @@ public class MainPageListAction extends HttpServlet {
 		
 		String[] p_time = new String[list.size()];
 		
-		
-		
 		for (int i = 0; i < list.size(); i++) {
 			p_time[i] = list.get(i).getP_time();
 			int p_tim = Integer.parseInt(p_time[i]);
@@ -66,6 +64,12 @@ public class MainPageListAction extends HttpServlet {
 			list.get(i).setP_date(p_ti);
 			
 		}
+		
+		
+		
+		
+		
+		
 		
 		request.setAttribute("list", list);
 		 
