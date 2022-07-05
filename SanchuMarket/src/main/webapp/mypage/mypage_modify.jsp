@@ -5,18 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-<style>
- body{
-   font-family: 'Gowun Dodum', sans-serif;
- }
+
+<style type="text/css">
+
+	.body1{
+		padding-top: 131px;
+	
+	}
 </style>
 
 <script type="text/javascript">
@@ -112,6 +111,11 @@
 	th {
 		text-align: center;
 	}
+	td{
+		float: left;
+		margin-left: 5px;
+		padding-left: 5px;
+	}
 	
 	input {
 		display: inline;
@@ -122,15 +126,20 @@
 		align-content: center;	
 	}
 	
+	
 </style>
 
 </head>
 <body>
+<div>
+		<%@include file="../mainpage/header&sidebar.jsp"%>
+</div>
+<div class="body1">
 	<jsp:include page="mypage_main.jsp" />
 	<form>
 		<div id="box">
 		<div class="panel">
-				<div class="panel-heading" align="center"><h4>회원가입</h4></div>
+				<div class="panel-heading" align="center"><h4>내 정보 수정</h4></div>
 				<div class="panel-body">
 			<table id="table"  class="table table-stiped">
 			
@@ -143,7 +152,6 @@
 				<tr>
 					<th>아이디</th>
 					<td><input name="u_id" value="${vo.u_id}" readonly="readonly"></td>
-
 				</tr>
 				<tr>
 					<th>비밀번호</th>
@@ -160,6 +168,15 @@
 					<td><input name="u_addr" id="u_addr" size="60"
 						value="${vo.u_addr }"></td>
 				</tr>
+				<tr>
+					<th>자기소개</th>
+					<td><textarea name="u_profile" id="u_profile" rows="10" cols="50" style="margin-left: 5px;"></textarea> </td>
+				</tr>
+				<tr>
+					<th>사진등록</th>
+					<td>사진등록폼 추가예정</td>
+				</tr>
+
 
 			</table>
 			</div>
@@ -177,7 +194,7 @@
 		<br>
 		<hr>
 		</div>
-		
+	</div>	
 	</form>
 </body>
 </html>
