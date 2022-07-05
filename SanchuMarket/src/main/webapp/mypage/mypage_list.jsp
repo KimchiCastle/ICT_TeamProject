@@ -1,21 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>상추마켓</title>
+<link href="../image/상추.png" rel="shortcut icon" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-<style>
-body{
-  font-family: 'Gowun Dodum', sans-serif;
-}
+<style type="text/css">
+
+	.body1{
+		padding-top: 131px;
+	
+	}
 </style>
 <script type="text/javascript">
 
@@ -54,13 +54,12 @@ $(document).ready(function(){
 	
 });
 </script>
-<style type="text/css">
-	
-
-	
-</style>
 </head>
 <body>
+<div>
+		<%@include file="../mainpage/header&sidebar.jsp"%>
+</div>
+<div class="body1">
 	<jsp:include page="mypage_main.jsp" />
 	<form>
 		<div id="box" align="center">
@@ -112,6 +111,8 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</form>
+</div>
+	
 </body>
 </html>
 

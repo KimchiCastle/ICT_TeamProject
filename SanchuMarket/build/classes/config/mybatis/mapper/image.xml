@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="image">
+	
+	<!-- 이미지 등록  -->
+	<insert id="image_insert" parameterType="vo.image.ImageVo">
+		insert into image values(
+		(select max(p_idx) from product),
+		 #{sumimage},
+		 #{imageFile1},
+		 #{imageFile2},
+		 #{imageFile3},
+		 #{imageFile4},
+		 #{imageFile5}
+		 )
+	</insert>
+	
+	
+		<!-- 상품목록 1개 에 대한 이미지 -->
+	<select id="image_selectOne" parameterType="int" resultType="vo.image.ImageVo">
+		select * from image where p_idx=#{p_idx}
+	</select>	
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

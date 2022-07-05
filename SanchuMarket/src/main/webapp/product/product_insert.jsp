@@ -48,14 +48,14 @@
 	
 	/* span태그 */
 	.pro_info {
-		font-size: 21px;
+		font-size: 20px;
 	}
 	
 	/* 전체 인풋태그 css */
 	.input-tag {
 		display: inline-block;
-		height: 30px;
-		padding: 0 10px;
+		height: 20px;
+		padding: 5px;
 		vertical-align: middle;
 		border: 1px solid black;
 		width: 60%;
@@ -65,32 +65,45 @@
 	}
 	
 	/* 이미지 미리보기 css */
-	.img_preview{
-	
-		margin: 10px;
-		display: inline-block;
+	#img_preview0, #img_preview1, #img_preview2, #img_preview3, #img_preview4, #img_preview5{
+		display: none;
 		position: relative;
 		
-/* 		width: 155px;
-		height: 155px; */
+		width: 150px;
+		height: 150px; 
 		
 /* 		border: 2px solid black; */
 	
 	}
 	/* 미리보기 삭제버튼 css */
+	#sum_style{
+		text-align:center;
+		width:75px;
+		height:20spx;
+	    position:absolute; 
+		font-size:12px;
+		outline:none;
+		border:none;
+		border-radius:15px;
+	    right:70px;
+	    bottom:130px;
+	    /* z-index:1; */
+	    background-color:rgba(0,0,0,0.5);
+	    color:white;
+	}
 	.chk_style{
-	width:30px;
-	height:30px;
-    position:absolute; 
-	font-size:20px;
-	outline:none;
-	border:none;
-	border-radius:15px;
-    right:13px;
-    bottom:120px;
-    /* z-index:1; */
-    background-color:rgba(0,0,0,0.5);
-    color:#ffcccc;
+		width:30px;
+		height:28px;
+	    position:absolute; 
+		font-size:20px;
+		outline:none;
+		border:none;
+		border-radius:15px;
+	    right:9px;
+	    bottom:115px;
+	    /* z-index:1; */
+	    background-color:rgba(0,0,0,0.5);
+	    color:#ffcccc;
 	}
 	
 		
@@ -98,6 +111,10 @@
 	#del_img1, #del_img2, #del_img3, #del_img4, #del_img5,#del_sum{
 		cursor: pointer;
 		display: none;
+	}
+	
+	#imgup{
+		margin-top: 5px;
 	}
 	
 	/* 이미지 미리보기 css */
@@ -154,12 +171,18 @@
 	
 	.td1{
 		width: 20%;
+		vertical-align: top;
 	}
 	
 	.td2{
 		width: 80%;
 	}
-	
+	#img_zone{
+		margin: auto; 
+		width: 65%; 
+		min-height: 50px;
+		/* background-color: black; */
+	}
 	
 </style>
 
@@ -302,7 +325,7 @@
 		var file_name = input.value.substring(file_kind+1,input.length);
 		var file_type = file_name.toLowerCase();
 
-		var check_array = new Array( 'jpg','gif','png','jpeg' );
+		var check_array = new Array( 'jpg','png','jpeg' );
 
 		$('#sumimage').val();
 		
@@ -324,8 +347,8 @@
 	        reader.onload = function (e) {
 		        $('#imgup_sum').attr('src', e.target.result);
 		        
-		        
-				$('#imgup_sum').show();
+		        $("#img_preview0").css("display","inline-block");
+				$("#imgup_sum").show();
 		        $("#del_sum").show();
 		       
 				preview_array[0] = true;
@@ -382,7 +405,7 @@
 		var file_name = input.value.substring(file_kind+1,input.length);
 		var file_type = file_name.toLowerCase();
 
-		var check_array = new Array( 'jpg','gif','png','jpeg' );
+		var check_array = new Array( 'jpg','png','jpeg' );
 
 		
 		if(check_array.indexOf(file_type)==-1){
@@ -402,11 +425,11 @@
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
-	        
-	        
+	        	        
 	        	$('#imgup_1').attr('src', e.target.result);
 	        	//배열에 트루값주기, 트루면 업로드 못함
 	        
+	        	$("#img_preview1").css("display","inline-block");
 	        	$("#imgup_1").show();
 	        	$("#del_img1").show();
 	        	
@@ -459,7 +482,7 @@
 		var file_name = input.value.substring(file_kind+1,input.length);
 		var file_type = file_name.toLowerCase();
 
-		var check_array = new Array( 'jpg','gif','png','jpeg' );
+		var check_array = new Array( 'jpg','png','jpeg' );
 
 		
 		if(check_array.indexOf(file_type)==-1){
@@ -480,7 +503,7 @@
 	        reader.onload = function (e) {
 				$('#imgup_2').attr('src', e.target.result);
 				
-				
+				 $("#img_preview2").css("display","inline-block");
 				$("#imgup_2").show();
 				$("#del_img2").show();
 				
@@ -531,7 +554,7 @@
 		var file_name = input.value.substring(file_kind+1,input.length);
 		var file_type = file_name.toLowerCase();
 
-		var check_array = new Array( 'jpg','gif','png','jpeg' );
+		var check_array = new Array( 'jpg','png','jpeg' );
 
 		
 		if(check_array.indexOf(file_type)==-1){
@@ -553,7 +576,7 @@
 	        reader.onload = function (e) {
 				$('#imgup_3').attr('src', e.target.result);
 				
-				
+				 $("#img_preview3").css("display","inline-block");
 				$("#imgup_3").show();
 				$("#del_img3").show();
 				
@@ -602,7 +625,7 @@
 		var file_name = input.value.substring(file_kind+1,input.length);
 		var file_type = file_name.toLowerCase();
 
-		var check_array = new Array( 'jpg','gif','png','jpeg' );
+		var check_array = new Array( 'jpg','png','jpeg' );
 
 		
 		if(check_array.indexOf(file_type)==-1){
@@ -622,7 +645,7 @@
 	        reader.onload = function (e) {
 	        	
 				$('#imgup_4').attr('src', e.target.result);
-				
+				 $("#img_preview4").css("display","inline-block");
 				$("#imgup_4").show();
 				$("#del_img4").show();
 				
@@ -673,7 +696,7 @@
 		var file_name = input.value.substring(file_kind+1,input.length);
 		var file_type = file_name.toLowerCase();
 
-		var check_array = new Array( 'jpg','gif','png','jpeg' );
+		var check_array = new Array( 'jpg','png','jpeg' );
 
 		
 		if(check_array.indexOf(file_type)==-1){
@@ -695,7 +718,7 @@
 		        	
 		        $('#imgup_5').attr('src', e.target.result);
 		        
-		        
+		        $("#img_preview5").css("display","inline-block");
 				$('#imgup_5').show();
 		        $("#del_img5").show();
 				
@@ -725,10 +748,11 @@
 <script type="text/javascript">
 	
 	function del_sum() {
-		alert('썸네일이미지 지움');
+		/* alert('썸네일이미지 지움'); */
 		/* 실제 DB에 들어가는 input value 지움 */
 		$('#sumimage').val('');
 		
+        $("#img_preview0").css("display","none");
 		$('#imgup_sum').hide();
 		$("#del_sum").hide(); 
 		
@@ -748,11 +772,11 @@
 
 
 	function del_img1() {
-		alert('1번이미지 지움');
+		/* alert('1번이미지 지움'); */
 		
 		$('#imageFile1').val('');
-
 		
+		$("#img_preview1").css("display","none");
 		$('#imgup_1').hide();
 		$("#del_img1").hide();
 		
@@ -770,10 +794,11 @@
 	}
 	
 	function del_img2() {
-		alert('2번이미지 지움');
+		/* alert('2번이미지 지움'); */
 		
 		$('#imageFile2').val('');
 		
+		$("#img_preview2").css("display","none");
 		$('#imgup_2').hide();
 		$("#del_img2").hide();
 		
@@ -790,10 +815,10 @@
 	}
 	
 	function del_img3() {
-		alert('3번이미지 지움');
+		/* alert('3번이미지 지움'); */
 		
 		$('#imageFile3').val('');
-		
+		$("#img_preview3").css("display","none");
 		$('#imgup_3').hide();
 		$("#del_img3").hide(); 
 		
@@ -810,10 +835,10 @@
 		return;
 	}
 	function del_img4() {
-		alert('4번이미지 지움');
+		/* alert('4번이미지 지움'); */
 		
 		$('#imageFile4').val('');
-		
+		$("#img_preview4").css("display","none");
 		$('#imgup_4').hide();
 		$("#del_img4").hide();
 		
@@ -830,10 +855,10 @@
 		return;
 	}
 	function del_img5() {
-		alert('5번이미지 지움');
+		/* alert('5번이미지 지움'); */
 		
 		$('#imageFile5').val('');
-		
+		$("#img_preview5").css("display","none");
 		$('#imgup_5').hide();
 		$("#del_img5").hide(); 
 		
@@ -917,7 +942,7 @@
 		var sumimage = $("#sumimage").val();
 		
  		if(sumimage==''){
- 			alert('섬네일 이미지를 등록해주세요.');
+ 			alert('대표 이미지를 반드시 등록해주세요.');
  			$("#imgup").focus();
  			return;
  		}
@@ -1060,7 +1085,7 @@
 				$("#p_price").css('outline','black');
 			}
 			
-			
+			/* 숫자 comma 찍는 함수 */
 			p_price = comma(uncomma(p_price));
 			
 			
@@ -1108,7 +1133,7 @@
 
 			var p_name = $(this).val().length;
 
-			console.log(p_name);
+			/* console.log(p_name); */
 
 			$("#name_length").html(p_name + '/40')
 
@@ -1136,12 +1161,12 @@
 <body>
 	<!-- 파일업로드 용 폼 -->
 	<form enctype="multipart/form-data" id="imgform" method="post">
-		<input type="file" id="sumimage"   style="display: none;" accept=".gif, .jpg, .jpeg, .png">
-		<input type="file" id="imageFile1" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
-		<input type="file" id="imageFile2" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
-		<input type="file" id="imageFile3" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
-		<input type="file" id="imageFile4" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
-		<input type="file" id="imageFile5" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
+		<input type="file" id="sumimage"   style="display: none;" accept=".jpg, .jpeg, .png">
+		<input type="file" id="imageFile1" style="display: none;" accept=".jpg, .jpeg, .png">
+		<input type="file" id="imageFile2" style="display: none;" accept=".jpg, .jpeg, .png">
+		<input type="file" id="imageFile3" style="display: none;" accept=".jpg, .jpeg, .png">
+		<input type="file" id="imageFile4" style="display: none;" accept=".jpg, .jpeg, .png">
+		<input type="file" id="imageFile5" style="display: none;" accept=".jpg, .jpeg, .png">
 	</form>
 
 	<div id="root">
@@ -1164,54 +1189,52 @@
 
 				<!-- 상품이미지 -->
 				<tr>
-					<td class="td1" align="left" style="vertical-align: top;"><span
+					<td class="td1" align="left" ><span
 						class="pro_info">상품이미지</span> 
 						<span class="pro_info" id="img_number">(0/6)</span>
 						<span style="color: red">*</span>
+						<input type="image" id="imgup" onclick="img_preview();"
+								src="../imgdata/image_upload.png" width="150px" height="150px">
 						</td>
 					<td class="td2" align="left">
 					
 						<!-- 이미지 등록 영역 -->
-						<div>
-						
-							<input type="image" id="imgup" onclick="img_preview();"
-								src="../imgdata/image_upload.png" width="150px" height="150px">
-							<br>
-							
-							<div class="img_preview" >
+						<div id="img_zone">
+							<div id="img_preview0" >
 								<input type="image" id="imgup_sum" onclick="send_0();"
 									src="" width="150px" height="150px">
+								<span id="sum_style" >대표 이미지</span>
 								<!-- 삭제버튼 -->
 								<input type="button" id="del_sum" class="chk_style" value="x" onclick="del_sum();">
 							</div>
 							
 								
-							<div class="img_preview" >
+							<div id="img_preview1" >
 								<input type="image" id="imgup_1" onclick="send_1();"
 									src="" width="150px" height="150px">
 								<!-- 삭제버튼 -->
 								<input type="button" id="del_img1" class="chk_style" value="x" onclick="del_img1();">
 							</div>
 							
-							<div class="img_preview">
+							<div id="img_preview2">
 								<input type="image" id="imgup_2" onclick="send_2();"
 									src="" width="150px" height="150px">
 								<input type="button" id="del_img2" class="chk_style" value="x" onclick="del_img2();">
 							</div>
 
-							<div class="img_preview">
+							<div id="img_preview3">
 								<input type="image" id="imgup_3" onclick="send_3();"
 									src="" width="150px" height="150px">
 								<input type="button" id="del_img3" class="chk_style" value="x" onclick="del_img3();">
 							</div>
 
-							<div class="img_preview">
+							<div id="img_preview4">
 								<input type="image" id="imgup_4" onclick="send_4();"
 									src="" width="150px" height="150px">
 								<input type="button" id="del_img4" class="chk_style" value="x" onclick="del_img4();">
 							</div>
 
-							<div class="img_preview">
+							<div id="img_preview5">
 								<input type="image" id="imgup_5" onclick="send_5();"
 									src="" width="150px" height="150px">
 								<input type="button" id="del_img5" class="chk_style" value="x" onclick="del_img5();">
@@ -1246,7 +1269,7 @@
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">카테고리<span style="color: red">*</span></span></td>
 					<td class="td2" align="left"><select class="input-tag"
-						id="c_idx" name="c_idx" style="width: 30%;">
+						id="c_idx" name="c_idx" style="width: 30%; height: 30px;">
 							<option value="0">카테고리 선택</option>
 							<option value="1">남성의류</option>
 							<option value="2">여성의류</option>

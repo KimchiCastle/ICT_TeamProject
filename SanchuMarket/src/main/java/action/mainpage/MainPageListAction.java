@@ -68,6 +68,17 @@ public class MainPageListAction extends HttpServlet {
 			
 		}
 		
+		
+		/*
+		 * List<ProductVo> cookielist=null; try { cookielist =
+		 * MyCookieList.getCookieList(request); } catch (Exception e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * 
+		 * System.out.println(cookielist.size());
+		 * 
+		 * request.setAttribute("cookielist", cookielist);
+		 */
+	
 		request.setAttribute("list", list);
 		 
 		/*

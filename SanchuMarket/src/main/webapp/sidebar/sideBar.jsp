@@ -30,7 +30,7 @@
 	#recentBanner{
 		border: 1px solid black;
 		text-align: center;
-		width: 100%;
+		width: 100px;
 		height:250px;
 		background-color: white;
 	}
@@ -48,7 +48,7 @@
 	#top_button{
 		background: white;
 		border: 1px solid black;
-		width: 100%;
+		width: 102px;
 		height: 40px;
 		cursor: pointer;
 	}
@@ -59,6 +59,44 @@
 	
 </style>
 
+<script type="text/javascript">
+
+  $(function(){
+	  global_page=1;
+	  slider(0);
+	  
+  });
+
+</script>
+
+
+
+<script type="text/javascript">
+
+  var global_page=1;
+  function slider(page_flag){
+	  
+	  var curr_page = global_page + page_flag;
+	  //유효성 체크
+	  
+	  global_page = curr_page;
+	
+	  $.ajax({
+		  url 	: "${pageContext.request.contextPath}/list_cookie.do",
+		  data	: {'cookie_page': curr_page},
+		  success:function(res_data){
+			  $("#disp").html(res_data);
+			  
+		  }
+		  
+	  });
+	  
+  }
+
+
+</script>
+
+
 </head>
 <body>
 
@@ -68,20 +106,14 @@
 			<div  id="text_p">
 				<span>최근 본 상품</span>
 			</div>
-			<div class="recentView" id="recentView">
-			<c:forEach var="cookielist" items="${ cookielist }">
-				<c:forEach var="recentimg" items="${ cookielist.image_list }">
+				<div class="recentView" id="recentView">
+					<div id="disp"></div>
 					<div>
-						<a href="#"><img class="recentimg" src="../imgdata/${ recentimg.sumimage }"></a>
+						<button onclick="slider(-1)">&lt;</button>
+						<span id="now">1</span>/<span id="total">1</span>
+						<button onclick="slider(1)">&gt;</button>
 					</div>
-				</c:forEach>
-			</c:forEach>
-				<div>
-					<button onclick="slider(-1)">&lt;</button>
-					<span id="now">1</span>/<span id="total">1</span>
-					<button onclick="slider(1)">&gt;</button>
 				</div>
-			</div>
 		</div>
 
 	</div>
