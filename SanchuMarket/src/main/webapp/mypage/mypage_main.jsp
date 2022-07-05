@@ -47,7 +47,7 @@ margin: auto;
   
   
   <body>
-  
+
   <div id="main_box" align="center"  >
   <hr>
   <div align="center">
