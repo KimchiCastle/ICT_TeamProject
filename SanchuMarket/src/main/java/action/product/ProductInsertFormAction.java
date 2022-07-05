@@ -30,14 +30,14 @@ public class ProductInsertFormAction extends HttpServlet {
 		
 		//---- 쿠키 설정 ---
 		
-		String p_idx = request.getParameter("p_idx");
-		String p_name = request.getParameter("p_name");
-		
-		Cookie cookie = new Cookie(URLEncoder.encode(p_name,"utf-8"), p_idx);
-		cookie.setPath("/SanchuMarket/");
-		 
-		//쿠키 응답하기
-		response.addCookie(cookie);
+//		String p_idx = request.getParameter("p_idx");
+//		String p_name = request.getParameter("p_name");
+//		
+//		Cookie cookie = new Cookie(URLEncoder.encode(p_name,"utf-8"), p_idx);
+//		cookie.setPath("/SanchuMarket/");
+//		 
+//		//쿠키 응답하기
+//		response.addCookie(cookie);
 		
 		
 		/*
