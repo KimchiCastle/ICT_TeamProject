@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +50,8 @@
 	  vertical-align: middle;
 	  cursor: if($enable-button-pointers, pointer, null);
 	  background-color: #42b883;
+	  margin-bottom: 50px;
+	  
 	}
 	
 	#button-wrap{
@@ -64,7 +65,7 @@
  <script>
 
  $(function(){
-		$("#form").on("keyup",function(e){
+		$('#form').on('keyup',function(e){
 			if(e.keyCode==13){
 				submit();
 			}
@@ -72,19 +73,20 @@
 	})
 		
 	function submit(){
-		console.log("submit1");
+		console.log('submit1');
 		
-		let u_id = $( "#u_id" ).val();
-		let u_pwd = $( "#u_pwd" ).val();
+		let u_id = $( '#u_id' ).val();
+		let u_pwd = $( '#u_pwd' ).val();
 		//아이디 비밀번호 유효성 체크 > 비동기통신 
 	  $.ajax({
-		  type:"POST",
+		  type:'POST',
 		  url:'login.do', 
-		  data:{"u_id":u_id, "u_pwd":u_pwd},
+		  data:{'u_id':u_id, 'u_pwd':u_pwd},
 		  success:function(res){ //res = bResult
 
-			  if(res=="false"){//bResult=false
-				  alert('아이디나 비밀번호가 일치하지 않습니다.');
+			  if(res=='false'){//bResult=false
+				  $('#loginMsg').html('아이디나 비밀번호가 일치하지 않습니다.')
+				  .css('color','red');
 			  	  return;
 				  
 			  }else{
@@ -144,6 +146,10 @@
     
     <div id="button-wrap">
     <button class="w-50 btn btn-md" type="submit" id="login" onclick="submit();">로그인</button>
+    </div>
+    
+    <div>
+      <span id="loginMsg"></span>
     </div>
     
     <p class="mt-5 mb-3 text-muted" align="center">한국 ICT 인재개발원</p>

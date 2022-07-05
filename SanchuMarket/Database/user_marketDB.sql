@@ -58,6 +58,11 @@ ALTER TABLE user_market
 
 alter table user_market add postcode varchar2(50); 
 alter table user_market add	u_ip varchar2(100)
+
+-----------7/4 찜 수 + 활동상태 column추가----------
+alter table user_market add u_status varchar2(100); 
+alter table user_market add	u_listcount int;
+
 ---------------------- 샘플데이터 ----------------------
 
   /* 시퀀스 쓰지않고, 1씩증가 하는 쿼리문 사용 */
