@@ -12,12 +12,48 @@
 	body{
 		font-family: 'Gowun Dodum', sans-serif;
 	}
+	
 	.i{
 		/* background-color:#ccffcc; */
 		padding-top: 145px;
 		width: 1050px;
 		margin: auto;
 	}
+	
+	#seller-box{
+		display: inline-block; 
+		height: 300px; 
+		width: 100%;
+	}
+	
+	#seller-pictrue{
+		
+		float:left;
+		height: 300px;
+		background-color: #ccccff;
+		width: 300px;
+		
+		display: inline-block;
+	}
+	#seller-page1{
+		
+		clear:both;
+		
+		height: 300px;
+		background-color: #ffcccc;
+		width: 750px;
+		display: inline-block;
+	}
+	#seller-page2{
+		margin-left:20px;
+		height: 100%;
+		background-color: #cccccc;
+		width: 95%;
+		display: inline-block;
+	}
+
+	
+	
 </style>
 </head>
 <body style="background-color: #f7f7f7;">
@@ -26,7 +62,19 @@
 </div>
 <div class="i">
 	<div>
-		<div style="background-color: #ffcccc; display: inline-block; height: 300px; width: 100%;">
+		<div id="seller-box" >
+			
+			<div id="seller-pictrue">
+				왜 안나와
+			</div>
+			<div  id="seller-page1">
+				
+				<div id="seller-page2">
+					나오는데?
+				</div>
+				
+			</div>
+		
 		</div>
 
 		<div>
