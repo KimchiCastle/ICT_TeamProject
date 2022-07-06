@@ -30,13 +30,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!-- 회원목록 조회  -->
+	<!-- 상품목록 조회  -->
 	<select id="product_list"  resultMap="product_map" >
 		select
 			p.* ,
 			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 		from (select * from product) p order by p_idx desc
 	</select>
+	
+	<!-- category별 조회 -->
+   <select id="product_c_idx"  resultMap="product_map">
+	    select
+			p.* ,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		from (select * from product) p where c_idx=#{ c_idx } order by p_idx desc
+
+   </select>
+	
+	
 	
 	<select id="image_list_p_idx" resultType="vo.image.ImageVo">
 		select * from image where p_idx=#{p_idx}
