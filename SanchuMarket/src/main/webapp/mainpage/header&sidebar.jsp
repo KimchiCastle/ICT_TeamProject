@@ -211,12 +211,12 @@ function send1() {
 		<div class="navi_bar">
 			<span class="main_menu"><img src="../image/category.png" width="30px"></span>
 			<div class="menu_content">
-				<a href="list.do?c_idx=1">남성의류</a>
-				<a href="list.do?c_idx=2">여성의류</a>
-				<a href="list.do?c_idx=3">도서/문구</a>
-				<a href="list.do?c_idx=4">음반/악기</a>
-				<a href="list.do?c_idx=5">가전제품</a>
-				<a href="list.do?c_idx=6">뷰티/미용</a>
+				<a href="../mainpage/list.do?c_idx=1">남성의류</a>
+				<a href="../mainpage/list.do?c_idx=2">여성의류</a>
+				<a href="../mainpage/list.do?c_idx=3">도서/문구</a>
+				<a href="../mainpage/list.do?c_idx=4">음반/악기</a>
+				<a href="../mainpage/list.do?c_idx=5">가전제품</a>
+				<a href="../mainpage/list.do?c_idx=6">뷰티/미용</a>
 			</div>
 		</div>
 	</div>
