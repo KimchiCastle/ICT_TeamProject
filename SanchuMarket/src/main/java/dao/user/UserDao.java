@@ -69,6 +69,19 @@ public class UserDao {
 		
 		return user;
 	}
+	// 판매자 상세정보 페이지 데이터 가져오기용
+	public UserVo selectOneByIdxTime(int u_idx){
+		
+		UserVo user = null;
+		
+		SqlSession sqlsession = factory.openSession();
+		
+		user = sqlsession.selectOne("user.user_idx_reg", u_idx);
+		
+		sqlsession.close();
+		
+		return user;
+	}
 	
 	//회원가입시 아이디 중복 방지, 로그인
 	public UserVo selectOneById(String u_id){

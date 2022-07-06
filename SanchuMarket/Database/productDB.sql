@@ -114,8 +114,17 @@ select
 	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 from (select * from product) p where c_idx=3 order by p_idx desc
 
+------------7/6 view»ý¼º-----------
+create or replace view product_user 
+as
+select u_name, p_name, p_date, p.p_idx 
+from user_market, product p
 
+select * from product_user
+drop view product_user
 
+select * from (select * from product_user order by p_idx asc) where ROWNUM  <= 6
+-----------------------------------
 
 select * from product 
 

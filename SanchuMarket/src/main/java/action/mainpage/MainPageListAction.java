@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.product.ProductDao;
-import util.MyCookieList;
 import vo.product.ProductVo;
 
 /**

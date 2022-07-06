@@ -13,6 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user_market where u_idx=#{u_idx} 
 	</select>
 	
+	<select id="user_idx_reg" resultType="vo.user.UserVo">
+		select u.*,
+		 to_number(floor((sysdate-u_regdate)*24*60*60)) as u_time
+		 from (select * from user_market) u where u_idx=#{u_idx} 
+	</select>
+	
 	<select id="check_id" resultType="vo.user.UserVo">
 		select * from user_market where u_id=#{u_id} 
 	</select>
@@ -38,12 +44,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                            sysdate, 
 		                            0, 
 		                            null,
-									null,
+									'no_file',
 									#{u_tel}, 
 									#{u_mail}, 
 									'일반회원', 
 									#{u_ip},
-									#{postcode}
+									#{postcode},
+									'활성',
+									0
 								   )
 	</insert> 
 	

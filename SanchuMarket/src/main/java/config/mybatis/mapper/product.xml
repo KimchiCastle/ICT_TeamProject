@@ -71,7 +71,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 0,
 		 #{p_status})
 	</insert>
-		
+	
+	<!--최근 상품 업로드 게시물 6개 조회-->
+	<select id="recent_product" resultType="vo.product.ProductVo">
+	<![CDATA[ select * from (select * from product order by #{p_idx} desc) where ROWNUM  <= 6]]>
+	</select>		
 	
 
 </mapper>
