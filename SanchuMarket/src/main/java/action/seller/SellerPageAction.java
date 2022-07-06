@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.product.ProductDao;
+import dao.user.UserDao;
 import vo.product.ProductVo;
+import vo.user.UserVo;
 
 /**
  * Servlet implementation class SellerPageAction
@@ -26,11 +28,19 @@ public class SellerPageAction extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//parameter로 session영역에 있는 u_idx 받아와야함
+		
+		
+		
+		//parameter로 u_idx 받아와야함
 		int u_idx = 3;
 		
 		//전체목록 가져오기
 		List<ProductVo> list = ProductDao.getinstance().selectList(u_idx);
+		
+		
+		//회원 정보 받아오기
+		/* UserVo user_info = UserDao.getInstance().selectList(u_idx); */
+		
 		
 		String[] p_time = new String[list.size()];
 		
@@ -40,7 +50,7 @@ public class SellerPageAction extends HttpServlet {
 			p_time[i] = list.get(i).getP_time();
 			int p_tim = Integer.parseInt(p_time[i]);
 			String p_ti = "1년전";
-			System.out.println(p_tim);
+			/* System.out.println(p_tim); */
 			if( p_tim <10) {
 				p_ti="방금전";
 			}else if( p_tim < 60) {
@@ -70,8 +80,11 @@ public class SellerPageAction extends HttpServlet {
 			
 		}
 		
+		// 판매정보 list binding
 		request.setAttribute("list", list);
 		
+		// u_idx에 해당하는 회원정보 binding
+//		request.setAttribute("user_info", user_info);
 		
 		//forward
 		String forward_page = "seller_page.jsp";

@@ -28,7 +28,7 @@ font-family: 'Gowun Dodum', sans-serif;
 }	
 	
 #main_box {
-width: 800px;
+width: 1050px;
 margin: auto;
 }
 #box {
@@ -61,19 +61,7 @@ margin: auto;
       <a href="mypage_modify.jsp">내 정보 수정</a>
   </div>
   <hr>
-
-  	<!-- 로그인이 안된경우 -->
-  	<c:if test="${empty sessionScopeuser }">
-  		<input id="button" type="button" value="로그인" style="float: right;"
-  				onclick="location.href='../user/login_form.do';">
-  	</c:if>
-  	
-  	<!-- 로그인이 된 경우 -->
-  	<c:if test="${not empty sessionScope.user }">
-  		<b>${user.m_name}</b>님 환영합니다
-  		<input type="button" value="로그아웃" 
-  				onclick="location.href='../member/logout.do';">
-  	</c:if>
+  
   </div>
  
   </body>

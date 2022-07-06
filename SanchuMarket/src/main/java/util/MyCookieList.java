@@ -1,6 +1,5 @@
 package util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +15,17 @@ public class MyCookieList {
 	
 	public static List<ProductVo> getCookieList(HttpServletRequest request) throws Exception {
 		
-Cookie cookie_array[] = request.getCookies();
+		Cookie cookie_array[] = request.getCookies();
 		
 		List<ProductVo> cookielist = new ArrayList<ProductVo>();
-				
 				
 		
 		if(cookie_array != null) {
 			
 			
-			
 			for(Cookie cookie2 : cookie_array) {
 				
-				
+			
 				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
 				if(!cookiename.equals("JSESSIONID")) {
 			
