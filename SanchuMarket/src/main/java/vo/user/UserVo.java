@@ -18,6 +18,9 @@ public class UserVo {
   String u_ip;
   String postcode;
   String u_regdate;
+  String u_status; //활동상태
+  int u_likecount; //찜 수 
+  
   
   public UserVo() {
 		

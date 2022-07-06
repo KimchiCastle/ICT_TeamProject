@@ -6,43 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!--bootStrap-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<!--jquery-->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!--google font CDN-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<!--chartJS CDN-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script defer src="chart.js"></script>
+
 <style>
 body{
 font-family: 'Gowun Dodum', sans-serif;
 font-size: 18px;
+
 }
 
 #header{
- 
 }
 
-#search_form{
-  width: 100%;
-  height: 350px;
-  position: relative;
-}
-
-#stats-form{
-  width: 100%;
-  height: 350px;
-  display: flex;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top:100%;
-  left:50%;
-}
-
-
-#stats-form > div{ 
-  box-sizing:border-box; 
-  margin: 5px;
-  border: 1px solid gray;
+#content{
+  background-color: #f2f2f2;
+  height: 100%;
 }
 
 
@@ -57,22 +45,70 @@ p{
   text-align: center;
 }
 
+.board-wrapper{
+  background-color: white;
+  height: 400px;
+  margin: 20px;
+ 
+} 
+
+#board{
+  width: 390px;
+  height: 350px;
+  display: inline-block;
+  float: left;
+  margin: 20px;
+}
+
+#chat{
+  width: 450px;
+  height: 350px;
+  display: inline-block;
+  float: left;
+  margin: 20px;
+}
+
+
+#number-wrapper{
+  background-color: white;
+  width: 300px;
+  display: inline-block;
+  margin: 20px;
+   float: left;
+}
+
+#number-table{
+  text-align: center;
+}
+
+
+th{
+  font-size: 40px;
+}
+
+
+#doughnut-wrpper{
+  float: left;
+  background-color: white;
+  width: 350px;
+  display: inline-block;
+  margin: 20px;
+  margin-left: 80px;
+  
+}
+
  #line-wrapper{
-  width: 500px;
-  clear: both;
+  width: 700px;
+  background-color: white;
+  display: inline-block;
+  margin: 20px;
 }
 
 #line-chart{
   vertical-align: center;
 }
 
-#number-wrapper{
- 
-}
 
-#board-wrapper{
-  width: 300px;
-} 
 </style>
 </head>
 <body>
@@ -81,86 +117,69 @@ p{
   <%@include file="header.jsp"%>
 </div>
 
-<div id="search_form">
-	 <!-- <div class="col-lg-6 col-md-12">
-                        <div class="card card-body mailbox">
-                            <h5 class="card-title">Notification</h5>
-                            <div class="message-center" style="height: 420px !important;">
-                                Message
-                                <a href="#">
-                                    <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-                                    <div class="mail-contnet">
-                                        <h6 class="text-dark font-medium mb-0">Luanch Admin</h6> <span class="mail-desc">Just see the my new admin!</span>
-                                        <span class="time">9:30 AM</span>
-                                    </div>
-                                </a>
-                                Message
-                                <a href="#">
-                                    <div class="btn btn-success btn-circle"><i class="fa fa-calendar-check-o"></i></div>
-                                    <div class="mail-contnet">
-                                        <h6 class="text-dark font-medium mb-0">Event today</h6> <span class="mail-desc">Just a reminder that you have
-                                            event</span> <span class="time">9:10 AM</span>
-                                    </div>
-                                </a>
-                                Message
-                                <a href="#">
-                                    <div class="btn btn-info btn-circle"><i class="fa fa-cog text-white"></i></div>
-                                    <div class="mail-contnet">
-                                        <h6 class="text-dark font-medium mb-0">Settings</h6> <span class="mail-desc">You can customize this template as you
-                                            want</span> <span class="time">9:08 AM</span>
-                                    </div>
-                                </a>
-                                Message
-                                <a href="#">
-                                    <div class="btn btn-primary btn-circle"><i class="fa fa-user"></i></div>
-                                    <div class="mail-contnet">
-                                        <h6 class="text-dark font-medium mb-0">Pavan kumar</h6> <span class="mail-desc">Just see the my admin!</span> <span
-                                            class="time">9:02 AM</span>
-                                    </div>
-                                </a>
-                                Message
-                                <a href="#">
-                                    <div class="btn btn-info btn-circle"><i class="fa fa-cog text-white"></i></div>
-                                    <div class="mail-contnet">
-                                        <h6 class="text-dark font-medium mb-0">Customize Themes</h6> <span class="mail-desc">You can customize this template as you
-                                            want</span> <span class="time">9:08 AM</span>
-                                    </div>
-                                </a>
-                                Message
-                                <a href="#">
-                                    <div class="btn btn-primary btn-circle"><i class="fa fa-user"></i></div>
-                                    <div class="mail-contnet">
-                                        <h6 class="text-dark font-medium mb-0">Pavan kumar</h6> <span class="mail-desc">Just see the my admin!</span> <span
-                                            class="time">9:02 AM</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div> -->
-</div>
+<div id="content">
 
-<div id="stats-form"><!--stats:통계-->
+	<div class="board-wrapper" id="board">
+	   <label>실시간 상품 업로드 현황</label>
+	   <c:forEach var="product" items="${ map.p_list }">
+	    ${ product.u_name } 
+	    ${ product.p_name } 
+	    ${ product.p_date } 
+	   </c:forEach>
+	</div>
+	
+	<div class="board-wrapper" id="chat" >
+	   <label>실시간 채팅문의 현황</label>
+	   <c:forEach var="chat" items="${ map.ch_list }">
+	    ${ chat.u_name } 
+	    ${ chat.ch_message } 
+	    ${ chat.ch_date } 
+	   </c:forEach>
+	   작성자 u_name
+	   채팅명 ch_message(8자정도로 제한)
+	   날짜 ch_date
+	</div>
+	
+	<div id="number-wrapper">
+	  <table class="table" id="number-table">
+	   <tr>
+	     <td>금일 거래량</td>
+	     <td>금일 취소거래량</td>
+	   </tr>
+	   
+	   <tr>
+	     <th>132건</th>
+	     <th>23건</th>
+	   </tr>
+	   
+	 </table> 	
+	</div>
+	
+	<div id="number-wrapper">
+	  <table class="table" id="number-table">
+	   <tr>
+	     <td>금일 방문수</td>
+	     <td>금일 가입수</td>
+	   </tr>
+	   
+	   <tr>
+	     <th>132명</th>
+	     <th>23명</th>
+	   </tr>
+	   
+	 </table> 	
+	</div>
+	
 
-	<div >
+	<div id="doughnut-wrpper">
 		<canvas id="doughnut-chart"></canvas>
 	</div>
 	
 	<div id="line-wrapper">
 		<canvas id="line-chart"></canvas>
 	</div>
-	
-	<div>
-		<label>금일 거래량<br>(거래완료기준)</label>
-		<p>132건</p>		
-		<hr>
-		<label>금일 방문수</label>
-		<p>23명</p>		
-	</div>
-	
-	<div id="board-wrapper">
-	   <label>실시간 게시물 업로드 현황</label>
-	</div>
-  </div><!--end stats form-->
+  
+  </div><!--end content-->
 <div class="b-example-divider"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>

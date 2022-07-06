@@ -83,7 +83,19 @@ public class ProductDao {
 	}
 
 
-	
+	//최근 상품 조회(mainpage_admin)
+	public List<ProductVo> selectRecentList() {
+		
+		List<ProductVo> list = null;
+
+		SqlSession sqlSession = factory.openSession();
+
+		list = sqlSession.selectList("product.recent_product");
+
+		sqlSession.close();
+		
+		return list;
+	}
 	
 	
 	

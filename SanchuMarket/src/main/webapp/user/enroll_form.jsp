@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,11 @@ body {
     padding-bottom: 20px;
     text-align: center;
 }
+
+#title{
+   font-weight: bold;
+   font-size: 30px;
+}
 #wrapper {
     position: relative;
     height: 100%;
@@ -60,7 +66,8 @@ h3 {
     display: block;
     width: 100%;
     height: 51px;
-    border: solid 1px #dadada;
+    border: solid 1px #6c757d;
+    border-radius: 3px;
     padding: 10px 14px 10px 14px;
     box-sizing: border-box;
     background: #fff;
@@ -150,20 +157,38 @@ select {
 /* 버튼 */
 
 .btn_area {
-    margin: 30px 0 91px;
+    margin: 50px 120px 91px;
 }
 
-#btnJoin {
-    width: 100%;
+ #enroll_btn {
+    width: 100px;;
     padding: 21px 0 17px;
     border: 0;
     cursor: pointer;
-    color: #fff;
-    background-color: #08a600;
+    color: white;
+    background-color: #a1d76f;
     font-size: 20px;
     font-weight: 400;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
-}
+} 
+
+  #revoke_btn{
+    width: 100px;
+    padding: 21px 0 17px;
+    border: 0;
+    cursor: pointer;
+    color: white;
+    background-color: #a1d76f;
+    font-size: 20px;
+    font-weight: 400;
+  }
+  
+  #addr_btn{
+    font-size: 20px;
+    border: 0;
+    background-color: #f5f6f7;
+  }
+  
+  
   
 
 </style>
@@ -751,7 +776,7 @@ select {
 				    <div style="display:inline-block; height: 50px;">
 				    <!-- <span class="box int_addr"> -->
 				          <input type="text"  id="sample2_postcode" name="postcode" readonly>
-					   	  <input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
+					   	  <input type="button" id="addr_btn" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 					<!-- </span> -->
 					</div>
 					
@@ -775,7 +800,10 @@ select {
                 <!-- JOIN BTN-->
                 <div class="btn_area">
                     <button type="button" id="enroll_btn" onclick="submit();">
-                        <span>가입하기</span>
+                        <span>가입</span>
+                    </button>
+                    <button type="button" id="revoke_btn" onclick= "location.href='../mainpage/list.do'">
+                        <span>취소</span>
                     </button>
                 </div>
 
@@ -848,8 +876,8 @@ select {
         element_layer.style.height = height + 'px';
         element_layer.style.border = borderWidth + 'px solid';
         // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
-        element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
-        element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+        element_layer.style.left (window.screen.width / 2) - (width / 2) - borderWidth + 'px';
+        element_layer.style.top = (window.screen.height / 2) - (height / 2) - borderWidth + 'px';
     }
 </script>	
 </body>
