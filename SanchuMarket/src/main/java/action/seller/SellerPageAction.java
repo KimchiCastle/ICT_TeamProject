@@ -31,6 +31,8 @@ public class SellerPageAction extends HttpServlet {
 		
 		
 		
+		
+		
 		//parameter로 u_idx 받아와야함
 		int u_idx = 3;
 		
