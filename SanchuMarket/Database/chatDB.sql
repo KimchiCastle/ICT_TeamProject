@@ -21,6 +21,14 @@ alter table chat
 alter table chat
    add constraint fk_chat_r_idx foreign key(r_idx)
    references room(r_idx);
+
+--7/6 view√ﬂ∞° 
+create or replace view chat_user
+as
+select u_name, substr(ch_message,1,10)as ch_message, ch_date, ch_idx
+from chat, user_market;
+
+select * from chat_user;
    
 select * from chat   
    

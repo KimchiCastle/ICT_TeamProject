@@ -7,11 +7,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import service.MyBatisConnector;
 import vo.image.ImageVo;
-import vo.product.ProductVo;
 
 public class ImageDao {
 
-	
 	SqlSessionFactory factory;
 	
 	//single-ton : 객체 1개만 생성해서 사용하자!

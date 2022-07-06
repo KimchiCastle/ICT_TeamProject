@@ -84,7 +84,7 @@ public class ProductDao {
 
 
 	//최근 상품 조회(mainpage_admin)
-	public List<ProductVo> selectList3() {
+	public List<ProductVo> selectRecentList() {
 		
 		List<ProductVo> list = null;
 

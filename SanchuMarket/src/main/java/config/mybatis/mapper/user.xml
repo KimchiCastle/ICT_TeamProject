@@ -38,13 +38,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                            sysdate, 
 		                            0, 
 		                            null,
-									null,
+									'no_file',
 									#{u_tel}, 
 									#{u_mail}, 
 									'일반회원', 
 									#{u_ip},
 									#{postcode},
-									null,
+									'활성',
 									0
 								   )
 	</insert> 

@@ -121,7 +121,7 @@ th{
 
 	<div class="board-wrapper" id="board">
 	   <label>실시간 상품 업로드 현황</label>
-	   <c:forEach var="product" items="${ list }">
+	   <c:forEach var="product" items="${ map.p_list }">
 	    ${ product.u_name } 
 	    ${ product.p_name } 
 	    ${ product.p_date } 
@@ -130,6 +130,14 @@ th{
 	
 	<div class="board-wrapper" id="chat" >
 	   <label>실시간 채팅문의 현황</label>
+	   <c:forEach var="chat" items="${ map.ch_list }">
+	    ${ chat.u_name } 
+	    ${ chat.ch_message } 
+	    ${ chat.ch_date } 
+	   </c:forEach>
+	   작성자 u_name
+	   채팅명 ch_message(8자정도로 제한)
+	   날짜 ch_date
 	</div>
 	
 	<div id="number-wrapper">
