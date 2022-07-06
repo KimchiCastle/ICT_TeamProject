@@ -88,7 +88,7 @@ $(document).ready(function(){
 				<c:forEach var="vo" items="${list }">
 					<tr>
 						<td><input type="checkbox" name="p_idx" value="${vo.p_idx}"></td>
-						<td><img src="../images/${vo.img}" ></td>
+						<td><img src="../images/${vo.sumimage}" ></td>
 						<td>${vo.p_name }</td>
 						<td>${vo.price }</td>
 						<td>${vo.p_status }</td>

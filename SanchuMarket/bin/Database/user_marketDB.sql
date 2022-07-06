@@ -20,8 +20,11 @@ create table user_market
 	u_tel		varchar2(100)  not null, -- 전화번호
 	u_mail		varchar2(100)  not null, -- 이메일
 	u_grade		varchar2(100)  default '일반회원', -- 회원등급
-	u_ip		varchar2(100)
-)
+	u_ip		varchar2(100),			 -- ip
+	postcode 	varchar2(50),			 -- 우편번호
+	u_status 	varchar2(100),			 -- 회원상태
+	u_likecount int					     -- 회원추천카운트
+)	
 
 ---------------------- 제약조건 ---------------------
 
