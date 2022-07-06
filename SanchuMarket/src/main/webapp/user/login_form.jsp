@@ -125,9 +125,9 @@
 <body class="text-center" id="form">
 
  <div id="box">
-    <img class="mb-4" src="../image/상추마켓.png" alt="" width="300" height="100">
+    <a href="../mainpage/list.do"><img class="mb-4" src="../image/상추마켓.png" alt="" width="300" height="100"></a>
     <div id="login-form">
-    <h1 class="h3 mb-3 fw-normal"style="margin-top: 20px;">로그인</h1>
+    <h1 style="margin: 20px; height: 80px;">로그인</h1>
 	</div>
 	
 	<div class="input-form">
@@ -138,7 +138,7 @@
       <input type="password" class="form-control" id="u_pwd" name="u_pwd" placeholder="비밀번호" autocomplete="false">
 	</div>
 	
-    <div class="checkbox mb-3">
+    <div class="checkbox mb-3" style="matgin-top:20px;">
       <label>
         <input type="checkbox" value="remember-me"> 로그인 상태 유지
       </label>

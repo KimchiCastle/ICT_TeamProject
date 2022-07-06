@@ -48,6 +48,11 @@ alter table user_market
 	add constraint ck_user_market_u_grade 
 	check( u_grade in( '일반회원','사업자','관리자' ) )
 	
+--------check 제약2 (7/6 수정)-------
+alter table user_market
+    add constraint ck_user_market_u_status
+    check( u_status in('활동', '탈퇴'))	
+    
 ---check제약 조건명 수정---	
 ALTER TABLE user_market 
    RENAME CONSTRAINT ck_user_market_u_garde TO
@@ -62,6 +67,9 @@ alter table user_market add	u_ip varchar2(100)
 -----------7/4 찜 수 + 활동상태 column추가----------
 alter table user_market add u_status varchar2(100); 
 alter table user_market add	u_listcount int;
+
+------------7/6 column명 수정----------------------
+alter table user_market rename column u_listcount to u_likecount
 
 ---------------------- 샘플데이터 ----------------------
 

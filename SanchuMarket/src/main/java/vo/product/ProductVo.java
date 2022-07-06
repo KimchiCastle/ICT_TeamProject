@@ -18,6 +18,7 @@ public class ProductVo {
 	String p_click;		//상품조회수
 	String p_status;	//거래상태
 	String p_time;		//몇초, 몇분, 몇시간, 몇일 전
+	String u_name;
 	
 	List<ImageVo> image_list;
 	

@@ -21,8 +21,10 @@ create table trade
 alter table trade
 	add constraint pk_trade_p_idx primary key(p_idx);
 
-------------------------------------------------------
 
+
+-----------------7/5 거래완료조회용 날짜column추가--------------------
+alter table trade add t_date date;
 
 
 

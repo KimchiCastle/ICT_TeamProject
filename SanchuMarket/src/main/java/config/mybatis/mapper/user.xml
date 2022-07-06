@@ -43,7 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									#{u_mail}, 
 									'일반회원', 
 									#{u_ip},
-									#{postcode}
+									#{postcode},
+									null,
+									0
 								   )
 	</insert> 
 	

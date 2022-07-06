@@ -109,8 +109,18 @@ select
 	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 from (select * from product) p where u_idx=3 order by p_idx desc
 
+------------최근 상품 조회용 view-------------
+create or replace view product_user
+as
+select u_name, p_name, p_date, p_idx
+from user_market u, product p
+where u.u_idx = p.u_idx
 
+select * from product_user
 
+select * from (select * from product_user order by p_idx desc) where ROWNUM  <= 2
+
+ 
 
 
 select * from product 
