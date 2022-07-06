@@ -80,7 +80,6 @@
 	  //유효성 체크
 	  
 	  global_page = curr_page;
-	  
 	  $.ajax({
 		  url 	: "${pageContext.request.contextPath}/list_cookie.do",
 		  data	: {'cookie_page': curr_page},
