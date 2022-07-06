@@ -19,7 +19,7 @@ public class UserVo {
   String postcode;
   String u_regdate;
   String u_status; //È°µ¿»óÅÂ
-  int u_listcount; //Âò ¼ö 
+  int u_likecount; //Âò ¼ö 
   
   
   public UserVo() {
