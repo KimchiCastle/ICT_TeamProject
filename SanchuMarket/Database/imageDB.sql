@@ -29,12 +29,15 @@ alter table image
 select * from image
 
 
-insert into product 
+insert into image
 values(
-select max(p_idx) from product,
+(select max(p_idx) from product),
 cat123.gif,
-wow123.jpg
-
+wow123.jpg,
+null,
+null,
+null,
+null
 )
 
 select * from image
