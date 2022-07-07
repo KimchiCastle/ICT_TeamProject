@@ -44,11 +44,17 @@ public class AdminMainFormAction extends HttpServlet {
 		int today_t_count = TradeDao.getinstance().selectTodayCount();
 
 		//금일 방문수
-		int today_u_count = UserDao.getInstance().
+		String u_ip = request.getRemoteAddr();
+		
+		/* int today_u_count = UserDao.getInstance(). */
+				
+				
+		//map에다가 전부 넣기 		
 		Map map = new HashMap();
 		map.put("p_list", p_list);
 		map.put("ch_list", ch_list);
-		map.put("today_count",today_p_count);
+		map.put("today_p_count",today_p_count);
+		map.put("today_t_count",today_t_count);
 		
 		request.setAttribute("map", map);
 		

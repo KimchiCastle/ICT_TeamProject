@@ -43,22 +43,55 @@
 	    margin:auto;
 	  } 
 	  
-	.btn{
+	#login_btn{
 	  display: inline-block;
 	  color: white;
 	  text-align: center;
 	  vertical-align: middle;
 	  cursor: if($enable-button-pointers, pointer, null);
 	  background-color: #42b883;
-	  margin-bottom: 50px;
+	  margin-top: 20px;
+	  margin-bottom: 45px;
 	  
 	}
 	
+	#naver_btn{
+	 /*  outline: none; */
+	  display: inline-block;
+	  color: white;
+	  text-align: center;
+	  vertical-align: middle;
+	  cursor: if($enable-button-pointers, pointer, null);
+	  background-color: #19ce60;
+	  margin-bottom: 10px;
+	   font-size: 22px;
+	  
+	}
+	
+	 #kakaotalk_btn{
+	 /*  outline: none; */
+	  display: inline-block;
+	  color: black;
+	  text-align: center;
+	  vertical-align: middle;
+	  cursor: if($enable-button-pointers, pointer, null);
+	  background-color: yellow;
+	  margin-bottom: 10px;
+	  font-size: 22px;
+	   
+	}
+	
 	#button-wrap{
-	   width: 220px;
+	   width: 230px;
+	   height: 80px;
 	   margin: auto;
 	}
     
+    #social-wrap{
+       width: 280px;
+       margin: auto;
+   	  
+    }
     
 </style>
 
@@ -67,13 +100,12 @@
  $(function(){
 		$('#form').on('keyup',function(e){
 			if(e.keyCode==13){
-				submit();
+				send();
 			}
 		});
 	})
 		
-	function submit(){
-		console.log('submit1');
+	function send(){
 		
 		let u_id = $( '#u_id' ).val();
 		let u_pwd = $( '#u_pwd' ).val();
@@ -90,7 +122,6 @@
 			  	  return;
 				  
 			  }else{
-				  alert('로그인 성공');
 				 location.href = '../mainpage/list.do';
 				  
 			  }
@@ -127,7 +158,7 @@
  <div id="box">
     <a href="../mainpage/list.do"><img class="mb-4" src="../image/상추마켓.png" alt="" width="300" height="100"></a>
     <div id="login-form">
-    <h1 style="margin: 20px; height: 80px;">로그인</h1>
+    <h3 style="margin: 20px; height: 80px;">로그인</h3>
 	</div>
 	
 	<div class="input-form">
@@ -144,13 +175,21 @@
       </label>
     </div>
     
+   	<div class="find_account"><a href="find_form.do">아이디/비밀번호 찾기</a></div>
+   	
     <div id="button-wrap">
-    <button class="w-50 btn btn-md" type="submit" id="login" onclick="submit();">로그인</button>
+    <button class="w-50 btn btn-md" id="login_btn" onclick="send();">로그인</button>
     </div>
-    
+      
     <div>
       <span id="loginMsg"></span>
     </div>
+    
+    <div id="social-wrap">
+     	<button class="w-100 btn btn-lg" id="naver_btn"  onclick="location.href='https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com'">네이버로그인</button>
+		<button class="w-100 btn btn-lg" id="kakaotalk_btn" onclick="location.href='https://www.google.com/'">카카오로그인</button>
+    </div>
+
     
     <p class="mt-5 mb-3 text-muted" align="center">한국 ICT 인재개발원</p>
   

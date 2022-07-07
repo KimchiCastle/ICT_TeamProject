@@ -6,14 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<!--jquery-->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!--boot strap-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!--google font-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!--date picker-->
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<!--비밀번호 토글 아이콘-->
+<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> -->
 <style type="text/css">
   
 html {
@@ -73,7 +79,7 @@ h3 {
     background: #fff;
     position: relative;
 }
-
+/*주소*/
 .int {
     display: block;
     position: relative;
@@ -98,18 +104,24 @@ input {
 
 .box.int_pass_check {
     padding-right: 40px;
+    position: relative;
 }
 
-/* .step_url {
-    
+i{
+   position: absolute;
+    left: 92%;
+    top: 15px; 
+    color: #3a9188;
+}
+/* 
+int_pass_check. i{
     position: absolute;
-    top: 16px;
-    right: 13px;
-    font-size: 15px;
-    color: #8e8e8e;
-}
+    left: 75%;
+    top: 27px;
+    color: orange;
+} */
 
-.pswdImg {
+/* .int_pass_check. i {
     width: 18px;
     height: 20px;
     display: inline-block;
@@ -119,8 +131,17 @@ input {
     margin-top: -10px;
     cursor: pointer;
 } */
+/* .step_url {
+    
+    position: absolute;
+    top: 16px;
+    right: 13px;
+    font-size: 15px;
+    color: #8e8e8e;
+}
+*/
 
-
+/* 
 select {
     width: 100%;
     height: 29px;
@@ -133,7 +154,7 @@ select {
     border: none;
     cursor: default;
     font-family: 'Gowun Dodum', sans-serif;
-}
+} */
 
 /* 에러메세지 */
 
@@ -195,8 +216,6 @@ select {
 	<script>
 	
 	
-	
-	
 	 //birth datepicker 초기화
 	  $.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
@@ -235,17 +254,37 @@ select {
 	   pwdFlag = false;
 	   submitFlag = false;
 	  }
-	 
-	 
-	 
+	
+	 //스크립트 문서 배치 
 	  let idFlag = false;
 	  let pwdFlag = false;
 	  let submitFlag = false;
 	
 	 $(document).ready(function(){ 
 		 
-		 	 //회원가입 실패시 enroll_form.do?reason=failed_enroll 받기
-			 setTimeout(showMessage,100);
+		 	 //비밀번호 토글
+			 $('.int_pass i').on('click',function(){
+			        $('input').toggleClass('active');
+			        if($('input').hasClass('active')){
+			            $(this).attr('class',"fa fa-eye-slash fa-lg")
+			            .prev('input').attr('type',"text");
+			        }else{
+			            $(this).attr('class',"fa fa-eye fa-lg")
+			            .prev('input').attr('type','password');
+			        }
+			 });
+		 	 
+			 $('.int_pass_check i').on('click',function(){
+			        $('input').toggleClass('active');
+			        if($('input').hasClass('active')){
+			            $(this).prop('class',"fa fa-eye-slash fa-lg")
+			            .prev('input').prop('type',"text");
+			        }else{
+			            $(this).prop('class',"fa fa-eye fa-lg")
+			            .prev('input').prop('type','password');
+			        }
+			 });
+			 
 	    	
 	    	$("#u_name").blur(function(){
 	    		checkName();
@@ -294,7 +333,10 @@ select {
 	    	$("#u_birth").change(function(){
 	    		checkBirth();
 	    	})
-	    });
+	    	
+	    	 //회원가입 실패시 enroll_form.do?reason=failed_enroll 받기
+			 setTimeout(showMessage,100);
+	    });//end document.ready
 	 
 	
 	    
@@ -347,19 +389,16 @@ select {
 	        //밑의 isValidPwd 함수 호출
 	        if (!isValidPwd(pwd1)) {
 	            showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
-	            alert('비밀번호4');
 	            setFocusToInputObject(oInput);
 	            return;
 	        }
 	        
 	        if( pwd2 != '' && (pwd1 != pwd2)){
 	        	showErrorMsg(oMsg2,"비밀번호가 일치하지 않습니다.");
-	        	alert('비밀번호7');
 	        	return;
 	        }
 	      
 	        	showSuccessMsg(oMsg1,"사용 가능한 비밀번호입니다.");
-	        	 alert('비밀번호5');
 	        	hideMsg(oMsg1);
 	        	return;
 	        
@@ -411,18 +450,15 @@ select {
 	
 	        if (pwd2.val() == "") {
 	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
-	            alert('비밀번호1');
 	            setFocusToInputObject(pwd2);
 	            return;
 	        }
 	        if (pwd1.val() != pwd2.val()) {
 	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
-	            alert('비밀번호2');
 	            setFocusToInputObject(pwd2);
 	            return;
 	        } else {
 	            oMsg.html("비밀번호가 일치합니다");
-	            alert('비밀번호3');
 	            hideMsg(oMsg);
 	            return;
 	        }
@@ -738,7 +774,8 @@ select {
                 <div>
                     <h3 class="join_title"><label for="u_pwd1">비밀번호</label></h3>
                     <span class="box int_pass">
-                        <input type="password" id="u_pwd1" name="u_pwd1" class="int" maxlength="20" autocomplete="off">
+                       <input type="password" id="u_pwd1" name="u_pwd1" class="int" maxlength="20" autocomplete="off">
+                        <i class="fa fa-eye fa-lg"></i>
                     </span>
                     <span class="error_next_box" id="pwd1Msg"></span>
                 </div>
@@ -746,9 +783,10 @@ select {
                 <!-- PWD2 -->
                 <div>
                     <h3 class="join_title"><label for="u_pwd2">비밀번호 재확인</label></h3>
-                    <span class="box int_pass_check">
-                        <input type="password" id="u_pwd2" name="u_pwd2" class="int" maxlength="20" autocomplete="off">
-                    </span>
+                    <div class="box int_pass_check">
+                       <input type="password" id="u_pwd2" name="u_pwd2" class="int" maxlength="20" autocomplete="off">
+ 					      <i class="fa fa-eye fa-lg"></i>
+                    </div>
                     <span class="error_next_box" id="pwd2Msg"></span>
                 </div>
 
@@ -758,7 +796,7 @@ select {
                     <span class="box int_name">
                         <input type="text" id="u_name" name="u_name" class="int" maxlength="20">
                     </span>
-                    <span class="error_next_box" id="nameMsg"></span>
+                    <span class="error_next_box" id="nameMsg"></span>	
                 </div>
                 
                 <!-- NICKNAME -->
