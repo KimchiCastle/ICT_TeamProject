@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									'일반회원', 
 									#{u_ip},
 									#{postcode},
-									'활성',
+									'활동',
 									0
 								   )
 	</insert> 

@@ -124,6 +124,19 @@ public class UserDao {
 		
 		return user;
 	}
+	//admin mainpage 금일 방문수
+	public int selectTodayCount() {
+		
+		int count = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+
+		count = sqlSession.selectOne("trade.today_count");
+
+		sqlSession.close();
+		
+		return count;
+	}
 		
 	public int insert(UserVo vo) {
 		
