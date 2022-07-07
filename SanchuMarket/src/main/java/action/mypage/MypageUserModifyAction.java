@@ -39,10 +39,10 @@ public class MypageUserModifyAction extends HttpServlet {
 				String u_photo		= 	request.getParameter("u_photo");
 				
 				//3.UserVo 포장
-				UserVo vo = new UserVo(u_idx,u_name,u_id,u_pwd,u_zipcode,u_addr,u_profile,u_photo);
-
-				//5.DB update
-				int res = UserDao.getInstance().update(vo);
+//				UserVo vo = new UserVo(u_idx,u_name,u_id,u_pwd,u_zipcode,u_addr,u_profile,u_photo);
+//
+//				//5.DB update
+//				int res = UserDao.getInstance().update(vo);
 				
 				//6.목록보기
 				response.sendRedirect("mypage/list.do");

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html>
@@ -191,23 +190,33 @@ function send1() {
 			<img id="searchicon" src="../image/saerch-icon.png" onclick="send1();">
 
 		</div>
+	<c:if test="${ empty sessionScope.user }">
+		<div class="btn_place">
+			<a class="btn" onclick="location.href='../user/login_form.do'"><img src="../image/mypage.png" width="30px">&nbsp;로그인</a>
+			&nbsp;&nbsp;|&nbsp;
+			<a class="btn" onclick="location.href='../user/enroll_form.do'"><img src="../image/mypage.png" width="30px">&nbsp;회원가입</a>
+		</div>
+	</c:if>
+	
 	
 	<!-- 판매,마이페이지 버튼 -->
+	<c:if test="${ not empty sessionScope.user }">
 		<div class="btn_place">
 			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>
 			 &nbsp;&nbsp;|&nbsp;
 			<a class="btn" onclick="location.href='../mypage/list.do'"><img src="../image/mypage.png" width="30px">&nbsp;마이페이지</a>
 		</div>
+	</c:if>
 	<!-- 반응형 네비게이션 바 -->
 		<div class="navi_bar">
 			<span class="main_menu"><img src="../image/category.png" width="30px"></span>
 			<div class="menu_content">
-				<a href="list.do?c_idx=1">남성의류</a>
-				<a href="list.do?c_idx=2">여성의류</a>
-				<a href="list.do?c_idx=3">도서/문구</a>
-				<a href="list.do?c_idx=4">음반/악기</a>
-				<a href="list.do?c_idx=5">가전제품</a>
-				<a href="list.do?c_idx=6">뷰티/미용</a>
+				<a href="../mainpage/list.do?c_idx=1">남성의류</a>
+				<a href="../mainpage/list.do?c_idx=2">여성의류</a>
+				<a href="../mainpage/list.do?c_idx=3">도서/문구</a>
+				<a href="../mainpage/list.do?c_idx=4">음반/악기</a>
+				<a href="../mainpage/list.do?c_idx=5">가전제품</a>
+				<a href="../mainpage/list.do?c_idx=6">뷰티/미용</a>
 			</div>
 		</div>
 	</div>

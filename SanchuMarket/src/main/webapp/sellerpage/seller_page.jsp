@@ -146,7 +146,7 @@
 						<div id="mark">인증마크</div>
 					</div>
 					<div id="seller-info2">
-						<div id="u_regdate">마켓오픈 몇일전</div>
+						<div id="u_regdate">마켓오픈 ${ user_info.u_regdate }일전</div>
 						<div id="u_listcount">평가 회원 수 : ${ user_info.u_likecount }</div>
 						<div id="u_like">회원 평점 : ${ user_info.u_like }</div>
 					</div>

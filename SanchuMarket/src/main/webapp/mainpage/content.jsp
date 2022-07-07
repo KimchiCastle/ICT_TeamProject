@@ -21,7 +21,7 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
-	border: 1px solid #f7f7f7;
+	border: 1px solid white;
 	
 }
 
