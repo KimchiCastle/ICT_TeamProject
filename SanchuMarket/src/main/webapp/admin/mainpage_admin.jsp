@@ -135,16 +135,13 @@ th{
 	    ${ chat.ch_message } 
 	    ${ chat.ch_date } 
 	   </c:forEach>
-	   작성자 u_name
-	   채팅명 ch_message(8자정도로 제한)
-	   날짜 ch_date
 	</div>
 	
 	<div id="number-wrapper">
 	  <table class="table" id="number-table">
 	   <tr>
+	     <td>${ map.today_p_count }</td>
 	     <td>금일 거래량</td>
-	     <td>금일 취소거래량</td>
 	   </tr>
 	   
 	   <tr>

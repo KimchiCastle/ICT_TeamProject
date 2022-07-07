@@ -12,7 +12,8 @@ create table trade
 (
 	p_idx	int,	--상품정보
 	seller	varchar2(100),	--판매자
-	buyer	varchar2(100)	--구매자
+	buyer	varchar2(100),	--구매자
+	t_date  date
 )
 
 ---------------------- 제약조건 ---------------------
@@ -20,10 +21,8 @@ create table trade
 --------기본키(pk) 제약
 alter table trade
 	add constraint pk_trade_p_idx primary key(p_idx);
-
-------------------------------------------------------
-
-
+	
+	
 
 
 insert into trade values(1,'hong123','haha');

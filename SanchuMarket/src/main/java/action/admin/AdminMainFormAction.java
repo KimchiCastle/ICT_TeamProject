@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.chat.ChatDao;
 import dao.product.ProductDao;
+import dao.trade.TradeDao;
+import dao.user.UserDao;
 import vo.chat.ChatVo;
 import vo.product.ProductVo;
 
@@ -31,13 +33,22 @@ public class AdminMainFormAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		//list한칸 안에 최근 vo객체 하나 들어가있음(최대 6개)
+		//실시간 상품&채팅 업로드(list한칸 안에 최근 vo객체 하나 들어가있음(최대 6개))
 		List<ProductVo> p_list = ProductDao.getinstance().selectRecentList();
 		List<ChatVo>ch_list = ChatDao.getinstance().SelectRecentList();
 		
+		//금일 상품업로드
+		int today_p_count = ProductDao.getinstance().selectTodayCount();
+		
+		//금일 거래량
+		int today_t_count = TradeDao.getinstance().selectTodayCount();
+
+		//금일 방문수
+		int today_u_count = UserDao.getInstance().
 		Map map = new HashMap();
 		map.put("p_list", p_list);
 		map.put("ch_list", ch_list);
+		map.put("today_count",today_p_count);
 		
 		request.setAttribute("map", map);
 		

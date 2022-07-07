@@ -97,6 +97,20 @@ public class ProductDao {
 		return list;
 	}
 	
+	public int selectTodayCount() {
+		
+		int count = 0;
+		
+		SqlSession sqlSession = factory.openSession();
+
+		count = sqlSession.selectOne("product.today_count");
+
+		sqlSession.close();
+		
+		return count;
+		
+	}
+	
 	
 	
 	// 상품등록 메서드

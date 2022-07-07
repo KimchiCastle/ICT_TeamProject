@@ -124,5 +124,7 @@ select * from (select * from product_user order by p_idx asc) where ROWNUM  <= 6
 
 select * from product 
 
+select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
+
 
 */
