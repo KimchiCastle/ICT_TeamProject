@@ -109,6 +109,10 @@ select
 	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 from (select * from product) p where u_idx=3 order by p_idx desc
 
+select
+	p.* ,
+	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+from (select * from product) p where c_idx=3 order by p_idx desc
 
 ------------7/6 view持失-----------
 create or replace view product_user 
@@ -125,6 +129,24 @@ select * from (select * from product_user order by p_idx asc) where ROWNUM  <= 6
 select * from product 
 
 select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
+
+
+
+	select p.*,
+  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+  			
+  	from(select * from product)	p
+  		
+  	where	p_name like '%食失%' or p_exp like '%せせ%' 
+  	
+  	order by p_idx desc
+
+
+
+
+
+
+
 
 
 */

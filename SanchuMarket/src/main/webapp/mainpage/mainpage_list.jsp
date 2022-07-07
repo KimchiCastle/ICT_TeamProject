@@ -13,7 +13,7 @@
 <style type="text/css">
 body{
 	margin: 0px;
-	background-color: #f7f7f7;
+	background-color: white;
 	font-family: 'Gowun Dodum', sans-serif;
 	font-size: 18px;
 }

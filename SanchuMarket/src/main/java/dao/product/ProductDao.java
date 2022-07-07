@@ -1,6 +1,7 @@
 package dao.product;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -32,6 +33,7 @@ public class ProductDao {
 
 	}
 
+	//상품 전체조회
 	public List<ProductVo> selectList() {
 
 		List<ProductVo> list = null;
@@ -40,6 +42,23 @@ public class ProductDao {
 		SqlSession sqlSession = factory.openSession();
 
 		list = sqlSession.selectList("product.product_list");
+
+		// 3.닫기
+		sqlSession.close();
+
+		return list;
+	}
+	
+	// 카테고리별 조회
+	public List<ProductVo> selectList(String c_idx) {
+		// TODO Auto-generated method stub
+		List<ProductVo> list = null;
+
+		// 1.SqlSession얻어오기
+		SqlSession sqlSession = factory.openSession();
+
+		// 2.실행
+		list = sqlSession.selectList("product.product_c_idx", c_idx);
 
 		// 3.닫기
 		sqlSession.close();
@@ -144,6 +163,25 @@ public class ProductDao {
 		
 		return vo;
 	}
+
+	
+	//상품검색
+	public List<ProductVo> selectList(Map map) {
+		// TODO Auto-generated method stub
+		List<ProductVo> list = null;
+
+		// 1. sqlSession 얻어오기
+		SqlSession sqlSession = factory.openSession();
+
+		// 2 실행
+		list = sqlSession.selectList("product.product_list_search",map);
+
+		// 3. 닫기
+		sqlSession.close();
+
+		return list;
+	}
+
 
 
 	

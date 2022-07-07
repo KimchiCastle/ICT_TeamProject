@@ -100,11 +100,18 @@
 	
 	}
 	
-	#nickname,#mark{
+	#nickname{
+		font-size: 25px;
 		height: 100%;
 	    display: flex;
 	    align-items: center;
 	    
+	}
+	#mark{
+		height: 100%;
+	    display: flex;
+	    align-items: center;
+	    font-size: 15px;
 	}
 	#u_regdate,#u_listcount,#u_like{
 		height: 100%;
@@ -135,13 +142,13 @@
 				
 				<div id="seller-page2">
 					<div id="seller-info1">
-						<div id="nickname">닉네임</div>
+						<div id="nickname"><b>${ user_info.u_nickname }</b></div>
 						<div id="mark">인증마크</div>
 					</div>
 					<div id="seller-info2">
-						<div id="u_regdate">마켓오픈 몇일전</div>
-						<div id="u_listcount">평가수 몇명</div>
-						<div id="u_like">평점 몇점</div>
+						<div id="u_regdate">마켓오픈 ${ user_info.u_regdate }일전</div>
+						<div id="u_listcount">평가 회원 수 : ${ user_info.u_likecount }</div>
+						<div id="u_like">회원 평점 : ${ user_info.u_like }</div>
 					</div>
 					<div id="seller-info3">
 					
