@@ -47,6 +47,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
    </select>
 	
+	<!-- 검색 조회 -->
+	<select id="product_list_search" resultMap="product_map" parameterType="java.util.Map">
+
+  		select p.*,
+		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		  			
+		  	from(select * from product)	p
+		  		
+		  	where	p_name like '%' || #{ p_name } || '%' or p_exp like '%' || #{ p_exp } || '%'  
+	  	
+	  	order by p_idx desc
+	  	
+  	</select>
 	
 	
 	<select id="image_list_p_idx" resultType="vo.image.ImageVo">

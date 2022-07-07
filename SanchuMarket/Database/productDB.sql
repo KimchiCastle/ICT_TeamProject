@@ -129,4 +129,22 @@ select * from (select * from product_user order by p_idx asc) where ROWNUM  <= 6
 select * from product 
 
 
+
+	select p.*,
+  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+  			
+  	from(select * from product)	p
+  		
+  	where	p_name like '%食失%' or p_exp like '%せせ%' 
+  	
+  	order by p_idx desc
+
+
+
+
+
+
+
+
+
 */
