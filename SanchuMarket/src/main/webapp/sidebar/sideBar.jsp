@@ -55,6 +55,7 @@
 	.recentimg{
 		width: 60px;
 		height: 60px;
+		border: 1px solid rgb(230,230,230);
 	}
 	
 </style>

@@ -52,8 +52,6 @@ public class SellerPageAction extends HttpServlet {
 		
 		u_time = String.format("%d", u_time_int);
 		
-		
-		
 		user_info.setU_regdate(u_time);
 		
 

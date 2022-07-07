@@ -2,55 +2,44 @@ package util;
 
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import dao.product.ProductDao;
 import vo.product.ProductVo;
 
 public class MyCookieList {
 
-	
-	public static List<ProductVo> getCookieList(HttpServletRequest request) throws Exception {
-		
-		Cookie cookie_array[] = request.getCookies();
-		
-		List<ProductVo> cookielist = new ArrayList<ProductVo>();
-				
-		
-		if(cookie_array != null) {
-			
-			
-			for(Cookie cookie2 : cookie_array) {
-				
-			
-				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
-				if(!cookiename.equals("JSESSIONID")) {
-			
-				String cookievalue = cookie2.getValue();
-				/*
-				 * System.out.println("쿠키값입니다."); System.out.println(cookiename);
-				 * System.out.println(cookievalue);
-				 * 
-				 * 
-				 * System.out.println("쿠키리스트포장중");
-				 */
-				ProductVo vo = ProductDao.getinstance().selectList2(Integer.parseInt(cookievalue));
-				
-				cookielist.add(vo);
-				
-				}
-				
-				
-			}
-			
-		}
-		
+	public static List<ProductVo> getCookieList(Cookie cookie_array[], HttpServletRequest request) throws Exception {
 
-		
-		
+		List<ProductVo> cookielist = new ArrayList<ProductVo>();
+
+		if (cookie_array != null) {
+
+			for (Cookie cookie2 : cookie_array) {
+
+				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
+				if (!cookiename.equals("JSESSIONID")) {
+
+					int cookievalue = Integer.parseInt(cookiename);
+
+					ProductVo vo = ProductDao.getinstance().selectList2(cookievalue);
+
+					cookielist.add(vo);
+
+				}
+
+			}
+
+		}
+		// 리스트 뒤집기 최근본 상품이 제일 최상위로 가게
+		Collections.reverse(cookielist);
+
+
 		return cookielist;
 	}
 }
