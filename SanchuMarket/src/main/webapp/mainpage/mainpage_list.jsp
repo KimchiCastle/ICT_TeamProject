@@ -25,7 +25,37 @@ body{
 		<%@include file="header&sidebar.jsp"%>
 </div>
 <div style="padding-top: 140px; width: 1035px; margin: auto; ">
-	<h3 style="margin: 0px; padding-left: 15px;">최근 올라온 상품</h3>
+	<!-- 검색 안했을 때 -->
+	<c:if test="${ empty param.searchtext and  empty param.c_idx }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">최근 올라온 상품</h3>
+	</c:if>
+	<!-- 검색결과 -->
+	<c:if test="${ not empty param.searchtext }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">"${ param.searchtext }" 에 대한 검색결과</h3>
+	</c:if>
+	<!-- 카테고리 -->
+	<c:if test="${ param.c_idx == 1 }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">남성의류 카테고리</h3>
+	</c:if>
+	<c:if test="${ param.c_idx == 2 }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">여성의류 카테고리</h3>
+	</c:if>
+	<c:if test="${ param.c_idx == 3 }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">도서/문구 카테고리</h3>
+	</c:if>
+	<c:if test="${ param.c_idx == 4 }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">음반/악기 카테고리</h3>
+	</c:if>
+	<c:if test="${ param.c_idx == 5 }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">가전제품 카테고리</h3>
+	</c:if>
+	<c:if test="${ param.c_idx == 6 }" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">뷰티/미용 카테고리</h3>
+	</c:if>
+	
+	
+	
+	
 </div>
 
 	<div style="margin-top: 0px;">
