@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.chat.ChatDao;
 import dao.product.ProductDao;
 import dao.trade.TradeDao;
-import dao.user.UserDao;
 import vo.chat.ChatVo;
 import vo.product.ProductVo;
 
@@ -44,11 +44,26 @@ public class AdminMainFormAction extends HttpServlet {
 		int today_t_count = TradeDao.getinstance().selectTodayCount();
 
 		//금일 방문수
-		int today_u_count = UserDao.getInstance().
+		Cookie[] list = request.getCookies();//메인페이지에서 형성된 쿠키수만큼의 list길이 기 형성
+		int cnt = 0;
+		
+		for(int i = 0; list != null && i < list.length; i++) {
+			if(list[i].getName().equals("cookie_cnt")) {
+				cnt = Integer.parseInt(list[i].getValue());
+				break;
+			}
+		}
+		
+		/* int today_u_count = UserDao.getInstance(). */
+		
+				
+				
+		//map에다가 전부 넣기 		
 		Map map = new HashMap();
 		map.put("p_list", p_list);
 		map.put("ch_list", ch_list);
-		map.put("today_count",today_p_count);
+		map.put("today_p_count",today_p_count);
+		map.put("today_t_count",today_t_count);
 		
 		request.setAttribute("map", map);
 		

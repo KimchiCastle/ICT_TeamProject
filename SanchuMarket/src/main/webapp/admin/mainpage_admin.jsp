@@ -25,12 +25,17 @@ font-size: 18px;
 
 }
 
+.allbody{
+	width: 1300px;
+	margin: auto;
+}
+
 #header{
 }
 
 #content{
   background-color: #f2f2f2;
-  height: 100%;
+  min-height: 100%;
 }
 
 
@@ -112,7 +117,7 @@ th{
 </style>
 </head>
 <body>
-
+<div class="allbody">
 <div id="header">
   <%@include file="header.jsp"%>
 </div>
@@ -140,13 +145,13 @@ th{
 	<div id="number-wrapper">
 	  <table class="table" id="number-table">
 	   <tr>
-	     <td>${ map.today_p_count }</td>
+	     <td>금일상품업로드</td>
 	     <td>금일 거래량</td>
 	   </tr>
 	   
 	   <tr>
-	     <th>132건</th>
-	     <th>23건</th>
+	     <th>${ map.today_p_count }</th>
+	     <th>${ map.today_t_count }</th>
 	   </tr>
 	   
 	 </table> 	
@@ -177,6 +182,7 @@ th{
 	</div>
   
   </div><!--end content-->
+</div>
 <div class="b-example-divider"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
