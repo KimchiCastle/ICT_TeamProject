@@ -225,14 +225,18 @@ select {
 	 
 	 //enrollAction에서 실패시 redirect되는 parameter 받기
 	  function showMessage(){
+		 
 		  if("${param.reason}" == "failed_enroll"){
 			  alert('회원가입에 실패했습니다. 관리자에게 문의하세요');
 			  return false;
 		  } 
+		  
 	   idFlag = false;
 	   pwdFlag = false;
 	   submitFlag = false;
 	  }
+	 
+	 
 	 
 	  let idFlag = false;
 	  let pwdFlag = false;
@@ -257,6 +261,7 @@ select {
 	    	$("#u_pwd1").blur(function() {
 	            pwdFlag = false;
 	            checkPwd();
+	            
 	        }).keyup(function(event) {
 	            checkShiftUp(event);
 	        }).keypress(function(event) {
@@ -264,6 +269,7 @@ select {
 	        }).keydown(function(event) {
 	            checkShiftDown(event);
 	        }); 
+	    	
 	    	
 	    	 $("#u_pwd2").blur(function() {
 	             checkPwd2();
@@ -274,6 +280,7 @@ select {
 	         }).keydown(function(event) {
 	             checkShiftDown(event);
 	         });
+	    	 
 	    	 
 	    	$("#u_nickname").blur(function(){
 	    		checkNickname("first");
@@ -303,7 +310,7 @@ select {
 			if(name==''){
 				showErrorMsg(oMsg,"필수정보입니다.");
 		        setFocusToInputObject(oInput);
-				return false;
+				return;
 			}
 			
    	        var nonchar = /[^가-힣a-zA-Z0-9]/;
@@ -311,7 +318,7 @@ select {
 			 if (name != "" && nonchar.test(name)) {
 				 showErrorMsg(oMsg,"한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
 			     setFocusToInputObject(oInput);
-		         return false;
+		         return;
 		    }
 			 
 		    hideMsg(oMsg);
@@ -325,25 +332,39 @@ select {
 	        if(pwdFlag) return true;
 
 	        var pwd1 = $("#u_pwd1").val();
-	        var oMsg = $("#pwd1Msg");
+	        var pwd2 = $("#u_pwd2").val();
+	        var oMsg1 = $("#pwd1Msg");
+	        var oMsg2 = $("#pwd2Msg");
 	        var oInput = $("#u_pwd1");
-
+			/* 
 	        if (pwd1 == '') {
 	            showErrorMsg(oMsg,"필수정보입니다.");
+	            alert('비밀번호6');
 	            setFocusToInputObject(oInput);
-	            return false;
-	        }
-	      
+	            return;
+	        } */
+	        
 	        //밑의 isValidPwd 함수 호출
 	        if (!isValidPwd(pwd1)) {
-	            showErrorMsg(oMsg,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+	            showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+	            alert('비밀번호4');
 	            setFocusToInputObject(oInput);
-	            return false;
-	        }else{
-	        	showSuccessMsg(oMsg,"사용 가능한 비밀번호입니다.");
-	        	hideMsg(oMsg);
-	        	return true;
+	            return;
 	        }
+	        
+	        if( pwd2 != '' && (pwd1 != pwd2)){
+	        	showErrorMsg(oMsg2,"비밀번호가 일치하지 않습니다.");
+	        	alert('비밀번호7');
+	        	return;
+	        }
+	      
+	        	showSuccessMsg(oMsg1,"사용 가능한 비밀번호입니다.");
+	        	 alert('비밀번호5');
+	        	hideMsg(oMsg1);
+	        	return;
+	        
+	        
+	      
 	   
   			}  		
 		//비밀번호 유효성 체크 함수(checkPwd()에 boolean반환)
@@ -374,6 +395,8 @@ select {
 		        if (!isPwd.test(pwd1)) {
 		            return false;
 		        }
+		        
+		        
 		
 		        return true;
 		    } 
@@ -382,25 +405,27 @@ select {
   	function checkPwd2() {
       
        	
-   		var pwd1 = $("#u_pwd1");
+   			var pwd1 = $("#u_pwd1");
    	        var pwd2 = $("#u_pwd2");
    	        var oMsg = $("#pwd2Msg");
 	
 	        if (pwd2.val() == "") {
 	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+	            alert('비밀번호1');
 	            setFocusToInputObject(pwd2);
-	            return false;
+	            return;
 	        }
 	        if (pwd1.val() != pwd2.val()) {
 	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+	            alert('비밀번호2');
 	            setFocusToInputObject(pwd2);
-	            return false;
+	            return;
 	        } else {
 	            oMsg.html("비밀번호가 일치합니다");
+	            alert('비밀번호3');
 	            hideMsg(oMsg);
-	            return true;
+	            return;
 	        }
-	        return true;
        		pwdFlag = true;
        } 
 
@@ -414,14 +439,14 @@ select {
            if ( email == "") {
          	  showErrorMsg(oMsg,"필수정보입니다.");
                setFocusToInputObject(oInput);	         
-               return false;
+               return;
              }
 
            var isEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
            var isHan = /[ㄱ-ㅎ가-힣]/g;
            if (!isEmail.test(email) || isHan.test(email)) {
                showErrorMsg(oMsg,"올바른 이메일 형식이 아닙니다.");
-               return false;
+               return;
            }
            
            
@@ -462,13 +487,13 @@ select {
 	        if ( id == '') {
         	  showErrorMsg(oMsg,'필수정보입니다.');
               setFocusToInputObject(oInput);	         
-              return false;
+              return;
             }
 
-	        var isID = /^[a-zA-Z](?=.{0,28}[0-9])[0-9a-zA-Z]{6,20}$/;
+	        var isID = /^[a-zA-Z][0-9a-zA-Z]{5,21}$/g;
 	        if (!isID.test(id)) {
-	            showErrorMsg(oMsg,"영문자와 숫자를 조합하여 6~20자리를 입력해주세요.");
-	            return false;
+	            showErrorMsg(oMsg,"영문자 또는 숫자를 조합하여 6~20자리를 입력해주세요.");
+	            return;
 	        }
 	        idFlag = false;
 	                
@@ -480,23 +505,23 @@ select {
 	                if (data == "Y") {
 	                	if (event == "first") {
 	                	  showSuccessMsg(oMsg, "사용 가능한 아이디입니다.");
-	                	   return true;
+	                	   return;
 	                    }else if(data == "N"){
 	                       showErrorMsg(oMsg,"존재하는 아이디입니다.");//호출하고 직후만 메시지 띄우려고..?
-	                       return false;
+	                       return;
 	                    }
 	                    idFlag = true;
 	                    
 	                    if ( id == '') {
 	                  	  showErrorMsg(oMsg,'필수정보입니다.');
 	                        setFocusToInputObject(oInput);	         
-	                        return false;
+	                        return;
 	                      }
 
 	                } else { 
 	                    showErrorMsg(oMsg, "이미 사용중인 아이디입니다.");
 	                    setFocusToInputObject(oInput);
-	                    return false;
+	                    return;
 	                }
 	            }
 	        });//end ajax
@@ -513,15 +538,15 @@ select {
 	        if ( nickname == "") {
         	  showErrorMsg(oMsg,"필수정보입니다.");
               setFocusToInputObject(oInput);	         
-              return false;
+              return;
             }
 
 	        var nonchar = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
 
 	        if (!nonchar.test(nickname)) {
-	            showErrorMsg(oMsg,"한글과 영문만 입력가능합니다. (특수기호, 공백 사용 불가)");
+	            showErrorMsg(oMsg,"한글과 영문2~16자리를 입력하세요. (특수기호, 공백 사용 불가)");
 	            setFocusToInputObject(oInput);
-	            return false;
+	            return;
 	        }
 
 	                
@@ -558,7 +583,7 @@ select {
            if ( addr == "") {
          	  showErrorMsg(oMsg,"필수정보입니다.");
                setFocusToInputObject(oInput);	         
-               return false;
+               return;
              }
 
            hideMsg(oMsg);
@@ -575,25 +600,23 @@ select {
            if ( tel == "") {
          	  showErrorMsg(oMsg,"필수정보입니다.");
                setFocusToInputObject(oInput);	         
-               return false;
+               return;
              }
            
            var isTel = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
            if (!isTel.test(tel)){
         	   showErrorMsg(oMsg,"형식에 맞지 않는 전화번호입니다.");
                setFocusToInputObject(oInput);	         
-               return false;
+               return;
            }
 
            hideMsg(oMsg);
-           return true;
 	    }
 	    
 		//생일 체크 함수
 		function checkBirth(){
 	
 			let birth = $("#u_bitrh").val();
-			console.log(birth);
 		}
 
    
@@ -673,12 +696,14 @@ select {
 	    } 
 	    
  	    //회원가입 실행
- 	    function submit(){ 
+ 	    function submit_1(){ 
  	    	
 	        if(idFlag && pwdFlag) {
+	          
 	           submitClose();
 	       	   $("#enroll_form").submit();
 	        }else {
+	      
 	           submitOpen();
 	           return false;
 	        }
@@ -799,7 +824,7 @@ select {
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="button" id="enroll_btn" onclick="submit();">
+                    <button type="button" id="enroll_btn" onclick="submit_1();">
                         <span>가입</span>
                     </button>
                     <button type="button" id="revoke_btn" onclick= "location.href='../mainpage/list.do'">
@@ -876,7 +901,7 @@ select {
         element_layer.style.height = height + 'px';
         element_layer.style.border = borderWidth + 'px solid';
         // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
-        element_layer.style.left (window.screen.width / 2) - (width / 2) - borderWidth + 'px';
+        element_layer.style.left = (window.screen.width / 2) - (width / 2) - borderWidth + 'px';
         element_layer.style.top = (window.screen.height / 2) - (height / 2) - borderWidth + 'px';
     }
 </script>	

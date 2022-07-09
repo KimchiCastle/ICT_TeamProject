@@ -14,7 +14,7 @@ public class Mytime {
 			p_time[i] = list.get(i).getP_time();
 			int p_tim = Integer.parseInt(p_time[i]);
 			String p_ti = "1년전";
-			//System.out.println(p_tim);
+			/* System.out.println(p_tim); */
 			if (p_tim < 10) {
 				p_ti = "방금전";
 			} else if (p_tim < 60) {

@@ -55,7 +55,36 @@
 	.recentimg{
 		width: 60px;
 		height: 60px;
+		/* border: 1px solid rgb(240,240,240); */
 	}
+	.recent_content{
+		text-decoration:none;
+		font-size:15px; 
+		
+		color:black;
+		text-align:left;
+		background-color: white;
+		display:none;
+		position: absolute;
+		width : 190px;
+		height : 60px;
+		border: 1px solid black;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		
+	}
+	
+	#recent_name{
+		margin-left: 15px; 
+		vertical-align: top; 
+		
+	}
+	
+	.recent_hober:hover .recent_content{
+		
+		display: inline;
+	}
+	
 	
 </style>
 
@@ -78,6 +107,12 @@
 	  
 	  var curr_page = global_page + page_flag;
 	  //유효성 체크
+	  
+	  if(curr_page<1){
+		  return;
+	  }
+	  
+	  $("#now").text(curr_page);
 	  
 	  global_page = curr_page;
 	  $.ajax({
@@ -109,7 +144,7 @@
 					<div id="disp"></div>
 					<div>
 						<button onclick="slider(-1)">&lt;</button>
-						<span id="now">1</span>/<span id="total">1</span>
+						<span id="now">1</span>/<span id="total">${ last_page }</span>
 						<button onclick="slider(1)">&gt;</button>
 					</div>
 				</div>

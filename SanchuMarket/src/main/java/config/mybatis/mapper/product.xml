@@ -90,6 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[ select * from (select * from product order by #{p_idx} desc) where ROWNUM  <= 6]]>
 	</select>		
 	
+	<!--금일 상품 업로드량-->
+	<select id="today_count">
+	  select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
+	</select>
+	
 
 </mapper>
 
