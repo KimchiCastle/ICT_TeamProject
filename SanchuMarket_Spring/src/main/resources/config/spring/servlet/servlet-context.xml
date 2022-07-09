@@ -23,6 +23,19 @@
 	
 	<context:component-scan base-package="com.ict.sanchumarket" />
 	
-	
+	<!-- 수동생성 -->
+	<context:annotation-config/>
+	<beans:bean class="controller.ProductController">
+		<!-- 컨스트럭터든 세터든 인젝션 넣으시오 -->
+	</beans:bean>
+	<beans:bean class="controller.MypageController">
+		<!-- 컨스트럭터든 세터든 인젝션 넣으시오 -->
+	</beans:bean>
+	<beans:bean class="controller.UserController">
+		<!-- 컨스트럭터든 세터든 인젝션 넣으시오 -->
+	</beans:bean>
+	<beans:bean class="controller.MypageController">
+		<!-- 컨스트럭터든 세터든 인젝션 넣으시오 -->
+	</beans:bean>
 	
 </beans:beans>
