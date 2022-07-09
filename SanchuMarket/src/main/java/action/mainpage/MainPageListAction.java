@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.product.ProductDao;
 import util.Mytime;
 import vo.product.ProductVo;
+import vo.user.UserVo;
 
 /**
  * Servlet implementation class MainPageListAction
@@ -32,22 +33,29 @@ public class MainPageListAction extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String searchtext = request.getParameter("searchtext");
-
+		
+		
 		String c_idx = request.getParameter("c_idx");
 
+		//int page = Integer.parseInt(request.getParameter("page"));
+		
+		
+		
+		// 전체목록 가져오기
 		if (c_idx == null) {
 
-			// 전체목록 가져오기
 			List<ProductVo> list = ProductDao.getinstance().selectList();
 			// 시간계산 메소드화
 			Mytime.time_cal(list);
 
+			
+			
 			request.setAttribute("list", list);
 
 		}
+		// 카테고리목록 가져오기
 		if (c_idx != null) {
 
-			// 전체목록 가져오기
 			List<ProductVo> list = ProductDao.getinstance().selectList(c_idx);
 			// 시간계산 메소드화
 			Mytime.time_cal(list);
@@ -55,7 +63,9 @@ public class MainPageListAction extends HttpServlet {
 			request.setAttribute("list", list);
 
 		}
-
+		
+		
+		//검색
 		if (searchtext != null) {
 
 			Map map = new HashMap();
@@ -100,15 +110,18 @@ public class MainPageListAction extends HttpServlet {
 		 */
 
 		// session받아서 처리해주세용
-		/*
-		 * HttpSession session = request.getSession();
-		 * 
-		 * if(session.getAttribute("user")==null) {
-		 * 
-		 * }else {
-		 * 
-		 * }
-		 */
+
+		
+		  UserVo user = (UserVo) request.getSession().getAttribute("user");
+		  
+			/*
+			 * if(session.getAttribute("user")==null) {
+			 * 
+			 * }else {
+			 * 
+			 * }
+			 */	 
+		System.out.println(user);
 
 		// forward
 		String forward_page = "mainpage_list.jsp";

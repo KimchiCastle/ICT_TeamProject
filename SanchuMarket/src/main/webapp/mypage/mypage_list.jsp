@@ -67,7 +67,6 @@ $(document).ready(function(){
 			 style="border-collapse:collapse;" cellpadding="4" cellspacing="0">
 				<br>
 				<tr>
-					<th>선택</th>
 					<th>사진</th>
 					<th>상품명</th>
 					<th>가격</th>
@@ -80,14 +79,13 @@ $(document).ready(function(){
 				<!-- data없는 경우 -->
 				<c:if test="${empty list}">
 					<tr>
-						<td colspan="7" align="center">
+						<td colspan="6" align="center">
 						<font color="red">등록된 상품이 없습니다</font></td>
 					</tr>
 				</c:if>
 				<!-- data 있는 경우-->
 				<c:forEach var="vo" items="${list }">
 					<tr>
-						<td><input type="checkbox" name="p_idx" value="${vo.p_idx}"></td>
 						<td><img src="../images/${vo.sumimage}" ></td>
 						<td>${vo.p_name }</td>
 						<td>${vo.price }</td>
@@ -104,7 +102,7 @@ $(document).ready(function(){
 			<!-- 회원인 경우 노출되는 메뉴 -->
 			  <c:if test="${not empty sessionScope.user }">
 			  	<div>
-			  		<input type="button" value="상품등록"
+			  		<input type="button" value="상품등록" 
 			  				onclick="location.href='/product/insert.do';">
 			  	</div>
 			  </c:if>

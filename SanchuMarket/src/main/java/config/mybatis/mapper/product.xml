@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  	from(select * from product)	p
 		  		
 		  	where	p_name like '%' || #{ p_name } || '%' or p_exp like '%' || #{ p_exp } || '%'  
-	  	
+	  	  
 	  	order by p_idx desc
 	  	
   	</select>

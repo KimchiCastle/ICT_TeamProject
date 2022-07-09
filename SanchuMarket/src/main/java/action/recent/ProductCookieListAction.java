@@ -29,7 +29,10 @@ public class ProductCookieListAction extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//현재 페이지
 		int cookie_page = Integer.parseInt(request.getParameter("cookie_page"));
+		
 		
         //한 페이지 당 보여줄 수 
         int pageSize = 3;
@@ -52,6 +55,11 @@ public class ProductCookieListAction extends HttpServlet {
 
 		}
 		
+		//최종페이지
+		int last_page = (cookielist2.size()%pageSize==0 ? cookielist2.size()/pageSize : cookielist2.size()/pageSize+1 );
+		
+		System.out.println(last_page);
+		
 		List<ProductVo> cookielist = new ArrayList<ProductVo>();
 		
 		
@@ -62,18 +70,15 @@ public class ProductCookieListAction extends HttpServlet {
 			
 			ProductVo vo = cookielist2.get(i);
 
-			System.out.println(vo.getP_name());
 			
 			cookielist.add(vo);
 			
 			
 		}
 		
-		
-		
-		
 		request.setAttribute("cookielist", cookielist);
-
+		request.setAttribute("last_page", last_page);
+		
 		// forward
 		String forward_page = "sidebar/cookie_list.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(forward_page);

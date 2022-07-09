@@ -56,9 +56,9 @@ margin: auto;
       </font>
   </div>
   <hr>
-  <div  >
-      <a href="mypage_list.jsp" >내 판매 물품</a> |
-      <a href="mypage_modify.jsp">내 정보 수정</a>
+  <div>
+      <a href="sale_list.do" >내 판매 물품</a> 
+      <a href="modify.do">내 정보 수정</a>
   </div>
   <hr>
   
