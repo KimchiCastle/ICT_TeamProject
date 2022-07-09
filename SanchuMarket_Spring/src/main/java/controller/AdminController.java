@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dao.UserDao;
+import dao.AdminDao;
 
 @Controller
-@RequestMapping("/user/")
-public class UserController {
+@RequestMapping("/admin/")
+public class AdminController {
 
 	 @Autowired 
 	 ServletContext application;
@@ -23,5 +23,7 @@ public class UserController {
 	 @Autowired 
 	 HttpServletRequest request;
 	 
-	UserDao userDao;
+	AdminDao adminDao;
+	
+	
 }
