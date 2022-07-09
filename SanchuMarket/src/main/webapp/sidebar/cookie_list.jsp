@@ -10,9 +10,14 @@
 <body>
 	<c:forEach var="cookielist" items="${ cookielist }">
 		<c:forEach var="recentimg" items="${ cookielist.image_list }">
-			<div>
-				<a href="#"><img class="recentimg"
-					src="../imgdata/${ recentimg.sumimage }"></a>
+			<div class="recent_hober">
+				<a href="#">
+				<span class="recent_content"><img class="recentimg"
+					src="../imgdata/${ recentimg.sumimage }">
+				<span id="recent_name">${ cookielist.p_name }</span></span></a>
+				
+				<img class="recentimg"
+					src="../imgdata/${ recentimg.sumimage }">
 			</div>
 		</c:forEach>
 	</c:forEach>
