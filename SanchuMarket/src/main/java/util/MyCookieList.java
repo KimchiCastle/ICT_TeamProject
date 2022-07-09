@@ -23,7 +23,7 @@ public class MyCookieList {
 			for (Cookie cookie2 : cookie_array) {
 
 				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
-				if (!cookiename.equals("JSESSIONID")) {
+				if (cookiename.matches("-?\\d+")) {
 
 					int cookievalue = Integer.parseInt(cookiename);
 
