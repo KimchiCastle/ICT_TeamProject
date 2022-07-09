@@ -8,10 +8,10 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.product.ProductDao;
 import util.Mytime;
@@ -70,18 +70,32 @@ public class MainPageListAction extends HttpServlet {
 			request.setAttribute("list", list);
 
 		}
+		
+		//쿠키 생성하기(admin페이지 방문자수 집계)
+		int cnt = 0;
+		cnt++;
+		
+		//쿠키 객체 생성시마다 value 증가
+		Cookie cookie = new Cookie("cookie_cnt", cnt+"");
+		
+		//쿠키 유효시간 하루로 설정
+		cookie.setMaxAge(24*60*60);
+		
+		//쿠키 유효 범위를 전역으로 설정
+		cookie.setPath("/");
+		response.addCookie(cookie);
 
-		/*
-		 * List<ProductVo> cookielist=null; try { cookielist =
+		
+		 /* List<ProductVo> cookielist=null; try { cookielist =
 		 * MyCookieList.getCookieList(request); } catch (Exception e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
 		 * 
 		 * System.out.println(cookielist.size());
 		 * 
 		 * request.setAttribute("cookielist", cookielist);
-		 */
-
-		/*
+		 * 
+		 * 
+		 * 
 		 * for( ProductVo vo : list) { System.out.println(vo.getP_idx()); }
 		 */
 
