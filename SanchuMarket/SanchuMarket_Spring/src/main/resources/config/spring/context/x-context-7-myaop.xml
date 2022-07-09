@@ -6,21 +6,15 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	<!-- AOP Test -->
-
-	<!-- 공통 관심사항이 구현된 Advice객체 생성 -->
-	<bean id="advice" class="advice.Advice" />
-
+	<bean id="advice"  class="advice.Advice"></bean>
 	<!-- AOP설정 : Target객체의 모든 메서드에 Advice에 구현된 공통기능을 적용한다. -->
 	<aop:config>
-		<aop:pointcut id="myPoint"  expression="execution(public * service.*Service.*(..))"
-			/>
-		<aop:aspect id="test" ref="advice">
-			<aop:before method="before" pointcut-ref="myPoint" />
-			<aop:after method="after" pointcut-ref="myPoint" />
+		<aop:pointcut expression="execution(public * service.*Service.*(..))"
+			id="myPoint" />
+		<aop:aspect id="test" ref="advice"><!--id는 어디서도 안씀-->
+			<aop:before method="before" pointcut-ref="myPoint" /><!--method이름 = advice객체 메소드 이름-->
+			<aop:after method="after"   pointcut-ref="myPoint" />
 		</aop:aspect>
 	</aop:config>
-	
 		
 </beans>

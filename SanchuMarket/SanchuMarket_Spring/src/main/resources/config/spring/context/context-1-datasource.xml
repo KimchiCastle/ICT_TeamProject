@@ -6,6 +6,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!--db properties읽어서 dbcp세팅-->
+	<!--스프링의 DBCP관리객체BasicDataSource. 예전엔 factory로 했었던거-->
 	<context:property-placeholder 
 		location="classpath:config/mybatis/db.properties"/>
 
@@ -17,5 +19,4 @@
 		<property name="defaultAutoCommit" value="false"/>
 	</bean>
 	
-		
 </beans>
