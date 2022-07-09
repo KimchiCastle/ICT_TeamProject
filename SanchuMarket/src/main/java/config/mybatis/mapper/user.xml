@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	
+	<!-- 회원목록 조회  -->
+	<select id="user_list" resultType="vo.user.UserVo">
+		select * from user_market order by u_idx
+	</select>
+	
+	<select id="user_idx" resultType="vo.user.UserVo">
+		select * from user_market where u_idx=#{u_idx} 
+	</select>
+	
+	<select id="user_idx_reg" resultType="vo.user.UserVo">
+		select u.*,
+		 to_number(floor((sysdate-u_regdate)*24*60*60)) as u_time
+		 from (select * from user_market) u where u_idx=#{u_idx} 
+	</select>
+	
+	<select id="check_id" resultType="vo.user.UserVo">
+		select * from user_market where u_id=#{u_id} 
+	</select>
+	
+	<select id="check_email" resultType="vo.user.UserVo">
+		select * from user_market where u_mail=#{u_mail} 
+	</select>
+	
+	<select id="check_nickname" resultType="vo.user.UserVo">
+		select * from user_market where u_nickname=#{u_nickname} 
+	</select>
+	
+	<!--u_photo/u_like/u_profile은 처음 가입시 null/0-->
+	<insert id="user_insert" parameterType="vo.user.UserVo">
+	insert into user_market values(
+									(select nvl(max(u_idx)+1,1)from user_market),
+									#{u_id}, 
+									#{u_pwd}, 
+									#{u_name}, 
+									#{u_nickname},
+		                            #{u_birth}, 
+		                            #{u_addr}, 
+		                            sysdate, 
+		                            0, 
+		                            null,
+									'no_file',
+									#{u_tel}, 
+									#{u_mail}, 
+									'일반회원', 
+									#{u_ip},
+									#{postcode},
+									'활동',
+									0
+								   )
+	</insert> 
+	
+	<update id="user_update" parameterType="vo.user.UserVo">
+		update user 
+			set 
+				u_name=#{u_name},
+				u_id=#{u_id},
+				u_pwd=#{u_pwd},
+				u_zipcode=#{u_zipcode},
+				u_addr=#{u_addr)
+		where u_idx=#{ u_idx }
+	</update>
+		
+	<delete id="withdraw_account" parameterType="java.lang.String">
+	   delete from user_market where u_id=#{u_id}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
