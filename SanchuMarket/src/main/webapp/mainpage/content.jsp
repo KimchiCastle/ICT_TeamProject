@@ -28,7 +28,7 @@ body{
 .main_content{
 /* margin-top: 131px; */
 width: 1020px;
-height: 1150px;
+height: auto;
 padding-top: 10px;
 padding-left: 15px;
 margin-left: 50%;
@@ -134,6 +134,7 @@ transform: translateX(-50%);
 	</div>
 	
 	</c:forEach>
+	
 	
 	</div>
 </div>

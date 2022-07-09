@@ -68,6 +68,7 @@ header{
 	padding-left: 10px;
 	height: 37px;
 	border: none;
+	outline: none;
 	
 }
 #searchicon{
@@ -169,7 +170,15 @@ function send1() {
 	
 }
 
-	
+$(function() {
+
+	$(".searchtext").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			send1();
+		}
+	});
+
+});
 	
 
 </script>
