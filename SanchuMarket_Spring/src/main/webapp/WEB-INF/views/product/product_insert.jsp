@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>물품등록</title>
 
+<link rel="stylesheet" 
+      href="${ pageContext.request.contextPath }/resources/css/product_insert.css">
 
 <!-- 부트스트랩 -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -22,186 +24,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
-<style type="text/css">
-	body{
-	  font-family: 'Gowun Dodum', sans-serif;
-	}
-	#root {
-		/* 		background: #ccffcc; */
-		width: 100%;
-		height: 100%;
-	}
-	
-	/* 실제 전체 div */
-	#insert_box {
-		width: 1020px;
-		margin: auto;
-		padding-top : 160px;
-		/* 		background: gray; */
-		min-height: 1000px;
-		text-align: center;
-	}
-	
-	/* 인클루드 한 메인프레임 */
-	#mainframe {
-		position : absolute;
-		z-index: 999;
-	}
-	
-	
-	#title {
-		font-size: 40px;
-	}
-	
-	/* span태그 */
-	.pro_info {
-		font-size: 20px;
-	}
-	
-	/* 전체 인풋태그 css */
-	.input-tag {
-		display: inline-block;
-		height: 20px;
-		padding: 5px;
-		vertical-align: middle;
-		border: 1px solid black;
-		width: 60%;
-		color: black;
-		font-size: 15px;
-		border-radius: 5px;
-	}
-	
-	/* 이미지 미리보기 css */
-	#img_preview0, #img_preview1, #img_preview2, #img_preview3, #img_preview4, #img_preview5{
-		display: none;
-		position: relative;
-		
-		width: 150px;
-		height: 150px; 
-		
-/* 		border: 2px solid black; */
-	
-	}
-	/* 미리보기 삭제버튼 css */
-	#sum_style{
-		text-align:center;
-		width:75px;
-		height:20spx;
-	    position:absolute; 
-		font-size:12px;
-		outline:none;
-		border:none;
-		border-radius:15px;
-	    right:70px;
-	    bottom:130px;
-	    /* z-index:1; */
-	    background-color:rgba(0,0,0,0.5);
-	    color:white;
-	}
-	.chk_style{
-		width:30px;
-		height:28px;
-	    position:absolute; 
-		font-size:20px;
-		outline:none;
-		border:none;
-		border-radius:15px;
-	    right:9px;
-	    bottom:115px;
-	    /* z-index:1; */
-	    background-color:rgba(0,0,0,0.5);
-	    color:#ffcccc;
-	}
-	
-		
-	/* 미리보기 삭제 css */
-	#del_img1, #del_img2, #del_img3, #del_img4, #del_img5,#del_sum{
-		cursor: pointer;
-		display: none;
-	}
-	
-	#imgup{
-		margin-top: 5px;
-	}
-	
-	/* 이미지 미리보기 css */
-	#imgup_1,#imgup_2, #imgup_3, #imgup_4, #imgup_5,#imgup_sum {
-		cursor: pointer;
-		display: none;
-	}
-	
-	
-	.input-tag:focus{
-		outline: none;
-		border: 1px solid black;
-	}
-	
-	/* 제목입력창 넓이 */
-	#p_name {
-		width: 450px;
-	}
-	
-	/* 제품설명 textarea css */
-	#p_exp {
-		padding: 15px;
-		width: 550px;
-		height: 150px;
-		resize: none;
-	}
-	
-	/* 주소버튼 */
-	#addrfind, #myaddr{
-		
-		background: white;
-		cursor: pointer;
-		border: 1px solid black;
-		width: 80px;
-		height: 30px;
-		
-	}
-	
-	/* 상품 상태 */
-	#p_condition {
-		width: 15px;
-		height: 15px;
-	}
-	
-	input {
-		accent-color: red;
-	}
-	
-	/* 테이블 간의 간격 */
-	td {
-		width: 1020px;
-		padding: 0.8em 1.4em 0.5em 0.8em;
-	}
-	
-	.td1{
-		width: 20%;
-		vertical-align: top;
-	}
-	
-	.td2{
-		width: 80%;
-	}
-	#img_zone{
-		margin: auto; 
-		width: 65%; 
-		min-height: 50px;
-		/* background-color: black; */
-	}
-	
-</style>
-
 <!-- 이미지 추가버튼 스크립트 -->
 <script type="text/javascript">
 	
 	var preview_array  = [false, false, false, false, false, false];
 	
-	
-	
 	function img_preview() {
-		
 
 		for(var i=0; i<preview_array.length; i++){
 			
@@ -220,7 +48,6 @@
 					return;
 				}
 			}
-			
 			
 			
 			/* i가0일때 */
@@ -291,6 +118,25 @@
 	}/* 프리뷰 end */
 </script>	
 
+<!-- 이미지 장수 표현 함수 -->
+<script type="text/javascript">
+	
+	function img_num() {
+		
+		var img_number = 0;
+		
+		for(var i=0; i<preview_array.length; i++ ){
+			if(preview_array[i]==true){
+				img_number++;
+			}
+			
+		}
+		/* 이미지 장수 표시 */
+		$("#img_number").html('('+ img_number + '/6)');
+		
+	}
+</script>
+
 <!-- 이미지 미리보기 -->
 <script type="text/javascript">	
 
@@ -304,24 +150,22 @@
 			
 	}
 	
-		$(function(){
+	$(function(){
+		
+		$("#sumimage").on('change',function(){
 			
-			$("#sumimage").on('change',function(){
+			if( $("#sumimage")[0].files[0]==undefined) {
 				
-				if( $("#sumimage")[0].files[0]==undefined) {
-					
-					
-					return;
 				
-				}
-				
-
-				
-				imgcheck0(this);
-				
-			})
+				return;
 			
-		});
+			}
+			
+			imgcheck0(this);
+			
+		})
+		
+	});
 
 	function imgcheck0(input) {
 		
@@ -361,15 +205,7 @@
 				preview_array[0] = true;
 				
 				/* 이미지넘버 변경 */
-				var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-				
-				
-				$("#img_number").html('('+ img_number + '/6)');
+				img_num();
 			
 			
 	        }
@@ -443,14 +279,7 @@
 	        	preview_array[1] = true;
 				
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-	        	
-	        	$("#img_number").html('('+ img_number + '/6)');
+	        	img_num();
 	        	
 	        }
 	        
@@ -516,14 +345,7 @@
 				
 				preview_array[2] = true;
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-	        	
-				$("#img_number").html('('+ img_number + '/6)');
+				img_num();
 	       
 	        }
 	        
@@ -589,13 +411,7 @@
 				
 				preview_array[3] = true;
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-				$("#img_number").html('('+ img_number + '/6)');
+				img_num();
 	       
 	        }
 	        reader.readAsDataURL(input.files[0]);
@@ -658,13 +474,7 @@
 				
 				preview_array[4] = true;
 	        	/* 이미지넘버 변경 */
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
-				$("#img_number").html('('+ img_number + '/6)');
+				img_num();
 				
 	       
 	        }
@@ -730,14 +540,8 @@
 		        $("#del_img5").show();
 				
 		        preview_array[5] = true;
-	        	var img_number = 0;
-				for(var i=0; i<preview_array.length; i++ ){
-					if(preview_array[i]==true){
-						img_number++;
-					}
-				}
 		        /* 이미지넘버 변경 */
-				$("#img_number").html('('+ img_number + '/6)');
+		        img_num();
 	       
 	        }
 	        reader.readAsDataURL(input.files[0]);
@@ -765,14 +569,9 @@
 		
 		/* 썸네일 비움 */
 		preview_array[0] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
 		
-		$("#img_number").html('('+ img_number + '/6)');
+		/* 이미지 넘버변경 */
+		img_num();
 		
 		return;
 	}
@@ -790,13 +589,9 @@
 		/* 1번사진 비움 */
 		preview_array[1] = false;
 		
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
-		$("#img_number").html('('+ img_number + '/6)');
+		/* 이미지 넘버변경 */
+		img_num();
+		
 		return;
 	}
 	
@@ -811,13 +606,10 @@
 		
 		/* 2번사진 비움 */
 		preview_array[2] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
-		$("#img_number").html('('+ img_number + '/6)');
+		
+		/* 이미지 넘버변경 */
+		img_num();
+		
 		return;
 	}
 	
@@ -831,13 +623,9 @@
 		
 		/* 3번사진 비움 */
 		preview_array[3] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
-		$("#img_number").html('('+ img_number + '/6)'); 
+		
+		/* 이미지 넘버변경 */
+		img_num();
 		 
 		return;
 	}
@@ -851,13 +639,9 @@
 		
 		/* 4번사진 비움 */
 		preview_array[4] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
-		$("#img_number").html('('+ img_number + '/6)');
+		
+		/* 이미지 넘버변경 */
+		img_num();
 
 		return;
 	}
@@ -871,13 +655,9 @@
 		
 		/* 5번사진 비움 */
 		preview_array[5] = false;
-		var img_number = 0;
-		for(var i=0; i<preview_array.length; i++ ){
-			if(preview_array[i]==true){
-				img_number++;
-			}
-		}
-		$("#img_number").html('('+ img_number + '/6)');
+		
+		/* 이미지 넘버변경 */
+		img_num();
 		
 		return;
 	}
@@ -885,7 +665,6 @@
 
 
 </script>
-
 
 
 <!-- 주소API -->
@@ -933,6 +712,9 @@
 	var regular_han = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z]/;
 	
 	function proInfoSend() {
+		
+		/* 세션으로부터 받은 u_idx 값 */
+		var u_idx = $("#u_idx").val().trim();
 		
 		var p_name = $("#p_name").val().trim();
 		
@@ -1024,6 +806,7 @@
 		formData.append('imageFile3',$('#imageFile3')[0].files[0]);
 		formData.append('imageFile4',$('#imageFile4')[0].files[0]);
 		formData.append('imageFile5',$('#imageFile5')[0].files[0]);
+		formData.append('u_idx',u_idx);				// 유저idx
 		formData.append('p_name',p_name);			// 상품명
 		formData.append('c_idx',c_idx);				// 카테고리번호
 		formData.append('p_location',p_location);	// 지역
@@ -1177,7 +960,7 @@
 	</form>
 
 	<div id="root">
-	
+		<input type="hidden" id="u_idx" value="${ user.u_idx }">
 	 	<div id="mainframe">
 			<%@ include file="../mainpage/header&sidebar.jsp"%>
 		</div> 
