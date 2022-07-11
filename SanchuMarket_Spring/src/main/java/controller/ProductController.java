@@ -80,27 +80,16 @@ public class ProductController {
 	//폼데이터 안에 한꺼번에 많은 데이터가 오기때문에 다 파라미터로 받자..
 	@ResponseBody
 	@RequestMapping(value = "product_insert.do", method = RequestMethod.POST)
-	public Map product_insert( MultipartFile sumimage,
-	@RequestParam(value="imageFile1", required = false, defaultValue = "no_file") MultipartFile imageFile1, 
-	@RequestParam(value="imageFile2", required = false, defaultValue = "no_file") MultipartFile imageFile2,
-	@RequestParam(value="imageFile3", required = false, defaultValue = "no_file") MultipartFile imageFile3,
-	@RequestParam(value="imageFile4", required = false, defaultValue = "no_file") MultipartFile imageFile4,
-	@RequestParam(value="imageFile5", required = false, defaultValue = "no_file") MultipartFile imageFile5,
+	public Map product_insert(
+	@RequestParam(value="imagedata", required = false, defaultValue = "no_file") MultipartFile [] imagedata, 
 	int u_idx, String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp) {
 		
 		String abs_path = applicaton.getRealPath("/resources/imgdata/");
 		
-		String sumimage_str = MyFileUpload.myFileUpload(abs_path, sumimage);
-		String imageFile1_str = MyFileUpload.myFileUpload(abs_path, imageFile1);
-		String imageFile2_str = MyFileUpload.myFileUpload(abs_path, imageFile2);
-		String imageFile3_str = MyFileUpload.myFileUpload(abs_path, imageFile3);
-		String imageFile4_str = MyFileUpload.myFileUpload(abs_path, imageFile4);
-		String imageFile5_str = MyFileUpload.myFileUpload(abs_path, imageFile5);
-		
-		ImageVo imageVo = new ImageVo(sumimage_str, imageFile1_str, imageFile2_str, imageFile3_str, imageFile4_str, imageFile5_str);
 		
 		
-		int res = image_dao.insert(imageVo);
+		
+		int res = image_dao.insert();
 		
 		
 		String p_status = "거래가능";

@@ -800,12 +800,12 @@
 		var form = $("#imgform")[0];
 		var formData = new FormData(form);
 		
-		formData.append('sumimage',$('#sumimage')[0].files[0]);
-		formData.append('imageFile1',$('#imageFile1')[0].files[0]);
-		formData.append('imageFile2',$('#imageFile2')[0].files[0]);
-		formData.append('imageFile3',$('#imageFile3')[0].files[0]);
-		formData.append('imageFile4',$('#imageFile4')[0].files[0]);
-		formData.append('imageFile5',$('#imageFile5')[0].files[0]);
+		formData.append('imagedata',$('#sumimage')[0].files[0]);
+		formData.append('imagedata',$('#imageFile1')[0].files[0]);
+		formData.append('imagedata',$('#imageFile2')[0].files[0]);
+		formData.append('imagedata',$('#imageFile3')[0].files[0]);
+		formData.append('imagedata',$('#imageFile4')[0].files[0]);
+		formData.append('imagedata',$('#imageFile5')[0].files[0]);
 		formData.append('u_idx',u_idx);				// 유저idx
 		formData.append('p_name',p_name);			// 상품명
 		formData.append('c_idx',c_idx);				// 카테고리번호
