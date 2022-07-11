@@ -115,7 +115,7 @@ public class ProductController {
 			
 			//이미지Vo에 이미지 파일명 넣기
 			imageVo.setImagedata(img_str);
-			
+			imageVo.setP_idx(p_idx);
 			//실제 DB에 넣기
 			res2 = image_dao.insert(imageVo);
 			
