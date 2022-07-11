@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+	
+
+	
+	<!-- 내 판매물품 조회 -->
+	<select id="product_user_idx" resultMap="product_map">
+		select
+			p.* 
+		from (select * from product) p where u_idx=#{u_idx} order by p_idx desc
+	</select>
+	
+	<!-- 삭제시 u_status 탈퇴로 변경 -->
+	<update id="withdraw_user" parameterType="int">
+		update user_market set u_status='탈퇴' where u_idx=#{u_idx}
+	</update>
+	
+	<!-- 업데이트 -->
+	<update id="update_mypage" parameterType="int">
+		update user_market set u_idx=#{u_idx}, u_name=#{u_name}, u_pwd=#{u_pwd},u_zipcode=#{u_zipcode},u_addr=#{u_addr} 
+	</update>
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

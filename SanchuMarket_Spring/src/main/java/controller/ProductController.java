@@ -1,6 +1,9 @@
 package controller;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -21,6 +24,7 @@ import dao.image.ImageDao;
 import dao.product.ProductDao;
 import util.MyFileUpload;
 import vo.image.ImageVo;
+import vo.product.ProductVo;
 
 @Controller
 @RequestMapping("/product/")
@@ -73,40 +77,67 @@ public class ProductController {
 		}
 		
 		
-		return "product/insert";
+		return "product/product_insert";
 	}
 	
 	// 포스트 타입으로 받음
 	//폼데이터 안에 한꺼번에 많은 데이터가 오기때문에 다 파라미터로 받자..
 	@ResponseBody
 	@RequestMapping(value = "product_insert.do", method = RequestMethod.POST)
-	public Map product_insert( MultipartFile sumimage,
-	@RequestParam(value="imageFile1", required = false, defaultValue = "no_file") MultipartFile imageFile1, 
-	@RequestParam(value="imageFile2", required = false, defaultValue = "no_file") MultipartFile imageFile2,
-	@RequestParam(value="imageFile3", required = false, defaultValue = "no_file") MultipartFile imageFile3,
-	@RequestParam(value="imageFile4", required = false, defaultValue = "no_file") MultipartFile imageFile4,
-	@RequestParam(value="imageFile5", required = false, defaultValue = "no_file") MultipartFile imageFile5,
+	public Map product_insert(
+	@RequestParam(value="imagedata") MultipartFile [] imagedata, 
 	int u_idx, String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp) {
 		
-		String abs_path = applicaton.getRealPath("/resources/imgdata/");
-		
-		String sumimage_str = MyFileUpload.myFileUpload(abs_path, sumimage);
-		String imageFile1_str = MyFileUpload.myFileUpload(abs_path, imageFile1);
-		String imageFile2_str = MyFileUpload.myFileUpload(abs_path, imageFile2);
-		String imageFile3_str = MyFileUpload.myFileUpload(abs_path, imageFile3);
-		String imageFile4_str = MyFileUpload.myFileUpload(abs_path, imageFile4);
-		String imageFile5_str = MyFileUpload.myFileUpload(abs_path, imageFile5);
-		
-		ImageVo imageVo = new ImageVo(sumimage_str, imageFile1_str, imageFile2_str, imageFile3_str, imageFile4_str, imageFile5_str);
-		
-		
-		int res = image_dao.insert(imageVo);
-		
-		
+		//파라미터로 받은 ProductVo 생성자를통해 생성
 		String p_status = "거래가능";
 		
+		//								 유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
+		ProductVo productVo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
 		
-		return null;
+		//ProductDB에 Data 넣기
+		//먼저 DB에 넣는 이유는 p_idx를 구하기 위해서
+		int res1 = product_dao.insert(productVo);
+		int p_idx = product_dao.selectMaxIdx();
+		
+		int res2 = 0;
+		
+		//절대경로 구함
+		String abs_path = applicaton.getRealPath("/resources/imgdata/");
+		
+		//for each문 사용 배열을 통해 이미지데이터 들어옴
+		for(MultipartFile img : imagedata) {
+			
+			//파일업로드 메서드 사용
+			String img_str = MyFileUpload.myFileUpload(abs_path, img);
+			
+			//이미지 Vo 생성
+			ImageVo imageVo = new ImageVo();
+			
+			//이미지Vo에 이미지 파일명 넣기
+			imageVo.setImagedata(img_str);
+			imageVo.setP_idx(p_idx);
+			//실제 DB에 넣기
+			res2 = image_dao.insert(imageVo);
+			
+		}
+		
+		//JsonConverter 사용하기 위한 Map생성
+		Map map = new HashMap();
+
+		//기본 리턴값 false
+		boolean bResult = false;
+		
+		//만약 상품등록과 이미지등록이 됐으면..
+		if(res1==1 && res2==1) {
+			
+			//리턴값 true 로 변경
+			bResult = true;
+			
+		}
+		//맵에 result값 넣기
+		map.put("res", bResult);
+		
+		return map;
 	}
 	
 	

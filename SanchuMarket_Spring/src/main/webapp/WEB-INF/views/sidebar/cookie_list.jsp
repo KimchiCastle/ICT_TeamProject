@@ -13,7 +13,7 @@
 			<div class="recent_hober">
 				<a href="#">
 				<span class="recent_content"><img class="recentimg"
-					src="../imgdata/${ recentimg.sumimage }">
+					src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
 				<span id="recent_name">${ cookielist.p_name }</span></span></a>
 				
 				<img class="recentimg"

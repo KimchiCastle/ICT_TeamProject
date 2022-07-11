@@ -11,7 +11,7 @@ public class MyFileUpload {
 		
 		
 		//파일이 비어있다면
-		if(file.getName().equals("no_file")) {
+		if(file.isEmpty()) {
 			
 			return "no_file";
 		}

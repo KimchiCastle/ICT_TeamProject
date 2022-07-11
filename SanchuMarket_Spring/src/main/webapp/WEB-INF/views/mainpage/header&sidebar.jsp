@@ -191,19 +191,19 @@ $(function() {
 <!-- 고정헤더 -->
 	<div class="header">
 	<!-- 로고 -->
-		<a class="logo"><img src="../image/상추마켓.png" width="200" height="50" onclick="location.href='../mainpage/list.do'"></a>
+		<a class="logo"><img src="${ pageContext.request.contextPath }/resources/image/상추마켓.png" width="200" height="50" onclick="location.href='../mainpage/list.do'"></a>
 	<!-- 검색창 -->
 	
 		<div class="searchtext" >
 			<input id="searchtext" name="searchtext" type="text" >
-			<img id="searchicon" src="../image/saerch-icon.png" onclick="send1();">
+			<img id="searchicon" src="${ pageContext.request.contextPath }/resources/image/saerch-icon.png" onclick="send1();">
 
 		</div>
 	<c:if test="${ empty sessionScope.user }">
 		<div class="btn_place">
-			<a class="btn" onclick="location.href='../user/login_form.do'"><img src="../image/mypage.png" width="30px">&nbsp;로그인</a>
+			<a class="btn" onclick="location.href='../user/login_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;로그인</a>
 			&nbsp;&nbsp;|&nbsp;
-			<a class="btn" onclick="location.href='../user/enroll_form.do'"><img src="../image/mypage.png" width="30px">&nbsp;회원가입</a>
+			<a class="btn" onclick="location.href='../user/enroll_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;회원가입</a>
 		</div>
 	</c:if>
 	
@@ -211,14 +211,14 @@ $(function() {
 	<!-- 판매,마이페이지 버튼 -->
 	<c:if test="${ not empty sessionScope.user }">
 		<div class="btn_place">
-			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="../image/sell.png" width="30px">&nbsp;판매하기</a>
+			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/sell.png" width="30px">&nbsp;판매하기</a>
 			 &nbsp;&nbsp;|&nbsp;
-			<a class="btn" onclick="location.href='../mypage/list.do'"><img src="../image/mypage.png" width="30px">&nbsp;마이페이지</a>
+			<a class="btn" onclick="location.href='../mypage/list.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;마이페이지</a>
 		</div>
 	</c:if>
 	<!-- 반응형 네비게이션 바 -->
 		<div class="navi_bar">
-			<span class="main_menu"><img src="../image/category.png" width="30px"></span>
+			<span class="main_menu"><img src="${ pageContext.request.contextPath }/resources/image/category.png" width="30px"></span>
 			<div class="menu_content">
 				<a href="../mainpage/list.do?c_idx=1">남성의류</a>
 				<a href="../mainpage/list.do?c_idx=2">여성의류</a>

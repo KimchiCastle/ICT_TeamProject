@@ -130,7 +130,19 @@ select * from product
 
 select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 
-
+insert into product values(
+(select nvl(max(p_idx),0)+1 from product),
+1,
+1,
+'상품1',
+sysdate,
+1111,
+'중고',
+'쌉니다 싸용',
+'서울시 중구',
+0,
+'거래가능'
+)
 
 	select p.*,
   	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
@@ -149,7 +161,10 @@ select
 		from (select * from product) p where u_idx=3 order by p_idx desc
 
 
-
+select
+			p.* ,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		from (select * from product) p order by p_idx desc
 
 
 */
