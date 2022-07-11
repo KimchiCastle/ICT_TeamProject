@@ -40,5 +40,10 @@ select * from image
 select p_idx, sumimage from image 
 select * from product
 
+select * from (select * from image where p_idx=3  order by i_idx) where ROWNUM  = 1
+
+
+
+
 */
 
