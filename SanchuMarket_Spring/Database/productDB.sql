@@ -135,7 +135,7 @@ insert into product values(
 1,
 1,
 '»óÇ°1',
-sysdate
+sysdate,
 1111,
 'Áß°í',
 '½Ô´Ï´Ù ½Î¿ë',

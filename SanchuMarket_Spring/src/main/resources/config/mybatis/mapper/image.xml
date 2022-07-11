@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="image_insert"  parameterType="vo.image.ImageVo">
 		insert into image values(
 		image_idx.nextVal,
-		(select max(p_idx) from product),
+		#{p_idx},
 		 #{imagedata}
 		 )
 	</insert>
