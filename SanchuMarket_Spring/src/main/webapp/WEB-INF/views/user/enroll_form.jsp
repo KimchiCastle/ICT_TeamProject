@@ -536,6 +536,7 @@ select {
 	        $.ajax({
 	            type:"GET",
 	            url: "check_id.do?u_id=" + id,
+	            
 	            success : function(data) {
 					//db에 존재하는 아이디 없으면 data=y 넘어옴
 	                if (data == "Y") {

@@ -114,6 +114,7 @@
 		  type:'POST',
 		  url:'login.do', 
 		  data:{'u_id':u_id, 'u_pwd':u_pwd},
+		  dataType:'json',
 		  success:function(res){ //res = bResult
 
 			  if(res=='false'){//bResult=false
@@ -126,6 +127,7 @@
 				  
 			  }
 		  },
+		  //jqXHR:자바스크립트 에러 처리 객체
 		  error:function(jqXHR, exception){
 		  
 		   	  let msg = '';
@@ -156,7 +158,7 @@
 <body class="text-center" id="form">
 
  <div id="box">
-    <a href="../mainpage/list.do"><img class="mb-4" src="../image/상추마켓.png" alt="" width="300" height="100"></a>
+    <a href="../mainpage/list.do"><img class="mb-4" src="../resources/image/상추마켓.png" alt="" width="300" height="100"></a>
     <div id="login-form">
     <h3 style="margin: 20px; height: 80px;">로그인</h3>
 	</div>

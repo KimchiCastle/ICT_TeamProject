@@ -28,8 +28,6 @@ public class MainPageController {
 	 public String list() {
 		 
 		 
-		 
-		 
 		 String visitCookie = "";
 		 String visitCookieCnt = "";
 		 
