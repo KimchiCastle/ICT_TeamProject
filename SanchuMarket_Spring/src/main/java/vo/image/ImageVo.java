@@ -2,9 +2,9 @@ package vo.image;
 
 public class ImageVo {
 	
-	int i_idx;
+	int i_idx;  // 사진 고유번호
 	int p_idx;	// 상품번호
-	String imagedata;
+	String imagedata; //사진데이터
 	
 	
 	

@@ -39,6 +39,7 @@ public class RecentController {
         //한 페이지 당 보여줄 수 
         int pageSize = 3;
 		
+        
         //한페이지에 보여질 시작번호, 끝반호 구하는 공식을 
         //아래처럼 하는 이유는 제로베이스이기때문(0부터 시작)
         
@@ -52,17 +53,21 @@ public class RecentController {
 		
 		// request로부터 쿠키값들 받아와서 배열에 저장
 		Cookie cookie_array[] = request.getCookies();
-
+		
+		
 		try {
 			
 			//List 데이터 가져오는 메서드, 배열과, request, 인젝션받은 product_dao 준다.
 			cookielist2 = MyCookieList.getCookieList(cookie_array, request, product_dao);
-
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		}
+		
+
 		
 		//마지막페이지 구하는 공식 삼항연산자 사용
 		int last_page = ( (cookielist2.size()%pageSize==0) ? (cookielist2.size()/pageSize) : (cookielist2.size()/pageSize+1) );
@@ -81,12 +86,13 @@ public class RecentController {
 			//i위치에 해당하는 최근본 상품을 vo로 포장하고,
 			ProductVo vo = cookielist2.get(i);
 			
-			vo.setImage_list( (List<ImageVo>) cookielist2.get(i).getImage_list().get(0));
-			
 			//실제 뿌려질 ArrayList에 add
 			cookielist.add(vo);
 			
 		}
+		
+		
+		
 		
 		//위에서 만들어진 ArrayList model에 Attribute
 		model.addAttribute("cookielist", cookielist);

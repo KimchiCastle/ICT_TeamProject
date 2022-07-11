@@ -86,11 +86,11 @@ public class ProductController {
 	@RequestMapping(value = "product_insert.do", method = RequestMethod.POST)
 	public Map product_insert(
 	@RequestParam(value="imagedata") MultipartFile [] imagedata, 
-	int u_idx, String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp) {
+	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp) {
 		
 		//파라미터로 받은 ProductVo 생성자를통해 생성
 		String p_status = "거래가능";
-		
+		int u_idx = 1;
 		//								 유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
 		ProductVo productVo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
 		
@@ -98,6 +98,8 @@ public class ProductController {
 		//먼저 DB에 넣는 이유는 p_idx를 구하기 위해서
 		int res1 = product_dao.insert(productVo);
 		int p_idx = product_dao.selectMaxIdx();
+		
+		System.out.println(p_idx);
 		
 		int res2 = 0;
 		
