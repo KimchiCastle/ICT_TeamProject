@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.product.ProductDao;
 import util.MyCookieList;
+import vo.image.ImageVo;
 import vo.product.ProductVo;
 
 @Controller
@@ -38,10 +39,13 @@ public class RecentController {
         //한 페이지 당 보여줄 수 
         int pageSize = 3;
 		
-        //한 페이지의 시작글 번호
-		int startRow = (cookie_page - 1) * pageSize;
-		//한 페이지의 마지막 글번호
-        int endRow = cookie_page * pageSize - 1;
+        //한페이지에 보여질 시작번호, 끝반호 구하는 공식을 
+        //아래처럼 하는 이유는 제로베이스이기때문(0부터 시작)
+        
+        // 시작번호 = 현재페이지 - 1 * 3
+		int startRow = (cookie_page - 1) * pageSize; //한 페이지의 시작글 번호
+		// 끝번호 = 현재페이지 * 3 -1
+        int endRow = cookie_page * pageSize - 1; //한 페이지의 마지막 글번호
 		
         //메소드로 부터 받아올 쿠키리스트 
 		List<ProductVo> cookielist2 = null;
@@ -76,7 +80,9 @@ public class RecentController {
 			
 			//i위치에 해당하는 최근본 상품을 vo로 포장하고,
 			ProductVo vo = cookielist2.get(i);
-
+			
+			vo.setImage_list( (List<ImageVo>) cookielist2.get(i).getImage_list().get(0));
+			
 			//실제 뿌려질 ArrayList에 add
 			cookielist.add(vo);
 			
