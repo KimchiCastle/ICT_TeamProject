@@ -1,4 +1,4 @@
-package dao;
+package dao.chat;
 
 import java.util.List;
 

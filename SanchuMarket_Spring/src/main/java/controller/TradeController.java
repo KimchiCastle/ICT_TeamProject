@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dao.TradeDao;
+import dao.trade.TradeDao;
 
 @Controller
 @RequestMapping("/trade/")
@@ -24,4 +24,10 @@ public class TradeController {
 	 HttpServletRequest request;
 	 
 	 TradeDao tradeDao;
+
+	public void setTradeDao(TradeDao tradeDao) {
+		this.tradeDao = tradeDao;
+	}
+	 
+	 
 }

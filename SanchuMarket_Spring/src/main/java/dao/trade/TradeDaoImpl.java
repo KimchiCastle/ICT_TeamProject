@@ -1,4 +1,4 @@
-package dao;
+package dao.trade;
 
 import org.apache.ibatis.session.SqlSession;
 
