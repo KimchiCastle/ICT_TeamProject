@@ -34,8 +34,8 @@
 	</beans:bean>
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>
+	</beans:bean>	
 	<beans:bean class="controller.ProductController">
-	
 		<beans:constructor-arg name="product_dao" ref="product_dao"/>
 	</beans:bean>
 	

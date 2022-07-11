@@ -27,15 +27,14 @@ public class MainPageController {
 	 @RequestMapping("list.do")
 	 public String list() {
 		 
+		 
+		 
+		 
 		 String visitCookie = "";
 		 String visitCookieCnt = "";
 		 
-		 Cookie cookie = new Cookie("visitCookie", "visitCookieCnt");
-		 Response.
-		 
-		 
 		 //admin 陛老 规巩荐 cookie积己
-		
+		 Cookie cookie = new Cookie("visitCookie", "visitCookieCnt");
 		
 		return "admin/mainpage_list";
 	 }	
