@@ -1,4 +1,4 @@
-package dao;
+package dao.trade;
 
 public interface TradeDao {
 

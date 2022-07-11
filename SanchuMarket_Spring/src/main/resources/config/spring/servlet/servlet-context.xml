@@ -25,6 +25,16 @@
 	
 	<!-- 수동생성 -->
 	<context:annotation-config/>
+
+	<beans:bean class="controller.TradeController">
+		<beans:property name="tradeDao" ref="tradeDao"/>
+	</beans:bean>
+	<beans:bean class="controller.UserController">
+		<beans:property name="userDao" ref="userDao"/>
+	</beans:bean>
+	<beans:bean class="controller.AdminController">
+		<beans:property name="adminService" ref="adminService"/>
+	</beans:bean>	
 	<beans:bean class="controller.ProductController">
 		<beans:constructor-arg name="product_dao" ref="product_dao"/>
 		<beans:constructor-arg name="image_dao" ref="image_dao"/>

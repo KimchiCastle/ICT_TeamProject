@@ -1,4 +1,4 @@
-package dao;
+package dao.admin;
 
 public interface AdminDao {
 

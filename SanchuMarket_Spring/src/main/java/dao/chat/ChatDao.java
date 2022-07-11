@@ -1,8 +1,8 @@
-package dao;
+package dao.chat;
 
 import java.util.List;
 
-import vo.ChatVo;
+import vo.chat.ChatVo;
 
 public interface ChatDao {
 
