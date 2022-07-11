@@ -13,29 +13,29 @@ import vo.product.ProductVo;
 
 public class MyCookieList {
 	
-	ProductDao product_dao;
-	
 	
 
-	public MyCookieList(ProductDao product_dao) {
-		this.product_dao = product_dao;
-	}
-
-
-
-	public List<ProductVo> getCookieList(Cookie cookie_array[], HttpServletRequest request) throws Exception {
-
+	public static List<ProductVo> getCookieList(Cookie cookie_array[], HttpServletRequest request, ProductDao product_dao) throws Exception {
+		
+		
+		//리스트 생성
 		List<ProductVo> cookielist = new ArrayList<ProductVo>();
 
+		//참조인자로 들어온 쿠키배열에 값이 있으면
 		if (cookie_array != null) {
-
+			
+			
 			for (Cookie cookie2 : cookie_array) {
 
 				String cookiename = URLDecoder.decode(cookie2.getName(), "utf-8");
+				
+				// 쿠키의 네임이 정수형이라면
 				if (cookiename.matches("-?\\d+")) {
 
+					// int형 받아온 쿠키네임 int형변환
 					int cookievalue = Integer.parseInt(cookiename);
 
+					// 쿠키네임은 p_idx이고, p_idx에 해당하는 상품정보 포장
 					ProductVo vo = product_dao.selectList2(cookievalue);
 
 					cookielist.add(vo);
@@ -44,10 +44,9 @@ public class MyCookieList {
 
 			}
 
+			// 리스트 뒤집기 최근본 상품이 제일 최상위로 가게
+			Collections.reverse(cookielist);
 		}
-		// 리스트 뒤집기 최근본 상품이 제일 최상위로 가게
-		Collections.reverse(cookielist);
-
 
 		return cookielist;
 	}
