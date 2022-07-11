@@ -15,14 +15,12 @@ public class ProductVo {
 	String p_condition; //상품상태
 	String p_exp;		//상품설명
 	String p_location;	//거래지역
-	String p_click;		//상품조회수
+	int p_click;		//상품조회수
 	String p_status;	//거래상태
 	String p_time;		//몇초, 몇분, 몇시간, 몇일 전
 	String u_name;
 	
 	List<ImageVo> image_list;
-	
-	
 	
 	
 	
@@ -54,7 +52,7 @@ public class ProductVo {
 
 
 	public ProductVo(int u_idx, int c_idx, String p_name, int p_price, String p_condition, String p_exp,
-			String p_location, String p_click, String p_status) {
+			String p_location, int p_click, String p_status) {
 		super();
 		this.u_idx = u_idx;
 		this.c_idx = c_idx;
@@ -140,11 +138,11 @@ public class ProductVo {
 		this.p_location = p_location;
 	}
 
-	public String getP_click() {
+	public int getP_click() {
 		return p_click;
 	}
 
-	public void setP_click(String p_click) {
+	public void setP_click(int p_click) {
 		this.p_click = p_click;
 	}
 
@@ -162,7 +160,7 @@ public class ProductVo {
 		
 		for(ImageVo vo : image_list) {
 			
-			System.out.println(vo.getSumimage().toString());
+			System.out.println(vo.getImagedata().toString());
 			
 		}
 		
