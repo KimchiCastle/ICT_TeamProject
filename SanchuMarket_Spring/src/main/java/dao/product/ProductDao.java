@@ -13,7 +13,7 @@ public interface ProductDao {
 
 		
 	// 카테고리별 조회
-	public List<ProductVo> selectList(String c_idx);
+	public List<ProductVo> selectList_cate(int c_idx);
 		
 	//u_idx 유저정보 넘김
 	public List<ProductVo> selectList(int u_idx);
@@ -40,6 +40,9 @@ public interface ProductDao {
 	public List<ProductVo> selectList(Map map);
 	
 	public int selectMaxIdx();
-	
+
+//	//상품리스트 테스트
+//	public List<ProductVo> select();
+//	
 	
 }

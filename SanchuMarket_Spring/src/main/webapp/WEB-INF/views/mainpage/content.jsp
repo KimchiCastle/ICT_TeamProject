@@ -122,7 +122,7 @@ transform: translateX(-50%);
 	<a class="a_tag" href="../product/insert_form.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
 	
 		<c:forEach var="image" items="${ vo.image_list }">
-			<div id="p_photo"><img id="img" src="../imgdata/${ image.sumimage }"></div>
+			<div id="p_photo"><img id="img" src="${ pageContext.request.contextPath }/resources/imgdata/${ image.imagedata }"></div>
 		</c:forEach>
 			
 			<div class="price_tag">
