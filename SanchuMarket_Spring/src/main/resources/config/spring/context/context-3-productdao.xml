@@ -7,8 +7,4 @@
    <bean id="product_dao" class="dao.product.ProductDaoImpl">
       <constructor-arg  ref="sqlSession"/>
    </bean>
-   
-   
-   
-   
 </beans>
