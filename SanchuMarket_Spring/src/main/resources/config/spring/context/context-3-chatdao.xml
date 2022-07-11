@@ -5,5 +5,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<bean id="chatDao" class="dao.chat.ChatDaoImpl"></bean>
+	<bean id="chat_dao" class="dao.chat.ChatDaoImpl">
+		<property name="sqlSession" ref="sqlSession"/>
+	</bean>
 </beans>

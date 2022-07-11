@@ -5,5 +5,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<bean id="adminDao" class="dao.admin.AdminDaoImpl"></bean>
+	<bean id="admin_dao" class="dao.admin.AdminDaoImpl">
+		<property name="sqlSession" ref="sqlSession"/>
+	</bean>
 </beans>

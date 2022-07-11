@@ -39,7 +39,7 @@ public interface ProductDao {
 	//상품검색
 	public List<ProductVo> selectList(Map map);
 	
-
+	public int selectMaxIdx();
 	
 	
 }

@@ -27,10 +27,10 @@
 	<context:annotation-config/>
 
 	<beans:bean class="controller.TradeController">
-		<beans:property name="tradeDao" ref="tradeDao"/>
+		<beans:property name="trade_dao" ref="trade_dao"/>
 	</beans:bean>
 	<beans:bean class="controller.UserController">
-		<beans:property name="userDao" ref="userDao"/>
+		<beans:property name="user_dao" ref="user_dao"/>
 	</beans:bean>
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>

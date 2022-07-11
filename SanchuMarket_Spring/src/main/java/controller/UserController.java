@@ -23,11 +23,12 @@ public class UserController {
 	 @Autowired 
 	 HttpServletRequest request;
 	 
-	UserDao userDao;
+	UserDao user_dao;
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
+	public void setUser_dao(UserDao user_dao) {
+		this.user_dao = user_dao;
 	}
-	
+
+
 	
 }
