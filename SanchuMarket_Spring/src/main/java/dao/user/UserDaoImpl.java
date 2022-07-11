@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import vo.user.UserVo;
 
-public class UserDaoImpl {
+public class UserDaoImpl implements UserDao{
 
 	SqlSession sqlSession;
 
