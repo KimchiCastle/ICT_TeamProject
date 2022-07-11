@@ -59,4 +59,8 @@
 		<!-- 컨스트럭터든 세터든 인젝션 넣으시오 -->
 	</beans:bean>
 	
+	<beans:bean class="controller.MainPageController">
+		<beans:constructor-arg ref="product_dao"/>
+	</beans:bean>
+	
 </beans:beans>

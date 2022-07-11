@@ -26,7 +26,7 @@ public class ProductDaoImpl implements ProductDao {
 
 
 	@Override
-	public List<ProductVo> selectList(String c_idx) {
+	public List<ProductVo> selectList_cate(int c_idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.product_c_idx", c_idx);
 	}
@@ -86,6 +86,9 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_max_idx");
 	}
+
+
+	
 
 	
 
