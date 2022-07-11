@@ -1,4 +1,4 @@
-package dao;
+package dao.product;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,6 @@ public interface ProductDao {
 	
 	//상품정보 넘김
 	public ProductVo selectList2(int p_idx);
-	
 
 	//최근 상품 조회(mainpage_admin)
 	public List<ProductVo> selectRecentList();
@@ -39,11 +38,8 @@ public interface ProductDao {
 		
 	//상품검색
 	public List<ProductVo> selectList(Map map);
-
-
-
-
 	
+
 	
 	
 }

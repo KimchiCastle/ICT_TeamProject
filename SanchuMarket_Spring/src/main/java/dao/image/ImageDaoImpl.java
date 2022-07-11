@@ -1,54 +1,36 @@
-package dao;
+package dao.image;
 
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import vo.ImageVo;
+import vo.image.ImageVo;
 
 public class ImageDaoImpl implements ImageDao {
 
 	SqlSession sqlSession;
-	
 
-	public void setSqlSession(SqlSession sqlSession) {
+	public ImageDaoImpl(SqlSession sqlSession) {
+		super();
 		this.sqlSession = sqlSession;
 	}
 
 	public int insert(ImageVo vo) {
 		// TODO Auto-generated method stub
 		
-		int res = 0;
-		
-		
-		
-		res = sqlSession.insert("image.image_insert",vo);
-		
-		
-		sqlSession.close();
-		
-		
-		return res;
+		return sqlSession.insert("image.image_insert",vo);
 	}
 
 	public ImageVo selectOne(int p_idx) {
 		// TODO Auto-generated method stub
 		
-		ImageVo vo = null;
-		
-		vo = sqlSession.selectOne("image.image_selectOne", p_idx);
-	
-		
-		return vo;
+		return sqlSession.selectOne("image.image_selectOne", p_idx);
 	}
 
 	public List<ImageVo> selectList() {
 		// TODO Auto-generated method stub
-		List<ImageVo> list = null;
 		
-		list = sqlSession.selectList("image_list_p_idx");
-		
-		return list;
+		return  sqlSession.selectList("image_list_p_idx");
 	}
 	
 	

@@ -25,6 +25,7 @@
 	
 	<!-- 수동생성 -->
 	<context:annotation-config/>
+
 	<beans:bean class="controller.TradeController">
 		<beans:property name="tradeDao" ref="tradeDao"/>
 	</beans:bean>
@@ -33,6 +34,19 @@
 	</beans:bean>
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>
+	<beans:bean class="controller.ProductController">
+	
+		<beans:constructor-arg name="product_dao" ref="product_dao"/>
+	</beans:bean>
+	
+<!-- 	<beans:bean class="controller.MypageController">
+		<beans:property name="userDao" ref="userDao"/>
+	</beans:bean> -->
+	<beans:bean class="controller.UserController">
+		<!-- 컨스트럭터든 세터든 인젝션 넣으시오 -->
+	</beans:bean>
+	<beans:bean class="controller.MypageController">
+		<!-- 컨스트럭터든 세터든 인젝션 넣으시오 -->
 	</beans:bean>
 	
 </beans:beans>

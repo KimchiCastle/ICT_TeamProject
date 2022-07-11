@@ -1,12 +1,11 @@
-package dao;
+package dao.image;
 
 import java.util.List;
 
-import vo.ImageVo;
+import vo.image.ImageVo;
 
 public interface ImageDao {
 
-	
 
 	public int insert(ImageVo vo);
 	
