@@ -6,12 +6,13 @@ drop table image cascade constraints
 --이미지 테이블 데이터 전체삭제 (실제 파일은 삭제 안됨!!)
 delete from image
 
+create sequence image_idx
 
 create table image
 (
 	i_idx		int,
 	p_idx		int, 			--상품번호
-	sumimage	varchar2(4000)	--사진
+	imagedata	varchar2(4000)	--사진
 );
 
 ---------------------- 제약조건 ---------------------

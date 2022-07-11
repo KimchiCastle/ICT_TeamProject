@@ -80,6 +80,13 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectList("product.product_list_search",map);
 	}
 
+
+	@Override
+	public int selectMaxIdx() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product.product_max_idx");
+	}
+
 	
 
 	

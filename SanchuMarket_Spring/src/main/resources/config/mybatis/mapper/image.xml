@@ -5,15 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="image">
 	
 	<!-- 이미지 등록  -->
-	<insert id="image_insert" parameterType="vo.image.ImageVo">
+	<insert id="image_insert"  parameterType="vo.image.ImageVo">
 		insert into image values(
+		image_idx.nextVal,
 		(select max(p_idx) from product),
-		 #{sumimage},
-		 #{imageFile1},
-		 #{imageFile2},
-		 #{imageFile3},
-		 #{imageFile4},
-		 #{imageFile5}
+		 #{imagedata}
 		 )
 	</insert>
 	

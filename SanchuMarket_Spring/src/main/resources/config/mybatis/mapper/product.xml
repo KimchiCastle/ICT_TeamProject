@@ -66,13 +66,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from image where p_idx=#{p_idx}
 	</select>
 	
-	
+	<select id="product_max_idx" resultType="int">
+		select nvl(max(p_idx),0) from product
+	</select>
 	
 	
 
 	<insert id="product_insert" parameterType="vo.product.ProductVo">
 		insert into product values(
-		(select nvl(max(p_idx)+1,1) from product),
+		(select nvl(max(p_idx),0)+1 from product),
 		 #{u_idx},
 		 #{c_idx},
 		 #{p_name},

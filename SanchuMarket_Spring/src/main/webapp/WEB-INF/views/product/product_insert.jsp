@@ -984,7 +984,7 @@
 						<span class="pro_info" id="img_number">(0/6)</span>
 						<span style="color: red">*</span>
 						<input type="image" id="imgup" onclick="img_preview();"
-								src="../imgdata/image_upload.png" width="150px" height="150px">
+								src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="150px" height="150px">
 						</td>
 					<td class="td2" align="left">
 					
