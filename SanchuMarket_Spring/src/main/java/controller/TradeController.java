@@ -23,11 +23,13 @@ public class TradeController {
 	 @Autowired 
 	 HttpServletRequest request;
 	 
-	 TradeDao tradeDao;
+	 TradeDao trade_dao;
 
-	public void setTradeDao(TradeDao tradeDao) {
-		this.tradeDao = tradeDao;
+	public void setTrade_dao(TradeDao trade_dao) {
+		this.trade_dao = trade_dao;
 	}
+
+
 	 
 	 
 }

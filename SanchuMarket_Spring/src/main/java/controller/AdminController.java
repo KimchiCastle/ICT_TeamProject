@@ -35,18 +35,18 @@ public class AdminController {
 	 public String list() {
 		 
 		 //쿠키받을때 request
-		 Cookie[] list = request.getCookies();//메인페이지에서 형성된 쿠키수만큼의 list길이 기 형성
+		//메인페이지에서 형성된 쿠키수만큼의 list길이 기 형성
+			/*
+			 * Cookie[] list = request.getCookies();
+			 * 
+			 * int visitCookieCnt = 0;
+			 * 
+			 * for(int i = 0; list != null && i < list.length; i++) {
+			 * if(list[i].getName().equals("visitCookie")) { visitCookieCnt =
+			 * Integer.parseInt(list[i].getValue()); break; } }
+			 */
 			
-			int visitCookieCnt = 0;
-			
-			for(int i = 0; list != null && i < list.length; i++) {
-				if(list[i].getName().equals("visitCookie")) {
-					visitCookieCnt = Integer.parseInt(list[i].getValue());
-					break;
-				}
-			}
-			
-		 return "mainpage_admin";
+		 return "admin/mainpage_admin";
 	 }
 	 
 	 
