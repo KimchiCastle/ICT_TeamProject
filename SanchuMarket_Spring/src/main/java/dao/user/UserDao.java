@@ -1,8 +1,8 @@
-package dao;
+package dao.user;
 
 import java.util.List;
 
-import vo.UserVo;
+import vo.user.UserVo;
 
 public interface UserDao {
 

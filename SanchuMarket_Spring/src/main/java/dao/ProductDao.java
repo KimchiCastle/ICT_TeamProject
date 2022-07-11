@@ -3,7 +3,7 @@ package dao;
 import java.util.List;
 import java.util.Map;
 
-import vo.ProductVo;
+import vo.product.ProductVo;
 
 public interface ProductDao {
 
