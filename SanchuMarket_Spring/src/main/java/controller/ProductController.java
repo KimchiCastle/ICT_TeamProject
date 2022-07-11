@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.product.ProductDao;
-import vo.product.ProductVo;
 
 @Controller
 @RequestMapping("/product/")

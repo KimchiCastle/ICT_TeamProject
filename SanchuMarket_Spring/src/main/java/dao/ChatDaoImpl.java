@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import vo.ChatVo;
+import vo.chat.ChatVo;
 
 public class ChatDaoImpl implements ChatDao{
 	
