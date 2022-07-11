@@ -41,6 +41,13 @@
 		}).open();
 	}
 	function send(f) {
+		
+		//실행 전 세션 존재 확인
+		if(${user} == null){
+			alert('세션이 만료됐습니다.\n로그인 창으로 이동합니다.');
+			location.href = "../user/login_form.do";
+		} 
+		
 		var u_name = f.u_name.value.trim();
 		var u_pwd = f.u_pwd.value.trim();
 		var u_zipcode = f.u_zipcode.value.trim();
@@ -88,19 +95,10 @@
 				alert('세션이 만료됐습니다.\n로그인 창으로 이동합니다.');
 				location.href = "../user/login_form.do";
 			} 
+			alert('정말 취소하시겠습니까?')
 			
-			Swal.fire({
-			  title: '정말 탈퇴하시겠습니까?',
-			  text: "탈퇴시 계정을 다시 복구시킬 수 없습니다.",
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: '탈퇴',
-			  cancelButtonText: '취소'
-			}).then((result) => {
 			  if (result.value) {
-		          location.href='../user/withdraw.do';
+		          location.href='../mypage/withdraw.do';
 			  }
 			})
 		}
@@ -174,7 +172,13 @@
 				</tr>
 				<tr>
 					<th>사진등록</th>
-					<td>사진등록폼 추가예정</td>
+					<td><input type="image" id="imgup" onclick="img_preview();"
+								src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="150px" height="150px">
+					</td>
+					<!-- 파일업로드 용 폼 -->
+						<form enctype="multipart/form-data" id="imgform" method="post">
+						<input type="file" id="sumimage"   style="display: none;" accept=".jpg, .jpeg, .png">
+						</form>
 				</tr>
 
 
