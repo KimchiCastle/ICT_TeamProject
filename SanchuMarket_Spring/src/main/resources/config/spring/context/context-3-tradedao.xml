@@ -5,5 +5,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<bean id="tradeDao" class="dao.trade.TradeDaoImpl"></bean>
+	<bean id="trade_dao" class="dao.trade.TradeDaoImpl">
+		<property name="sqlSession" ref="sqlSession"/>
+	</bean>
 </beans>
