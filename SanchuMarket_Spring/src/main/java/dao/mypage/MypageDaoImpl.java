@@ -1,7 +1,10 @@
 package dao.mypage;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import vo.product.ProductVo;
 import vo.user.UserVo;
 
 public class MypageDaoImpl implements MypageDao {
@@ -23,6 +26,12 @@ public class MypageDaoImpl implements MypageDao {
 	public int withdraw_user(int u_idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("user_market.user_market_withdraw",u_idx);
+	}
+
+	@Override
+	public List<ProductVo> selectList(int u_idx) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

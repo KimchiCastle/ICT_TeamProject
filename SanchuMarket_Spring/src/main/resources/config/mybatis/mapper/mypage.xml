@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	<!-- 내 판매물품 조회 -->
-	<select id="product_user_idx" parameterType="int" resultType="vo.ProductVo">
+	<select id="product_user_idx" parameterType="int" resultType="vo.product.ProductVo">
 		select
 			* 
 		from  product where u_idx=#{u_idx} order by p_idx desc
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 업데이트 -->
-	<update id="mypage_update" parameterType="vo.UserVo">
+	<update id="mypage_update" parameterType="vo.user.UserVo">
 		update user_market set u_pwd=#{u_pwd},u_zipcode=#{u_zipcode},u_addr=#{u_addr},u_profile=#{u_profile} where u_idx=#{u_idx} 
 	</update>
 	

@@ -77,6 +77,7 @@ public class UserController {
 			result = "N";
 		}
 		
+		System.out.println(result);
 		Map map = new HashMap();
 		
 		map.put("result", result);
