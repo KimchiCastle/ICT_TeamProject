@@ -32,9 +32,13 @@
 	<beans:bean class="controller.UserController">
 		<beans:property name="user_dao" ref="user_dao"/>
 	</beans:bean>
+	<beans:bean class="controller.VisitController">
+		<beans:property name="visit_dao" ref="visit_dao"/>
+	</beans:bean>	
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>
 	</beans:bean>	
+	
 	
 	<!-- 상품등록 관련 컨트롤러 -->
 	<beans:bean class="controller.ProductController">

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="trade">
 
 	<!--금일 상품 거래량-->
-	<select id="today_count">
+	<select id="today_count" resultType="int">
 	  select count(*) from trade where to_char(t_date,'dd') = to_char(sysdate, 'dd')
 	</select>
 

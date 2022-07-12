@@ -7,6 +7,8 @@ import java.util.Map;
 import dao.chat.ChatDao;
 import dao.product.ProductDao;
 import dao.trade.TradeDao;
+import dao.user.UserDao;
+import dao.visit.VisitDao;
 import vo.chat.ChatVo;
 import vo.product.ProductVo;
 
@@ -15,16 +17,19 @@ public class AdminServiceImpl implements AdminService {
 	ProductDao product_dao;
 	ChatDao chat_dao;
 	TradeDao trade_dao;
+	UserDao user_dao;
+	VisitDao visit_dao;
 	
-
-
-	public AdminServiceImpl(ProductDao product_dao, ChatDao chat_dao, TradeDao trade_dao) {
+	
+	public AdminServiceImpl(ProductDao product_dao, ChatDao chat_dao, TradeDao trade_dao, UserDao user_dao,
+			VisitDao visit_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.chat_dao = chat_dao;
 		this.trade_dao = trade_dao;
+		this.user_dao = user_dao;
+		this.visit_dao = visit_dao;
 	}
-
 
 	@Override
 	public Map list() {
@@ -34,10 +39,16 @@ public class AdminServiceImpl implements AdminService {
 		List<ChatVo> ch_list = chat_dao.SelectRecentList();
 		
 		//금일 상품업로드
-		int today_p_count = product_dao.selectTodayCount();
+		int today_p_count = product_dao.todayProductCount();
 		
 		//금일 거래량
-		int today_t_count = trade_dao.selectTodayCount();
+		int today_t_count = trade_dao.todayTradeCount();
+		
+		//금일 방문자수
+		int today_v_count = visit_dao.todayVisitCount();
+		
+		//금일 가입자수
+		int today_u_count = user_dao.todayEnrollCount();
 
 		Map map = new HashMap();
 		
@@ -45,6 +56,8 @@ public class AdminServiceImpl implements AdminService {
 		map.put("ch_list", ch_list);
 		map.put("today_p_count",today_p_count);
 		map.put("today_t_count",today_t_count);
+		map.put("today_v_count",today_v_count);
+		map.put("today_u_count",today_u_count);
 		
 		//service의 모든 joinpoint들이 advice로 넘어가는 로깅이 1.234초 후에 뜬다. 
 		//list메소드 호출 간격을 1.234초 유지시키는것.

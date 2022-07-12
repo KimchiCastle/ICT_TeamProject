@@ -491,7 +491,7 @@ select {
 	            url: "check_email.do?u_mail=" + email,
 	            success : function(data) {
 					//db에 존재하는 닉네임 없으면 data=y 넘어옴
-	                if (data == "Y") {
+	                if (data.result == "Y") {
 	                	 if (event == "first") {
 	                		 showSuccessMsg(oMsg, "사용 가능한 이메일입니다.");
 	                		
@@ -536,30 +536,33 @@ select {
 	        $.ajax({
 	            type:"GET",
 	            url: "check_id.do?u_id=" + id,
-	            
+	            dataType: 'json',
 	            success : function(data) {
 					//db에 존재하는 아이디 없으면 data=y 넘어옴
-	                if (data == "Y") {
+					console.log(data);
+	                if (data.result == "Y") {
 	                	if (event == "first") {
+	                	  console.log("1");
 	                	  showSuccessMsg(oMsg, "사용 가능한 아이디입니다.");
 	                	   return;
-	                    }else if(data == "N"){
-	                       showErrorMsg(oMsg,"존재하는 아이디입니다.");//호출하고 직후만 메시지 띄우려고..?
-	                       return;
-	                    }
-	                    idFlag = true;
-	                    
-	                    if ( id == '') {
-	                  	  showErrorMsg(oMsg,'필수정보입니다.');
-	                        setFocusToInputObject(oInput);	         
-	                        return;
-	                      }
+	                	}
+	                }else{
+                      console.log("2");
+                      showErrorMsg(oMsg,"존재하는 아이디입니다.");//호출하고 직후만 메시지 띄우려고..?
+                      return;
+	                	 }
+					
+                    idFlag = true;
+                    console.log("3");
+                    
+                    if ( id == '') {
+                    	console.log("4");
+                  	  showErrorMsg(oMsg,'필수정보입니다.');
+                        setFocusToInputObject(oInput);	         
+                        return;
+                    }
 
-	                } else { 
-	                    showErrorMsg(oMsg, "이미 사용중인 아이디입니다.");
-	                    setFocusToInputObject(oInput);
-	                    return;
-	                }
+	                 
 	            }
 	        });//end ajax
 	        return true;

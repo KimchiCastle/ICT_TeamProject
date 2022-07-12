@@ -70,8 +70,7 @@ $(document).ready(function(){
 					<th>사진</th>
 					<th>상품명</th>
 					<th>가격</th>
-					<th>판매상태</th>
-					<th>올린날짜</th>
+					<th>판매여부</th>
 					<th>기능</th>
 				</tr>
 				<br>
@@ -79,7 +78,7 @@ $(document).ready(function(){
 				<!-- data없는 경우 -->
 				<c:if test="${empty list}">
 					<tr>
-						<td colspan="6" align="center">
+						<td colspan="5" align="center">
 						<font color="red">등록된 상품이 없습니다</font></td>
 					</tr>
 				</c:if>
@@ -90,7 +89,6 @@ $(document).ready(function(){
 						<td>${vo.p_name }</td>
 						<td>${vo.price }</td>
 						<td>${vo.p_status }</td>
-						<td>${vo.p_date }</td>
 						<td align="center">
 							<input id="button" type="button" value="상세정보보기"onclick="location.href='/product/detail.do';"><br> 
 							<input id="button" type="button" value="삭제하기" onclick="del('${vo.p_idx}');">

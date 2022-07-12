@@ -54,7 +54,7 @@ public class ProductDaoImpl implements ProductDao {
 
 
 	@Override
-	public int selectTodayCount() {
+	public int todayProductCount() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.today_count");
 	}
