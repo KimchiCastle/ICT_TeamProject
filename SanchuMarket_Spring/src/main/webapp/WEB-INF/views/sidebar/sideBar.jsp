@@ -119,11 +119,17 @@
 		  url 	: "${pageContext.request.contextPath}/list_cookie.do",
 		  data	: {'cookie_page': curr_page},
 		  success:function(res_data){
+			  
 			  $("#disp").html(res_data);
 			  
 		  }
 		  
 	  });
+	  
+	  
+	  
+	  
+	  
 	  
   }
 
