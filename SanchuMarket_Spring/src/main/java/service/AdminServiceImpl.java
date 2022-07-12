@@ -31,10 +31,6 @@ public class AdminServiceImpl implements AdminService {
 		this.visit_dao = visit_dao;
 	}
 
-
-
-
-
 	@Override
 	public Map list() {
 		
