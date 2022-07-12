@@ -22,7 +22,6 @@ alter table image
 	add constraint pk_image_i_idx primary key(i_idx);
 
 
-select * from image
 
 
 insert into image
@@ -39,6 +38,11 @@ null
 select * from image
 select p_idx, sumimage from image 
 select * from product
+
+select * from (select * from image where p_idx=3  order by i_idx) where ROWNUM  = 1
+
+
+
 
 */
 

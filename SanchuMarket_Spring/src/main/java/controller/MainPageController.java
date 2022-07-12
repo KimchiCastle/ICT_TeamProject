@@ -44,7 +44,7 @@ public class MainPageController {
 	 public String list(Model model,  @RequestParam(value="c_idx",required = false ,defaultValue="null")String 	c_idx
 			 				 , @RequestParam(value="searchtext", required = false , defaultValue="all") String searchtext) {
 		 
-		 System.out.println(c_idx);
+//		 System.out.println(c_idx);
 		// ,
 		//		
 		 

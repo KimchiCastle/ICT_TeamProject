@@ -61,10 +61,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	
   	</select>
 	
-	<!-- ResultMap 호출  -->
-	<select id="image_list_p_idx" resultType="vo.image.ImageVo">
-		select * from image where p_idx=#{p_idx} order by i_idx
-	</select>
 	
 	<!-- 상품등록시 p_idx 알아내기 -->
 	<select id="product_max_idx" resultType="int">
@@ -88,13 +84,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 #{p_status})
 	</insert>
 	
+	<!-- ResultMap 호출,  섬네일 이미지만 포장함  -->
+	<select id="image_list_p_idx" resultType="vo.image.ImageVo">
+		select * from (select * from image where p_idx=#{p_idx} order by i_idx) where ROWNUM  = 1
+	</select>
+	
 	<!--최근 상품 업로드 게시물 6개 조회-->
 	<select id="recent_product" resultType="vo.product.ProductVo">
 	<![CDATA[ select * from (select * from product order by #{p_idx} desc) where ROWNUM  <= 6]]>
 	</select>		
 	
-	<!--금일 상품 업로드량-->
-	<select id="today_count">
+	<!--admin mainpage금일 상품 업로드량-->
+	<select id="today_count" resultType="int">
 	  select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 	</select>
 	
