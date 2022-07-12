@@ -32,8 +32,9 @@ public interface UserDao {
 	//회원가입시 이메일 중복 방지
 	public UserVo selectOneByEmail(String email);
 	
-	//admin mainpage 금일 방문수
-	public int selectTodayCount();
+	
+	//admin mainpage 금일 가입수
+	public int todayEnrollCount();
 	
 		
 	public int insert(UserVo vo);

@@ -70,6 +70,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   delete from user_market where u_id=#{u_id}
 	</delete>
 	
+	<select id="enroll_count" resultType="int">
+		select count(*) from user where to_char(u_regdate,'dd') = to_char(sysdate, 'dd')	
+	</select>
+	
 </mapper>
 
 

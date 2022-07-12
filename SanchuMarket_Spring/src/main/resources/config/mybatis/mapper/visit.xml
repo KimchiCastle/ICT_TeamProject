@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="visit">
+
+	<!--admin page 금일 방문자수-->
+  <select id="today_count" resultType="vo.visit.VisitVo">
+	select count(*) from visit where to_char(,'dd') = to_char(sysdate, 'dd')
+  </select>
+
+</mapper>

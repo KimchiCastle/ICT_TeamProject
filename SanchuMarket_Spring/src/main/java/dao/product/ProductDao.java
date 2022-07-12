@@ -26,7 +26,7 @@ public interface ProductDao {
 	public List<ProductVo> selectRecentList();
 		
 	
-	public int selectTodayCount();
+	public int todayProductCount();
 		
 	
 	// 상품등록 메서드
