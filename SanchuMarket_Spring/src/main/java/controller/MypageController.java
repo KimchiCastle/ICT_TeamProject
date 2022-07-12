@@ -33,12 +33,12 @@ public class MypageController {
 	}
 	
 	@RequestMapping("list.do")
-	public String list(Model model, int u_idx) {
+	public String list(Model model) {
 		
 		//로그인 정보 읽어오기
-		UserVo u_idx1 = (UserVo) session.getAttribute("u_idx");
+		UserVo u_idx = (UserVo) session.getAttribute("u_idx");
 		
-		return"";
+		return"mypage_main";
 	}
 	
 
