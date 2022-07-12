@@ -11,10 +11,8 @@
 	<c:forEach var="cookielist" items="${ cookielist }">
 		<c:forEach var="recentimg" items="${ cookielist.image_list }">
 			<div class="recent_hober">
-				<a href="#">
-				<span class="recent_content"><img class="recentimg"
-					src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
-				<span id="recent_name">${ cookielist.p_name }</span></span></a>
+				<div class="recent_content"><img class="recentimg"
+					src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }"> </div>
 				
 				<img class="recentimg"
 					src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
