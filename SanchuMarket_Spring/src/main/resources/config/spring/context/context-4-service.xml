@@ -8,6 +8,8 @@
 	    <constructor-arg ref="product_dao"/>
 	    <constructor-arg ref="chat_dao"/>
 	    <constructor-arg ref="trade_dao"/>
+	    <constructor-arg ref="user_dao"/>
+	    <constructor-arg ref="visit_dao"/>
 	</bean>
 	
 </beans>

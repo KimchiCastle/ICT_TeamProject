@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <!--chartJS CDN-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script defer src="chart.js"></script>
+<script defer src="../resources/chart.js"></script>
 
 <style>
 body{
@@ -165,8 +165,8 @@ th{
 	   </tr>
 	   
 	   <tr>
-	     <th>132명</th>
-	     <th>23명</th>
+	     <th></th>
+	     <th></th>
 	   </tr>
 	   
 	 </table> 	

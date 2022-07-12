@@ -62,20 +62,18 @@ public class UserDaoImpl implements UserDao{
 		
 	}
 	
-	
-	//admin mainpage 금일 방문수
-	public int selectTodayCount() {
-
-		return sqlSession.selectOne("trade.today_count");
+	//admin mainpage 금일 가입수
+	public int todayEnrollCount() {
+		
+		return sqlSession.selectOne("user.enroll_count");
 	}
 		
 	
 	public int insert(UserVo vo) {
-		
 
 		return sqlSession.insert("user.user_insert", vo);
-		
 	}
+	
 
 	public int update(UserVo vo) {
 
@@ -88,5 +86,6 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.delete("user.withdraw_account", u_id);
 		
 	}
+
 	
 }
