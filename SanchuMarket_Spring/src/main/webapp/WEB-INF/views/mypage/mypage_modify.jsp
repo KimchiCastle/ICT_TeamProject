@@ -141,7 +141,7 @@
 				<div class="panel-body">
 			<table id="table"  class="table table-stiped">
 			
-				<input type="hidden" name="u_idx" value="${vo.u_idx }">
+				<input type="hidden" name="u_idx" value="${user.u_idx }">
 
 				<tr>
 					<th>이름</th>
@@ -177,7 +177,7 @@
 					</td>
 					<!-- 파일업로드 용 폼 -->
 						<form enctype="multipart/form-data" id="imgform" method="post">
-						<input type="file" id="sumimage"   style="display: none;" accept=".jpg, .jpeg, .png">
+							<input type="file" id="sumimage"   style="display: none;" accept=".jpg, .jpeg, .png">
 						</form>
 				</tr>
 

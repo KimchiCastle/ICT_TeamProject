@@ -7,10 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	<!-- 내 판매물품 조회 -->
-	<select id="product_user_idx" resultMap="product_map">
+	<select id="product_user_idx" parameterType="int" resultType="vo.ProductVo">
 		select
-			p.* 
-		from (select * from product) p where u_idx=#{u_idx} order by p_idx desc
+			* 
+		from  product where u_idx=#{u_idx} order by p_idx desc
 	</select>
 	
 	<!-- 삭제시 u_status 탈퇴로 변경 -->
@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 업데이트 -->
-	<update id="update_mypage" parameterType="int">
-		update user_market set u_idx=#{u_idx}, u_name=#{u_name}, u_pwd=#{u_pwd},u_zipcode=#{u_zipcode},u_addr=#{u_addr} 
+	<update id="mypage_update" parameterType="vo.UserVo">
+		update user_market set u_pwd=#{u_pwd},u_zipcode=#{u_zipcode},u_addr=#{u_addr},u_profile=#{u_profile} where u_idx=#{u_idx} 
 	</update>
 	
 
