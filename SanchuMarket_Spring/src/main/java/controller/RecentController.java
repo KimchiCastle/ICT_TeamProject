@@ -81,7 +81,7 @@ public class RecentController {
 			//i위치에 해당하는 최근본 상품을 vo로 포장하고,
 			ProductVo vo = cookielist2.get(i);
 			
-			vo.setImage_list( (List<ImageVo>) cookielist2.get(i).getImage_list().get(0));
+//			vo.setImage_list( (List<ImageVo>) cookielist2.get(i).getImage_list().get(0));
 			
 			//실제 뿌려질 ArrayList에 add
 			cookielist.add(vo);
