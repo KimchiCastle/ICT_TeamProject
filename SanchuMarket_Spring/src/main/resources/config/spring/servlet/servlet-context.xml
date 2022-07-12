@@ -41,6 +41,7 @@
 		<beans:constructor-arg ref="product_dao"/>
 		<beans:constructor-arg ref="image_dao"/>
 	</beans:bean>
+	
 	<!-- 최근본상품 -->
 	<beans:bean class="controller.RecentController">
 		<beans:constructor-arg ref="product_dao"/>
