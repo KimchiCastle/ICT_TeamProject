@@ -48,6 +48,7 @@ transform: translateX(-50%);
 	margin-right: 14px;
 	margin-bottom: 15px;
 	float: left;
+	z-index: 1;
 }
 
 

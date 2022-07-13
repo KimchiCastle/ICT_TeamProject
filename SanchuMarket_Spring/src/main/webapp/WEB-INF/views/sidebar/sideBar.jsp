@@ -31,7 +31,7 @@
 		border: 1px solid black;
 		text-align: center;
 		width: 100px;
-		height:250px;
+		height: 280px;
 		background-color: white;
 	}
 	
@@ -52,37 +52,86 @@
 		height: 40px;
 		cursor: pointer;
 	}
+	
+	#recent_view{
+		min-height: 280px;
+	}
+	
 	.recentimg{
 		width: 60px;
 		height: 60px;
-		/* border: 1px solid rgb(240,240,240); */
+		border: 1px solid rgb(240,240,240);
+		
+		
+		
+		 
 	}
 	.recent_content{
-		text-decoration:none;
 		font-size:15px; 
 		
+		text-align:right;
+		
 		color:black;
-		text-align:left;
+		
+		outline: solid 1px black;
+		
 		background-color: white;
+		
 		display:none;
 		position: absolute;
-		width : 190px;
+		right:21px;
+		
+		
+		width : 250px;
 		height : 60px;
-		border: 1px solid black;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		
+		
+		vertical-align: top;
+		
+		cursor: pointer;
 		
 	}
+	.recent_text{
+		position: absolute;
+		right:82px;
+		
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+		color:black;
+		
+		display: inline-block;
+		
+		height: 30px;
+		width: 163px;
+	}
+	.recent_text1{
+		position: absolute;
+		top : 30px;
+		right:82px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+		color:black;
+		
+		display: inline-block;
+		
+		height: 30px;
+		width: 163px;
+	}
+	
+	
 	
 	#recent_name{
 		margin-left: 15px; 
-		vertical-align: top; 
 		
 	}
 	
-	.recent_hober:hover .recent_content{
+	.recent_hober:hover .recent_content {
 		
 		display: inline;
+		
+		
 	}
 	
 	
@@ -91,7 +140,7 @@
 <script type="text/javascript">
 
   $(function(){
-	  global_page=1;
+	 /*  global_page=1; */
 	  slider(0);
 	  
   });
@@ -102,32 +151,33 @@
 
 <script type="text/javascript">
 
-  var global_page=1;
-  function slider(page_flag){
-	  
-	  var curr_page = global_page + page_flag;
-	  //유효성 체크
-	  
-	  if(curr_page<1){
-		  return;
-	  }
-	  
-	  $("#now").text(curr_page);
-	  
-	  global_page = curr_page;
-	  $.ajax({
-		  url 	: "${pageContext.request.contextPath}/list_cookie.do",
-		  data	: {'cookie_page': curr_page},
-		  success:function(res_data){
-			  $("#disp").html(res_data);
-			  
-		  }
-		  
-	  });
-	  
-  }
 
+	var global_page = 1;
 
+	function slider(page_flag) {
+
+		var curr_page = global_page + page_flag;
+		//유효성 체크
+
+		if (curr_page < 1) {
+			return;
+		}
+
+		$("#now").text(curr_page);
+
+		global_page = curr_page;
+		$.ajax({
+			url : "${pageContext.request.contextPath}/list_cookie.do",
+			data : {'curr_page' : curr_page},
+			success : function(res_data) {
+
+				$("#disp").html(res_data);
+
+			}
+
+		});
+
+	}
 </script>
 
 
@@ -142,11 +192,11 @@
 			</div>
 				<div class="recentView" id="recentView">
 					<div id="disp"></div>
-					<div>
+					<%-- <div>
 						<button onclick="slider(-1)">&lt;</button>
 						<span id="now">1</span>/<span id="total">${ last_page }</span>
 						<button onclick="slider(1)">&gt;</button>
-					</div>
+					</div> --%>
 				</div>
 		</div>
 
@@ -155,6 +205,7 @@
 		<button id="top_button" onclick="window.scrollTo(0,0);">TOP</button>
 	</div>
 </div>
+
 
 
 </body>
