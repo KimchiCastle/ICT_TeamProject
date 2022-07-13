@@ -41,6 +41,14 @@ public interface ProductDao {
 	
 	public int selectMaxIdx();
 
+	//가격 범위 상품명 검색
+	public List<ProductVo> select_price_text_search(Map map);
+
+	//가격 범위검색
+	public List<ProductVo> select_price_search(Map map);
+	
+
+
 //	//상품리스트 테스트
 //	public List<ProductVo> select();
 //	

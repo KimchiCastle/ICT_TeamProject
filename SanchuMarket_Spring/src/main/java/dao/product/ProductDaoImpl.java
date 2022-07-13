@@ -79,13 +79,27 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.product_list_search",map);
 	}
+	
 
+	@Override
+	public List<ProductVo> select_price_text_search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.product_price_text_search",map);
+	}
 
+	@Override
+	public List<ProductVo> select_price_search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.product_price_search",map);
+	}
+	
 	@Override
 	public int selectMaxIdx() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_max_idx");
 	}
+
+
 
 
 	

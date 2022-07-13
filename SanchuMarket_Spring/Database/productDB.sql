@@ -147,9 +147,9 @@ sysdate,
 	select p.*,
   	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
   			
-  	from(select * from product)	p
+  	from(select * from product)	p where c_idx=2 and
   		
-  	where	p_name like '%食失%' or p_exp like '%せせ%' 
+  		p_name like '%食失%' or p_exp like '%せせ%' 
   	
   	order by p_idx desc
 
@@ -165,6 +165,25 @@ select
 			p.* ,
 			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 		from (select * from product) p order by p_idx desc
+
+
+
+	select p.*,
+  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+  			
+  	from(select * from product)	p where p_price between 1 and 11
+  		
+  	
+  	
+  	order by p_idx desc
+
+
+
+
+
+
+
+
 
 
 */
