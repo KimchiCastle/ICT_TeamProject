@@ -113,48 +113,6 @@ i{
     top: 15px; 
     color: #3a9188;
 }
-/* 
-int_pass_check. i{
-    position: absolute;
-    left: 75%;
-    top: 27px;
-    color: orange;
-} */
-
-/* .int_pass_check. i {
-    width: 18px;
-    height: 20px;
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    margin-top: -10px;
-    cursor: pointer;
-} */
-/* .step_url {
-    
-    position: absolute;
-    top: 16px;
-    right: 13px;
-    font-size: 15px;
-    color: #8e8e8e;
-}
-*/
-
-/* 
-select {
-    width: 100%;
-    height: 29px;
-    font-size: 15px;
-    background: #fff url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
-    background-size: 20px 8px;
-    -webkit-appearance: none;
-    display: inline-block;
-    text-align: start;
-    border: none;
-    cursor: default;
-    font-family: 'Gowun Dodum', sans-serif;
-} */
 
 /* 에러메세지 */
 
@@ -368,7 +326,7 @@ select {
     	 }
 
 			//비밀번호1 유효성 체크 함수
-  			function checkPwd(){
+  		function checkPwd(){
 	     
 	
 	        if(pwdFlag) return true;
@@ -378,20 +336,25 @@ select {
 	        var oMsg1 = $("#pwd1Msg");
 	        var oMsg2 = $("#pwd2Msg");
 	        var oInput = $("#u_pwd1");
-			/* 
+			
 	        if (pwd1 == '') {
 	            showErrorMsg(oMsg,"필수정보입니다.");
-	            alert('비밀번호6');
-	            setFocusToInputObject(oInput);
-	            return;
-	        } */
-	        
-	        //밑의 isValidPwd 함수 호출
-	        if (!isValidPwd(pwd1)) {
-	            showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 	            setFocusToInputObject(oInput);
 	            return;
 	        }
+	        
+	        if(!isValidPwd(pwd1)){
+	        	showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+	            setFocusToInputObject(oInput);
+	            return;
+	        } 
+	        
+	        //밑의 isValidPwd 함수 호출
+	       /*  if (!isValidPwd(pwd1)) {
+	            showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+	            setFocusToInputObject(oInput);
+	            return;
+	        } */
 	        
 	        if( pwd2 != '' && (pwd1 != pwd2)){
 	        	showErrorMsg(oMsg2,"비밀번호가 일치하지 않습니다.");
@@ -401,13 +364,11 @@ select {
 	        	showSuccessMsg(oMsg1,"사용 가능한 비밀번호입니다.");
 	        	hideMsg(oMsg1);
 	        	return;
-	        
-	        
-	      
-	   
-  			}  		
+  	  }  		
+			
 		//비밀번호 유효성 체크 함수(checkPwd()에 boolean반환)
 		function isValidPwd(pwd1) {
+			
 		        var cnt = 0;
 		        if (pwd1 == "") {
 		            return false;
@@ -539,24 +500,19 @@ select {
 	            dataType: 'json',
 	            success : function(data) {
 					//db에 존재하는 아이디 없으면 data=y 넘어옴
-					console.log(data);
 	                if (data.result == "Y") {
 	                	if (event == "first") {
-	                	  console.log("1");
 	                	  showSuccessMsg(oMsg, "사용 가능한 아이디입니다.");
 	                	   return;
 	                	}
 	                }else{
-                      console.log("2");
                       showErrorMsg(oMsg,"존재하는 아이디입니다.");//호출하고 직후만 메시지 띄우려고..?
                       return;
 	                	 }
 					
                     idFlag = true;
-                    console.log("3");
                     
                     if ( id == '') {
-                    	console.log("4");
                   	  showErrorMsg(oMsg,'필수정보입니다.');
                         setFocusToInputObject(oInput);	         
                         return;
