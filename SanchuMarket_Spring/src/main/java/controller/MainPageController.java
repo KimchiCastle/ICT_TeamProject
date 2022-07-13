@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,16 +44,21 @@ public class MainPageController {
 	
 	 @RequestMapping("list.do")
 	 public String list(Model model,  @RequestParam(value="c_idx",required = false ,defaultValue="null")String 	c_idx
-			 				 , @RequestParam(value="searchtext", required = false , defaultValue="all") String searchtext) {
+			 				 , @RequestParam(value="searchtext", required = false , defaultValue="all") String searchtext
+			 				 , @RequestParam(value="min_p", required = false, defaultValue="no_min" )String min_p
+			 				 , @RequestParam(value="max_p", required = false, defaultValue="no_max" )String max_p
+			 ) {
 		 
-//		 System.out.println(c_idx);
+		
 		// ,
 		//		
 		 
 			
 			// 전체목록 가져오기
-			
-		 	if( c_idx.equals("null") ) {
+		 	//	검색어가 비었고					최소가격이 비었고					
+		 	if( searchtext.equals("all") && min_p.equals("no_min") 
+	 			//최대가격이 비었고				카테고리가 비었을 때
+	 			&& max_p.equals("no_max") && c_idx.equals("null")) {
 		 		
 		 		List<ProductVo> list = product_dao.selectList();
 		 		
@@ -61,7 +68,54 @@ public class MainPageController {
 		 		
 		 		
 		 		model.addAttribute("list", list);
+		 		
+		 		return "mainpage/mainpage_list";
 		 	}
+		 	
+		 	//가격 범위 상품명 검색
+		 	//	검색어, 최소가격, 최대가격이 있을 때.
+			if(!searchtext.equals("all") && !min_p.equals("no_min") 
+					&& !max_p.equals("no_max") && c_idx.equals("null") ) {
+				
+				
+				
+				Map map = new HashMap();
+				map.put("p_name", searchtext);
+				map.put("p_exp", searchtext);
+				map.put("min_p", min_p);
+				map.put("max_p", max_p);
+				
+				List<ProductVo> list = product_dao.select_price_text_search(map);
+				
+				// 시간계산 메소드화
+				Mytime.time_cal(list);
+
+				model.addAttribute("list", list);
+				
+				return "mainpage/mainpage_list";
+			}
+			
+			//검색어 가격 범위검색
+			if(!min_p.equals("no_min") && !max_p.equals("no_max")
+					&&searchtext.equals("all") && c_idx.equals("null")) {
+				
+				System.out.println(min_p);
+				System.out.println(max_p);
+				
+				Map map = new HashMap();
+				map.put("min_p", min_p);
+				map.put("max_p", max_p);
+				
+				List<ProductVo> list = product_dao.select_price_search(map);
+				
+				// 시간계산 메소드화
+				Mytime.time_cal(list);
+
+				model.addAttribute("list", list);
+				
+				return "mainpage/mainpage_list";
+			}
+		 	
 
 			
 			// 카테고리목록 가져오기
@@ -73,6 +127,7 @@ public class MainPageController {
 
 				model.addAttribute("list", list);
 
+				return "mainpage/mainpage_list";
 			}
 //			
 //			
@@ -90,8 +145,20 @@ public class MainPageController {
 				Mytime.time_cal(list);
 
 				model.addAttribute("list", list);
+				
+				return "mainpage/mainpage_list";
 
 			}
+			
+			
+				
+				
+				
+				
+				
+				
+				
+				
 			
 //			//쿠키 생성하기(admin페이지 방문자수 집계)
 //			int cnt = 0;
