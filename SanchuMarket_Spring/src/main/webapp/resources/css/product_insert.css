@@ -20,8 +20,8 @@
 	
 	/* 인클루드 한 메인프레임 */
 	#mainframe {
-		position : absolute;
-		z-index: 999;
+		/* position : absolute; */
+		/* z-index: 999; */
 	}
 	
 	
@@ -161,9 +161,10 @@
 		width: 80%;
 	}
 	#img_zone{
+		
 		margin: auto; 
-		width: 65%; 
+		width: 100%; 
 		min-height: 50px;
-		/* background-color: black; */
+		 background-color: black; 
 	}
 	

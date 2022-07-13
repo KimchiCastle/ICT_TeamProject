@@ -33,7 +33,7 @@ public class RecentController {
 	}
 	
 	@RequestMapping("/list_cookie.do")		//		현재페이지
-	public String ProductCookieList(Model model, int cookie_page) {
+	public String ProductCookieList(Model model, int curr_page) {
 		
 		
         //한 페이지 당 보여줄 수 
@@ -44,9 +44,9 @@ public class RecentController {
         //아래처럼 하는 이유는 제로베이스이기때문(0부터 시작)
         
         // 시작번호 = 현재페이지 - 1 * 3
-		int startRow = (cookie_page - 1) * pageSize; //한 페이지의 시작글 번호
+		int startRow = (curr_page - 1) * pageSize; //한 페이지의 시작글 번호
 		// 끝번호 = 현재페이지 * 3 -1
-        int endRow = cookie_page * pageSize - 1; //한 페이지의 마지막 글번호
+        int endRow = curr_page * pageSize - 1; //한 페이지의 마지막 글번호
 		
         //메소드로 부터 받아올 쿠키리스트 
 		List<ProductVo> cookielist2 = null;
@@ -94,8 +94,10 @@ public class RecentController {
 		
 		//위에서 만들어진 ArrayList model에 Attribute
 		model.addAttribute("cookielist", cookielist);
-		model.addAttribute("last_page", last_page);
+
 		//마지막 페이지도 뿌리기.
+		model.addAttribute("curr_page", curr_page);
+		model.addAttribute("last_page", last_page);
 		
 		// forward
 		return "sidebar/cookie_list";
