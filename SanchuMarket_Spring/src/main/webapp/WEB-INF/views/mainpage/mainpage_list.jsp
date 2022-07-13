@@ -16,7 +16,15 @@ body{
 	background-color: white;
 	font-family: 'Gowun Dodum', sans-serif;
 	font-size: 18px;
+	height: 1000px;
+	
+	
 }
+
+.body{
+	z-index: 999px;
+}
+
 
 </style>
 </head>
@@ -58,7 +66,7 @@ body{
 	
 </div>
 
-	<div style="margin-top: 0px;">
+	<div style="margin-top: 0px; z-index: 2;">
 		<%@include file="content.jsp"%>
 </div>
 </body>
