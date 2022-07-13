@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/seller_page.css">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -13,119 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-<style type="text/css">
-	body{
-		font-family: 'Gowun Dodum', sans-serif;
-	}
-	
-	.i{
-		/* background-color:#ccffcc; */
-		padding-top: 145px;
-		width: 1050px;
-		margin: auto;
-	}
-	
-	#seller-box{
-		background-color: white;
-		display: inline-block; 
-		height: 300px; 
-		width: 100%;
-		border: 1px solid rgb(230, 230, 230);
-	}
-	
-	#seller-pictrue{
-		
-		float:left;
-		display: inline-block;
-		height: 300px;
-		/* background-color: #ccccff; */
-		width: 300px;
-		
-	}
-	#seller-page1{
-		
-		clear:both;
-		
-		height: 300px;
-		/* background-color: #ffcccc; */
-		width: 750px;
-		display: inline-block;
-	}
-	#seller-page2{
-		margin-left:20px;
-		height: 100%;
-		/* background-color: #cccccc; */
-		width: 95%;
-		display: inline-block;
-	}
 
-	#seller-info1{
-		
-		justify-content: space-between;
-		display: flex;
-		align-items: center;
-		width:100%;
-		height: 25%;
-		/* background-color: #ccffcc; */
-	}
-		
-	#seller-info2{
-		justify-content: space-between;
-		display: flex;
-    	align-items: center;
-		width: 100%;
-		height: 100px;
-		border-top: 1px solid rgb(230, 230, 230);
-		border-bottom: 1px solid rgb(230, 230, 230);
-		
-	
-	}
-	
-	#seller-info3{
-		
-		/* float:left; */
-		display: flex;
-		width: 100%;
-		height: 30%;
-		/* background-color: #eeffee; */
-	
-	}
-	#seller-info4{
-		
-		/* float:left; */
-		display: flex;
-		width: 100%;
-		height: 20%;
-		/* background-color: #ffeeee; */
-	
-	}
-	
-	#nickname{
-		font-size: 25px;
-		height: 100%;
-	    display: flex;
-	    align-items: center;
-	    
-	}
-	#mark{
-		height: 100%;
-	    display: flex;
-	    align-items: center;
-	    font-size: 15px;
-	}
-	#u_regdate,#u_listcount,#u_like{
-		height: 100%;
-	    display: flex;
-	    align-items: center;
-	    margin-right: 30px;
-	    
-	}
-	
-
-	
-	
-	
-</style>
 </head>
 <body >
 <div>
@@ -137,7 +27,7 @@
 			
 			<div id="seller-pictrue">
 				이미지
-			</div>
+			</div> 
 			<div  id="seller-page1">
 				
 				<div id="seller-page2">
@@ -151,11 +41,17 @@
 						<div id="u_like">회원 평점 : ${ user_info.u_like }</div>
 					</div>
 					<div id="seller-info3">
-					
+						
 					</div>
 					<div id="seller-info4">
-					
-					</div>
+							<div style="cursor: pointer; margin-top: 10px;"
+								onclick="singo();">
+								<img
+									src="${ pageContext.request.contextPath }/resources/image/report_icon.png"
+									width="15px" height="15px"><span
+									style="font-size: 15px; color: rgb(180, 180, 180)">신고하기</span>
+							</div>
+						</div>
 				</div>
 				
 			</div>

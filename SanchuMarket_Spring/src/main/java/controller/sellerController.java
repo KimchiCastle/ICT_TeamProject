@@ -30,7 +30,9 @@ public class sellerController {
 
 
 	@RequestMapping("list.do")
-	public String seller_list(Model model, int u_idx) {
+	public String seller_list(Model model ) {
+		
+		int u_idx = 1;
 		
 		//판매자가 올린 판매상품 전체 조회
 		List<ProductVo> product_list = product_dao.selectList(u_idx);
