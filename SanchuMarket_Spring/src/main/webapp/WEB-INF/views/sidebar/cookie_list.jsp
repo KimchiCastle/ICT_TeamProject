@@ -10,6 +10,16 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+<style type="text/css">
+	
+	#btn_left, #btn_right{
+		background-color: white;
+		width: 25px;
+		height: 30px;
+	}
+	
+</style>
+
 <script type="text/javascript">
 
 	/* 현재페이지/ 마지막페이지 버튼 활성화 비활성화 */
@@ -42,7 +52,7 @@
 				src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
 				</div>
 				<div class="recent_text">${ cookielist.p_name }</div>
-				<div class="recent_text1">가격 : <span style="color: red"><fmt:formatNumber pattern="#,###" value="${ cookielist.p_price }"/></span>원</div>
+				<div class="recent_text1">가격 : <font color="red"><fmt:formatNumber pattern="#,###" value="${ cookielist.p_price }"/></font>원</div>
 				
 				
 				</div>
@@ -60,10 +70,8 @@
 	</c:forEach>
 	<div>
 		<input type="button" id="btn_left" onclick="slider(-1)" value="&lt;" disabled="disabled">
-		<span id="now">${ curr_page }</span>/
-		<c:if test="${ last_page eq 0 }">1
-		</c:if>		
-		<c:if test="${ last_page ne 0 }"><span id="total">${ last_page }</span>
+		<span id="now">${ curr_page }</span>/<c:if test="${ last_page eq 0 }">1
+		</c:if><c:if test="${ last_page ne 0 }"><span id="total">${ last_page }</span>
 		</c:if>		
 		
 		<input type="button" id="btn_right" onclick="slider(1)" value="&gt;" disabled="disabled">

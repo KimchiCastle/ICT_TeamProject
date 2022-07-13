@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+
+	body{
+	 	font-family: 'Gowun Dodum', sans-serif;
+		font-size: 18px;
+	}
+
+	#floater{
+		text-align: center;
+		width: 100px;
+		height: 300px;
+		padding: 3px;
+		
+	}
+	
+	#recentBanner{
+		border: 1px solid black;
+		text-align: center;
+		width: 100px;
+		height: 260px;
+		background-color: white;
+	}
+	
+	#text_p{
+		padding-top: 	5px;
+		padding-bottom: 5px;
+	}
+	
+	#top_move{
+		margin-top: 10px;
+		width: 100%;
+		
+	}
+	#top_button{
+		background: white;
+		border: 1px solid black;
+		width: 100px;
+		height: 40px;
+		cursor: pointer;
+	}
+	
+
+	
+	.recentimg{
+		width: 60px;
+		height: 60px;
+		border: 1px solid rgb(240,240,240);
+		
+		
+		
+		 
+	}
+	.recent_content{
+		font-size:15px; 
+		
+		text-align:right;
+		
+		color:black;
+		
+		outline: solid 1px black;
+		
+		background-color: white;
+		
+		display:none;
+		position: absolute;
+		right:17px;
+		
+		
+		width : 250px;
+		height : 60px;
+		
+		
+		vertical-align: top;
+		
+		cursor: pointer;
+		
+	}
+	.recent_text{
+		position: absolute;
+		right:82px;
+		
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+		color:black;
+		
+		display: inline-block;
+		
+		height: 30px;
+		width: 163px;
+	}
+	.recent_text1{
+		position: absolute;
+		top : 30px;
+		right:82px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+		color:black;
+		
+		display: inline-block;
+		
+		height: 30px;
+		width: 163px;
+	}
+	
+	
+	
+	#recent_name{
+		margin-left: 15px; 
+		
+	}
+	
+	.recent_hober:hover .recent_content {
+		
+		display: inline;
+		
+		
+	}
+	
