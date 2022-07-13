@@ -66,7 +66,7 @@ body{
 	
 </div>
 
-	<div style="margin-top: 0px; z-index: 2;">
+	<div style="margin-top: 0px;">
 		<%@include file="content.jsp"%>
 </div>
 </body>

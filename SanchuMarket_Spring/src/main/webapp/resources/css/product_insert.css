@@ -37,11 +37,11 @@
 	/* 전체 인풋태그 css */
 	.input-tag {
 		display: inline-block;
-		height: 20px;
+		height: 35px;
 		padding: 5px;
 		vertical-align: middle;
 		border: 1px solid black;
-		width: 60%;
+		width: 100%;
 		color: black;
 		font-size: 15px;
 		border-radius: 5px;
@@ -51,6 +51,8 @@
 	#img_preview0, #img_preview1, #img_preview2, #img_preview3, #img_preview4, #img_preview5{
 		display: none;
 		position: relative;
+		
+		margin-left:10px;
 		
 		width: 150px;
 		height: 150px; 
@@ -114,13 +116,13 @@
 	
 	/* 제목입력창 넓이 */
 	#p_name {
-		width: 450px;
+		width: 92%;
 	}
 	
 	/* 제품설명 textarea css */
 	#p_exp {
 		padding: 15px;
-		width: 550px;
+		width: 100%;
 		height: 150px;
 		resize: none;
 	}
@@ -131,8 +133,8 @@
 		background: white;
 		cursor: pointer;
 		border: 1px solid black;
-		width: 80px;
-		height: 30px;
+		width: 90px;
+		height: 40px;
 		
 	}
 	
@@ -162,9 +164,19 @@
 	}
 	#img_zone{
 		
+		/* background-color: black; */
 		margin: auto; 
-		width: 100%; 
+		width: 65%; 
 		min-height: 50px;
-		 background-color: black; 
+		margin-bottom: 50px;
+	}
+	#img_intro{
+		
+		font-size:16px;
+		color : skyblue;
+		/* background-color: #ccffcc; */
+		margin: auto; 
+		width: 65%; 
+		min-height: 50px;
 	}
 	
