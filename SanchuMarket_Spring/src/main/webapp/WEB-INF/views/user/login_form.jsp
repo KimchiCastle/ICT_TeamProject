@@ -117,14 +117,13 @@
 		  dataType:'json',
 		  success:function(res){ //res = bResult
 
-			  if(res=='false'){//bResult=false
+			  if(!res.bResult){//bResult=false
 				  $('#loginMsg').html('아이디나 비밀번호가 일치하지 않습니다.')
 				  .css('color','red');
 			  	  return;
-				  
 			  }else{
+				 console.log("로그인실패");
 				 location.href = '../mainpage/list.do';
-				  
 			  }
 		  },
 		  //jqXHR:자바스크립트 에러 처리 객체
