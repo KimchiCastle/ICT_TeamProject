@@ -92,12 +92,10 @@ public class RecentController {
 		}
 		
 		
-		
-		
 		//위에서 만들어진 ArrayList model에 Attribute
 		model.addAttribute("cookielist", cookielist);
-		//마지막 페이지도 뿌리기.
 		model.addAttribute("last_page", last_page);
+		//마지막 페이지도 뿌리기.
 		
 		// forward
 		return "sidebar/cookie_list";

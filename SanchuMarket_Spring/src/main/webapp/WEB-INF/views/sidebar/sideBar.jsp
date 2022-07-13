@@ -55,34 +55,74 @@
 	.recentimg{
 		width: 60px;
 		height: 60px;
-		/* border: 1px solid rgb(240,240,240); */
+		border: 1px solid rgb(240,240,240);
+		
+		
+		
+		 
 	}
 	.recent_content{
-		text-decoration:none;
 		font-size:15px; 
 		
-		color:black;
 		text-align:left;
+		
+		color:black;
+		
+		outline: solid 1px black;
+		
 		background-color: white;
+		
 		display:none;
 		position: absolute;
 		width : 190px;
 		height : 60px;
-		border: 1px solid black;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		
+		
+		vertical-align: top;
+		
+		
 		
 	}
+	.recent_text{
+		position: absolute;
+		
+		
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+		color:black;
+		
+		display: inline-block;
+		
+		height: 30px;
+		width: 120px;
+	}
+	.recent_text1{
+		position: absolute;
+		top : 30px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+		color:black;
+		
+		display: inline-block;
+		
+		height: 30px;
+		width: 120px;
+	}
+	
+	
 	
 	#recent_name{
 		margin-left: 15px; 
-		vertical-align: top; 
 		
 	}
 	
-	.recent_hober:hover .recent_content{
+	.recent_hober:hover .recent_content {
 		
 		display: inline;
+		
+		
 	}
 	
 	
@@ -119,11 +159,17 @@
 		  url 	: "${pageContext.request.contextPath}/list_cookie.do",
 		  data	: {'cookie_page': curr_page},
 		  success:function(res_data){
+			  
 			  $("#disp").html(res_data);
 			  
 		  }
 		  
 	  });
+	  
+	  
+	  
+	  
+	  
 	  
   }
 
