@@ -25,7 +25,7 @@
 	
 	<!-- 수동생성 -->
 	<context:annotation-config/>
-
+	
 	<beans:bean class="controller.TradeController">
 		<beans:property name="trade_dao" ref="trade_dao"/>
 	</beans:bean>
@@ -49,6 +49,11 @@
 	<!-- 최근본상품 -->
 	<beans:bean class="controller.RecentController">
 		<beans:constructor-arg ref="product_dao"/>
+	</beans:bean>
+	
+	<beans:bean class="controller.sellerController">
+		<beans:constructor-arg ref="product_dao"/>
+		<beans:constructor-arg ref="user_dao"/>
 	</beans:bean>
 	
 	
