@@ -120,13 +120,16 @@ transform: translateX(-50%);
 	<!-- 데이터 있는 경우 -->
 	<c:forEach  var="vo" items="${ list }">
 	
+	<!-- 상품 -->
 	<div class="product_list">
 	<a class="a_tag" href="../product/insert_form.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
 	
+		<!-- 상품이미지 -->
 		<c:forEach var="image" items="${ vo.image_list }">
 			<div id="p_photo"><img id="img" src="${ pageContext.request.contextPath }/resources/imgdata/${ image.imagedata }"></div>
 		</c:forEach>
 			
+			<!-- 상품 이름,가격,올린날짜 -->
 			<div class="price_tag">
 				<div id="p_name"><span>${ vo.p_name }</span></div>
 				<div id="p_price"><fmt:formatNumber pattern="#,###" value="${ vo.p_price }"/>원</div>

@@ -295,9 +295,10 @@ $(function() {
 
 
 <script type="text/javascript">
-	var regular = /^[0,9]{1,9}$/ 
-	
-	
+
+var regular_price = /^[0-9]*$/
+
+<!-- 가격 필터링 검색 -->	
 function price_search() {
 		
 		
@@ -306,8 +307,24 @@ function price_search() {
 	var max_p = $("#max_p").val().trim();
 	var searchtext = $("#searchtext").val().trim();
 	
+	if(!regular_price.test(min_p)){
+		alert('숫자만 입력 가능합니다.');
+		$("#min_p").val('');
+		$("#min_p").focus();
+		return;
+	}
+	
+	if(!regular_price.test(max_p)){
+		alert('숫자만 입력 가능합니다.');
+		$("#max_p").val('');
+		$("#max_p").focus();
+		return;
+	}
+	
 	if(min_p == ""){
 		alert('최소가격을 입력해주세요');
+		$("#min_p").val('');
+		$("#min_p").focus();
 		return;
 	}
 	
@@ -404,7 +421,7 @@ $(function() {
 			</div>
 		</div>
 		
-		<!-- 가격검색 -->
+		<!-- 가격 필터링 검색 -->
 		<div class="price_area">
 			<input id="min_p" type="text" oninput="numberMaxLength(this);"> ~ 
 			<input id="max_p" type="text" oninput="numberMaxLength(this);">
