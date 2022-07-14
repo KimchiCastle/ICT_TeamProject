@@ -166,7 +166,9 @@ i{
     border: 0;
     background-color: #f5f6f7;
   }
-  
+  #addr_btn:hover{
+    color: gray;
+  }
   
   
 
@@ -327,7 +329,6 @@ i{
 
 			//비밀번호1 유효성 체크 함수
   		function checkPwd(){
-	     
 	
 	        if(pwdFlag) return true;
 
@@ -338,29 +339,32 @@ i{
 	        var oInput = $("#u_pwd1");
 			
 	        if (pwd1 == '') {
-	            showErrorMsg(oMsg,"필수정보입니다.");
+	        	console.log("1");
+	            showErrorMsg(oMsg1,"필수정보입니다.");
 	            setFocusToInputObject(oInput);
 	            return;
 	        }
 	        
 	        if(!isValidPwd(pwd1)){
+	        	console.log("2");
 	        	showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 	            setFocusToInputObject(oInput);
 	            return;
 	        } 
 	        
-	        //밑의 isValidPwd 함수 호출
-	       /*  if (!isValidPwd(pwd1)) {
-	            showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
-	            setFocusToInputObject(oInput);
-	            return;
-	        } */
 	        
 	        if( pwd2 != '' && (pwd1 != pwd2)){
+	        	console.log("3");
 	        	showErrorMsg(oMsg2,"비밀번호가 일치하지 않습니다.");
 	        	return;
 	        }
-	      
+	        
+	        if( pwd1==pwd2 ){
+	        	console.log("4");
+	        	hideMsg(oMsg2);
+	        	return;
+	        }
+	       		 console.log("5");
 	        	showSuccessMsg(oMsg1,"사용 가능한 비밀번호입니다.");
 	        	hideMsg(oMsg1);
 	        	return;
@@ -418,7 +422,7 @@ i{
 	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
 	            setFocusToInputObject(pwd2);
 	            return;
-	        } else {
+	        }else {
 	            oMsg.html("비밀번호가 일치합니다");
 	            hideMsg(oMsg);
 	            return;
@@ -503,12 +507,13 @@ i{
 	                if (data.result == "Y") {
 	                	if (event == "first") {
 	                	  showSuccessMsg(oMsg, "사용 가능한 아이디입니다.");
-	                	   return;
+						  hideMsg(oMsg);
+	                	  return;
 	                	}
 	                }else{
                       showErrorMsg(oMsg,"존재하는 아이디입니다.");//호출하고 직후만 메시지 띄우려고..?
                       return;
-	                	 }
+	                 }
 					
                     idFlag = true;
                     
@@ -811,8 +816,8 @@ i{
 					   	  <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 					 </span>
 					
-					<span class="box int_addr2">    
-					      <input type="text" class="int" id="sample2_detailAddress" name="detail" >
+					<span class="box int_addr2" style="magin:5px auto">    
+					      <input type="text" class="int" id="sample2_detailAddress" name="detail"  >
 					</span>  
 					 
 					 <span id="addrMsg" style="display:none"></span>
@@ -892,15 +897,15 @@ i{
     function initLayerPosition(){
         var width = 300; //우편번호서비스가 들어갈 element의 width
         var height = 400; //우편번호서비스가 들어갈 element의 height
-        var borderWidth = 1; //샘플에서 사용하는 border의 두께
+     /*    var borderWidth = 1; */ //샘플에서 사용하는 border의 두께
 
         // 위에서 선언한 값들을 실제 element에 넣는다.
         element_layer.style.width = width + 'px';
         element_layer.style.height = height + 'px';
         element_layer.style.border = borderWidth + 'px solid';
         // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
-        element_layer.style.left = (window.screen.width / 2) - (width / 2) - borderWidth + 'px';
-        element_layer.style.top = (window.screen.height / 2) - (height / 2) - borderWidth + 'px';
+        element_layer.style.left = (window.screen.width / 2) - (width / 2) /* - borderWidth + 'px' */;
+        element_layer.style.top = (window.screen.height / 2) - (height / 2) /* - borderWidth + 'px' */;
     }
 </script>	
 </body>

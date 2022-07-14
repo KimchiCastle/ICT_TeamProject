@@ -23,7 +23,19 @@
 	
 	<context:component-scan base-package="com.ict.sanchumarket" />
 	
-	<!-- 수동생성 -->
+	<!--로그인, 권한 체크용 interceptor-->
+	   <interceptors>
+        <interceptor>
+            <mapping path="/user/login.do"></mapping>
+            <beans:bean id="loginInterceptor" class="interceptor.LoginInterceptor"></beans:bean>
+        </interceptor>
+        <interceptor>
+            <mapping path="/admin/**"></mapping>
+            <beans:bean id="AdminInterceptor" class="interceptor.AdminInterceptor"></beans:bean>
+        </interceptor>
+    </interceptors>
+	
+	<!-- controller 수동생성 -->
 	<context:annotation-config/>
 	
 	<beans:bean class="controller.TradeController">
