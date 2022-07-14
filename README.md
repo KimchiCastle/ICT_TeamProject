@@ -19,10 +19,10 @@
 
 | 이름 | Github | e-mail |
 | --- | --- | --- |
-| 서아진 | Ajin1068(https://github.com/AJin1068) | dkwlsdl8@hanmail.net |
-| 김치성 | Kimchicastle(https://github.com/KimchiCastle) | kimchicastle@gmail.com |
-| 최규범 | choiason(https://github.com/choiason) |  |
-| 노원영 | nyy032(https://github.com/nyy032) | nyy031@gmail.com |
+| 서아진 | [Ajin1068](https://github.com/AJin1068) | dkwlsdl8@hanmail.net |
+| 김치성 | [Kimchicastle](https://github.com/KimchiCastle) | kimchicastle@gmail.com |
+| 최규범 | [choiason](https://github.com/choiason) |  |
+| 노원영 | [nyy032](https://github.com/nyy032) | nyy031@gmail.com |
 
 ## 📚 Content
 
