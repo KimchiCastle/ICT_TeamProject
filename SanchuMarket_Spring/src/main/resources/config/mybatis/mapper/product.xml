@@ -60,6 +60,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	order by p_idx desc
 	  	
   	</select>
+  	
+  	<!-- 가격 범위 상품명 검색 -->
+	<select id="product_price_text_search" resultMap="product_map" parameterType="java.util.Map">
+
+  		select p.*,
+  		
+		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		  			
+		  	from(select * from product)	p where p_price between #{ min_p } and #{ max_p }
+		  		
+		  	and p_name like '%' || #{ p_name } || '%' or p_exp like '%' || #{ p_exp } || '%'	
+	  	
+	  	order by p_idx desc
+
+	  	
+  	</select>
+  	
+  	<!-- 가격 범위검색 -->
+  	<select id="product_price_search" resultMap="product_map" parameterType="java.util.Map">
+
+  		select p.*,
+  		
+		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		  			
+		  	from(select * from product)	p where p_price between #{ min_p } and #{ max_p }
+		 
+	  	order by p_idx desc
+
+	  	
+  	</select>
+  	
+  	
+   	<!-- 카테고리 내 검색조회 -->
+  <!--	<select id="product_list_search_cate" resultMap="product_map" parameterType="java.util.Map">
+
+  		select p.*,
+		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		  			
+		  	from(select * from product)	p where c_idx=#{ c_idx }
+		  		
+		  	and	p_name like '%' || #{ p_name } || '%' or p_exp like '%' || #{ p_exp } || '%'  
+	  	  
+	  	order by p_idx desc
+	  	
+  	</select> -->
 	
 	
 	<!-- 상품등록시 p_idx 알아내기 -->

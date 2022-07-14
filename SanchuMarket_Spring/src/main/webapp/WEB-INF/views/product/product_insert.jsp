@@ -10,11 +10,10 @@
       href="${ pageContext.request.contextPath }/resources/css/product_insert.css">
 
 <!-- 부트스트랩 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
- -->
-
+ 
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -1029,9 +1028,16 @@
 									src="" width="150px" height="150px">
 								<input type="button" id="del_img5" class="chk_style" value="x" onclick="del_img5();">
 							</div>
-								
+							
+							
+							
 						</div>
-
+						<div id="img_intro">
+								
+								* <b>대표 이미지</b>는 반드시 <font color="red">등록</font>해야 합니다.<br>
+								- 이미지를 클릭할 경우 이미지를 수정하실 수 있습니다.<br>
+								- 이미지 등록은 좌측 <b>이미지 등록</b>을 눌러 등록할 수 있습니다.
+							</div>
 
 					</td>
 				</tr>
@@ -1044,10 +1050,11 @@
 				<tr>
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">제목<span style="color: red">*</span></span></td>
-					<td class="td2" align="left"><input maxlength="40" oninput="numberMaxLength(this);"
-						type="text" id="p_name" name="p_name" class="input-tag"
-						placeholder="제목을 입력하세요." >
-						&nbsp;&nbsp; <span class="pro_info" id="name_length">0/40</span></td>
+					<td class="td2" align="left"><span class="pro_info"
+						id="name_length">0/40</span>&nbsp;&nbsp; <input maxlength="40"
+						oninput="numberMaxLength(this);" type="text" id="p_name"
+						name="p_name" class="input-tag" placeholder="제목을 입력하세요.">
+					</td>
 				</tr>
 
 				<tr>
@@ -1128,14 +1135,16 @@
 				<tr>
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">상품설명<span style="color: red">*</span></span></td>
-					<td align="left"><span style="font-size: 18px;"
-						id="exp_length">0/1000</span>
+					<td align="left">
+					
 						<br>
+						<div>
 						<textarea class="input-tag"
 							id="p_exp" name="p_exp" maxlength="1000"
 							oninput="numberMaxLength(this);"
 							placeholder="구입연도, 브랜드, 사용감, 하자유무 등 필요한 정보를 넣어주세요. &#13;&#10;구매자의 문의를 좀더 줄일 수 있습니다."></textarea>
-
+						</div>
+						<div align="right"><span style="font-size: 18px;"id="exp_length">0/1000</span></div>
 					</td>
 				</tr>
 

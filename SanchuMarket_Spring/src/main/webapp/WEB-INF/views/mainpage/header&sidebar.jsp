@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,15 +60,15 @@ header{
 	height: 39px;
 	float: left;
 	margin-left: 70px;
-	margin-right: 50px;
-	margin-top: 10px;
+	margin-right: 30px;
+	margin-top: 6px;
 	border: 2px solid #20de07;
 }
 #searchtext{
 	float: left;
 	width: 400px;
 	padding-left: 10px;
-	height: 37px;
+	height: 35px;
 	border: none;
 	outline: none;
 	
@@ -74,8 +76,9 @@ header{
 #searchicon{
 	width: 25px; 
 	height: 25px; 
-	margin-top: 7px; 
-	margin-left: 7px;
+	margin-top: 6px; 
+	margin-left: 14px;
+	cursor: pointer;
 
 }
 
@@ -84,8 +87,8 @@ header{
 }
 
 .btn_place{
-	margin-top : 12px;
-	width: 260px;
+	margin-top : 4px;
+	width: 280px;
 	float: left;
 	align-items: center;
 	cursor: pointer;
@@ -126,6 +129,8 @@ li, ul{
 }
 
 
+
+
 .menu_content{
 	list-style:none;	
 	width: 150px;
@@ -150,6 +155,34 @@ li, ul{
   display: block;
 }
 
+.price_area{
+	display: inline-block;
+	height: 35px;
+	
+	float: left;
+	width: 500px;
+	margin: auto;
+	margin-left: 80px;
+	
+	margin-top: 15px; 
+}
+
+.price_area > input {
+	
+	text-align: right;
+	width: 130px;
+	height: 30px;
+	border: none;
+	outline: 2px solid #20de07;
+	font-size: 10px;
+}
+
+#p_searchicon {
+	margin-left: 10px; 
+	width: 25px; 
+	height: 25px; 
+}
+
 </style>
 
 
@@ -158,14 +191,24 @@ li, ul{
 function send1() {
 	
 	var search1 = document.getElementById('searchtext').value;
-	//검색어가 비었을 때 전체검색
+	//카테고리 
+	//var c_idx 	= document.getElementById('c_idx').value;
 	
 	
+	/* if(search1 !="" && c_idx !=""){
+		location.href = "list.do?searchtext" + encodeURIComponent(search1) + "&c_idx=" + c_idx;
+		return;
+	} */
+	
+	//검색어가 있을때 검색.
 	if( search1 !="" ){		
 		location.href = "list.do?searchtext=" + encodeURIComponent(search1);
+		return;
 	}
+	//검색어가 비었을 때 전체검색
 	if( search1 == "" ){
 		location.href = "list.do";
+		return;
 	}
 	
 }
@@ -183,40 +226,189 @@ $(function() {
 
 </script>
 
+<!-- 숫자 입력시 콤마 처리 해주는 펑션. -->
+<!-- <script type="text/javascript">
+	var regular_han = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z]/;
+
+	$(function() {
+
+		$("#min_p").on("propertychange change keyup paste input", function() {
+
+			var min_p = $(this).val();
+
+			min_p = comma(uncomma(min_p));
+
+			/* console.log(p_price); */
+
+			$("#min_p").val(min_p);
+
+		});
+
+	})
+
+	$(function() {
+
+		$("#max_p").on("propertychange change keyup paste input", function() {
+
+			var max_p = $(this).val();
+
+			max_p = comma(uncomma(max_p));
+
+			/* console.log(p_price); */
+
+			$("#max_p").val(max_p);
+
+		});
+
+	})
+
+	/* 실제 입력값을 변경해주는 함수 */
+	function comma(str) {
+		str = String(str);
+
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+
+	function uncomma(str) {
+		str = String(str);
+
+		if (regular_han.test(str)) {
+			alert('숫자만 입력하세요');
+		}
+
+		return str.replace(/[^\d]+/g, '');
+	}
+</script>
+<script type="text/javascript">
+	function numberMaxLength(e) {
+		if (e.value.length > e.maxLength) {
+			e.value = e.value.slice(0, e.maxLength);
+		}
+	}
+</script> -->
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+var regular_price = /^[0-9]*$/
+
+<!-- 가격 필터링 검색 -->	
+function price_search() {
+		
+		
+	
+	var min_p = $("#min_p").val().trim();
+	var max_p = $("#max_p").val().trim();
+	var searchtext = $("#searchtext").val().trim();
+	
+	if(!regular_price.test(min_p)){
+		alert('숫자만 입력 가능합니다.');
+		$("#min_p").val('');
+		$("#min_p").focus();
+		return;
+	}
+	
+	if(!regular_price.test(max_p)){
+		alert('숫자만 입력 가능합니다.');
+		$("#max_p").val('');
+		$("#max_p").focus();
+		return;
+	}
+	
+	if(min_p == ""){
+		alert('최소가격을 입력해주세요');
+		$("#min_p").val('');
+		$("#min_p").focus();
+		return;
+	}
+	
+	if(max_p == ""){
+		alert('최대가격을 입력해주세요');
+		return;
+	}
+	
+	if(min_p != "" && max_p != "" && searchtext != ""){		
+		location.href = "list.do?min_p="+ min_p + "&max_p=" + max_p + "&searchtext=" + searchtext;
+		return;
+	}
+	if(min_p != "" && max_p != ""){		
+		location.href = "list.do?min_p="+ min_p + "&max_p=" + max_p;
+		return;
+	}
+	
+	
+	
+}
+
+//	최소가격에 커서 올렸을 때 엔터처리
+$(function() {
+
+	$("#min_p").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			price_search();
+		}
+	});
+
+});
+
+//	최대 가격에 커서 올렸을 때 엔터처리
+$(function() {
+
+	$("#max_p").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			price_search();
+		}
+	});
+
+});
+
+</script>
+
 </head>
 <body>
 <div>
 
 <header>
-<!-- 고정헤더 -->
+	<!-- 고정헤더 -->
 	<div class="header">
-	<!-- 로고 -->
+		<!-- 상추마켓로고 -->
 		<a class="logo"><img src="${ pageContext.request.contextPath }/resources/image/상추마켓.png" width="200" height="50" onclick="location.href='../mainpage/list.do'"></a>
-	<!-- 검색창 -->
-	
+		
+		<!-- 검색창 -->
 		<div class="searchtext" >
-			<input id="searchtext" name="searchtext" type="text" >
+			<%-- <input type="hidden" id="c_idx" value="${ param.c_idx }"> --%>
+			<input id="searchtext" name="searchtext" type="text" value="${ param.searchtext }">
 			<img id="searchicon" src="${ pageContext.request.contextPath }/resources/image/saerch-icon.png" onclick="send1();">
 
 		</div>
-	<c:if test="${ empty sessionScope.user }">
-		<div class="btn_place">
-			<a class="btn" onclick="location.href='../user/login_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;로그인</a>
-			&nbsp;&nbsp;|&nbsp;
-			<a class="btn" onclick="location.href='../user/enroll_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;회원가입</a>
-		</div>
-	</c:if>
+		
+		<!-- 로그인 정보가 없을 때 로그인, 회원가입 버튼  -->
+		<c:if test="${ empty sessionScope.user }">
+			<div class="btn_place">
+				<a class="btn" onclick="location.href='../user/login_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;로그인</a>
+				&nbsp;&nbsp;|&nbsp;
+				<a class="btn" onclick="location.href='../user/enroll_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;회원가입</a>
+			</div>
+		</c:if>
 	
 	
-	<!-- 판매,마이페이지 버튼 -->
-	<c:if test="${ not empty sessionScope.user }">
-		<div class="btn_place">
-			<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/sell.png" width="30px">&nbsp;판매하기</a>
-			 &nbsp;&nbsp;|&nbsp;
-			<a class="btn" onclick="location.href='../mypage/list.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;마이페이지</a>
-		</div>
-	</c:if>
-	<!-- 반응형 네비게이션 바 -->
+		<!-- 로그인 정보가 있을 때 판매,마이페이지 버튼 -->
+		<c:if test="${ not empty sessionScope.user }">
+			<div class="btn_place">
+				<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/sell.png" width="30px">&nbsp;판매하기</a>
+				 &nbsp;&nbsp;|&nbsp;
+				<a class="btn" onclick="location.href='../mypage/list.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;마이페이지</a>
+			</div>
+		</c:if>
+	
+	
+		<!-- 카테고리 -->
 		<div class="navi_bar">
 			<span class="main_menu"><img src="${ pageContext.request.contextPath }/resources/image/category.png" width="30px"></span>
 			<div class="menu_content">
@@ -228,6 +420,14 @@ $(function() {
 				<a href="../mainpage/list.do?c_idx=6">뷰티/미용</a>
 			</div>
 		</div>
+		
+		<!-- 가격 필터링 검색 -->
+		<div class="price_area">
+			<input id="min_p" type="text" oninput="numberMaxLength(this);"> ~ 
+			<input id="max_p" type="text" oninput="numberMaxLength(this);">
+			<img id="p_searchicon" src="${ pageContext.request.contextPath }/resources/image/saerch-icon.png" onclick="price_search();">
+		</div>
+		
 	</div>
 </header>
 	<!-- 고정형 사이드바 -->
@@ -235,7 +435,7 @@ $(function() {
 		<%@include file="../sidebar/sideBar.jsp" %>
 	</div>
 	
-	<!--  -->
+	
 
 
 
