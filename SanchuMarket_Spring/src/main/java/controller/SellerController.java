@@ -14,7 +14,7 @@ import vo.user.UserVo;
 
 @Controller
 @RequestMapping("/sellerpage/")
-public class sellerController {
+public class SellerController {
 	
 	
 	ProductDao product_dao;
@@ -22,7 +22,7 @@ public class sellerController {
 	UserDao user_dao;
 	
 	
-	public sellerController(ProductDao product_dao, UserDao user_dao) {
+	public SellerController(ProductDao product_dao, UserDao user_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.user_dao = user_dao;

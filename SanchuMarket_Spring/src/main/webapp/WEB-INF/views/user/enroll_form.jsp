@@ -19,160 +19,9 @@
 <!--비밀번호 토글 아이콘-->
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> -->
-<style type="text/css">
-  
-html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    height: 100%;
-    background: #f5f6f7;
-    font-family: 'Gowun Dodum', sans-serif;
-}
-
-#header {
-    padding-top: 62px;
-    padding-bottom: 20px;
-    text-align: center;
-}
-
-#title{
-   font-weight: bold;
-   font-size: 30px;
-}
-#wrapper {
-    position: relative;
-    height: 100%;
-}
-
-#content {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    width: 460px;
-}
-
-
-
-
-/* 입력폼 */
-
-
-h3 {
-    margin: 19px 0 8px;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-
-.box {
-    display: block;
-    width: 100%;
-    height: 51px;
-    border: solid 1px #6c757d;
-    border-radius: 3px;
-    padding: 10px 14px 10px 14px;
-    box-sizing: border-box;
-    background: #fff;
-    position: relative;
-}
-/*주소*/
-.int {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 29px;
-    border: none;
-    background: #fff;
-    font-size: 15px;
-}
-
-input {
-     font-family: 'Gowun Dodum', sans-serif;
-}
-
-.box.int_id {
-    padding-right: 110px;
-}
-
-.box.int_pass {
-    padding-right: 40px;
-}
-
-.box.int_pass_check {
-    padding-right: 40px;
-    position: relative;
-}
-
-i{
-   position: absolute;
-    left: 92%;
-    top: 15px; 
-    color: #3a9188;
-}
-
-/* 에러메세지 */
-
-.error_next_box {
-    margin-top: 9px;
-    font-size: 12px;
-    color: red;    
-    display: none;
-}
-
-#alertTxt {
-    position: absolute;
-    top: 19px;
-    right: 38px;
-    font-size: 12px;
-    color: red;
-    display: none;
-    font-family: 'Gowun Dodum', sans-serif;
-}
-
-/* 버튼 */
-
-.btn_area {
-    margin: 50px 120px 91px;
-}
-
- #enroll_btn {
-    width: 100px;;
-    padding: 21px 0 17px;
-    border: 0;
-    cursor: pointer;
-    color: white;
-    background-color: #a1d76f;
-    font-size: 20px;
-    font-weight: 400;
-} 
-
-  #revoke_btn{
-    width: 100px;
-    padding: 21px 0 17px;
-    border: 0;
-    cursor: pointer;
-    color: white;
-    background-color: #a1d76f;
-    font-size: 20px;
-    font-weight: 400;
-  }
-  
-  #addr_btn{
-    font-size: 20px;
-    border: 0;
-    background-color: #f5f6f7;
-  }
-  #addr_btn:hover{
-    color: gray;
-  }
-  
-  
-
-</style>
+<!--CSS-->
+<link rel="stylesheet" 
+      href="${ pageContext.request.contextPath }/resources/css/enroll_form.css">
 	<script>
 	
 	
@@ -816,7 +665,7 @@ i{
 					   	  <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 					 </span>
 					
-					<span class="box int_addr2" style="magin:5px auto">    
+					<span class="box int_addr2">    
 					      <input type="text" class="int" id="sample2_detailAddress" name="detail"  >
 					</span>  
 					 
