@@ -178,5 +178,12 @@ public class UserController {
 		return "user/login_form";
 	}
 	
+	//아이디 비밀번호 찾기
+	@RequestMapping("find_form.do")
+	public String findForm() {
+		
+		return "user/find_form";
+	}
+	
 	
 }

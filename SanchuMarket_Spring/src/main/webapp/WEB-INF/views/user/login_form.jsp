@@ -13,87 +13,8 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<style>
-	  body{
-	    font-family: 'Gowun Dodum', sans-serif;
-	    font-size: 18px;
-	  }
-	  
-	  #box{
-	    width: 600px;
-	    margin: 0 auto;
-	  }
-	   
-	 .mb-4{
-	     vertical-align: center;
-	  }
-	  
-	 .fw-normal{
-	    text-align: center;
-	  } 
-	  
-	  .input-form{
-		margin-bottom: 20px;	  
-	  }
-	  
-	  .form-control{
-	    margin-top: 20px;
-	    margin-bottom: 40px;
-	    width: 250px;
-	    margin:auto;
-	  } 
-	  
-	#login_btn{
-	  display: inline-block;
-	  color: white;
-	  text-align: center;
-	  vertical-align: middle;
-	  cursor: if($enable-button-pointers, pointer, null);
-	  background-color: #42b883;
-	  margin-top: 20px;
-	  margin-bottom: 45px;
-	  
-	}
-	
-	#naver_btn{
-	 /*  outline: none; */
-	  display: inline-block;
-	  color: white;
-	  text-align: center;
-	  vertical-align: middle;
-	  cursor: if($enable-button-pointers, pointer, null);
-	  background-color: #19ce60;
-	  margin-bottom: 10px;
-	   font-size: 22px;
-	  
-	}
-	
-	 #kakaotalk_btn{
-	 /*  outline: none; */
-	  display: inline-block;
-	  color: black;
-	  text-align: center;
-	  vertical-align: middle;
-	  cursor: if($enable-button-pointers, pointer, null);
-	  background-color: yellow;
-	  margin-bottom: 10px;
-	  font-size: 22px;
-	   
-	}
-	
-	#button-wrap{
-	   width: 230px;
-	   height: 80px;
-	   margin: auto;
-	}
-    
-    #social-wrap{
-       width: 280px;
-       margin: auto;
-   	  
-    }
-    
-</style>
+<link rel="stylesheet" 
+      href="${ pageContext.request.contextPath }/resources/css/login_form.css">
 
  <script>
 
