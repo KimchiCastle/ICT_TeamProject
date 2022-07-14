@@ -186,12 +186,6 @@
       <span id="loginMsg"></span>
     </div>
     
-    <div id="social-wrap">
-     	<button class="w-100 btn btn-lg" id="naver_btn"  onclick="location.href='https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com'">네이버로그인</button>
-		<button class="w-100 btn btn-lg" id="kakaotalk_btn" onclick="location.href='https://www.google.com/'">카카오로그인</button>
-    </div>
-
-    
     <p class="mt-5 mb-3 text-muted" align="center">한국 ICT 인재개발원</p>
   
   </div>

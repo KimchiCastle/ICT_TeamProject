@@ -194,6 +194,12 @@
 			<artifactId>cglib</artifactId>
 			<version>2.2</version>
 		</dependency>
+		<!--비밀번호암호화-->
+		<dependency>
+		    <groupId>org.mindrot</groupId>
+		    <artifactId>jbcrypt</artifactId>
+		    <version>0.4</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
