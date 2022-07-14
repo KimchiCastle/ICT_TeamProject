@@ -28,7 +28,7 @@
 
 ---
 
-1. [사용한툴]
+1. [사용한 기술](https://github.com/KimchiCastle/ICT_TeamProject#-%EC%82%AC%EC%9A%A9%ED%95%9C-%EA%B8%B0%EC%88%A0)
 2. [프로젝트 진행 기한](https://github.com/KimchiCastle/ICT_TeamProject#-%EC%82%AC%EC%9A%A9%ED%95%9C-%EA%B8%B0%EC%88%A0)
 
 ## 🔨 사용한 기술
