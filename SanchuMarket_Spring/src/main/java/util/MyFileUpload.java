@@ -16,7 +16,6 @@ public class MyFileUpload {
 			return "no_file";
 		}
 		
-		System.out.println("파일업로드 if문통과했음 ");
 		
 		//실제 파일 이름 받아오기
 		String image_str = file.getOriginalFilename();
