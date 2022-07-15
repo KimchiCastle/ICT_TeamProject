@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>판매자 상세정보</title>
 
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/seller_page.css">
 
@@ -16,8 +16,63 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
+
+<script type="text/javascript">
+	
+	function onReport(){
+		
+		center_modify_popup();
+		$(".shadow").show();
+	}
+	
+	function center_modify_popup(){
+		
+		//윈도우 폭구하는 함수
+		var w_width = $(window).width();
+		//윈도우 높이 구하는 함수
+		var w_height = $(window).height();
+		
+		var r_width  = $("#report_popup").width();
+		var r_height = $("#report_popup").height();
+		
+		
+		var left = w_width/2 - r_width/2;
+		var top  = w_height/2 - r_height/2;
+		
+		/* 위치 css를 JSON으로 처리한다. */
+		//css : Map방식 속성값 지정
+		$("#report_popup").css({ 'left':left, 'top':top });
+		
+		$("#report_popup").show();
+	}
+	
+	function hide_report_popup(){
+		
+		
+		$("#report_popup").hide();
+		$(".shadow").hide();
+		
+	}
+	/* checkbox 하나만 선택되는 함수 */
+	function doOpenCheck(chk){
+	    var obj = document.getElementsByName("report");
+	    for(var i=0; i<obj.length; i++){
+	        if(obj[i] != chk){
+	            obj[i].checked = false;
+	        }
+	    }
+	}
+	
+	
+</script>
+
+
 </head>
 <body >
+
+
+<%@ include file="report_popup.jsp" %>
+
 <div>
 	<%@ include file="../mainpage/header&sidebar.jsp"%>
 </div>
@@ -45,11 +100,15 @@
 					</div>
 					<div id="seller-info4">
 							<div style="cursor: pointer; margin-top: 10px;"
-								onclick="singo();">
+								onclick="onReport();">
 								<img
 									src="${ pageContext.request.contextPath }/resources/image/report_icon.png"
 									width="15px" height="15px"><span
 									style="font-size: 15px; color: rgb(180, 180, 180)">신고하기</span>
+								
+							<div class="shadow">
+							</div>
+							
 							</div>
 						</div>
 				</div>
@@ -69,6 +128,7 @@
 	</div>
 
 </div>
+
 
 
 

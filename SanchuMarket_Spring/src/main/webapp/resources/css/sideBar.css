@@ -82,6 +82,8 @@
 		
 		overflow: hidden;
 		text-overflow: ellipsis;
+		white-space: nowrap;
+		
 		text-align: left;
 		color:black;
 		
@@ -94,8 +96,11 @@
 		position: absolute;
 		top : 30px;
 		right:82px;
+		
 		overflow: hidden;
 		text-overflow: ellipsis;
+		white-space: nowrap;
+		
 		text-align: left;
 		color:black;
 		
