@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>물품등록</title>
+<title>상품등록</title>
 
 <link rel="stylesheet" 
       href="${ pageContext.request.contextPath }/resources/css/product_insert.css">
@@ -27,7 +27,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
+<!-- insert JavaScript -->
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/product_insert.js"></script>
+
 </head>
 <body>
 	<!-- 파일업로드 용 폼 -->
@@ -76,7 +78,7 @@
 									src="" width="150px" height="150px">
 								<span id="sum_style" >대표 이미지</span>
 								<!-- 삭제버튼 -->
-								<input type="button" id="del_sum" class="chk_style" value="x" onclick="del_sum();">
+								<span id="del_sum" class="chk_style"  onclick="del_sum();">x</span>
 							</div>
 							
 								
@@ -84,31 +86,31 @@
 								<input type="image" id="imgup_1" onclick="send_1();"
 									src="" width="150px" height="150px">
 								<!-- 삭제버튼 -->
-								<input type="button" id="del_img1" class="chk_style" value="x" onclick="del_img1();">
+								<span id="del_img1" class="chk_style" onclick="del_img1();">x</span>
 							</div>
 							
 							<div id="img_preview2">
 								<input type="image" id="imgup_2" onclick="send_2();"
 									src="" width="150px" height="150px">
-								<input type="button" id="del_img2" class="chk_style" value="x" onclick="del_img2();">
+								<span id="del_img2" class="chk_style" onclick="del_img2();">x</span>
 							</div>
 
 							<div id="img_preview3">
 								<input type="image" id="imgup_3" onclick="send_3();"
 									src="" width="150px" height="150px">
-								<input type="button" id="del_img3" class="chk_style" value="x" onclick="del_img3();">
+								<span id="del_img3" class="chk_style" onclick="del_img3();">x</span>
 							</div>
 
 							<div id="img_preview4">
 								<input type="image" id="imgup_4" onclick="send_4();"
 									src="" width="150px" height="150px">
-								<input type="button" id="del_img4" class="chk_style" value="x" onclick="del_img4();">
+								<span id="del_img4" class="chk_style" onclick="del_img4();">x</span>
 							</div>
 
 							<div id="img_preview5">
 								<input type="image" id="imgup_5" onclick="send_5();"
 									src="" width="150px" height="150px">
-								<input type="button" id="del_img5" class="chk_style" value="x" onclick="del_img5();">
+								<span id="del_img5" class="chk_style" onclick="del_img5();">x</span>
 							</div>
 							
 							
@@ -116,9 +118,10 @@
 						</div>
 						<div id="img_intro">
 								
-								* <b>대표 이미지</b>는 반드시 <font color="red">등록</font>해야 합니다.<br>
-								- 이미지를 클릭할 경우 이미지를 수정하실 수 있습니다.<br>
-								- 이미지 등록은 좌측 <b>이미지 등록</b>을 눌러 등록할 수 있습니다.
+								* <b>대표 이미지</b>는 반드시 <font color="red"><b>등록</b></font>해야 합니다.<br>
+								- 이미지를 <b>클릭할</b> 경우 이미지를 <b>수정</b>하실 수 있습니다.<br>
+								- 이미지 등록은 좌측 <b>이미지 등록</b>을 눌러 등록할 수 있습니다.<br>
+								- 이미지 확장자는 <b>.jpg, .jpeg, .png</b> 만 등록 가능합니다.
 							</div>
 
 					</td>
@@ -132,8 +135,11 @@
 				<tr>
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">제목<span style="color: red">*</span></span></td>
-					<td class="td2" align="left"><span class="pro_info"
-						id="name_length">0/40</span>&nbsp;&nbsp; <input maxlength="40"
+					<td class="td2" align="left">
+						<div style="display: inline-block; min-width: 70px; ">
+							<span class="pro_info" id="name_length">0/40</span>
+						</div>
+						<input maxlength="40"
 						oninput="numberMaxLength(this);" type="text" id="p_name"
 						name="p_name" class="input-tag" placeholder="제목을 입력하세요.">
 					</td>
@@ -148,7 +154,7 @@
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">카테고리<span style="color: red">*</span></span></td>
 					<td class="td2" align="left"><select class="input-tag"
-						id="c_idx" name="c_idx" style="width: 30%; height: 30px;">
+						id="c_idx" name="c_idx" style="width: 30%; height: 35px;">
 							<option value="0">카테고리 선택</option>
 							<option value="1">남성의류</option>
 							<option value="2">여성의류</option>
@@ -237,8 +243,8 @@
 				<!-- 등록 취소버튼 -->
 				<tr>
 					<td colspan="2">
-						<input type="button" value="등록하기" onclick="proInfoSend();"> 
-						<input type="button" value="취소하기" onclick="procancel()"></td>
+						<input class="btn btn-success" type="button" value="등록하기" onclick="proInfoSend();"> 
+						<input class="btn btn" type="button" value="취소하기" onclick="procancel()"></td>
 				</tr>
 
 			</table>

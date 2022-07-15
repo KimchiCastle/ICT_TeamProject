@@ -52,7 +52,7 @@
 		display: none;
 		position: relative;
 		
-		margin-left:10px;
+		margin:5px;
 		
 		width: 150px;
 		height: 150px; 
@@ -77,13 +77,16 @@
 	    color:white;
 	}
 	.chk_style{
-		width:30px;
+		vertical-align: middle;
+		text-align:center;
+		
+		width:28px;
 		height:28px;
 	    position:absolute; 
-		font-size:20px;
+		/* font-size:20px; */
 		outline:none;
 		border:none;
-		border-radius:15px;
+		border-radius:18px;
 	    right:9px;
 	    bottom:115px;
 	    /* z-index:1; */
@@ -116,8 +119,10 @@
 	
 	/* 제목입력창 넓이 */
 	#p_name {
-		width: 92%;
+		width: 88%;
 	}
+	
+	
 	
 	/* 제품설명 textarea css */
 	#p_exp {
