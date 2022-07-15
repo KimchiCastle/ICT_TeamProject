@@ -146,7 +146,7 @@ public class ProductController {
 	@RequestMapping("product_modify_form.do")
 	public String product_modify_form(int p_idx, Model model){
 		
-		ProductVo vo = product_dao.
+//		ProductVo vo = product_dao.
 		
 		
 		
