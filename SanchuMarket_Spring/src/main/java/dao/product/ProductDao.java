@@ -32,9 +32,6 @@ public interface ProductDao {
 	// 상품등록 메서드
 	public int insert(ProductVo vo);
 	
-	
-	//상품 1개 조회 메서드
-	public ProductVo selectOne(int p_idx);
 		
 	//상품검색
 	public List<ProductVo> selectList(Map map);

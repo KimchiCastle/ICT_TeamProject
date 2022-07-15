@@ -4,6 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 	
+	<!-- 이미지 가지고 오기 위한 resultMap -->
 	<resultMap type="vo.product.ProductVo" id="product_map">
 		<result property="p_idx" column="p_idx"/>
 		
@@ -21,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select * from product) p where u_idx=#{u_idx} order by p_idx desc
 	</select>
 	
-	<!--  -->
+	<!-- 상품하나 조회  -->
 	<select id="product_p_idx" resultMap="product_map">
 		select
 			p.* ,
