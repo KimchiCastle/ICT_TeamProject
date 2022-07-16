@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>상품수정</title>
 
 <link rel="stylesheet" 
-      href="${ pageContext.request.contextPath }/resources/css/product_insert.css">
+      href="${ pageContext.request.contextPath }/resources/css/product_modify.css">
 
 
 
@@ -27,14 +32,119 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
-<!-- insert JavaScript -->
-<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/product_insert.js"></script>
+<!-- 이미지 추가버튼 스크립트 -->
+<script type="text/javascript">
+	var preview_array  = [false, false, false, false, false, false];
+	
+	for(var i=0; i<${ fn:length(vo.image_list) }; i++){
+		preview_array[i] = true;
+	}
+	
+	function img_preview() {
+
+		for(var i=0; i<preview_array.length; i++){
+			
+			
+			/* i가 0일때 */
+			if(i==0){
+				
+				/* 0번사진 비어있으면 */
+				if(preview_array[0]==false){
+					
+					/* 섬네일사진 */
+					/* 0번사진 인풋태그 호출 */
+					
+					send_0();
+					
+					return;
+				}
+			}
+			
+			/* i가1일때 */
+			if(i==1){
+				
+				/* 1번사진이 비어있으면 */
+				if(preview_array[1]==false){
+					
+					/* 1번사진 인풋태그 호출 */
+					send_1();
+					
+					return;
+				}
+			}
+			
+			/* i가 2일때 */
+			if(i==2){
+				
+				/* 2번사진 비어있으면 */
+				if(preview_array[2]==false){
+					
+					/* 2번사진 인풋태그 호출 */
+					send_2();
+					return;
+				}
+			}
+			
+			/* i가 3일때 */
+			if(i==3){
+				
+				/* 3번사진 비어있으면 */
+				if(preview_array[3]==false){
+					
+					/* 3번사진 인풋태그 호출 */
+					send_3();
+					return;
+				}
+			}
+			
+			/* i가 4일때 */
+			if(i==4){
+				
+				/* 4번사진 비어있으면 */
+				if(preview_array[4]==false){
+					
+					/* 4번사진 인풋태그 호출 */
+					send_4();
+
+					return;
+				}
+			}
+			
+			/* i가 5일때 */
+			if(i==5){
+				
+				/* 5번사진 비어있으면 */
+				if(preview_array[5]==false){
+					
+					/* 5번사진 인풋태그 호출 */
+					send_5();
+					
+					return;
+				}
+			}
+			
+			
+			
+					
+		}/*  for end */
+		
+		alert("더이상 등록할 수 없습니다.");
+		return;
+		
+	}/* 프리뷰 end */
+
+
+</script>
+
+<!-- modify JavaScript -->
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/product_modify.js"></script>
+
 
 </head>
 <body>
 	<!-- 파일업로드 용 폼 -->
 	<form enctype="multipart/form-data" id="imgform" method="post">
-		<input type="file" id="sumimage"   style="display: none;" accept=".jpg, .jpeg, .png">
+		<input type="file" id="sumimage"  src="${pageContext.request.contextPath}/resources/imgdata/${vo.image_list[0].imagedata}"  style="display: none;"  accept=".jpg, .jpeg, .png">
 		<input type="file" id="imageFile1" style="display: none;" accept=".jpg, .jpeg, .png">
 		<input type="file" id="imageFile2" style="display: none;" accept=".jpg, .jpeg, .png">
 		<input type="file" id="imageFile3" style="display: none;" accept=".jpg, .jpeg, .png">
@@ -64,7 +174,7 @@
 				<tr>
 					<td class="td1" align="left" ><span
 						class="pro_info">상품이미지</span> 
-						<span class="pro_info" id="img_number">(0/6)</span>
+						<span class="pro_info" id="img_number">(${ fn:length(vo.image_list) }/6)</span>
 						<span style="color: red">*</span>
 						<input type="image" id="imgup" onclick="img_preview();"
 								src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="150px" height="150px">
@@ -75,44 +185,107 @@
 						<div id="img_zone">
 							<div id="img_preview0" >
 								<input type="image" id="imgup_sum" onclick="send_0();"
-									src="" width="150px" height="150px">
+									src="${pageContext.request.contextPath }/resources/imgdata/${ vo.image_list[0].imagedata }" width="150px" height="150px">
 								<span id="sum_style" >대표 이미지</span>
 								<!-- 삭제버튼 -->
 								<span id="del_sum" class="chk_style"  onclick="del_sum();">x</span>
 							</div>
 							
-								
-							<div id="img_preview1" >
-								<input type="image" id="imgup_1" onclick="send_1();"
-									src="" width="150px" height="150px">
-								<!-- 삭제버튼 -->
-								<span id="del_img1" class="chk_style" onclick="del_img1();">x</span>
-							</div>
+							<!-- 1번이미지 데이터가 있으면 -->	
+							<c:if test="${ not empty vo.image_list[1].imagedata }">
+								<div id="img_preview1" >
+									<input type="image" id="imgup_1" onclick="send_1();"
+										src="${pageContext.request.contextPath}/resources/imgdata/${ vo.image_list[1].imagedata }" width="150px" height="150px">
+									<!-- 삭제버튼 -->
+									<span id="del_img1" class="chk_style" onclick="del_img1();">x</span>
+								</div>
+							</c:if>	
 							
-							<div id="img_preview2">
-								<input type="image" id="imgup_2" onclick="send_2();"
-									src="" width="150px" height="150px">
-								<span id="del_img2" class="chk_style" onclick="del_img2();">x</span>
-							</div>
-
-							<div id="img_preview3">
-								<input type="image" id="imgup_3" onclick="send_3();"
-									src="" width="150px" height="150px">
-								<span id="del_img3" class="chk_style" onclick="del_img3();">x</span>
-							</div>
-
-							<div id="img_preview4">
-								<input type="image" id="imgup_4" onclick="send_4();"
-									src="" width="150px" height="150px">
-								<span id="del_img4" class="chk_style" onclick="del_img4();">x</span>
-							</div>
-
-							<div id="img_preview5">
-								<input type="image" id="imgup_5" onclick="send_5();"
-									src="" width="150px" height="150px">
-								<span id="del_img5" class="chk_style" onclick="del_img5();">x</span>
-							</div>
+							<!-- 1번이미지 데이터 없으면  -->
+							<c:if test="${ empty vo.image_list[1].imagedata }">
+								<div id="img_preview1" style="display: none;">
+									<input type="image" id="imgup_1"  style="display: none;" onclick="send_1();"
+										src="" width="150px" height="150px">
+									<!-- 삭제버튼 -->
+									<span id="del_img1"  class="chk_style" style="display: none;" onclick="del_img1();">x</span>
+								</div>
+							</c:if>	
 							
+							
+							<!-- 2번이미지 데이터가 있으면 -->	
+							<c:if test="${ not empty vo.image_list[2].imagedata }">
+								<div id="img_preview2">
+									<input type="image" id="imgup_2" onclick="send_2();"
+										src="${pageContext.request.contextPath}/resources/imgdata/${ vo.image_list[2].imagedata }" width="150px" height="150px">
+									<!-- 삭제버튼 -->
+									<span id="del_img2" class="chk_style" onclick="del_img2();">x</span>
+								</div>
+							</c:if>
+							
+							
+							<!-- 2번이미지 데이터가 없으면 -->	
+							<c:if test="${ empty vo.image_list[2].imagedata }">
+								<div id="img_preview2" style="display: none;">
+									<input type="image" id="imgup_2" style="display: none;" onclick="send_2();"
+										src="" width="150px" height="150px">
+									<!-- 삭제버튼 -->
+									<span id="del_img2" class="chk_style" style="display: none;" onclick="del_img2();">x</span>
+								</div>
+							</c:if>
+							
+							<!-- 3번이미지 데이터가 있으면 -->
+							<c:if test="${ not empty vo.image_list[3].imagedata }">
+								<div id="img_preview3">
+									<input type="image" id="imgup_3" onclick="send_3();"
+										src="${ pageContext.request.contextPath }/resources/imgdata/${ vo.image_list[3].imagedata }" width="150px" height="150px">
+									<span id="del_img3" class="chk_style" onclick="del_img3();">x</span>
+								</div>
+							</c:if>
+							
+							<!-- 3번이미지 데이터가 없으면 -->
+							<c:if test="${ empty vo.image_list[3].imagedata }">
+								<div id="img_preview3" style="display: none;">
+									<input type="image" id="imgup_3" style="display: none;" onclick="send_3();"
+										src="" width="150px" height="150px">
+									<span id="del_img3" class="chk_style" style="display: none;" onclick="del_img3();">x</span>
+								</div>
+							</c:if>
+							
+							<!-- 4번이미지 데이터가 있으면 -->
+							<c:if test="${ not empty vo.image_list[4].imagedata }">
+								<div id="img_preview4">
+									<input type="image" id="imgup_4" onclick="send_4();"
+										src="${ pageContext.request.contextPath }/resources/imgdata/${ vo.image_list[4].imagedata }" width="150px" height="150px">
+									<span id="del_img4" class="chk_style" onclick="del_img4();">x</span>
+								</div>
+							</c:if>
+							
+							<!-- 4번이미지 데이터가 없으면 -->
+							<c:if test="${ empty vo.image_list[4].imagedata }">
+								<div id="img_preview4" style="display: none;">
+									<input type="image" id="imgup_4" style="display: none;" onclick="send_4();" 
+										src="" width="150px" height="150px">
+									<span id="del_img4" class="chk_style" style="display: none;" onclick="del_img4();">x</span>
+								</div>
+							</c:if>
+							
+							<!-- 5번이미지 데이터 있으면 -->
+							<c:if test="${ not empty vo.image_list[5].imagedata }">
+								<div id="img_preview5">
+									<input type="image" id="imgup_5" onclick="send_5();"
+										src="${ pageContext.request.contextPath }/resources/imgdata/${ vo.image_list[5].imagedata }" width="150px" height="150px">
+									<span id="del_img5" class="chk_style" onclick="del_img5();">x</span>
+								</div>
+							</c:if>
+							
+							<!-- 5번이미지 데이터가 없으면 -->
+							<c:if test="${ empty vo.image_list[5].imagedata }">
+								<div id="img_preview5" style="display: none;">
+									<input type="image" id="imgup_5" style="display: none;" onclick="send_5();"
+										src="" width="150px" height="150px">
+									<span id="del_img5" class="chk_style" style="display: none;" onclick="del_img5();">x</span>
+								</div>
+							</c:if>
 							
 							
 						</div>
@@ -136,10 +309,10 @@
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">제목<span style="color: red">*</span></span></td>
 					<td class="td2" align="left">
-						<div style="display: inline-block; min-width: 70px; ">
-							<span class="pro_info" id="name_length">0/40</span>
+						<div style="display: inline-block; min-width: 70px;">
+						<span class="pro_info" id="name_length">${ fn:length(vo.p_name) }/40</span>
 						</div>
-						<input maxlength="40"
+						<input maxlength="40" value="${vo.p_name}"
 						oninput="numberMaxLength(this);" type="text" id="p_name"
 						name="p_name" class="input-tag" placeholder="제목을 입력하세요.">
 					</td>
@@ -178,7 +351,7 @@
 						<input type="button" id="myaddr" value="내주소" >
 						<input type="button" id="addrfind" value="주소찾기" onclick="addrFind();">
 						<br>
-						<input type="text" id="p_location" class="input-tag" style="margin-top: 5px;" readonly="readonly">
+						<input type="text" id="p_location" class="input-tag" style="margin-top: 5px;" value="${ vo.p_location }" readonly="readonly">
 					</td>
 
 
@@ -193,9 +366,9 @@
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">상품상태<span style="color: red">*</span></span></td>
 					<td class="td2" align="left"><input type="radio"
-						name="p_condition" id="p_condition" value="중고상품" checked="checked">
-						<span class="pro_info">중고상품</span> <input type="radio"
-						name="p_condition" id="p_condition" value="새상품"> <span
+						name="p_condition" id="p_condition" value="중고상품">
+						<span class="pro_info">중고상품</span> 
+						<input type="radio" name="p_condition" id="p_condition" value="새상품"> <span
 						class="pro_info">새상품</span></td>
 				</tr>
 
@@ -208,7 +381,7 @@
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">가격<span style="color: red">*</span></span></td>
 					<td class="td2" align="left"><input type="text" id="p_price" maxlength="11"
-						name="p_price" class="input-tag" placeholder="가격"
+						name="p_price" class="input-tag" placeholder="가격" value="<fmt:formatNumber pattern="#,###" value="${ vo.p_price }"/>"
 						oninput="numberMaxLength(this);" style="width: 30%;"> &nbsp; <span class="pro_info">원</span>
 						<br>
 						<span class="pro_info" id="price_under"></span>
@@ -230,9 +403,9 @@
 						<textarea class="input-tag"
 							id="p_exp" name="p_exp" maxlength="1000"
 							oninput="numberMaxLength(this);"
-							placeholder="구입연도, 브랜드, 사용감, 하자유무 등 필요한 정보를 넣어주세요. &#13;&#10;구매자의 문의를 좀더 줄일 수 있습니다."></textarea>
+							placeholder="구입연도, 브랜드, 사용감, 하자유무 등 필요한 정보를 넣어주세요. &#13;&#10;구매자의 문의를 좀더 줄일 수 있습니다.">${ vo.p_exp }</textarea>
 						</div>
-						<div align="right"><span style="font-size: 18px;"id="exp_length">0/1000</span></div>
+						<div align="right"><span style="font-size: 18px;"id="exp_length">${ fn:length(vo.p_exp) }/1000</span></div>
 					</td>
 				</tr>
 
@@ -243,7 +416,7 @@
 				<!-- 등록 취소버튼 -->
 				<tr>
 					<td colspan="2">
-						<input class="btn btn-success" type="button" value="등록하기" onclick="proInfoSend();"> 
+						<input class="btn btn-success" type="button" value="등록하기" onclick="proInfoModify();"> 
 						<input class="btn btn" type="button" value="취소하기" onclick="procancel()"></td>
 				</tr>
 
