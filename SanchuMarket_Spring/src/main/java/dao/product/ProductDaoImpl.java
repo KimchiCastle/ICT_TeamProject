@@ -44,7 +44,15 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_p_idx",p_idx);
 	}
-
+	
+	
+	@Override
+	public ProductVo selectListproduct(int p_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product.product_p_idx_one",p_idx);
+	}
+	
+	
 	//최근 상품 업로드 게시물 6개 조회
 	@Override
 	public List<ProductVo> selectRecentList() {
@@ -95,6 +103,7 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_max_idx");
 	}
+
 
 
 
