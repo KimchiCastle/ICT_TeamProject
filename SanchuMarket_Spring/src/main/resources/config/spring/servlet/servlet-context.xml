@@ -82,7 +82,7 @@
 	</beans:bean>
 	
 	<!--메일링-->
-	<!-- <context:component-scan base-package="spring.service" />  -->
+	 <context:component-scan base-package="spring.service" /> 
 	
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com"/>
