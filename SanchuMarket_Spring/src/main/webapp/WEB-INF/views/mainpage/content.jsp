@@ -22,6 +22,7 @@ body{
 	margin-right: auto;
 	width: 100%;
 	border: 1px solid white;
+	min-width: 1150px;
 	
 }
 

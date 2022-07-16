@@ -181,7 +181,7 @@ select
 
 
 
-
+delete from product where p_idx between 1 and 10
 
 
 
