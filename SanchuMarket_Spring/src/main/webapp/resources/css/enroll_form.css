@@ -18,7 +18,8 @@ body {
 
 #title{
    font-weight: bold;
-   font-size: 30px;
+   font-size: 50px;
+   color: #58983d;
 }
 #wrapper {
     position: relative;
@@ -49,12 +50,19 @@ h3 {
     display: block;
     width: 100%;
     height: 51px;
-    border: solid 1px #6c757d;
+    border: solid 1px #adbf9a;
     border-radius: 3px;
     padding: 10px 14px 10px 14px;
     box-sizing: border-box;
     background: #fff;
     position: relative;
+}
+
+#u_birth{
+   border: solid 1px #adbf9a;
+   height: 51px;
+   width: 180px;
+   border-radius: 3px;
 }
 /*주소*/
 .int {
@@ -73,8 +81,9 @@ h3 {
 
 input {
      font-family: 'Gowun Dodum', sans-serif;
-    
 }
+
+
 
 .box.int_id {
     padding-right: 110px;
@@ -122,25 +131,31 @@ i{
 }
 
  #enroll_btn {
-    width: 100px;;
+    width: 100px;
+    height: 50px;
+  /*   text-align: middle; */
+   
     padding: 21px 0 17px;
     border: 0;
     cursor: pointer;
     color: white;
-    background-color: #a1d76f;
+    background-color: #58983d;
     font-size: 20px;
     font-weight: 400;
+    border-radius: 3px;
 } 
 
   #revoke_btn{
     width: 100px;
+    height: 50px;
     padding: 21px 0 17px;
     border: 0;
     cursor: pointer;
     color: white;
-    background-color: #a1d76f;
+    background-color: #58983d;
     font-size: 20px;
     font-weight: 400;
+    border-radius: 3px;
   }
   
   #addr_btn{

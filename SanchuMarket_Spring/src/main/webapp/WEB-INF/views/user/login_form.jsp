@@ -5,73 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!--font-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<!--JavaScript-->
+<script type="text/javascr	ipt" src="../resources/js/login_form.js"></script>
+<!--CSS-->
 <link rel="stylesheet" 
       href="${ pageContext.request.contextPath }/resources/css/login_form.css">
-
- <script>
-
- $(function(){
-		$('#form').on('keyup',function(e){
-			if(e.keyCode==13){
-				send();
-			}
-		});
-	})
-		
-	function send(){
-		
-		let u_id = $( '#u_id' ).val();
-		let u_pwd = $( '#u_pwd' ).val();
-		//아이디 비밀번호 유효성 체크 > 비동기통신 
-	  $.ajax({
-		  type:'POST',
-		  url:'login.do', 
-		  data:{'u_id':u_id, 'u_pwd':u_pwd},
-		  dataType:'json',
-		  success:function(res){ //res = bResult
-
-			  if(!res.bResult){//bResult=false
-				  $('#loginMsg').html('아이디나 비밀번호가 일치하지 않습니다.')
-				  .css('color','red');
-			  	  return;
-			  }else{
-				 console.log("로그인실패");
-				 location.href = '../mainpage/list.do';
-			  }
-		  },
-		  //jqXHR:자바스크립트 에러 처리 객체
-		  error:function(jqXHR, exception){
-		  
-		   	  let msg = '';
-		  
-			  if (jqXHR.status == 0) {
-				msg = 'Not connect.\n Verify Network.';
-		      }else if (jqXHR.status == 404) {
-		    	msg = 'Requested page not found. [404]';            
-		      }else if (jqXHR.status == 500) {
-		        msg = 'Internal Server Error [500].';            
-		      }else if (exception == 'parsererror') {                
-		    	msg = 'Requested JSON parse failed.';            
-		      }else if (exception == 'timeout') {                
-		    	msg = 'Time out error.';            
-		      }else if (exception == 'abort') {                
-		    	msg = 'Ajax request aborted.';            
-		      }else {                
-		        msg = 'Uncaught Error.\n' + jqXHR.responseText;            
-		      }
-		      alert(msg);
-	 	 }
-	  });//end ajax
-	}//end login 
-</script>
+      
+<!-- <script>
+$(document).ready(function(){
+    $("modal").click(function(){
+        $("#IDModal").modal();
+    });
+});
+</script> -->
 
 </head>
 
@@ -80,7 +36,7 @@
  <div id="box">
     <a href="../mainpage/list.do"><img class="mb-4" src="../resources/image/상추마켓.png" alt="" width="300" height="100"></a>
     <div id="login-form">
-    <h3 style="margin: 20px; height: 80px;">로그인</h3>
+    <h3>로그인</h3>
 	</div>
 	
 	<div class="input-form">
@@ -97,8 +53,52 @@
       </label>
     </div>
     
-   	<div class="find_account"><a href="find_form.do">아이디/비밀번호 찾기</a></div>
-   	
+    
+  <a data-toggle="modal" data-target="#IDModal">아이디찾기</a>&nbsp;/
+
+  <div class="modal fade" id="IDModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">아이디찾기</h4>
+        </div>
+        <div class="modal-body">
+          <p>이름</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <a data-toggle="modal" data-target="#pwdModal">비밀번호찾기</a>
+
+  <div class="modal fade" id="pwdModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">비밀번호찾기</h4>
+        </div>
+        <div class="modal-body">
+          <p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div>
+    <a href="enroll_form.do">회원가입</a>
+  </div>
+  
     <div id="button-wrap">
     <button class="w-50 btn btn-md" id="login_btn" onclick="send();">로그인</button>
     </div>

@@ -149,6 +149,7 @@ public class ProductController {
 	@RequestMapping("product_modify_form.do")
 	public String product_modify_form(Model model){
 		
+
 		//임시로 p_idx 1로 설정
 		int p_idx=1;
 		
@@ -160,6 +161,9 @@ public class ProductController {
 		
 		//model에 add
 		model.addAttribute("vo", vo);
+
+//		ProductVo vo = product_dao.
+
 		
 		
 		/* System.out.println(vo.getImage_list().get(0).getImagedata()); */
