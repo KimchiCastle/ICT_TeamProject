@@ -36,7 +36,7 @@ public class MyCookieList {
 					int cookievalue = Integer.parseInt(cookiename);
 
 					// 쿠키네임은 p_idx이고, p_idx에 해당하는 상품정보 포장
-					ProductVo vo = product_dao.selectList2(cookievalue);
+					ProductVo vo = product_dao.selectListproduct(cookievalue);
 					
 					
 					

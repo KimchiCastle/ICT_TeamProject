@@ -24,18 +24,8 @@ alter table image
 
 
 
-insert into image
-values(
-(select max(p_idx) from product),
-cat123.gif,
-wow123.jpg,
-null,
-null,
-null,
-null
-)
 
-select * from image
+select * from image order by i_idx
 select p_idx, sumimage from image 
 select * from product
 
