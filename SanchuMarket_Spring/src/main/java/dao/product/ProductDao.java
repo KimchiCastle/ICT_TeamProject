@@ -21,6 +21,9 @@ public interface ProductDao {
 	
 	//상품정보 넘김
 	public ProductVo selectList2(int p_idx);
+	
+	//상품정보 넘김
+	public ProductVo selectListproduct(int p_idx);
 
 	//최근 상품 조회(mainpage_admin)
 	public List<ProductVo> selectRecentList();
