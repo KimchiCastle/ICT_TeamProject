@@ -180,26 +180,14 @@ public class UserController {
 		return "user/login_form";
 	}
 	
-	//아이디 찾기
-	@RequestMapping("find_id_form.do")
-	public String findId() {
-		
-		return "user/find_id_form";
-	}
-	
+	//아이디찾기 
 	@RequestMapping("find_id.do")
 	public String findIdForm() {
 		
 		return "user/find_id";
 	}
 	
-	//비밀번호 찾기
-	@RequestMapping("find_pwd_form.do")
-	public String findPwdForm() {
-		
-		return "user/find_pwd_form";
-	}
-	
+	//비밀번호찾기
 	@RequestMapping("find_pwd.do")
 	public boolean findPwd(HashMap<String, Object> paramap) {
 		
@@ -208,7 +196,7 @@ public class UserController {
 			HashMap<String, Object> map = getMail_Pwd(paramap);
 			if (map.size() != 0) {
 				b = true;
-				String setfrom = "hwangjeongyong4@gmail.com";
+				String setfrom = "hwangjeongyong4@gmail.com	";
 				String tomail = (String) map.get("g_mail"); // 받는 사람 이메일
 				String title = "BOM AIR 비밀번호 찾기 기능 입니다."; // 제목
 				try {
@@ -228,6 +216,8 @@ public class UserController {
 		
 		return b;
 	}
+	
+	
 	
 	
 }
