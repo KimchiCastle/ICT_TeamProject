@@ -45,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectOne("product.product_p_idx",p_idx);
 	}
 	
-	
+	//상품정보와 상품이미지 하나만 가져오기
 	@Override
 	public ProductVo selectListproduct(int p_idx) {
 		// TODO Auto-generated method stub

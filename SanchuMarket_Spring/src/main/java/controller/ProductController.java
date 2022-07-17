@@ -146,11 +146,13 @@ public class ProductController {
 		return map;
 	}
 	
-	@RequestMapping("product_modify_form.do")
+	@RequestMapping("modify_form.do")
 	public String product_modify_form(Model model){
 		
+		
+		//나중에 상품 수정시, u_idx 확인절차 넣을 예정
 
-		//임시로 p_idx 1로 설정
+		//임시로 p_idx 1로 설정 파라미터로 받기 수정예정
 		int p_idx=1;
 		
 		//파라미터로 받아온 p_idx로 상품 정보 1개 가져오기
@@ -162,14 +164,58 @@ public class ProductController {
 		//model에 add
 		model.addAttribute("vo", vo);
 
-//		ProductVo vo = product_dao.
-
-		
-		
-		/* System.out.println(vo.getImage_list().get(0).getImagedata()); */
-		
 		
 		return "product/product_modify_form";
 	}
+	
+	
+
+	@ResponseBody
+	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
+	public Map product_modify(
+	@RequestParam(value="imagedata") MultipartFile [] imagedata, int p_idx, String[] chage_image,
+	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp
+	) {
+		
+		int u_idx = 3;
+		
+		//파라미터로 받은 ProductVo 생성자를통해 생성
+		String p_status = "거래가능";
+		
+		//상품설명 줄바꿈 하기
+		p_exp = p_exp.replaceAll("\r\n", "<br>");
+		
+		//								 유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
+		ProductVo productVo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
+		
+		System.out.println(p_idx);
+		
+		for(String msg : chage_image) {
+			System.out.println(msg);
+		}
+		
+		
+		int res2 = 0;
+		
+		//절대경로 구함
+		String abs_path = applicaton.getRealPath("/resources/imgdata/");
+		
+
+		
+		//JsonConverter 사용하기 위한 Map생성
+		Map map = new HashMap();
+
+		//기본 리턴값 false
+		boolean bResult = true;
+		
+		//만약 상품등록과 이미지등록이 됐으면..
+		
+		//맵에 result값 넣기
+		map.put("res", bResult);
+		
+		return map;
+	}
+	
+	
 	
 }
