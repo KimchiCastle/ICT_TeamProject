@@ -36,8 +36,7 @@
 <script type="text/javascript">
 	var preview_array  = [false, false, false, false, false, false];
 	
-	var myMap = new Map();
-	
+	var chage_image = [];
 	
 	for(var y=0; y<${ fn:length(vo.image_list) }; y++){
 		preview_array[y] = true;
@@ -168,6 +167,9 @@
 
 
 	function imgcheck0(input) {
+		/* 이미지파일명 체크 */
+		var myfile_sub = input.value.lastIndexOf('\\');
+		var myreal_file = input.value.substring(myfile_sub+1, input.length);
 		
 		/* 이미지 확장자 파일체크 */
 		var file_kind = input.value.lastIndexOf('.');
@@ -196,7 +198,18 @@
 	        reader.onload = function (e) {
 		        $('#imgup_sum').attr('src', e.target.result);
 		        	
-				alert('${vo.image_list[0].i_idx}');
+				/* 수정한 사진이면.. */
+		        if('${vo.image_list[0].i_idx}'){
+		        	chage_image[0] = '${vo.image_list[0].i_idx}';
+		        }else{
+		        	/* 추가한 사진이면.. */
+		        	chage_image[0] = "newPhoto";
+		        }
+				chage_image[1] = myreal_file;
+				
+				alert(chage_image[0]);
+				alert(chage_image[1]);
+				
 	
 		        $("#img_preview0").css("display","inline-block");
 				$("#imgup_sum").show();
@@ -244,6 +257,11 @@
 	
 	function imgcheck1(input) {
 		
+		/* 이미지파일명 체크 */
+		var myfile_sub = input.value.lastIndexOf('\\');
+		var myreal_file = input.value.substring(myfile_sub+1, input.length);
+		
+		
 		/* 이미지 확장자 파일체크 */
 		var file_kind = input.value.lastIndexOf('.');
 		var file_name = input.value.substring(file_kind+1,input.length);
@@ -269,14 +287,28 @@
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
-	        	        
-	        	$('#imgup_1').attr('src', e.target.result);
-	        	//배열에 트루값주기, 트루면 업로드 못함
 	        
+	        	$('#imgup_1').attr('src', e.target.result);
+	        	
+	        	/* 수정한 사진이면.. */
+	        	if('${vo.image_list[1].i_idx}'){
+	        		chage_image[2] = '${vo.image_list[1].i_idx}';
+	        	}else{
+	        		/* 추가한 사진이면.. */
+	        		chage_image[2] = "newPhoto";
+	        	}
+	        	
+				chage_image[3] = myreal_file;
+				
+				alert(chage_image[2]);
+				alert(chage_image[3]);
+	        	
+	        	
 	        	$("#img_preview1").css("display","inline-block");
 	        	$("#imgup_1").show();
 	        	$("#del_img1").show();
 	        	
+	        	//배열에 트루값주기, 트루면 업로드 못함
 	        	preview_array[1] = true;
 				
 	        	/* 이미지넘버 변경 */
@@ -314,6 +346,10 @@
 	
 	function imgcheck2(input) {
 		
+		/* 이미지파일명 체크 */
+		var myfile_sub = input.value.lastIndexOf('\\');
+		var myreal_file = input.value.substring(myfile_sub+1, input.length);
+		
 		/* 이미지 확장자 파일체크 */
 		var file_kind = input.value.lastIndexOf('.');
 		var file_name = input.value.substring(file_kind+1,input.length);
@@ -340,7 +376,20 @@
 	        reader.onload = function (e) {
 				$('#imgup_2').attr('src', e.target.result);
 				
-				 $("#img_preview2").css("display","inline-block");
+	        	/* 수정한 사진이면.. */
+	        	if('${vo.image_list[2].i_idx}'){
+	        		chage_image[4] = '${vo.image_list[2].i_idx}';
+	        	}else{
+	        		/* 추가한 사진이면.. */
+	        		chage_image[4] = "newPhoto";
+	        	}
+				chage_image[5] = myreal_file;
+				
+				alert(chage_image[4]);
+				alert(chage_image[5]);
+				
+				
+				$("#img_preview2").css("display","inline-block");
 				$("#imgup_2").show();
 				$("#del_img2").show();
 				
@@ -379,6 +428,10 @@
 	
 	function imgcheck3(input) {
 		
+		/* 이미지파일명 체크 */
+		var myfile_sub = input.value.lastIndexOf('\\');
+		var myreal_file = input.value.substring(myfile_sub+1, input.length);
+		
 		/* 이미지 확장자 파일체크 */
 		var file_kind = input.value.lastIndexOf('.');
 		var file_name = input.value.substring(file_kind+1,input.length);
@@ -405,6 +458,20 @@
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
 				$('#imgup_3').attr('src', e.target.result);
+				
+				
+	        	/* 수정한 사진이면.. */
+	        	if('${vo.image_list[3].i_idx}'){
+	        		chage_image[6] = '${vo.image_list[3].i_idx}';
+	        	}else{
+	        		/* 추가한 사진이면.. */
+	        		chage_image[6] = "newPhoto";
+	        	}
+				chage_image[7] = myreal_file;
+				
+				alert(chage_image[6]);
+				alert(chage_image[7]);
+				
 				
 				 $("#img_preview3").css("display","inline-block");
 				$("#imgup_3").show();
@@ -444,6 +511,10 @@
 	
 	function imgcheck4(input) {
 		
+		/* 이미지파일명 체크 */
+		var myfile_sub = input.value.lastIndexOf('\\');
+		var myreal_file = input.value.substring(myfile_sub+1, input.length);
+		
 		/* 이미지 확장자 파일체크 */
 		var file_kind = input.value.lastIndexOf('.');
 		var file_name = input.value.substring(file_kind+1,input.length);
@@ -469,6 +540,20 @@
 	        reader.onload = function (e) {
 	        	
 				$('#imgup_4').attr('src', e.target.result);
+				
+	        	/* 수정한 사진이면.. */
+	        	if('${vo.image_list[4].i_idx}'){
+	        		chage_image[8] = '${vo.image_list[4].i_idx}';
+	        	}else{
+	        		/* 추가한 사진이면.. */
+	        		chage_image[8] = "newPhoto";
+	        	}
+				chage_image[9] = myreal_file;
+				
+				alert(chage_image[8]);
+				alert(chage_image[9]); 
+				
+				
 				$("#img_preview4").css("display","inline-block");
 				$("#imgup_4").show();
 				$("#del_img4").show();
@@ -509,6 +594,10 @@
 	
 	function imgcheck5(input) {
 		
+		/* 이미지파일명 체크 */
+		var myfile_sub = input.value.lastIndexOf('\\');
+		var myreal_file = input.value.substring(myfile_sub+1, input.length);
+		
 		/* 이미지 확장자 파일체크 */
 		var file_kind = input.value.lastIndexOf('.');
 		var file_name = input.value.substring(file_kind+1,input.length);
@@ -536,6 +625,18 @@
 		        	
 		        $('#imgup_5').attr('src', e.target.result);
 		        
+	        	/* 수정한 사진이면.. */
+	        	if('${vo.image_list[5].i_idx}'){
+	        		chage_image[10] = '${vo.image_list[5].i_idx}';
+	        	}else{
+	        		/* 추가한 사진이면.. */
+	        		chage_image[10] = "newPhoto";
+	        	}
+				chage_image[11] = myreal_file;
+				
+				alert(chage_image[10]);
+				alert(chage_image[11]);
+		        
 		        $("#img_preview5").css("display","inline-block");
 				$('#imgup_5').show();
 		        $("#del_img5").show();
@@ -549,12 +650,158 @@
 	    }
 	}
 
-//-----------------------------------------------------------
+</script>
 
+<script type="text/javascript">
+//<!-- 이미지미리보기삭제 -->--------------------------------
+	
+	function del_sum() {
+		/* alert('썸네일이미지 지움'); */
+		/* 실제 DB에 들어가는 input value 지움 */
+		$('#sumimage').val('');
+		
+	    $("#img_preview0").css("display","none");
+		$('#imgup_sum').hide();
+		$("#del_sum").hide(); 
+		
+		/* 썸네일 비움 */
+		preview_array[0] = false;
+		
+		/* 삭제한 사진이면.. */
+        if('${vo.image_list[0].i_idx}'){
+        	chage_image[0] = '${vo.image_list[0].i_idx}';
+        	chage_image[1] = "delPhoto";
+        }
+		
+		/* 이미지 넘버변경 */
+		img_num();
+		
+		return;
+	}
+	
+	
+	function del_img1() {
+		/* alert('1번이미지 지움'); */
+		
+		$('#imageFile1').val('');
+		
+		$("#img_preview1").css("display","none");
+		$('#imgup_1').hide();
+		$("#del_img1").hide();
+		
+		/* 1번사진 비움 */
+		preview_array[1] = false;
+		
+		/* 삭제한 사진이면.. */
+        if('${vo.image_list[1].i_idx}'){
+        	chage_image[2] = '${vo.image_list[1].i_idx}';
+        	chage_image[3] = "delPhoto";
+        }
+		
+		/* 이미지 넘버변경 */
+		img_num();
+		
+		return;
+	}
+	
+	function del_img2() {
+		/* alert('2번이미지 지움'); */
+		
+		$('#imageFile2').val('');
+		
+		$("#img_preview2").css("display","none");
+		$('#imgup_2').hide();
+		$("#del_img2").hide();
+		
+		/* 2번사진 비움 */
+		preview_array[2] = false;
+		
+		/* 삭제한 사진이면.. */
+        if('${vo.image_list[2].i_idx}'){
+        	chage_image[4] = '${vo.image_list[2].i_idx}';
+        	chage_image[5] = "delPhoto";
+        }
+		
+		
+		/* 이미지 넘버변경 */
+		img_num();
+		
+		return;
+	}
+	
+	function del_img3() {
+		/* alert('3번이미지 지움'); */
+		
+		$('#imageFile3').val('');
+		$("#img_preview3").css("display","none");
+		$('#imgup_3').hide();
+		$("#del_img3").hide(); 
+		
+		/* 3번사진 비움 */
+		preview_array[3] = false;
+		
+		/* 삭제한 사진이면.. */
+        if('${vo.image_list[3].i_idx}'){
+        	chage_image[6] = '${vo.image_list[3].i_idx}';
+        	chage_image[7] = "delPhoto";
+        }
+		
+		
+		/* 이미지 넘버변경 */
+		img_num();
+		 
+		return;
+	}
+	function del_img4() {
+		/* alert('4번이미지 지움'); */
+		
+		$('#imageFile4').val('');
+		$("#img_preview4").css("display","none");
+		$('#imgup_4').hide();
+		$("#del_img4").hide();
+		
+		/* 4번사진 비움 */
+		preview_array[4] = false;
+		
+		/* 삭제한 사진이면.. */
+        if('${vo.image_list[4].i_idx}'){
+        	chage_image[8] = '${vo.image_list[4].i_idx}';
+        	chage_image[9] = "delPhoto";
+        }else{
+        	chage_image[8] = "newNum";
+        	chage_image[9] = "delPhoto";
+        }
+		
+		/* 이미지 넘버변경 */
+		img_num();
+	
+		return;
+	}
+	
+	function del_img5() {
+		/* alert('5번이미지 지움'); */
+		
+		$('#imageFile5').val('');
+		$("#img_preview5").css("display","none");
+		$('#imgup_5').hide();
+		$("#del_img5").hide(); 
+		
+		/* 5번사진 비움 */
+		preview_array[5] = false;
+		
+        if('${vo.image_list[5].i_idx}'){
+        	chage_image[10] = '${vo.image_list[5].i_idx}';
+        	chage_image[11] = "delPhoto";
+        }
+		
+		/* 이미지 넘버변경 */
+		img_num();
+		
+		return;
+	}
 
 
 </script>
-
 
 
 <!-- modify JavaScript -->
@@ -565,7 +812,7 @@
 <body>
 	<!-- 파일업로드 용 폼 -->
 	<form enctype="multipart/form-data" id="imgform" method="post">
-		<input type="file" id="sumimage"   style="display: none;" accept=".jpg, .jpeg, .png">
+		<input type="file"  id="sumimage"   style="display: none;" accept=".jpg, .jpeg, .png">
 		<input type="file" id="imageFile1" style="display: none;" accept=".jpg, .jpeg, .png">
 		<input type="file" id="imageFile2" style="display: none;" accept=".jpg, .jpeg, .png">
 		<input type="file" id="imageFile3" style="display: none;" accept=".jpg, .jpeg, .png">
@@ -575,6 +822,7 @@
 
 	<div id="root">
 		<input type="hidden" id="u_idx" value="${ user.u_idx }">
+		<input type="hidden" id="p_idx" value="${ vo.p_idx }">
 	 	<div id="mainframe">
 			<%@ include file="../mainpage/header&sidebar.jsp"%>
 		</div> 

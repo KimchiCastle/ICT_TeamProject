@@ -187,9 +187,11 @@
 		
 		var p_exp = $("#p_exp").val().trim();
 		
-		var sumimage = $("#sumimage").val();
+//		var sumimage = $("#sumimage").val();
 		
- 		if(sumimage==''){
+		//보안상 이유때문에 file의 value값은 미리 정할 수 없음.
+		//그래서 이미지 배열을 통해 해결
+ 		if(preview_array[0]==false){
  			alert('대표 이미지를 반드시 등록해주세요.');
  			$("#imgup").focus();
  			return;
@@ -217,6 +219,7 @@
 			return;			
 		}
 		
+		//라디오를 checked해놓지 않았음.
 		if(p_condition==undefined){
 			alert('상품상태를 선택해 주세요.');
 			$("input:radio[name=p_condition]").focus();
@@ -259,11 +262,12 @@
 			return;
 		}
 		
-		
 		if(confirm('등록 하시겠습니까?')==false) return;
 		
 		var form = $("#imgform")[0];
+		var p_idx = $("#p_idx").val();
 		var formData = new FormData(form);
+		
 		
 		formData.append('imagedata',$('#sumimage')[0].files[0]);
 		formData.append('imagedata',$('#imageFile1')[0].files[0]);
@@ -271,17 +275,20 @@
 		formData.append('imagedata',$('#imageFile3')[0].files[0]);
 		formData.append('imagedata',$('#imageFile4')[0].files[0]);
 		formData.append('imagedata',$('#imageFile5')[0].files[0]);
-		formData.append('u_idx',u_idx);				// 유저idx
+		formData.append('u_idx',u_idx);				// 유저 idx
 		formData.append('p_name',p_name);			// 상품명
 		formData.append('c_idx',c_idx);				// 카테고리번호
 		formData.append('p_location',p_location);	// 지역
 		formData.append('p_condition',p_condition);	// 상품상태
 		formData.append('p_price',p_price);			// 가격
 		formData.append('p_exp',p_exp);				// 상품설명
-		
- 	 	$.ajax({
+		//수정 에서 추가 되었음
+		formData.append('p_idx',p_idx);				// 수정하려는 상품 idx
+		formData.append('chage_image',chage_image)  // 이미지 수정정보
+ 	 	
+		$.ajax({
 			
-			url 	 : 'product_insert.do',
+			url 	 : 'product_modify.do',
 			type	 : 'POST',
 			data	 : formData,
 			processData : false,
@@ -290,12 +297,13 @@
 			success  : function(res){
 				
 				if(res.res==true){
-					alert('물품등록 성공!');
-					location.href='../mainpage/list.do';
+					alert('상품수정 성공!');
+				//	location.href='../mainpage/list.do';
 				}
 				
 			},error	: function(err){
-				alert('물품등록에 실패했습니다. 관리자에게 문의하세요.');
+				alert('상품수정에 실패했습니다. 관리자에게 문의하세요.');
+				
 			}
 			
 		}); 

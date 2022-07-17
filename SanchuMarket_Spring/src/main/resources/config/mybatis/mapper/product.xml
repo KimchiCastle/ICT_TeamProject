@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select * from product) p where p_idx=#{p_idx}
 	</select>
 	
-	<!-- 상품하나 조회  -->
+	<!-- 상품하나 조회, 이미지 전체 다가져옴 -->
 	<select id="product_p_idx" resultMap="product_map_all" >
 		select
 			p.* ,
