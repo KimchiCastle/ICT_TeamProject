@@ -139,6 +139,7 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 ---Á¶È¸¿ë
 select * from user_market;
 
+select count(*) from user_market where u_id='hong123' and u_mail='hongkill@gmail.com'
 
 
 */

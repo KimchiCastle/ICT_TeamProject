@@ -31,6 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user_market where u_nickname=#{u_nickname} 
 	</select>
 	
+	<select id="check_emailAndId" resultType="int" parameterType="vo.user.UserVo">
+	   select count(*) from user_market where u_id=#{u_id} and u_mail=#{u_mail}
+	</select>
+	
 	<!--u_photo/u_like/u_profile은 처음 가입시 null/0-->
 	<insert id="user_insert" parameterType="vo.user.UserVo">
 	insert into user_market values(

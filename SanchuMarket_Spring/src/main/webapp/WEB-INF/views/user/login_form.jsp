@@ -16,19 +16,27 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <!--JavaScript-->
-<script type="text/javascript" src="../resources/js/login_form.js"></script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/login_form.js"></script>
 <!--CSS-->
 <link rel="stylesheet" 
       href="${ pageContext.request.contextPath }/resources/css/login_form.css">
-      
-<!-- <script>
-$(document).ready(function(){
-    $("modal").click(function(){
-        $("#IDModal").modal();
-    });
-});
-</script> -->
+  
+<script>
+  /* 모달창 input data 초기화 */ 
+  $(function(){
+	  
+	  $('[data-dismiss=modal]').on('click', function (e) {
+		    var $t = $(this),
+		        target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
 
+		  $(target)
+		    .find("input,textarea,select")
+		       .val('')
+		       .end();
+		})
+  });  
+</script>  
+    
 </head>
 
 <body class="text-center" id="form">
@@ -53,83 +61,82 @@ $(document).ready(function(){
       </label>
     </div>
     
-   <!--아이디찾기--> 
-  <a data-toggle="modal" data-target="#IDModal">아이디찾기</a>&nbsp;/
-
-  <div class="modal fade" id="IDModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <div class="modal-content">
-        <form>
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title"><label>아이디 찾기</label></h4>
+<!--아이디찾기-->    
+<a href="#idModal" data-toggle="modal">아이디찾기</a>&nbsp;/
+<div class="modal fade" id="idModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <form>
+       
+	      <div class="modal-header text-center">
+	        <h4 class="modal-title w-100 font-weight-bold">휴대폰 인증</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      
+	      <div class="modal-body mx-1">
+	        <div class="md-form mb-5">
+	          <label style="width:20%;">이름</label>
+	          <input name="name" class="modalInput">
 	        </div>
-	        
-	        <div class="modal-body">
-	        	<div>
-	        	  <label>이름</label>
-	        	  <input type="text" name="name" id="name" class="form-control">
-	        	</div>
-	        	<div>
-	        	  <label>휴대폰번호</label>
-	        	  <input type="text" name="phone" id="phone" class="form-control">
-	        	</div>
+	
+	        <div class="md-form mb-4">
+	          <label style="width:20%;">휴대폰번호</label>
+	          <input name="phoneNo" class="modalInput">
 	        </div>
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" onclick="phoneAuth();">전화번호인증</button>
-	          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-	        </div>
-        </form>
-      </div>
-      
+	      </div>
+	      
+	      <div class="modal-footer d-flex justify-content-center">
+	        <button class="btn btn-indigo" onclick="phoneNoSubmit(this.form);">인증메일발송</button>
+	        <button class="btn btn-indigo" data-dismiss="modal">닫기</button>
+	      </div>
+		      
+       </form>
     </div>
   </div>
-  
-   <!--비밀번호찾기--> 
-  <a data-toggle="modal" data-target="#pwdModal">비밀번호 찾기</a>
-  
-   <div class="modal fade" id="pwdModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, velit.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Read more</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- 
-  <div class="modal fade" id="pwdModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">비밀번호찾기</h4>
-        </div>
-        
-         <div class="modal-body">
-        	
-	        </div>  
-        </div>
-        
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" onclick="emailAuth();">이메일보내기</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        </div>
-      </div>
+</div>
+
+<!--비밀번호찾기-->
+<a class="nav-link" href="#pwdModal" data-toggle="modal" >비밀번호찾기</a>
+<div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
       
+	      <div class="modal-header text-center">
+	        <h4 class="modal-title w-100 font-weight-bold">임시비밀번호 발급</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      
+	      <div class="modal-body mx-3">
+	        <div class="md-form mb-5">
+	          <label style="width:20%;">아이디</label>
+	          <input name="id">
+	        </div>
+	
+	        <div class="md-form mb-4">
+	          <label style="width:20%;">이메일</label>
+	          <input id="email" name="email">
+	        </div>
+	      </div>
+	      
+	      <span id="pwdErrMsg" style=" margin-left:45px; color:red; display:none;"></span>
+	      
+	      <div class="modal-footer d-flex justify-content-center">
+	        <button class="btn btn-indigo" onclick="mailSubmit(this.form);">인증메일발송</button>
+	        <button class="modalBtns btn btn-indigo" data-dismiss="modal">닫기</button>
+	      </div>
+     
+      </form>
     </div>
-  </div> -->
+  </div>
+</div>
+
+
   
   <div id="enroll">
     <a href="enroll_form.do">회원가입</a>
