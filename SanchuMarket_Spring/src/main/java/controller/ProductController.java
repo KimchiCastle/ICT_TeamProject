@@ -2,6 +2,7 @@ package controller;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -173,26 +174,94 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
 	public Map product_modify(
-	@RequestParam(value="imagedata") MultipartFile [] imagedata, int p_idx, String[] chage_image,
+	@RequestParam(value="imagedata") MultipartFile [] imagedata, int p_idx, String[] change_image,
 	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp
 	) {
 		
+		
+		String abs_Path = applicaton.getRealPath("/resources/imgdata/");
+		
 		int u_idx = 3;
+		
+		List<String> upload_str = new ArrayList<String>();
+		
+		//일단 들어온 파일 전부 업로드
+		for(MultipartFile file : imagedata) {
+			
+//			 upload_str.add(MyFileUpload.myFileUpload(abs_Path, file));
+			 upload_str.add(file.getOriginalFilename());
+			
+		}
+		
 		
 		//파라미터로 받은 ProductVo 생성자를통해 생성
 		String p_status = "거래가능";
 		
+		
+		
 		//상품설명 줄바꿈 하기
 		p_exp = p_exp.replaceAll("\r\n", "<br>");
 		
+		
+		
 		//								 유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
-		ProductVo productVo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
+		ProductVo vo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
 		
-		System.out.println(p_idx);
 		
-		for(String msg : chage_image) {
-			System.out.println(msg);
+		
+		//수정하려전 수정 전 상품 정보 받아오기
+		ProductVo vo2 = product_dao.selectList2(p_idx);
+		
+		
+		//받아온 상품정보로부터 이미지 list 가져오기
+		List<ImageVo> image_list = vo2.getImage_list();
+		
+		
+		//원래 상품 idx 배열로 만들기
+		int image_idx [] = new int[image_list.size()];
+		
+		
+		
+		// 배열에 원래 상품이미지 idx 넣기
+		for(int i=0; i<image_idx.length; i++) {
+			image_idx[i] = image_list.get(i).getI_idx();
+//			System.out.println(image_idx[i]);
 		}
+		System.out.println("---------------------");
+		
+		List<Integer> change_idxList = new ArrayList<Integer>();
+		
+		for (int i = 0; i < change_image.length; i++) {
+
+			// i가 짝수면
+			if (i % 2 == 0) {
+
+				// 수정된 사진이면
+				if (!change_image[i].equals("changePhoto")) {
+
+					if (upload_str.contains(change_image[i + 1])) {
+						System.out.printf("%s이 이미지는 수정되었습니다. idx를 저장해주세요\n", change_image[i + 1]);
+					}
+
+				// 추가된 사진이면
+				} else {
+
+					System.out.printf("%s이 이미지는 추가되었습니다. idx를 인서트해주세요\n", change_image[i + 1]);
+
+				}
+			
+			//i가 홀수면..
+			}else {
+				
+			}
+
+		}
+
+		for(int a : change_idxList) {
+			System.out.println(a);
+		}
+		
+		
 		
 		
 		int res2 = 0;
