@@ -32,6 +32,8 @@ public interface UserDao {
 	//회원가입시 이메일 중복 방지
 	public UserVo selectOneByEmail(String email);
 	
+	//비밀번호 찾기시 아이디,이메일 존재 여부
+	public int countForFindPwd(UserVo vo);
 	
 	//admin mainpage 금일 가입수
 	public int todayEnrollCount();

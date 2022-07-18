@@ -1,34 +1,58 @@
-$(function(){
-		$('#form').on('keyup',function(e){
-			if(e.keyCode==13){
-				send();
-			}
-		});
-	})
-		
-	function send(){
-		
-		let u_id = $( '#u_id' ).val();
-		let u_pwd = $( '#u_pwd' ).val();
-		//아이디 비밀번호 유효성 체크 > 비동기통신 
-	  $.ajax({
-		  type:'POST',
-		  url:'login.do', 
-		  data:{'u_id':u_id, 'u_pwd':u_pwd},
-		  dataType:'json',
-		  success:function(res){ //res = bResult
+let email = $('#email').val();
+		let id = $('#id').val();
+		let regularExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
-			  if(!res.bResult){//bResult=false
-				  $('#loginMsg').html('아이디나 비밀번호가 일치하지 않습니다.')
-				  .css('color','red');
-			  	  return;
-			  }else{
-				 console.log("로그인실패");
-				 location.href = '../mainpage/list.do';
-			  }
-		  },
-		  //jqXHR:자바스크립트 에러 처리 객체
-		  error:function(jqXHR, exception){
+$(function(){
+	
+	$('#form').on('keyup',function(e){
+		if(e.keyCode==13){
+			send();
+		}
+	});
+	
+	$('#email').blur(function(){
+		
+		if(email == ''){
+			console.log('email2');
+			$('#pwdErrMsg').html('필수 입력값입니다.').show();
+		}
+		if(!regularExp.test(email)){
+			console.log('email');
+			$('#pwdErrMsg').html('유효한 이메일 형식이 아닙니다.').show();
+		}
+	});
+	
+	$('#id').blur(function(){
+		
+		if(id == ''){
+			console.log('id');
+			$('#pwdErrMsg').html('필수 입력값입니다.').show();
+		}
+	});
+	
+	
+});//end document.ready
+	
+	function phoneNoSubmit(){
+		
+	}
+	
+	function mailSubmit(f){
+		
+		$.ajax({
+			 type : POST,
+			 url : 'count_emailId.do',
+			 data : {'email':email, 'id':id},
+			 dataType : 'json',
+			 success : function(res){
+				
+				if(res.result=='noExist'){
+					$('#pwdErrMsg').html('존재하지 않는 아이디 혹은 이메일입니다.').show();
+				}else{
+					
+				}
+			 },
+			 error:function(jqXHR, exception){
 		  
 		   	  let msg = '';
 		  
@@ -48,7 +72,12 @@ $(function(){
 		        msg = 'Uncaught Error.\n' + jqXHR.responseText;            
 		      }
 		      alert(msg);
-	 	 }
-	  });//end ajax
-	}//end login 
+		 }
+	
+	
+			
+			
+		});
+	}
+	
 	
