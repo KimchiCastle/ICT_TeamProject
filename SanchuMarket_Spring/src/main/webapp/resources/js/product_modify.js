@@ -16,422 +16,6 @@
 		$("#img_number").html('('+ img_number + '/6)');
 		
 	}
-	
-	function send_0() {
-		
-		
-		$("#sumimage").click();
-	
-			
-	}
-	
-	$(function(){
-		
-		$("#sumimage").on('change',function(){
-			
-			if( $("#sumimage")[0].files[0]==undefined) {
-				
-				
-				return;
-			
-			}
-			
-			imgcheck0(this);
-			
-		})
-		
-	});
-//-----------------------------------------------------------
-
-
-
-
-
-
-//<!-- 이미지 미리보기 -->-----------------------------------
-
-	function imgcheck0(input) {
-		
-		/* 이미지 확장자 파일체크 */
-		var file_kind = input.value.lastIndexOf('.');
-		var file_name = input.value.substring(file_kind+1,input.length);
-		var file_type = file_name.toLowerCase();
-
-		var check_array = new Array( 'jpg','png','jpeg' );
-
-		$('#sumimage').val();
-		
-		if(check_array.indexOf(file_type)==-1){
-			
-			/* 사용자에게 알려주고 */
-			alert('이미지 파일만 선택할 수 있습니다.');
-
-			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
-			$('#sumimage').val('');
-			
-			return;
-		
-		} 
-
-		
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-		        $('#imgup_sum').attr('src', e.target.result);
-		        
-		        $("#img_preview0").css("display","inline-block");
-				$("#imgup_sum").show();
-		        $("#del_sum").show();
-		       
-				preview_array[0] = true;
-				
-				/* 이미지넘버 변경 */
-				img_num();
-			
-			
-	        }
-	        
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-	
-	
-	
-	/* 1번사진 */
-	
-	function send_1() {
-
-		$("#imageFile1").click();
-		
-	}
-	
-	$(function(){
-		
-		$("#imageFile1").on('change',function(){
-			
-			/* 파일선택 취소했을때 */
-			if( $("#imageFile1")[0].files[0]==undefined) {
-				
-				
-				return;
-			}
-			
-			imgcheck1(this);
-			
-		})
-		
-	});
-	
-	function imgcheck1(input) {
-		
-		/* 이미지 확장자 파일체크 */
-		var file_kind = input.value.lastIndexOf('.');
-		var file_name = input.value.substring(file_kind+1,input.length);
-		var file_type = file_name.toLowerCase();
-
-		var check_array = new Array( 'jpg','png','jpeg' );
-
-		
-		if(check_array.indexOf(file_type)==-1){
-			
-			alert('이미지 파일만 선택할 수 있습니다.');
-			
-			
-			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
-			$('#imageFile1').val('');
-			
-			return;
-		
-		} 
-		
-		
-		
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-	        	        
-	        	$('#imgup_1').attr('src', e.target.result);
-	        	//배열에 트루값주기, 트루면 업로드 못함
-	        
-	        	$("#img_preview1").css("display","inline-block");
-	        	$("#imgup_1").show();
-	        	$("#del_img1").show();
-	        	
-	        	preview_array[1] = true;
-				
-	        	/* 이미지넘버 변경 */
-	        	img_num();
-	        	
-	        }
-	        
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-
-	/* 2번사진 */
-
-	function send_2() {
-		$("#imageFile2").click();
-	}
-	
-	$(function(){
-		
-		$("#imageFile2").on('change',function(){
-			
-			/* 파일선택 취소했을때 */
-			if( $("#imageFile2")[0].files[0]==undefined) {
-				
-				return;
-			}
-			
-			imgcheck2(this);
-			
-		})
-		
-	});
-	
-	
-	
-	function imgcheck2(input) {
-		
-		/* 이미지 확장자 파일체크 */
-		var file_kind = input.value.lastIndexOf('.');
-		var file_name = input.value.substring(file_kind+1,input.length);
-		var file_type = file_name.toLowerCase();
-
-		var check_array = new Array( 'jpg','png','jpeg' );
-
-		
-		if(check_array.indexOf(file_type)==-1){
-			
-			alert('이미지 파일만 선택할 수 있습니다.');
-			
-			
-			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
-			$('#imageFile2').val('');
-			
-			return;
-		
-		} 
-		
-		
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-				$('#imgup_2').attr('src', e.target.result);
-				
-				 $("#img_preview2").css("display","inline-block");
-				$("#imgup_2").show();
-				$("#del_img2").show();
-				
-				preview_array[2] = true;
-	        	/* 이미지넘버 변경 */
-				img_num();
-	       
-	        }
-	        
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-	
-	
-	/* 3번사진 */
-	
-	function send_3() {
-		$("#imageFile3").click();
-	}
-	
-	$(function(){
-		
-		$("#imageFile3").on('change',function(){
-			
-			/* 파일선택 취소했을때 */
-			if( $("#imageFile3")[0].files[0]==undefined){
-				
-				return;
-			}
-			
-			imgcheck3(this);
-			
-		})
-		
-	});
-
-	function imgcheck3(input) {
-		
-		/* 이미지 확장자 파일체크 */
-		var file_kind = input.value.lastIndexOf('.');
-		var file_name = input.value.substring(file_kind+1,input.length);
-		var file_type = file_name.toLowerCase();
-
-		var check_array = new Array( 'jpg','png','jpeg' );
-
-		
-		if(check_array.indexOf(file_type)==-1){
-			
-			alert('이미지 파일만 선택할 수 있습니다.');
-			
-			
-			
-			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
-			$('#imageFile3').val('');
-			
-			return;
-		
-		}
-		
-		
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-				$('#imgup_3').attr('src', e.target.result);
-				
-				 $("#img_preview3").css("display","inline-block");
-				$("#imgup_3").show();
-				$("#del_img3").show();
-				
-				preview_array[3] = true;
-	        	/* 이미지넘버 변경 */
-				img_num();
-	       
-	        }
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-	
-	
-	/* 4번사진 */
-	
-	function send_4() {
-		$("#imageFile4").click();
-	}
-	
-	$(function(){
-		
-		$("#imageFile4").on('change',function(){
-			
-			/* 파일선택 취소했을때 */
-			if( $("#imageFile4")[0].files[0]==undefined){
-				
-				return;
-			}
-			
-			imgcheck4(this);
-			
-		})
-		
-	});
-
-	function imgcheck4(input) {
-		
-		/* 이미지 확장자 파일체크 */
-		var file_kind = input.value.lastIndexOf('.');
-		var file_name = input.value.substring(file_kind+1,input.length);
-		var file_type = file_name.toLowerCase();
-
-		var check_array = new Array( 'jpg','png','jpeg' );
-
-		
-		if(check_array.indexOf(file_type)==-1){
-			
-			alert('이미지 파일만 선택할 수 있습니다.');
-			
-			
-			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
-			$('#imageFile4').val('');
-			
-			return;
-		
-		}
-		
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-	        	
-				$('#imgup_4').attr('src', e.target.result);
-				
-				alert($("#sumimage").val());
-				
-				$("#img_preview4").css("display","inline-block");
-				$("#imgup_4").show();
-				$("#del_img4").show();
-				
-				preview_array[4] = true;
-	        	/* 이미지넘버 변경 */
-				img_num();
-				
-	       
-	        }
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-	
-	
-	/* 5번사진 */
-	
-	function send_5() {
-		$("#imageFile5").click();
-		
-	}
-	
-	$(function(){
-		
-		$("#imageFile5").on('change',function(){
-			
-			/* 파일선택 취소했을때 */
-			if( $("#imageFile5")[0].files[0]==undefined){
-				
-				return;
-			}
-			
-			imgcheck5(this);
-			
-		})
-		
-	});
-
-	function imgcheck5(input) {
-		
-		/* 이미지 확장자 파일체크 */
-		var file_kind = input.value.lastIndexOf('.');
-		var file_name = input.value.substring(file_kind+1,input.length);
-		var file_type = file_name.toLowerCase();
-
-		var check_array = new Array( 'jpg','png','jpeg' );
-
-		
-		if(check_array.indexOf(file_type)==-1){
-			
-			alert('이미지 파일만 선택할 수 있습니다.');
-			
-			
-			/* 실제 업로드 되는 input태그 vlaue값 지우기 */
-			$('#imageFile5').val('');
-			
-			return;
-		
-		}
-		
-		
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-		        	
-		        $('#imgup_5').attr('src', e.target.result);
-		        
-		        $("#img_preview5").css("display","inline-block");
-				$('#imgup_5').show();
-		        $("#del_img5").show();
-				
-		        preview_array[5] = true;
-		        /* 이미지넘버 변경 */
-		        img_num();
-	       
-	        }
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-
 //-----------------------------------------------------------
 
 
@@ -603,9 +187,11 @@
 		
 		var p_exp = $("#p_exp").val().trim();
 		
-		var sumimage = $("#sumimage").val();
+//		var sumimage = $("#sumimage").val();
 		
- 		if(sumimage==''){
+		//보안상 이유때문에 file의 value값은 미리 정할 수 없음.
+		//그래서 이미지 배열을 통해 해결
+ 		if(preview_array[0]==false){
  			alert('대표 이미지를 반드시 등록해주세요.');
  			$("#imgup").focus();
  			return;
@@ -633,6 +219,7 @@
 			return;			
 		}
 		
+		//라디오를 checked해놓지 않았음.
 		if(p_condition==undefined){
 			alert('상품상태를 선택해 주세요.');
 			$("input:radio[name=p_condition]").focus();
@@ -675,11 +262,12 @@
 			return;
 		}
 		
-		
 		if(confirm('등록 하시겠습니까?')==false) return;
 		
 		var form = $("#imgform")[0];
+		var p_idx = $("#p_idx").val();
 		var formData = new FormData(form);
+		
 		
 		formData.append('imagedata',$('#sumimage')[0].files[0]);
 		formData.append('imagedata',$('#imageFile1')[0].files[0]);
@@ -687,17 +275,20 @@
 		formData.append('imagedata',$('#imageFile3')[0].files[0]);
 		formData.append('imagedata',$('#imageFile4')[0].files[0]);
 		formData.append('imagedata',$('#imageFile5')[0].files[0]);
-		formData.append('u_idx',u_idx);				// 유저idx
+		formData.append('u_idx',u_idx);				// 유저 idx
 		formData.append('p_name',p_name);			// 상품명
 		formData.append('c_idx',c_idx);				// 카테고리번호
 		formData.append('p_location',p_location);	// 지역
 		formData.append('p_condition',p_condition);	// 상품상태
 		formData.append('p_price',p_price);			// 가격
 		formData.append('p_exp',p_exp);				// 상품설명
-		
- 	 	$.ajax({
+		//수정 에서 추가 되었음
+		formData.append('p_idx',p_idx);				// 수정하려는 상품 idx
+		formData.append('chage_image',chage_image)  // 이미지 수정정보
+ 	 	
+		$.ajax({
 			
-			url 	 : 'product_insert.do',
+			url 	 : 'product_modify.do',
 			type	 : 'POST',
 			data	 : formData,
 			processData : false,
@@ -706,12 +297,13 @@
 			success  : function(res){
 				
 				if(res.res==true){
-					alert('물품등록 성공!');
-					location.href='../mainpage/list.do';
+					alert('상품수정 성공!');
+				//	location.href='../mainpage/list.do';
 				}
 				
 			},error	: function(err){
-				alert('물품등록에 실패했습니다. 관리자에게 문의하세요.');
+				alert('상품수정에 실패했습니다. 관리자에게 문의하세요.');
+				
 			}
 			
 		}); 

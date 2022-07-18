@@ -32,7 +32,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select * from product) p where u_idx=#{u_idx} order by p_idx desc
 	</select>
 	
-	<!-- 상품하나 조회  -->
+	<!-- 상품하나 조회, 이미지도 하나만  -->
+	<select id="product_p_idx_one" resultMap="product_map" >
+		select
+			p.* ,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		from (select * from product) p where p_idx=#{p_idx}
+	</select>
+	
+	<!-- 상품하나 조회, 이미지 전체 다가져옴 -->
 	<select id="product_p_idx" resultMap="product_map_all" >
 		select
 			p.* ,

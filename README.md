@@ -19,7 +19,7 @@
 | --- | --- | --- |
 | 서아진 | [Ajin1068](https://github.com/AJin1068) | dkwlsdl8@hanmail.net |
 | 김치성 | [Kimchicastle](https://github.com/KimchiCastle) | kimchicastle1013@gmail.com |
-| 최규범 | [choiason](https://github.com/choiason) |  |
+| 최규범 | [choiason](https://github.com/choiason) | ppe941025@naver.com |
 | 노원영 | [nyy032](https://github.com/nyy032) | nyy031@gmail.com |
 
 ## 📚 Content
@@ -44,3 +44,8 @@
 
 ## : 구현한 기능
 ---
+1. 로그인/회원가입
+2. 상품 전체조회 
+3. 상품 검색기능 (카테고리별, 키워드별)
+4. 상품 등록 (이미지 미리보기 기능)
+5. 최근 본 상품(쿠키 사용)
