@@ -65,6 +65,12 @@ public class UserDaoImpl implements UserDao{
 	//비밀번호 찾기시 아이디,이메일 존재 여부
 	public int countForFindPwd(UserVo vo) {
 		
+		String u_id = vo.getU_id();
+		String u_mail = vo.getU_mail();
+		
+		System.out.printf("dao_id=%s",u_id);
+		System.out.printf("dao_email=%s",u_mail);
+		
 		return sqlSession.selectOne("user.check_emailAndId",vo);
 	}
 	

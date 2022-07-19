@@ -23,19 +23,6 @@
 		  });
 	  });
 	 
-	 
-	 //enrollAction에서 실패시 redirect되는 parameter 받기
-	  function showMessage(){
-		 
-		  if("${param.reason}" == "failed_enroll"){
-			  alert('회원가입에 실패했습니다. 관리자에게 문의하세요');
-			  return false;
-		  } 
-		  
-	   idFlag = false;
-	   pwdFlag = false;
-	   submitFlag = false;
-	  }
 	
 	 //스크립트 문서 배치 
 	  let idFlag = false;
@@ -519,7 +506,7 @@
 	    } 
 	    
  	    //회원가입 실행
- 	    function submit_1(){ 
+ 	    function enroll(){ 
  	    	
 	        if(idFlag && pwdFlag) {
 	          
