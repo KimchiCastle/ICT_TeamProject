@@ -27,6 +27,7 @@
 
 1. [사용한 기술](https://github.com/KimchiCastle/ICT_TeamProject#-%EC%82%AC%EC%9A%A9%ED%95%9C-%EA%B8%B0%EC%88%A0)
 2. [프로젝트 진행 기한](https://github.com/KimchiCastle/ICT_TeamProject#-%EC%82%AC%EC%9A%A9%ED%95%9C-%EA%B8%B0%EC%88%A0)
+3. [구현한 기능](https://github.com/KimchiCastle/ICT_TeamProject#-%EA%B5%AC%ED%98%84%ED%95%9C-%EA%B8%B0%EB%8A%A5)
 
 ## 🔨 사용한 기술
 ---
@@ -48,4 +49,9 @@
 2. 상품 전체조회 
 3. 상품 검색기능 (카테고리별, 키워드별)
 4. 상품 등록 (이미지 미리보기 기능)
-5. 최근 본 상품(쿠키 사용)
+5. 상품 수정 (이미지 수정 기능)
+6. 최근 본 상품(쿠키 사용)
+
+---
+
+## : 구현 이미지
