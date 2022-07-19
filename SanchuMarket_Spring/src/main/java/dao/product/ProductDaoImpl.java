@@ -103,14 +103,14 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_max_idx");
 	}
-
-
-
-
-
 	
+	//상품 수정
+	@Override
+	public int update(ProductVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("product.product_update",vo);
+	}
 
-	
 
 	
 

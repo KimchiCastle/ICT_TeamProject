@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.image.ImageDao;
 import dao.product.ProductDao;
+import util.MyFileDelete;
 import util.MyFileUpload;
 import vo.image.ImageVo;
 import vo.product.ProductVo;
@@ -188,8 +189,9 @@ public class ProductController {
 		//일단 들어온 파일 전부 업로드
 		for(MultipartFile file : imagedata) {
 			
-//			 upload_str.add(MyFileUpload.myFileUpload(abs_Path, file));
-			 upload_str.add(file.getOriginalFilename());
+			//list에 업로드된 파일명 add
+			upload_str.add(MyFileUpload.myFileUpload(abs_Path, file));
+//			upload_str.add(file.getOriginalFilename());
 			
 		}
 		
@@ -197,40 +199,26 @@ public class ProductController {
 		//파라미터로 받은 ProductVo 생성자를통해 생성
 		String p_status = "거래가능";
 		
-		
-		
 		//상품설명 줄바꿈 하기
 		p_exp = p_exp.replaceAll("\r\n", "<br>");
-		
 		
 		
 		//								 유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
 		ProductVo vo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
 		
+		//수정될 상품번호 객체에 포장
+		vo.setP_idx(p_idx);
+
 		
-		
-		//수정하려전 수정 전 상품 정보 받아오기
-		ProductVo vo2 = product_dao.selectList2(p_idx);
-		
-		
-		//받아온 상품정보로부터 이미지 list 가져오기
-		List<ImageVo> image_list = vo2.getImage_list();
-		
-		
-		//원래 상품 idx 배열로 만들기
-		int image_idx [] = new int[image_list.size()];
-		
-		
-		
-		// 배열에 원래 상품이미지 idx 넣기
-		for(int i=0; i<image_idx.length; i++) {
-			image_idx[i] = image_list.get(i).getI_idx();
-//			System.out.println(image_idx[i]);
-		}
-		System.out.println("---------------------");
-		
-		List<Integer> change_idxList = new ArrayList<Integer>();
-		
+		/*
+			이미지수정, 이미지 삭제, 이미지 업로드 조건별로 실행
+			
+			change_image[] 배열길이는 12로 초기화 되어있고, 내부 값은 0임(문자열)
+			
+			일단 이미지를 전부다 등록하고, 그후에 수정된(삭제 포함) 정보는
+			
+			DB에서 꺼내와 실제 데이터와 DB 삭제
+		*/
 		for (int i = 0; i < change_image.length; i++) {
 
 			// i가 짝수면
@@ -238,38 +226,68 @@ public class ProductController {
 
 				// 수정된 사진이면
 				if (!change_image[i].equals("changePhoto")) {
-
-					if (upload_str.contains(change_image[i + 1])) {
-						System.out.printf("%s이 이미지는 수정되었습니다. idx를 저장해주세요\n", change_image[i + 1]);
+					
+					//수정된 idx가 정수형이며, 초기화됐던 0이 아닐때
+					if (change_image[i].matches("-?\\d+") && Integer.parseInt(change_image[i])!=0 && !change_image[i+1].equals("delPhoto")) {
+//						System.out.printf("%s이 이미지는 수정되었습니다.%s 해당번호에 수정해주세요\n", change_image[i + 1], change_image[i]);
+						
+						/* 
+						 해당 idx에 대한 절대경로 이미지파일 삭제 
+						 
+						 DB에 저장되어 있는 파일명에 해당하는 실제 파일삭제
+						 */
+						ImageVo imgFileName = image_dao.selectOneImage(Integer.parseInt(change_image[i]));
+						
+						MyFileDelete.myFileDelete(abs_Path, imgFileName.getImagedata());
+						
+						
+						Map updateInfo = new HashMap();
+						
+						updateInfo.put("i_idx", Integer.parseInt(change_image[i]));
+						updateInfo.put("imagedata", change_image[i + 1]);
+						//DB에 이미지 파일명 update
+						int res = image_dao.imageUpdate(updateInfo);
+						
 					}
 
 				// 추가된 사진이면
 				} else {
 
-					System.out.printf("%s이 이미지는 추가되었습니다. idx를 인서트해주세요\n", change_image[i + 1]);
-
+//					System.out.printf("%s이 이미지는 추가되었습니다. %s 해당번호는 추가해주세요\n", change_image[i + 1],change_image[i]);
+					
+					ImageVo imageVo = new ImageVo();
+					imageVo.setP_idx(p_idx);
+					imageVo.setImagedata(change_image[i + 1]);
+					
+					int res = image_dao.insert(imageVo);
+					
+					
 				}
 			
 			//i가 홀수면..
 			}else {
-				
+				//삭제된 파일이면
+				if(change_image[i].equals("delPhoto")) {
+//					System.out.printf("%s 이 idx에 해당하는 이미지는 삭제되었습니다 삭제해주세요.\n",change_image[i-1]);
+					
+					ImageVo imgFileName = image_dao.selectOneImage(Integer.parseInt(change_image[i-1]));
+					
+					//실제 파일 삭제
+					MyFileDelete.myFileDelete(abs_Path, imgFileName.getImagedata());
+					
+					//DB삭제
+					int res = image_dao.deleteImage(Integer.parseInt(change_image[i-1]));
+				}
 			}
 
 		}
 
-		for(int a : change_idxList) {
-			System.out.println(a);
-		}
-		
-		
-		
-		
-		int res2 = 0;
-		
-		//절대경로 구함
-		String abs_path = applicaton.getRealPath("/resources/imgdata/");
-		
 
+		
+		
+		//앞서 선언한, 수정된 정보 포장된 vo객체, DB 업데이트
+		int res2 = product_dao.update(vo);
+		
 		
 		//JsonConverter 사용하기 위한 Map생성
 		Map map = new HashMap();
