@@ -36,7 +36,7 @@
 <script type="text/javascript">
 	var preview_array  = [false, false, false, false, false, false];
 	
-	var chage_image = [];
+	var change_image = ["0","0","0","0","0","0","0","0","0","0","0","0"];
 	
 	for(var y=0; y<${ fn:length(vo.image_list) }; y++){
 		preview_array[y] = true;
@@ -200,15 +200,14 @@
 		        	
 				/* 수정한 사진이면.. */
 		        if('${vo.image_list[0].i_idx}'){
-		        	chage_image[0] = '${vo.image_list[0].i_idx}';
+		        	change_image[0] = '${vo.image_list[0].i_idx}';
 		        }else{
 		        	/* 추가한 사진이면.. */
-		        	chage_image[0] = "newPhoto";
+		        	change_image[0] = "changePhoto";
 		        }
-				chage_image[1] = myreal_file;
+		        change_image[1] = myreal_file;
 				
-				alert(chage_image[0]);
-				alert(chage_image[1]);
+
 				
 	
 		        $("#img_preview0").css("display","inline-block");
@@ -292,17 +291,14 @@
 	        	
 	        	/* 수정한 사진이면.. */
 	        	if('${vo.image_list[1].i_idx}'){
-	        		chage_image[2] = '${vo.image_list[1].i_idx}';
+	        		change_image[2] = '${vo.image_list[1].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
-	        		chage_image[2] = "newPhoto";
+	        		change_image[2] = "changePhoto";
 	        	}
 	        	
-				chage_image[3] = myreal_file;
+	        	change_image[3] = myreal_file;
 				
-				alert(chage_image[2]);
-				alert(chage_image[3]);
-	        	
 	        	
 	        	$("#img_preview1").css("display","inline-block");
 	        	$("#imgup_1").show();
@@ -378,15 +374,12 @@
 				
 	        	/* 수정한 사진이면.. */
 	        	if('${vo.image_list[2].i_idx}'){
-	        		chage_image[4] = '${vo.image_list[2].i_idx}';
+	        		change_image[4] = '${vo.image_list[2].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
-	        		chage_image[4] = "newPhoto";
+	        		change_image[4] = "changePhoto";
 	        	}
-				chage_image[5] = myreal_file;
-				
-				alert(chage_image[4]);
-				alert(chage_image[5]);
+	        	change_image[5] = myreal_file;
 				
 				
 				$("#img_preview2").css("display","inline-block");
@@ -462,18 +455,15 @@
 				
 	        	/* 수정한 사진이면.. */
 	        	if('${vo.image_list[3].i_idx}'){
-	        		chage_image[6] = '${vo.image_list[3].i_idx}';
+	        		change_image[6] = '${vo.image_list[3].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
-	        		chage_image[6] = "newPhoto";
+	        		change_image[6] = "changePhoto";
 	        	}
-				chage_image[7] = myreal_file;
+	        	change_image[7] = myreal_file;
 				
-				alert(chage_image[6]);
-				alert(chage_image[7]);
-				
-				
-				 $("#img_preview3").css("display","inline-block");
+	        	
+				$("#img_preview3").css("display","inline-block");
 				$("#imgup_3").show();
 				$("#del_img3").show();
 				
@@ -543,17 +533,14 @@
 				
 	        	/* 수정한 사진이면.. */
 	        	if('${vo.image_list[4].i_idx}'){
-	        		chage_image[8] = '${vo.image_list[4].i_idx}';
+	        		change_image[8] = '${vo.image_list[4].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
-	        		chage_image[8] = "newPhoto";
+	        		change_image[8] = "changePhoto";
 	        	}
-				chage_image[9] = myreal_file;
-				
-				alert(chage_image[8]);
-				alert(chage_image[9]); 
-				
-				
+	        	change_image[9] = myreal_file;
+
+	        	
 				$("#img_preview4").css("display","inline-block");
 				$("#imgup_4").show();
 				$("#del_img4").show();
@@ -627,15 +614,13 @@
 		        
 	        	/* 수정한 사진이면.. */
 	        	if('${vo.image_list[5].i_idx}'){
-	        		chage_image[10] = '${vo.image_list[5].i_idx}';
+	        		change_image[10] = '${vo.image_list[5].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
-	        		chage_image[10] = "newPhoto";
+	        		change_image[10] = "changePhoto";
 	        	}
-				chage_image[11] = myreal_file;
+	        	change_image[11] = myreal_file;
 				
-				alert(chage_image[10]);
-				alert(chage_image[11]);
 		        
 		        $("#img_preview5").css("display","inline-block");
 				$('#imgup_5').show();
@@ -657,6 +642,7 @@
 	
 	function del_sum() {
 		/* alert('썸네일이미지 지움'); */
+		
 		/* 실제 DB에 들어가는 input value 지움 */
 		$('#sumimage').val('');
 		
@@ -667,11 +653,6 @@
 		/* 썸네일 비움 */
 		preview_array[0] = false;
 		
-		/* 삭제한 사진이면.. */
-        if('${vo.image_list[0].i_idx}'){
-        	chage_image[0] = '${vo.image_list[0].i_idx}';
-        	chage_image[1] = "delPhoto";
-        }
 		
 		/* 이미지 넘버변경 */
 		img_num();
@@ -694,8 +675,8 @@
 		
 		/* 삭제한 사진이면.. */
         if('${vo.image_list[1].i_idx}'){
-        	chage_image[2] = '${vo.image_list[1].i_idx}';
-        	chage_image[3] = "delPhoto";
+        	change_image[2] = '${vo.image_list[1].i_idx}';
+        	change_image[3] = "delPhoto";
         }
 		
 		/* 이미지 넘버변경 */
@@ -718,8 +699,8 @@
 		
 		/* 삭제한 사진이면.. */
         if('${vo.image_list[2].i_idx}'){
-        	chage_image[4] = '${vo.image_list[2].i_idx}';
-        	chage_image[5] = "delPhoto";
+        	change_image[4] = '${vo.image_list[2].i_idx}';
+        	change_image[5] = "delPhoto";
         }
 		
 		
@@ -742,8 +723,8 @@
 		
 		/* 삭제한 사진이면.. */
         if('${vo.image_list[3].i_idx}'){
-        	chage_image[6] = '${vo.image_list[3].i_idx}';
-        	chage_image[7] = "delPhoto";
+        	change_image[6] = '${vo.image_list[3].i_idx}';
+        	change_image[7] = "delPhoto";
         }
 		
 		
@@ -765,11 +746,9 @@
 		
 		/* 삭제한 사진이면.. */
         if('${vo.image_list[4].i_idx}'){
-        	chage_image[8] = '${vo.image_list[4].i_idx}';
-        	chage_image[9] = "delPhoto";
+        	change_image[8] = '${vo.image_list[4].i_idx}';
+        	change_image[9] = "delPhoto";
         }else{
-        	chage_image[8] = "newNum";
-        	chage_image[9] = "delPhoto";
         }
 		
 		/* 이미지 넘버변경 */
@@ -790,8 +769,8 @@
 		preview_array[5] = false;
 		
         if('${vo.image_list[5].i_idx}'){
-        	chage_image[10] = '${vo.image_list[5].i_idx}';
-        	chage_image[11] = "delPhoto";
+        	change_image[10] = '${vo.image_list[5].i_idx}';
+        	change_image[11] = "delPhoto";
         }
 		
 		/* 이미지 넘버변경 */
@@ -1046,15 +1025,15 @@
 				</tr>
 				
 				<!-- 가격  -->
-				<tr>	
+				<tr>
 					<td class="td1" align="left" style="vertical-align: top;"><span
 						class="pro_info">가격<span style="color: red">*</span></span></td>
-					<td class="td2" align="left"><input type="text" id="p_price" maxlength="11"
-						name="p_price" class="input-tag" placeholder="가격" value="<fmt:formatNumber pattern="#,###" value="${ vo.p_price }"/>"
-						oninput="numberMaxLength(this);" style="width: 30%;"> &nbsp; <span class="pro_info">원</span>
-						<br>
-						<span class="pro_info" id="price_under"></span>
-					</td>
+					<td class="td2" align="left"><input type="text" id="p_price"
+						maxlength="11" name="p_price" class="input-tag" placeholder="가격"
+						value="<fmt:formatNumber pattern="#,###" value="${ vo.p_price }"/>"
+						oninput="numberMaxLength(this);" style="width: 30%;">
+						&nbsp; <span class="pro_info">원</span> <br> <span
+						class="pro_info" id="price_under"></span></td>
 				</tr>
 
 				<tr>
