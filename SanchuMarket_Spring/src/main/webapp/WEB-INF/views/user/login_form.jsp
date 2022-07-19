@@ -22,26 +22,30 @@
       href="${ pageContext.request.contextPath }/resources/css/login_form.css">
   
 <script>
-  /* 모달창 input data 초기화 */ 
+  //모달창 input data 초기화 
   $(function(){
 	  
-	  $('[data-dismiss=modal]').on('click', function (e) {
-		    var $t = $(this),
-		        target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
+	  $('[data-dismiss=modal]').on('click', function () {
+		  
+	    var $t = $(this),
+	        target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
 
 		  $(target)
 		    .find("input,textarea,select")
 		       .val('')
 		       .end();
-		})
-  });  
+		  });
+
+		});
+  
 </script>  
     
 </head>
 
-<body class="text-center" id="form">
+<body class="text-center">
 
  <div id="box">
+   <div id="form">
     <a href="../mainpage/list.do"><img class="mb-4" src="../resources/image/상추마켓.png" alt="" width="300" height="100"></a>
     <div id="login-form">
     <h3>로그인</h3>
@@ -59,22 +63,22 @@
       <label>
         <input type="checkbox" value="remember-me"> 로그인 상태 유지
       </label>
-    </div>
-    
+   </div>
+ </div> 
 <!--아이디찾기-->    
 <a href="#idModal" data-toggle="modal">아이디찾기</a>&nbsp;/
 <div class="modal fade" id="idModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-       <form>
-       
+       <form onsubmit="return false">
+       	  <!--header-->
 	      <div class="modal-header text-center">
 	        <h4 class="modal-title w-100 font-weight-bold">휴대폰 인증</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
-	      
+	      <!--body-->
 	      <div class="modal-body mx-1">
 	        <div class="md-form mb-5">
 	          <label style="width:20%;">이름</label>
@@ -87,8 +91,11 @@
 	        </div>
 	      </div>
 	      
+	      <span id="idErrMsg" style=" margin-left:45px; color:red; display:none;"></span>
+	      
+	      <!--footer-->
 	      <div class="modal-footer d-flex justify-content-center">
-	        <button class="btn btn-indigo" onclick="phoneNoSubmit(this.form);">인증메일발송</button>
+	        <button class="btn btn-indigo" onclick="">아이디조회</button>
 	        <button class="btn btn-indigo" data-dismiss="modal">닫기</button>
 	      </div>
 		      
@@ -100,22 +107,22 @@
 <!--비밀번호찾기-->
 <a class="nav-link" href="#pwdModal" data-toggle="modal" >비밀번호찾기</a>
 <div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form>
-      
+      <form id="pwdFind_form" method="post" onsubmit="return mailSubmit();">
+      	  <!--header-->	
 	      <div class="modal-header text-center">
 	        <h4 class="modal-title w-100 font-weight-bold">임시비밀번호 발급</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
-	      
+	      <!--body-->
 	      <div class="modal-body mx-3">
 	        <div class="md-form mb-5">
 	          <label style="width:20%;">아이디</label>
-	          <input name="id">
+	          <input id="id" name="id">
 	        </div>
 	
 	        <div class="md-form mb-4">
@@ -124,11 +131,12 @@
 	        </div>
 	      </div>
 	      
-	      <span id="pwdErrMsg" style=" margin-left:45px; color:red; display:none;"></span>
+	      <span id="pwdErrMsg" style="margin-left:45px; color:red; display:none;"></span>
 	      
+	      <!--footer-->
 	      <div class="modal-footer d-flex justify-content-center">
-	        <button class="btn btn-indigo" onclick="mailSubmit(this.form);">인증메일발송</button>
-	        <button class="modalBtns btn btn-indigo" data-dismiss="modal">닫기</button>
+	        <input type="button" class="btn btn-indigo" onclick="mailSubmit();" value="인증메일발송">
+	        <input type="button" class="modalBtns btn btn-indigo" data-dismiss="modal" value="닫기">
 	      </div>
      
       </form>
@@ -152,7 +160,7 @@
     
     <p class="mt-5 mb-3 text-muted" align="center">한국 ICT 인재개발원</p>
   
-  </div>
+  </div><!--end box-->
 
 
 </body>
