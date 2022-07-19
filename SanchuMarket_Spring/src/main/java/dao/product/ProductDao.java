@@ -22,7 +22,7 @@ public interface ProductDao {
 	//상품정보 넘김
 	public ProductVo selectList2(int p_idx);
 	
-	//상품정보 넘김
+	//상품정보와 상품이미지 하나만 가져오기
 	public ProductVo selectListproduct(int p_idx);
 
 	//최근 상품 조회(mainpage_admin)
@@ -46,6 +46,10 @@ public interface ProductDao {
 
 	//가격 범위검색
 	public List<ProductVo> select_price_search(Map map);
+
+	
+	// 상품 수정
+	public int update(ProductVo vo);
 	
 
 

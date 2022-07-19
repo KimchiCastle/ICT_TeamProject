@@ -172,8 +172,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 
-
-
+	<!-- 상품정보 수정 -->
+	<update id="product_update" parameterType="vo.product.ProductVo">
+		update product set 
+		p_name=#{p_name},
+		c_idx=#{c_idx},
+		p_price=#{p_price}, 
+		p_condition=#{p_condition}, 
+		p_exp=#{p_exp}, 
+		p_location=#{p_location}
+		where p_idx=#{p_idx}
+	</update>
 
 
 

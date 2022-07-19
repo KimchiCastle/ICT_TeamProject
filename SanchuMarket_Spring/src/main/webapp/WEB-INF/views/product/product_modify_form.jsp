@@ -199,7 +199,7 @@
 		        $('#imgup_sum').attr('src', e.target.result);
 		        	
 				/* 수정한 사진이면.. */
-		        if('${vo.image_list[0].i_idx}'){
+		        if('${ not empty vo.image_list[0].i_idx}' == 'true'){
 		        	change_image[0] = '${vo.image_list[0].i_idx}';
 		        }else{
 		        	/* 추가한 사진이면.. */
@@ -290,7 +290,7 @@
 	        	$('#imgup_1').attr('src', e.target.result);
 	        	
 	        	/* 수정한 사진이면.. */
-	        	if('${vo.image_list[1].i_idx}'){
+	        	if('${ not empty vo.image_list[1].i_idx}' == 'true'){
 	        		change_image[2] = '${vo.image_list[1].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
@@ -373,7 +373,7 @@
 				$('#imgup_2').attr('src', e.target.result);
 				
 	        	/* 수정한 사진이면.. */
-	        	if('${vo.image_list[2].i_idx}'){
+	        	if('${ not empty vo.image_list[2].i_idx}' == 'true'){
 	        		change_image[4] = '${vo.image_list[2].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
@@ -454,7 +454,7 @@
 				
 				
 	        	/* 수정한 사진이면.. */
-	        	if('${vo.image_list[3].i_idx}'){
+	        	if('${ not empty vo.image_list[3].i_idx}' == 'true'){
 	        		change_image[6] = '${vo.image_list[3].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
@@ -532,7 +532,7 @@
 				$('#imgup_4').attr('src', e.target.result);
 				
 	        	/* 수정한 사진이면.. */
-	        	if('${vo.image_list[4].i_idx}'){
+	        	if('${ not empty vo.image_list[4].i_idx}' == 'true'){
 	        		change_image[8] = '${vo.image_list[4].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
@@ -613,7 +613,7 @@
 		        $('#imgup_5').attr('src', e.target.result);
 		        
 	        	/* 수정한 사진이면.. */
-	        	if('${vo.image_list[5].i_idx}'){
+	        	if('${ not empty vo.image_list[5].i_idx}' == 'true'){
 	        		change_image[10] = '${vo.image_list[5].i_idx}';
 	        	}else{
 	        		/* 추가한 사진이면.. */
@@ -674,10 +674,12 @@
 		preview_array[1] = false;
 		
 		/* 삭제한 사진이면.. */
-        if('${vo.image_list[1].i_idx}'){
+        if('${ not empty vo.image_list[1].i_idx}' == 'true'){
         	change_image[2] = '${vo.image_list[1].i_idx}';
         	change_image[3] = "delPhoto";
         }
+		
+		
 		
 		/* 이미지 넘버변경 */
 		img_num();
@@ -698,11 +700,10 @@
 		preview_array[2] = false;
 		
 		/* 삭제한 사진이면.. */
-        if('${vo.image_list[2].i_idx}'){
+        if('${ not empty vo.image_list[2].i_idx}' == 'true'){
         	change_image[4] = '${vo.image_list[2].i_idx}';
         	change_image[5] = "delPhoto";
         }
-		
 		
 		/* 이미지 넘버변경 */
 		img_num();
@@ -722,7 +723,7 @@
 		preview_array[3] = false;
 		
 		/* 삭제한 사진이면.. */
-        if('${vo.image_list[3].i_idx}'){
+        if('${ not empty vo.image_list[3].i_idx}' == 'true'){
         	change_image[6] = '${vo.image_list[3].i_idx}';
         	change_image[7] = "delPhoto";
         }
@@ -745,7 +746,7 @@
 		preview_array[4] = false;
 		
 		/* 삭제한 사진이면.. */
-        if('${vo.image_list[4].i_idx}'){
+        if('${ not empty vo.image_list[4].i_idx}' == 'true'){
         	change_image[8] = '${vo.image_list[4].i_idx}';
         	change_image[9] = "delPhoto";
         }else{
@@ -768,7 +769,7 @@
 		/* 5번사진 비움 */
 		preview_array[5] = false;
 		
-        if('${vo.image_list[5].i_idx}'){
+        if('${ not empty vo.image_list[5].i_idx}' == 'true'){
         	change_image[10] = '${vo.image_list[5].i_idx}';
         	change_image[11] = "delPhoto";
         }
