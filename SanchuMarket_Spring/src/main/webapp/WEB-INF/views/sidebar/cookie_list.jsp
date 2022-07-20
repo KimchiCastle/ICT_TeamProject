@@ -18,6 +18,10 @@
 		height: 30px;
 	}
 	
+	.recent_content{
+		z-index: 10;
+	}
+	
 </style>
 
 <script type="text/javascript">

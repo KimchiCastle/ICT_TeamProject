@@ -49,7 +49,6 @@ transform: translateX(-50%);
 	margin-right: 14px;
 	margin-bottom: 15px;
 	float: left;
-	z-index: 1;
 }
 
 
@@ -63,9 +62,10 @@ transform: translateX(-50%);
 
 #img{
 	height: 100%;
- 	position: absolute; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
+ 	position: relative; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
   	left: 50%; 			/* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
   	transform: translateX(-50%);
+  	z-index: 1;
 }
 .price_tag{
 	width: 100%;

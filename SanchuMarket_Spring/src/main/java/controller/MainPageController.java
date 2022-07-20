@@ -69,6 +69,8 @@ public class MainPageController {
 		 		
 		 		model.addAttribute("list", list);
 		 		
+		 		System.out.println("전체검색");
+		 		
 		 		return "mainpage/mainpage_list";
 		 	}
 		 	
@@ -81,7 +83,6 @@ public class MainPageController {
 				
 				Map map = new HashMap();
 				map.put("p_name", searchtext);
-				map.put("p_exp", searchtext);
 				map.put("min_p", min_p);
 				map.put("max_p", max_p);
 				
@@ -92,10 +93,12 @@ public class MainPageController {
 
 				model.addAttribute("list", list);
 				
+				System.out.println("가격범위 상품명 검색");
+				
 				return "mainpage/mainpage_list";
 			}
 			
-			//검색어 가격 범위검색
+			//가격 범위검색
 			if(!min_p.equals("no_min") && !max_p.equals("no_max")
 					&&searchtext.equals("all") && c_idx.equals("null")) {
 				
@@ -112,6 +115,8 @@ public class MainPageController {
 				Mytime.time_cal(list);
 
 				model.addAttribute("list", list);
+				
+				System.out.println("가격검색");
 				
 				return "mainpage/mainpage_list";
 			}
@@ -137,7 +142,6 @@ public class MainPageController {
 
 				Map map = new HashMap();
 				map.put("p_name", searchtext);
-				map.put("p_exp", searchtext);
 
 				List<ProductVo> list = product_dao.selectList(map);
 
@@ -145,6 +149,8 @@ public class MainPageController {
 				Mytime.time_cal(list);
 
 				model.addAttribute("list", list);
+				
+				System.out.println("상품검색");
 				
 				return "mainpage/mainpage_list";
 
