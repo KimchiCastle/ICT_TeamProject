@@ -25,6 +25,23 @@
 <link rel="stylesheet" 
       href="${ pageContext.request.contextPath }/resources/css/enroll_form.css">
 
+<script type="text/javascript">
+
+
+//enrollAction에서 실패시 redirect되는 parameter 받기
+ function showMessage(){
+	 
+	  if("${param.reason}" == "failed_enroll"){
+		  alert('회원가입에 실패했습니다. 관리자에게 문의하세요');
+		  return false;
+	  } 
+	  
+  idFlag = false;
+  pwdFlag = false;
+  submitFlag = false;
+ }
+
+</script>
 
 </head>
 <body>
@@ -142,7 +159,7 @@
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="button" id="enroll_btn" onclick="submit_1();">
+                    <button type="button" id="enroll_btn" onclick="enroll();">
                         <span>가입</span>
                     </button>
                     <button type="button" id="revoke_btn" onclick= "location.href='../mainpage/list.do'">

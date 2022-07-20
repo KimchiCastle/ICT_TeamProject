@@ -150,8 +150,8 @@ th{
 	   </tr>
 	   
 	   <tr>
-	     <th>${ map.today_p_count }</th>
-	     <th>${ map.today_t_count }</th>
+	     <th>102건${ map.today_p_count }</th>
+	     <th>34건${ map.today_t_count }</th>
 	   </tr>
 	   
 	 </table> 	
@@ -165,8 +165,8 @@ th{
 	   </tr>
 	   
 	   <tr>
-	     <th></th>
-	     <th></th>
+	     <th>562명</th>
+	     <th>13명</th>
 	   </tr>
 	   
 	 </table> 	

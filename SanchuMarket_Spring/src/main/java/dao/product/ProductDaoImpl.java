@@ -45,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectOne("product.product_p_idx",p_idx);
 	}
 	
-	
+	//상품정보와 상품이미지 하나만 가져오기
 	@Override
 	public ProductVo selectListproduct(int p_idx) {
 		// TODO Auto-generated method stub
@@ -103,14 +103,14 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_max_idx");
 	}
-
-
-
-
-
 	
+	//상품 수정
+	@Override
+	public int update(ProductVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("product.product_update",vo);
+	}
 
-	
 
 	
 

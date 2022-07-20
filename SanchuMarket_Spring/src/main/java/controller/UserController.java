@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.user.UserDao;
@@ -181,41 +183,46 @@ public class UserController {
 	}
 	
 	//아이디찾기 
-	@RequestMapping("find_id.do")
-	public String findIdForm() {
-		
-		return "user/find_id";
+	/*
+	 * @RequestMapping("find_id.do") public String findIdForm() {
+	 * 
+	 * return "user/find_id"; }
+	 */
+	
+	//비밀번호찾기
+	@RequestMapping("count_emailId.do")
+	@ResponseBody
+	public Map countEmailId(@RequestParam("id") String u_id, 
+					   @RequestParam("email") String u_email) {
+			
+			System.out.printf("controller_id=%s",u_id);
+			System.out.printf("controller_email=%s",u_email);
+			
+			UserVo vo = new UserVo();
+			vo.setU_id(u_id);
+			vo.setU_mail(u_email);
+			int count = user_dao.countForFindPwd(vo);
+			
+			Map map = new HashMap();
+			System.out.printf("count="+count);
+			if(count==0) {
+				map.put("result","noExist");
+				System.out.println("3");
+				return map;
+			}else {
+				map.put("result", "exist");
+			}
+			
+			return map;
 	}
 	
-//	//비밀번호찾기
-//	@RequestMapping("find_pwd.do")
-//	public boolean findPwd(HashMap<String, Object> paramap) {
-//		
-//		
-//			boolean b = false;
-//			HashMap<String, Object> map = getMail_Pwd(paramap);
-//			if (map.size() != 0) {
-//				b = true;
-//				String setfrom = "hwangjeongyong4@gmail.com	";
-//				String tomail = (String) map.get("g_mail"); // 받는 사람 이메일
-//				String title = "BOM AIR 비밀번호 찾기 기능 입니다."; // 제목
-//				try {
-//					MimeMessage message = mailSender.createMimeMessage();
-//					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-//					messageHelper.setFrom(setfrom); // 보내는사람 생략하거나 하면 정상작동을 안함
-//					messageHelper.setTo(tomail); // 받는사람 이메일
-//					messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-//					String text = "고객님의 비밀번호는 " + (String) map.get("g_pwd");
-//					messageHelper.setText(text, true);
-//					mailSender.send(message);
-//				} catch (Exception e) {
-//					System.out.println(e);
-//				}
-//
-//			}
-//		
-//		return b;
-//	}
+	@RequestMapping("sendEmail.do")
+	public boolean sendEmail() {
+		
+
+		 return true;
+		  
+	}
 	
 	
 	

@@ -87,12 +87,17 @@
 	   color: gray;
 	}
     
-   /*  #social-wrap{
-       width: 280px;
-       margin: auto;
-    } */
     
     #enroll{
       margin-top: 5px;
     }
+    
+    .modal {
+      text-align: center;
+    }
+    
+    .form-control{
+      display: inline-block;
+    }
+
     
