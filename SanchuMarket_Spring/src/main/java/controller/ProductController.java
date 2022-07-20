@@ -2,7 +2,6 @@ package controller;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +52,7 @@ public class ProductController {
 		this.product_dao = product_dao;
 		this.image_dao = image_dao;
 	}
+	
 	
 	//나중에 쿠키생성은 상품페이지 눌렀을때 만들도록 수정 할예정
 	@RequestMapping("insert_form.do")
@@ -182,6 +182,7 @@ public class ProductController {
 		
 		String abs_Path = applicaton.getRealPath("/resources/imgdata/");
 		
+		//나중에 파라미터로 받기
 		int u_idx = 3;
 		
 		List<String> upload_str = new ArrayList<String>();
@@ -282,8 +283,6 @@ public class ProductController {
 
 		}
 
-
-		
 		
 		//앞서 선언한, 수정된 정보 포장된 vo객체, DB 업데이트
 		int res2 = product_dao.update(vo);
@@ -293,9 +292,8 @@ public class ProductController {
 		Map map = new HashMap();
 
 		//기본 리턴값 false
-		boolean bResult = true;
-		
-		//만약 상품등록과 이미지등록이 됐으면..
+		//만약 상품수정 됐으면..
+		boolean bResult = (res2==1);
 		
 		//맵에 result값 넣기
 		map.put("res", bResult);
@@ -304,5 +302,21 @@ public class ProductController {
 	}
 	
 	
+	@RequestMapping("poduct_detail.do")
+	public String productList(Model model) {
+		
+		//p_idx 파라미터로 받아야함, 일단 임시로 1번상품
+		
+		int p_idx = 1;
+		
+		ProductVo vo = product_dao.selectList2(p_idx);
+		
+		vo.setP_exp(vo.getP_exp().replaceAll("<br>", "\r\n"));
+		
+		model.addAttribute("vo", vo);
+		
+		
+		return "product/product_detail";
+	}
 	
 }
