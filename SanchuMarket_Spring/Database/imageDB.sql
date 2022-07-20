@@ -28,7 +28,7 @@ alter table image
 
 
 
-select * from image order by i_idx
+select * from image where p_idx=1 order by i_idx
 select p_idx, sumimage from image 
 select * from product
 

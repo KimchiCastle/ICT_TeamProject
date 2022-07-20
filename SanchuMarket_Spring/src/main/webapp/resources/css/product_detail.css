@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+	#box{
+		background-color: #ccffcc; 
+		padding-top: 150px; 
+		width: 1020px; 
+		margin: auto;
+	}
+	
+	.container{
+		width: 600px;
+		height: 400px;
+	}
+	
