@@ -27,7 +27,7 @@ body{
 }
 
 .body{
-	z-index: 999px;
+	
 }
 
 
@@ -39,13 +39,25 @@ body{
 </div>
 <div style="padding-top: 140px; width: 1035px; margin: auto; ">
 	<!-- 검색 안했을 때 -->
-	<c:if test="${ empty param.searchtext and  empty param.c_idx }" var="param">	
+	<c:if test="${ empty param.searchtext and empty param.c_idx and empty param.min_p and empty param.max_p}" var="param">	
 		<h3 style="margin: 0px; padding-left: 15px;">최근 올라온 상품</h3>
 	</c:if>
-	<!-- 검색결과 -->
-	<c:if test="${ not empty param.searchtext }" var="param">	
+	
+	<!-- 가격, 상품명 검색 -->
+	<c:if test="${ not empty param.searchtext and empty param.c_idx and not empty param.min_p and not empty param.max_p}" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">${ param.min_p }원 ~ ${ param.max_p }원의 "${ param.searchtext }" 에 대한 검색결과</h3>
+	</c:if>
+	
+	<!-- 가격 검색 -->
+	<c:if test="${ empty param.searchtext and empty param.c_idx and not empty param.min_p and not empty param.max_p}" var="param">	
+		<h3 style="margin: 0px; padding-left: 15px;">${ param.min_p }원 ~ ${ param.max_p }원의 상품</h3>
+	</c:if>
+
+	<!-- 상품 검색 -->
+	<c:if test="${not empty param.searchtext and empty param.c_idx and empty param.min_p and empty param.max_p }" var="param">	
 		<h3 style="margin: 0px; padding-left: 15px;">"${ param.searchtext }" 에 대한 검색결과</h3>
 	</c:if>
+
 	<!-- 카테고리 -->
 	<c:if test="${ param.c_idx == 1 }" var="param">	
 		<h3 style="margin: 0px; padding-left: 15px;">남성의류 카테고리</h3>

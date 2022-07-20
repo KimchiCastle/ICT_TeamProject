@@ -171,9 +171,9 @@ select
 	select p.*,
   	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
   			
-  	from(select * from product)	p where p_price between 1 and 11
+  	from(select * from product)	p where p_price between 20000 and 30000
   		
-  	
+  	and p_name like '%여성%' or p_exp like '' 
   	
   	order by p_idx desc
 
@@ -182,6 +182,14 @@ select
 
 
 
+
+
+
+
+
+
+--@@@@@@@@@@@@@@@@@@@지우기@@@@@@@@@@@@@@@@@@@@@@@
+delete from product where p_idx between 1 and 10
 
 
 

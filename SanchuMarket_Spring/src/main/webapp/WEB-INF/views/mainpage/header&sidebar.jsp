@@ -18,7 +18,7 @@
 body{
 	margin-top: 0px;
 	font-family: 'Gowun Dodum', sans-serif;
-
+	min-width: 1150px;
 }
 
 
@@ -34,6 +34,8 @@ header{
 	z-index: 888;
 	left: 50%;
 	transform: translateX(-50%);
+
+	
 	
 }
 
@@ -47,6 +49,7 @@ header{
 	height: 54px;
 	float: left;
 	z-index: 889;
+	min-width: 1150px;
 }
 
 .logo{
@@ -105,7 +108,6 @@ header{
 
 
 .side{
-	display: flex;
 	padding-top: 130px;
 	position: fixed;
 	top: 70px;
@@ -165,6 +167,7 @@ li, ul{
 	margin-left: 80px;
 	
 	margin-top: 15px; 
+	
 }
 
 .price_area > input {
@@ -383,7 +386,7 @@ $(function() {
 		<!-- 검색창 -->
 		<div class="searchtext" >
 			<%-- <input type="hidden" id="c_idx" value="${ param.c_idx }"> --%>
-			<input id="searchtext" name="searchtext" type="text" value="${ param.searchtext }">
+			<input id="searchtext" name="searchtext" type="text" value="${ param.searchtext }" placeholder="상품명을 입력하세요.">
 			<img id="searchicon" src="${ pageContext.request.contextPath }/resources/image/saerch-icon.png" onclick="send1();">
 
 		</div>
@@ -423,17 +426,17 @@ $(function() {
 		
 		<!-- 가격 필터링 검색 -->
 		<div class="price_area">
-			<input id="min_p" type="text" oninput="numberMaxLength(this);"> ~ 
-			<input id="max_p" type="text" oninput="numberMaxLength(this);">
+			<input id="min_p" type="text" oninput="numberMaxLength(this);" value="${ param.min_p }" placeholder="최소가격" style="font-size: 15px; "> ~ 
+			<input id="max_p" type="text" oninput="numberMaxLength(this);" value="${ param.max_p }" placeholder="최대가격" style="font-size: 15px;">
 			<img id="p_searchicon" src="${ pageContext.request.contextPath }/resources/image/saerch-icon.png" onclick="price_search();">
 		</div>
 		
 	</div>
-</header>
 	<!-- 고정형 사이드바 -->
 	<div class="side">
 		<%@include file="../sidebar/sideBar.jsp" %>
 	</div>
+</header>
 	
 	
 
