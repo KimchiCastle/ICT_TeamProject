@@ -1,14 +1,70 @@
 @charset "UTF-8";
 
+	
+	
 	#box{
-		background-color: #ccffcc; 
+		/* background-color: #ccffcc;  */
 		padding-top: 150px; 
 		width: 1020px; 
 		margin: auto;
+		
+		min-height: 1300px;
+		
 	}
 	
 	.container{
+		
+		
 		width: 600px;
 		height: 400px;
+		margin-bottom: 150px;
 	}
+	
+	
+	#user_info {
+	
+		margin: auto;
+		/* background-color: #ffccff; */
+		height: 120px;
+		width: 800px;
+		
+		margin-bottom:35px;
+		
+		color: black;
+		
+		border-top: 1px solid rgb(220,220,220); 
+		border-bottom: 1px solid rgb(220,220,220); 
+	
+	}
+	
+	#user_img {
+		
+		float : left;
+		width : 100px;
+		height : 100px;
+		/* background-color: #ffffcc; */
+		
+	}
+	
+	#u_nickname{
+		
+		clear:both;
+		
+		margin-top:20px;
+		margin-left:30px;
+		
+		display: inline-block;
+		/* background-color: #ccccff; */
+		
+		font-size: 25px;
+		
+	}
+	
+	#p_name{
+		font-size: 25px;
+		font-weight: bold;
+	}
+	
+	
+	
 	

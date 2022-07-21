@@ -23,10 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.image.ImageDao;
 import dao.product.ProductDao;
+import dao.user.UserDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
+import util.Mytime;
 import vo.image.ImageVo;
 import vo.product.ProductVo;
+import vo.user.UserVo;
 
 @Controller
 @RequestMapping("/product/")
@@ -46,11 +49,13 @@ public class ProductController {
 	
 	ProductDao product_dao;
 	ImageDao image_dao;
+	UserDao user_dao;
 
-	public ProductController(ProductDao product_dao, ImageDao image_dao) {
+	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.image_dao = image_dao;
+		this.user_dao =	user_dao;
 	}
 	
 	
@@ -220,6 +225,10 @@ public class ProductController {
 			
 			DB에서 꺼내와 실제 데이터와 DB 삭제
 		*/
+		
+		
+		int fileCnt = 0; // MutipartFile 파일명 인덱스용 카운트 변수
+		
 		for (int i = 0; i < change_image.length; i++) {
 
 			// i가 짝수면
@@ -245,7 +254,9 @@ public class ProductController {
 						Map updateInfo = new HashMap();
 						
 						updateInfo.put("i_idx", Integer.parseInt(change_image[i]));
-						updateInfo.put("imagedata", change_image[i + 1]);
+						updateInfo.put("imagedata", upload_str.get(fileCnt));
+						
+						fileCnt++;
 						//DB에 이미지 파일명 update
 						int res = image_dao.imageUpdate(updateInfo);
 						
@@ -258,7 +269,10 @@ public class ProductController {
 					
 					ImageVo imageVo = new ImageVo();
 					imageVo.setP_idx(p_idx);
-					imageVo.setImagedata(change_image[i + 1]);
+					imageVo.setImagedata(upload_str.get(fileCnt));
+					
+					
+					fileCnt++;
 					
 					int res = image_dao.insert(imageVo);
 					
@@ -306,14 +320,22 @@ public class ProductController {
 	public String productList(Model model) {
 		
 		//p_idx 파라미터로 받아야함, 일단 임시로 1번상품
-		
 		int p_idx = 1;
+		
+		
 		
 		ProductVo vo = product_dao.selectList2(p_idx);
 		
+		UserVo vo2 = user_dao.selectOneByIdx(vo.getU_idx());
+		
 		vo.setP_exp(vo.getP_exp().replaceAll("<br>", "\r\n"));
 		
+		vo.setP_time(Mytime.time_cal(vo));
+		
+		
 		model.addAttribute("vo", vo);
+		model.addAttribute("vo2", vo2);
+		
 		
 		
 		return "product/product_detail";
