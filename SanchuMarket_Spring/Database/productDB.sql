@@ -147,44 +147,214 @@ sysdate,
 	select p.*,
   	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
   			
-  	from(select * from product)	p where c_idx=2 and
+  	from(select * from product)	p where
   		
-  		p_name like '%여성%' or p_exp like '%ㅋㅋ%' 
+  		p_name like '%합%'
   	
   	order by p_idx desc
 
 
 
-select
+	select
+		p.* ,
+		to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+	from (select * from product) p  order by p_idx desc
+	
+	
+
+	
+	
+	
+
+
+
+--전체상품 페이징 처리용 sql
+select * from
+	(
+		select
 			p.* ,
+			rank() over(order by p_idx desc) no,
 			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
-		from (select * from product) p where u_idx=3 order by p_idx desc
+		from (select * from product) p 
+	)
+where no between 1 and 4
+
+--상품검색 페이징 처리용 sql
+select * from
+	(
+		select 
+			p.*,
+			rank() over(order by p_name like '%합%' desc) no,
+		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time	
+	  	from(select * from product)	p 
+	) 
+ where p_name like '%합%' and no between 1 and 4
+  	
+select p_idx, p_name from product where p_name like '%' || '합' || '%' 
 
 
-select
-			p.* ,
-			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
-		from (select * from product) p order by p_idx desc
+select 
+	select * from 
+	(
+		select p.*,
+		rank() over( order by p_idx  )
+		from(select * from product) p
+	)
+where p_name like '%' || '합' || '%' 
+
+select * from 
+	(
+		select p.*,
+		rank() over( order by p_idx  ) no
+		from(select * from product
+		where p_name like '%합%'
+		) p
+	)
+where no between 1 and 10
 
 
 
+
+select * from 
+	(
+		select p.*,
+		to_number(floor((sysdate-p_date)*24*60*60)) as p_time,
+		rank() over( order by p_idx  ) no
+		from(select * from product
+		where p_name like '%합%'
+		) p
+	)
+where no between 1 and 10
+
+
+
+
+
+
+
+
+
+
+   select rank() over
+   (
+     select * from product where p_name like '%' || '합' || '%' 
+   ) as c from product 
+   where c between 1 and 5 
+   
+   원영아 쿼리 수행 순서에서 c먹게끔 짜도 수행이 안되네...
+   select * 
+   from
+   (
+	   select rank() over
+	   (
+	     select * from product where p_name like '%' || '합' || '%'
+	     
+	   )c from product 
+  
+   )
+   where c between 1 and 5  
+
+
+	--카테고리 
+	select
+		p.* ,
+		to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+	from (select * from product) p where c_idx=1 order by p_idx desc
+   
+   
+   
+   --가격 검색
+	select * from
+	(
+		select p.*,
+	  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time,
+	  	rank() over( order by p_idx  ) no
+	  	from(select * from product
+	  	where p_price between 1000 and 10000
+	  	
+	  	)p
+	)
+	where no between 1 and 10
+	 
+	 
+	 
+	 
+  
+
+	select * from 
+		(
+			select p.*,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time,
+			rank() over( order by p_idx  ) no
+			from(select * from product
+			where p_name like '%합%'
+			) p
+		)
+	where no between 1 and 10
+	
+	
+select * from
+(	
+	select
+		p.* ,
+		to_number(floor((sysdate-p_date)*24*60*60)) as p_time,
+		rank() over( order by p_idx  ) no
+		from (select * from product
+		where c_idx=1
+		) p 
+)	
+where no between 1 and 4
+	
+	
+	
+
+select * from
+(
 	select p.*,
   	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
   			
-  	from(select * from product)	p where p_price between 20000 and 30000
-  		
-  	and p_name like '%여성%' or p_exp like '' 
+  	from(select * from product)	p 
+  	
+  	where p_price between 10000 and 50000
+  	
+  	and p_name like '%여성%' 
+  	
+  	
   	
   	order by p_idx desc
+)
+
+select nvl(count(*),0) from product where p_price between 10000 and 50000 and p_name like '%%' 
+
+
+
+select * from
+	(
+		select
+			p.* ,
+			rank() over(order by p_idx desc) no,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+		from (select * from product) p 
+	)
+where no between 1 and 5
 
 
 
 
+select * from
+select nvl(count(*),0) from product
 
 
 
+		
+		
+		
+		
+		
 
+select nvl(count(*),0) from product where c_idx=1
 
+	select nvl(count(*),0) as no from product where p_price between 100 and 10000000 and  p_name like '%합%'
 
 
 

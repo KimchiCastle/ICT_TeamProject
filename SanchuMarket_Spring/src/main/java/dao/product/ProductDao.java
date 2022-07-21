@@ -9,11 +9,22 @@ public interface ProductDao {
 
 
 	//상품 전체조회
-	public List<ProductVo> selectList(); 
+	public List<ProductVo> selectList(Map map); 
 
+	//전체상품 개수
+	public int				rowTotal();
+	//상품검색 개수
+	public int 				rowTotal_search(Map map);
+	//가격범위상품명 개수	
+	public int				rowTotal_pp(Map map);
+	//가격검색 개수		
+	public int			   	rowTotal_p_price(Map map);
+	//카테고리 개수
+	public int 				rowTotal_cate(int c_idx);
+		
 		
 	// 카테고리별 조회
-	public List<ProductVo> selectList_cate(int c_idx);
+	public List<ProductVo> selectList_cate(Map map);
 		
 	//u_idx 유저정보 넘김
 	public List<ProductVo> selectList(int u_idx);
@@ -37,7 +48,7 @@ public interface ProductDao {
 	
 		
 	//상품검색
-	public List<ProductVo> selectList(Map map);
+	public List<ProductVo> select_search(Map map);
 	
 	public int selectMaxIdx();
 
@@ -50,6 +61,8 @@ public interface ProductDao {
 	
 	// 상품 수정
 	public int update(ProductVo vo);
+
+	
 	
 
 

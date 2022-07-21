@@ -19,16 +19,56 @@ public class ProductDaoImpl implements ProductDao {
 
 	//상품 전체조회
 	@Override
-	public List<ProductVo> selectList() {
+	public List<ProductVo> selectList(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product.product_list");
+		return sqlSession.selectList("product.product_list",map);
 	}
 
+	//전체상품 개수
+	@Override
+	public int rowTotal() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product.product_rowtotal");
+	}
+	
+	//가격,상품명 검색 개수
+	@Override
+	public int rowTotal_pp(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product.product_rowtotal_pp", map);
+	}
+	
+	//가격검색 개수
+	@Override
+	public int rowTotal_p_price(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product.product_rowtotal_p_price", map);
+	}
+	
+	//상품검색 개수
+	@Override
+	public int rowTotal_search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product.product_rowtotal_search", map);
+	}
+
+	
+	//카테고리 개수
+	@Override
+	public int rowTotal_cate(int c_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product_rowtotal_c_idx",c_idx);
+	}
+
+
+
+
+	
 	// 카테고리별 조회 
 	@Override
-	public List<ProductVo> selectList_cate(int c_idx) {
+	public List<ProductVo> selectList_cate(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product.product_c_idx", c_idx);
+		return sqlSession.selectList("product.product_c_idx", map);
 	}
 
 	//회원
@@ -77,7 +117,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	// 상품 검색 기능
 	@Override
-	public List<ProductVo> selectList(Map map) {
+	public List<ProductVo> select_search(Map map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.product_list_search",map);
 	}
@@ -111,6 +151,12 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.update("product.product_update",vo);
 	}
 
+	
+
+	
+	
+	
+	
 
 	
 
