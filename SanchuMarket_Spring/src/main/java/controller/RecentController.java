@@ -12,10 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dao.ProductDao;
+import dao.product.ProductDao;
 import util.MyCookieList;
-import vo.ImageVo;
-import vo.ProductVo;
+import vo.image.ImageVo;
+import vo.product.ProductVo;
 
 @Controller
 public class RecentController {

@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dao.ChatDao;
-import dao.ProductDao;
-import dao.TradeDao;
-import dao.UserDao;
-import dao.VisitDao;
-import vo.ChatVo;
-import vo.ProductVo;
+import dao.chat.ChatDao;
+import dao.product.ProductDao;
+import dao.trade.TradeDao;
+import dao.user.UserDao;
+import dao.visit.VisitDao;
+import vo.chat.ChatVo;
+import vo.product.ProductVo;
 
 public class AdminServiceImpl implements AdminService {
 

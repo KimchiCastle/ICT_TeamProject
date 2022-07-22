@@ -688,6 +688,8 @@
 	
 	function proInfoSend() {
 		
+		if( "${user.u_idx}")
+		
 		
 		/* 세션으로부터 받은 u_idx 값 */
 		var u_idx = $("#u_idx").val().trim();
