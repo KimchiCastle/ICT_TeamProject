@@ -72,9 +72,14 @@
 				<div style="margin-left:30px; display: inline-block;">${ vo.p_location }</div>
 		</div>
 		
-		<div style="clear: both;"></div>
-		<div style="width: 800px; margin: auto;"><span id="p_name">${ vo.p_name }</span></div>
-		<div><sapn>${ vo.p_time }</sapn> </div>
+		<div style=" margin:auto; clear: both; width: 800px;">
+		
+		<div style="width: 800px;"><span id="p_name">${ vo.p_name }</span></div>
+		<div><span>${ vo.p_time }</span></div>
+		<div><span id="p_price"><fmt:formatNumber pattern="#,###" value="${vo.p_price}"></fmt:formatNumber></span>&nbsp;원</div>
+		<div style="margin-top: 50px;">${ vo.p_exp }</div>
+		
+		</div>
 	</div>
 </div>
 
