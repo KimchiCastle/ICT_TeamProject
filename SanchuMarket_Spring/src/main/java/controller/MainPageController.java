@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import common.MyConstant;
-import dao.product.ProductDao;
+import dao.ProductDao;
 import util.Mytime;
-import vo.product.ProductVo;
+import vo.ProductVo;
 
 @Controller
 @RequestMapping("/mainpage/")

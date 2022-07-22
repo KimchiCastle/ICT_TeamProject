@@ -2,7 +2,7 @@ package util;
 
 import java.util.List;
 
-import vo.product.ProductVo;
+import vo.ProductVo;
 
 public class Mytime {
 

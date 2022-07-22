@@ -21,15 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import dao.image.ImageDao;
-import dao.product.ProductDao;
-import dao.user.UserDao;
+import dao.ImageDao;
+import dao.ProductDao;
+import dao.UserDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
-import vo.image.ImageVo;
-import vo.product.ProductVo;
-import vo.user.UserVo;
+import vo.ImageVo;
+import vo.ProductVo;
+import vo.UserVo;
 
 @Controller
 @RequestMapping("/product/")
