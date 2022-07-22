@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import dao.UserDao;
-import vo.UserVo;
+import dao.user.UserDao;
+import vo.user.UserVo;
 
 @Controller
 @RequestMapping("/user/")

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="visit">
 
 	<!--admin page 금일 방문자수-->
-  <select id="today_count" resultType="vo.VisitVo">
+  <select id="today_count" resultType="vo.visit.VisitVo">
 	select count(*) from visit where to_char(,'dd') = to_char(sysdate, 'dd')
   </select>
 

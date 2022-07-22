@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dao.ProductDao;
-import dao.UserDao;
+import dao.product.ProductDao;
+import dao.user.UserDao;
 import util.Mytime;
-import vo.ProductVo;
-import vo.UserVo;
+import vo.product.ProductVo;
+import vo.user.UserVo;
 
 @Controller
 @RequestMapping("/sellerpage/")

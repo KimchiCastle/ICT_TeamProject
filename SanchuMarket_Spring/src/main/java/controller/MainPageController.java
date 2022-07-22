@@ -16,9 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import dao.ProductDao;
+import dao.product.ProductDao;
 import util.Mytime;
-import vo.ProductVo;
+import vo.product.ProductVo;
 
 @Controller
 @RequestMapping("/mainpage/")
