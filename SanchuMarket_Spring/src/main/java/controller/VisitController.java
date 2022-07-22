@@ -3,7 +3,7 @@ package controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dao.visit.VisitDao;
+import dao.VisitDao;
 
 @Controller
 @RequestMapping("/visit/")

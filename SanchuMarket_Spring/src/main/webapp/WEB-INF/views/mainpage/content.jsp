@@ -143,7 +143,7 @@ display: inline-block;
 	
 	<!-- 상품 -->
 	<div class="product_list">
-	<a class="a_tag" href="../product/insert_form.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
+	<a class="a_tag" href="../product/poduct_detail.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
 	
 		<!-- 상품이미지 -->
 		<c:forEach var="image" items="${ vo.image_list }">
