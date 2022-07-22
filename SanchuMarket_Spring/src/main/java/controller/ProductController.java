@@ -23,10 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.image.ImageDao;
 import dao.product.ProductDao;
+import dao.user.UserDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
+import util.Mytime;
 import vo.image.ImageVo;
 import vo.product.ProductVo;
+import vo.user.UserVo;
 
 @Controller
 @RequestMapping("/product/")
@@ -46,38 +49,19 @@ public class ProductController {
 	
 	ProductDao product_dao;
 	ImageDao image_dao;
+	UserDao user_dao;
 
-	public ProductController(ProductDao product_dao, ImageDao image_dao) {
+	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.image_dao = image_dao;
+		this.user_dao =	user_dao;
 	}
 	
 	
 	//나중에 쿠키생성은 상품페이지 눌렀을때 만들도록 수정 할예정
 	@RequestMapping("insert_form.do")
-	public String insert_form(
-			@RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
-			@RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
-			) throws Exception {
-		
-		//만약 들어온 파라미터 값이 null이 아니면
-		if(!p_idx.equals("null")) {
-			
-			
-			//쿠키 생성 key = p_idx , value = p_name
-			//한글(유니코드문제)로 쿠키에 들어가지 못하기 때문에 URLEncoder 사용
-			Cookie cookie = new Cookie(p_idx, URLEncoder.encode(p_name, "utf-8"));
-			
-			
-			//쿠키는 지정한 경로의 하위경로에서만 쿠키에 접근 가능
-			cookie.setPath("/sanchumarket/");
-			
-			
-			//쿠키응답
-			response.addCookie(cookie);
-			
-		}
+	public String insert_form()  {
 		
 		
 		return "product/product_insert";
@@ -149,13 +133,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping("modify_form.do")
-	public String product_modify_form(Model model){
+	public String product_modify_form(Model model,int p_idx){
 		
 		
 		//나중에 상품 수정시, u_idx 확인절차 넣을 예정
 
 		//임시로 p_idx 1로 설정 파라미터로 받기 수정예정
-		int p_idx=1;
 		
 		//파라미터로 받아온 p_idx로 상품 정보 1개 가져오기
 		ProductVo vo = product_dao.selectList2(p_idx);
@@ -176,14 +159,14 @@ public class ProductController {
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
 	public Map product_modify(
 	@RequestParam(value="imagedata") MultipartFile [] imagedata, int p_idx, String[] change_image,
-	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp
+	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp, int u_idx
 	) {
 		
 		
 		String abs_Path = applicaton.getRealPath("/resources/imgdata/");
 		
 		//나중에 파라미터로 받기
-		int u_idx = 3;
+		
 		
 		List<String> upload_str = new ArrayList<String>();
 		
@@ -220,6 +203,10 @@ public class ProductController {
 			
 			DB에서 꺼내와 실제 데이터와 DB 삭제
 		*/
+		
+		
+		int fileCnt = 0; // MutipartFile 파일명 인덱스용 카운트 변수
+		
 		for (int i = 0; i < change_image.length; i++) {
 
 			// i가 짝수면
@@ -245,7 +232,9 @@ public class ProductController {
 						Map updateInfo = new HashMap();
 						
 						updateInfo.put("i_idx", Integer.parseInt(change_image[i]));
-						updateInfo.put("imagedata", change_image[i + 1]);
+						updateInfo.put("imagedata", upload_str.get(fileCnt));
+						
+						fileCnt++;
 						//DB에 이미지 파일명 update
 						int res = image_dao.imageUpdate(updateInfo);
 						
@@ -258,7 +247,10 @@ public class ProductController {
 					
 					ImageVo imageVo = new ImageVo();
 					imageVo.setP_idx(p_idx);
-					imageVo.setImagedata(change_image[i + 1]);
+					imageVo.setImagedata(upload_str.get(fileCnt));
+					
+					
+					fileCnt++;
 					
 					int res = image_dao.insert(imageVo);
 					
@@ -303,20 +295,70 @@ public class ProductController {
 	
 	
 	@RequestMapping("poduct_detail.do")
-	public String productList(Model model) {
+	public String productList(Model model,
+							  @RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
+							  @RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
+							  ) throws Exception {
+		
+		
+		//만약 들어온 파라미터 값이 null이 아니면
+				if(!p_idx.equals("null")) {
+					
+					
+					//쿠키 생성 key = p_idx , value = p_name
+					//한글(유니코드문제)로 쿠키에 들어가지 못하기 때문에 URLEncoder 사용
+					Cookie cookie = new Cookie(p_idx, URLEncoder.encode(p_name, "utf-8"));
+					
+					
+					//쿠키는 지정한 경로의 하위경로에서만 쿠키에 접근 가능
+					cookie.setPath("/sanchumarket/");
+					
+					
+					//쿠키응답
+					response.addCookie(cookie);
+					
+				}
+				
+		
 		
 		//p_idx 파라미터로 받아야함, 일단 임시로 1번상품
 		
-		int p_idx = 1;
+		ProductVo vo = product_dao.selectList2(Integer.parseInt(p_idx));
 		
-		ProductVo vo = product_dao.selectList2(p_idx);
+		UserVo vo2 = user_dao.selectOneByIdx(vo.getU_idx());
 		
-		vo.setP_exp(vo.getP_exp().replaceAll("<br>", "\r\n"));
 		
+		//시간 계산 메소드 사용
+		vo.setP_time(Mytime.time_cal(vo));
+		
+		
+		//유저정보와, 상품정보 둘다 binding
 		model.addAttribute("vo", vo);
+		model.addAttribute("vo2", vo2);
+		
 		
 		
 		return "product/product_detail";
 	}
+	
+	@RequestMapping("jjimon.do")
+	@ResponseBody
+	public Map jjimon(int p_idx, int u_idx) {
+		
+		System.out.println(p_idx);
+		System.out.println(u_idx);
+		
+		Map map = new HashMap();
+		
+		map.put("p_idx", p_idx);
+		map.put("u_idx", u_idx);
+				
+		
+		
+		
+		return null;
+	}
+	
+	
 	
 }

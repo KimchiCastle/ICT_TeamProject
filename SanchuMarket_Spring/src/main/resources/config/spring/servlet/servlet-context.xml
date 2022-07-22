@@ -51,11 +51,11 @@
 		<beans:property name="adminService" ref="adminService"/>
 	</beans:bean>	
 	
-	
 	<!-- 상품등록 관련 컨트롤러 -->
 	<beans:bean class="controller.ProductController">
 		<beans:constructor-arg ref="product_dao"/>
 		<beans:constructor-arg ref="image_dao"/>
+		<beans:constructor-arg ref="user_dao"/>
 	</beans:bean>
 	
 	<!-- 최근본상품 -->
