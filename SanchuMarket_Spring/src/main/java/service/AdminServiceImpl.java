@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	public Map list() {
 		
 		//실시간 상품&채팅 업로드(list한칸 안에 최근 vo객체 하나 들어가있음(최대 6개))
-		List<ProductVo> p_list = product_dao.selectList();
+		List<ProductVo> p_list = product_dao.selectList(null);
 		List<ChatVo> ch_list = chat_dao.SelectRecentList();
 		
 		//금일 상품업로드

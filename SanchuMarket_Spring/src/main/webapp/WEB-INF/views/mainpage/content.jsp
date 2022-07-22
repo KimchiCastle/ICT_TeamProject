@@ -13,99 +13,99 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style type="text/css">
-body{
-  font-family: 'Gowun Dodum', sans-serif;
-}
-
-.main{
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
-	border: 1px solid white;
-	min-width: 1150px;
+	body{
+	  font-family: 'Gowun Dodum', sans-serif;
+	}
 	
-}
-
-.main_content{
-/* margin-top: 131px; */
-width: 1020px;
-height: auto;
-padding-top: 10px;
-padding-left: 15px;
-margin-left: 50%;
-transform: translateX(-50%);
-display: inline-block;
-}
-
-.a_tag{
-	text-decoration: none;
-	color: black;
-}
-
-.product_list{
-	width: 187px;
-	height: 260px; 
-	border: 1px solid #d3d3d3;
-	margin-right: 14px;
-	margin-bottom: 15px;
-	float: left;
-}
-
-
-#p_photo{
-	width: 185px;
-	height: 185px;
-	outline: 1px solid #d3d3d3;
-	overflow: hidden;
-	position: relative;
-}
-
-#img{
-	height: 100%;
- 	position: relative; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
-  	left: 50%; 			/* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
-  	transform: translateX(-50%);
-  	z-index: 1;
-}
-.price_tag{
-	width: 100%;
-	height: 75px;
-	padding: 10px 6px 10px 6px;
-	outline: 1px solid #d3d3d3;
-	background-color: white;
+	.main{
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+		border: 1px solid white;
+		min-width: 1150px;
 		
-}
-
-#p_name{
-	margin-bottom: 10px;
-	width: 170px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-#p_price{
-	float: left;
-	font-size: 15px;
-	margin-top: 2px;
-	font-weight: bold;
-}
-
-#p_date{
- float: right;
- font-size: 12px;
- font-weight: bold;
- text-align: right;
- margin-top: 4px;
- color: #878793;
-}
-
-.paging_btn{
-	width: 1000px;
-	margin-top: 20px;
-	margin: auto;
+	}
+	
+	.main_content{
+	/* margin-top: 131px; */
+	width: 1020px;
+	height: auto;
+	padding-top: 10px;
+	padding-left: 15px;
+	margin-left: 50%;
+	transform: translateX(-50%);
 	display: inline-block;
-}
+	}
+	
+	.a_tag{
+		text-decoration: none;
+		color: black;
+	}
+	
+	.product_list{
+		width: 187px;
+		height: 260px; 
+		border: 1px solid #d3d3d3;
+		margin-right: 14px;
+		margin-bottom: 15px;
+		float: left;
+	}
+	
+	
+	#p_photo{
+		width: 185px;
+		height: 185px;
+		outline: 1px solid #d3d3d3;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	#img{
+		height: 100%;
+	 	position: relative; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
+	  	left: 50%; 			/* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
+	  	transform: translateX(-50%);
+	  	z-index: 1;
+	}
+	.price_tag{
+		width: 100%;
+		height: 75px;
+		padding: 10px 6px 10px 6px;
+		outline: 1px solid #d3d3d3;
+		background-color: white;
+			
+	}
+	
+	#p_name{
+		margin-bottom: 10px;
+		width: 170px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	
+	#p_price{
+		float: left;
+		font-size: 15px;
+		margin-top: 2px;
+		font-weight: bold;
+	}
+	
+	#p_date{
+	 float: right;
+	 font-size: 12px;
+	 font-weight: bold;
+	 text-align: right;
+	 margin-top: 4px;
+	 color: #878793;
+	}
+	
+	.paging_btn{
+		width: 1000px;
+		margin-top: 20px;
+		margin: auto;
+		display: inline-block;
+	}
 
 
 </style>
@@ -143,7 +143,7 @@ display: inline-block;
 	
 	<!-- 상품 -->
 	<div class="product_list">
-	<a class="a_tag" href="../product/insert_form.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
+	<a class="a_tag" href="../product/poduct_detail.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
 	
 		<!-- 상품이미지 -->
 		<c:forEach var="image" items="${ vo.image_list }">
