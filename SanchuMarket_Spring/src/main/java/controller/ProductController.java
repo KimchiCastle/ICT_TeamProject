@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,28 +62,8 @@ public class ProductController {
 	
 	//나중에 쿠키생성은 상품페이지 눌렀을때 만들도록 수정 할예정
 	@RequestMapping("insert_form.do")
-	public String insert_form(
-			@RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
-			@RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
-			) throws Exception {
+	public String insert_form()  {
 		
-		//만약 들어온 파라미터 값이 null이 아니면
-		if(!p_idx.equals("null")) {
-			
-			
-			//쿠키 생성 key = p_idx , value = p_name
-			//한글(유니코드문제)로 쿠키에 들어가지 못하기 때문에 URLEncoder 사용
-			Cookie cookie = new Cookie(p_idx, URLEncoder.encode(p_name, "utf-8"));
-			
-			
-			//쿠키는 지정한 경로의 하위경로에서만 쿠키에 접근 가능
-			cookie.setPath("/sanchumarket/");
-			
-			
-			//쿠키응답
-			response.addCookie(cookie);
-			
-		}
 		
 		
 		return "product/product_insert";
@@ -317,22 +298,44 @@ public class ProductController {
 	
 	
 	@RequestMapping("poduct_detail.do")
-	public String productList(Model model) {
+	public String productList(Model model,
+							  @RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
+							  @RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
+							  ) throws Exception {
+		
+		
+		//만약 들어온 파라미터 값이 null이 아니면
+				if(!p_idx.equals("null")) {
+					
+					
+					//쿠키 생성 key = p_idx , value = p_name
+					//한글(유니코드문제)로 쿠키에 들어가지 못하기 때문에 URLEncoder 사용
+					Cookie cookie = new Cookie(p_idx, URLEncoder.encode(p_name, "utf-8"));
+					
+					
+					//쿠키는 지정한 경로의 하위경로에서만 쿠키에 접근 가능
+					cookie.setPath("/sanchumarket/");
+					
+					
+					//쿠키응답
+					response.addCookie(cookie);
+					
+				}
+				
+		
 		
 		//p_idx 파라미터로 받아야함, 일단 임시로 1번상품
-		int p_idx = 1;
 		
-		
-		
-		ProductVo vo = product_dao.selectList2(p_idx);
+		ProductVo vo = product_dao.selectList2(Integer.parseInt(p_idx));
 		
 		UserVo vo2 = user_dao.selectOneByIdx(vo.getU_idx());
 		
-		vo.setP_exp(vo.getP_exp().replaceAll("<br>", "\r\n"));
 		
+		//시간 계산 메소드 사용
 		vo.setP_time(Mytime.time_cal(vo));
 		
 		
+		//유저정보와, 상품정보 둘다 binding
 		model.addAttribute("vo", vo);
 		model.addAttribute("vo2", vo2);
 		
