@@ -27,8 +27,9 @@
 
 1. [사용한 기술](https://github.com/KimchiCastle/ICT_TeamProject#-%EC%82%AC%EC%9A%A9%ED%95%9C-%EA%B8%B0%EC%88%A0)
 2. [프로젝트 진행 기한](https://github.com/KimchiCastle/ICT_TeamProject#-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A7%84%ED%96%89-%EA%B8%B0%EA%B0%84)
-4. [화면구상]
-3. [구현한 기능](https://github.com/KimchiCastle/ICT_TeamProject#-%EA%B5%AC%ED%98%84%ED%95%9C-%EA%B8%B0%EB%8A%A5)
+3. [화면구상](https://github.com/KimchiCastle/ICT_TeamProject#-%ED%99%94%EB%A9%B4-%EA%B5%AC%EC%83%81)
+4. [구현한 기능](https://github.com/KimchiCastle/ICT_TeamProject#-%EA%B5%AC%ED%98%84%ED%95%9C-%EA%B8%B0%EB%8A%A5)
+5. [구현 이미지](https://github.com/KimchiCastle/ICT_TeamProject#-%EA%B5%AC%ED%98%84-%EC%9D%B4%EB%AF%B8%EC%A7%80)
 
 ## 🔨 사용한 기술
 ---
@@ -47,8 +48,8 @@
 ## 🎨 화면 구상
 ---
 
-[오븐](https://ovenapp.io/view/rapRTRKLth68syfLn03wypVPe3rcHxCG/MEF1Z)
-
+[오븐](https://ovenapp.io/view/rapRTRKLth68syfLn03wypVPe3rcHxCG/wJE6j)
+![ovenMain](https://user-images.githubusercontent.com/88763803/180354758-52341404-a7f0-4f24-93fc-0a41f2ab87d0.png)
 
 
 ## : 구현한 기능
