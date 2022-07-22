@@ -26,7 +26,8 @@
 ---
 
 1. [사용한 기술](https://github.com/KimchiCastle/ICT_TeamProject#-%EC%82%AC%EC%9A%A9%ED%95%9C-%EA%B8%B0%EC%88%A0)
-2. [프로젝트 진행 기한](https://github.com/KimchiCastle/ICT_TeamProject#-%EC%82%AC%EC%9A%A9%ED%95%9C-%EA%B8%B0%EC%88%A0)
+2. [프로젝트 진행 기한](https://github.com/KimchiCastle/ICT_TeamProject#-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A7%84%ED%96%89-%EA%B8%B0%EA%B0%84)
+4. [화면구상]
 3. [구현한 기능](https://github.com/KimchiCastle/ICT_TeamProject#-%EA%B5%AC%ED%98%84%ED%95%9C-%EA%B8%B0%EB%8A%A5)
 
 ## 🔨 사용한 기술
@@ -42,6 +43,13 @@
 ---
 
 2022.06.16 ~ 2022. 08 
+
+## 🎨 화면 구상
+---
+
+[오븐](https://ovenapp.io/view/rapRTRKLth68syfLn03wypVPe3rcHxCG/MEF1Z)
+
+
 
 ## : 구현한 기능
 ---
