@@ -50,33 +50,95 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 상품목록 조회  -->
-	<select id="product_list"  resultMap="product_map" >
-		select
-			p.* ,
-			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
-		from (select * from product) p order by p_idx desc
+	<select id="product_list"  resultMap="product_map" parameterType="java.util.Map" >
+		
+		select * from
+			(
+				select
+					p.* ,
+					rank() over(order by p_idx desc) no,
+					to_number(floor((sysdate-p_date)*24*60*60)) as p_time
+				from (select * from product) p 
+			)
+		where no between #{ start } and #{ end } 
+		
 	</select>
+	
+	<!-- 전체상품 개수 조회 -->
+	<select id="product_rowtotal" resultType="int" >
+		select nvl(count(*),0) from product
+	</select>
+	
+	<!-- 상품검색 개수 조회 -->
+	<select id="product_rowtotal_search" resultType="int" >
+		select nvl(count(*),0) as no from product where p_name like '%' || #{ p_name } || '%'
+	</select>
+	
+	<!-- 가격,상품명 개수 조회 -->
+	<select id="product_rowtotal_pp" resultType="int" >
+		select nvl(count(*),0) as no from product where p_price between #{ min_p } and #{ max_p } 
+														and  p_name like '%' || #{ p_name } || '%'
+	</select>
+	
+	<!-- 상품가격 개수 조회 -->
+	<select id="product_rowtotal_p_price" resultType="int" >
+		select nvl(count(*),0) as no from product where p_price between #{ min_p } and #{ max_p } 
+	</select>
+	
+	
+	<!-- 카테고리 개수 조회 -->
+	<select id="product_rowtotal_c_idx" resultType="int" >
+		select nvl(count(*),0) from product where c_idx=#{ c_idx }
+	</select>
+	
+	
 	
 	<!-- category별 조회 -->
    <select id="product_c_idx"  resultMap="product_map">
-	    select
+   select * from
+	(	
+		select
 			p.* ,
-			to_number(floor((sysdate-p_date)*24*60*60)) as p_time
-		from (select * from product) p where c_idx=#{ c_idx } order by p_idx desc
-
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time,
+			rank() over( order by p_idx  ) no
+			from (select * from product
+			where c_idx=#{ c_idx }
+			) p 
+	)	
+	where no between #{ start } and #{ end }
+   
    </select>
 	
 	<!-- 검색 조회 -->
 	<select id="product_list_search" resultMap="product_map" parameterType="java.util.Map">
 
-  		select p.*,
+
+	
+	select * from 
+		(
+			select p.*,
+			to_number(floor((sysdate-p_date)*24*60*60)) as p_time,
+			rank() over( order by p_idx  ) no
+			from(select * from product
+			where p_name like '%' || #{ p_name } || '%'
+			) p
+		)
+	where no between #{ start } and ${ end }
+
+
+
+
+
+
+
+  	<!-- 	select p.*,
 		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 		  			
 		  	from(select * from product)	p
 		  		
-		  	where	p_name like '%' || #{ p_name } || '%' <!-- or p_exp like '%' || #{ p_exp } || '%' -->  
+		  	where	p_name like '%' || #{ p_name } || '%' or p_exp like '%' || #{ p_exp } || '%'  
 	  	  
-	  	order by p_idx desc
+	  	order by p_idx desc -->
 	  	
   	</select>
   	
@@ -99,13 +161,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	<!-- 가격 범위검색 -->
   	<select id="product_price_search" resultMap="product_map" parameterType="java.util.Map">
 
-  		select p.*,
+
+		select * from
+			(
+				select p.*,
+			  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time,
+			  	rank() over( order by p_idx  ) no
+			  	from(select * from product
+			  	where p_price between #{ min_p } and #{ max_p }
+			  	
+			  	)p
+			)
+		where no between #{ start } and #{ end }
+
+
+
+
+
+
+
+
+<!--   		select p.*,
   		
 		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time
 		  			
 		  	from(select * from product)	p where p_price between #{ min_p } and #{ max_p }
 		 
-	  	order by p_idx desc
+	  	order by p_idx desc -->
 
 	  	
   	</select>

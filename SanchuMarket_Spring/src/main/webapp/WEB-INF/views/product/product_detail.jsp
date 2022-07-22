@@ -23,7 +23,7 @@
 <div id="root">
 	<%@ include file="../mainpage/header&sidebar.jsp"%>
 
-	<div id="box" align="left">
+	<div id="box">
 		<div class="container">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<!-- Indicators -->
@@ -38,47 +38,34 @@
 				</ol>
 
 				<!-- Wrapper for slides -->
-				<div class="carousel-inner" >
+				<div class="carousel-inner">
 					<div class="item active">
-						<img class="Pro_image" src="${pageContext.request.contextPath}/resources/imgdata/${ vo.image_list[0].imagedata }" style="width: 100%; height: 500px;">
+						<img src="${pageContext.request.contextPath}/resources/imgdata/${ vo.image_list[0].imagedata }" style="width: 100%; height: 400px;">
 					</div>
 					
 					<c:forEach var="list" items="${ vo.image_list }" varStatus="i" begin="1" end="${ fn:length(vo.image_list) }">
 							<div class="item">
-								<img class="Pro_image" src="${pageContext.request.contextPath}/resources/imgdata/${ list.imagedata }" style="width: 100%; height: 500px;">
+								<img src="${pageContext.request.contextPath}/resources/imgdata/${ list.imagedata }" style="width: 100%; height: 400px;">
 							</div>
 					</c:forEach>
+					
+
+					<%-- <div class="item">
+						<img src="${pageContext.request.contextPath}/resources/imgdata/test3.png"  style="width: 100%;">
+					</div> --%>
 				</div>
 
 				<!-- Left and right controls -->
 				<a class="left carousel-control" 
-					href="#myCarousel" data-slide="prev" style=" opacity: .2;"> <span
+					href="#myCarousel" data-slide="prev"> <span
 					class="glyphicon glyphicon-chevron-left"></span> <span
 					class="sr-only">Previous</span>
 				</a> <a class="right carousel-control"
-					href="#myCarousel" data-slide="next" style=" opacity: .2;"> <span
+					href="#myCarousel" data-slide="next"> <span
 					class="glyphicon glyphicon-chevron-right"></span> <span
 					class="sr-only">Next</span>
 				</a>
 			</div>
-		</div><!-- 캐러셀 끝 -->
-
-		<div id="user_info">
-			<div id="user_img">
-				<img src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="100px" height="100px" style="margin-top:5px; border-radius: 50px;">
-			</div>
-				<div id="u_nickname">${ vo2.u_nickname }</div>
-				<br>
-				<div style="margin-left:30px; display: inline-block;">${ vo.p_location }</div>
-		</div>
-		
-		<div style=" margin:auto; clear: both; width: 800px;">
-		
-		<div style="width: 800px;"><span id="p_name">${ vo.p_name }</span></div>
-		<div><span>${ vo.p_time }</span></div>
-		<div><span id="p_price"><fmt:formatNumber pattern="#,###" value="${vo.p_price}"></fmt:formatNumber></span>&nbsp;원</div>
-		<div style="margin-top: 50px;">${ vo.p_exp }</div>
-		
 		</div>
 	</div>
 </div>

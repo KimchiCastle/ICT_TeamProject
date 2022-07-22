@@ -56,7 +56,6 @@
 	<beans:bean class="controller.ProductController">
 		<beans:constructor-arg ref="product_dao"/>
 		<beans:constructor-arg ref="image_dao"/>
-		<beans:constructor-arg ref="user_dao"/>
 	</beans:bean>
 	
 	<!-- 최근본상품 -->

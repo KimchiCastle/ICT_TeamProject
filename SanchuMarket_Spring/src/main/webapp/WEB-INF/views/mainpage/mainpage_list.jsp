@@ -26,12 +26,129 @@ body{
 	
 }
 
-.body{
+
+
+</style>
+
+<script type="text/javascript">
+
+
+function page(page){
+	
+	
 	
 }
 
 
-</style>
+
+
+
+
+function send1() {
+	
+	var search1 = document.getElementById('searchtext').value;
+	
+	//검색어가 있을때 검색.
+	if( search1 !="" ){		
+		location.href = "list.do?searchtext=" + encodeURIComponent(search1);
+		return;
+	}
+	//검색어가 비었을 때 전체검색
+	if( search1 == "" ){
+		location.href = "list.do";
+		return;
+	}
+	
+}
+
+$(function() {
+
+	$(".searchtext").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			send1();
+		}
+	});
+
+});
+	
+
+</script>
+
+<script type="text/javascript">
+
+var regular_price = /^[0-9]*$/
+
+<!-- 가격 필터링 검색 -->	
+function price_search() {
+		
+		
+	
+	var min_p = $("#min_p").val().trim();
+	var max_p = $("#max_p").val().trim();
+	var searchtext = $("#searchtext").val().trim();
+	
+	if(!regular_price.test(min_p)){
+		alert('숫자만 입력 가능합니다.');
+		$("#min_p").val('');
+		$("#min_p").focus();
+		return;
+	}
+	
+	if(!regular_price.test(max_p)){
+		alert('숫자만 입력 가능합니다.');
+		$("#max_p").val('');
+		$("#max_p").focus();
+		return;
+	}
+	
+	if(min_p == ""){
+		alert('최소가격을 입력해주세요');
+		$("#min_p").val('');
+		$("#min_p").focus();
+		return;
+	}
+	
+	if(max_p == ""){
+		alert('최대가격을 입력해주세요');
+		return;
+	}
+	
+	if(min_p != "" && max_p != "" && searchtext != ""){		
+		location.href = "list.do?min_p="+ min_p + "&max_p=" + max_p + "&searchtext=" + searchtext;
+		return;
+	}
+	if(min_p != "" && max_p != ""){		
+		location.href = "list.do?min_p="+ min_p + "&max_p=" + max_p;
+		return;
+	}
+	
+	
+	
+}
+
+//	최소가격에 커서 올렸을 때 엔터처리
+$(function() {
+
+	$("#min_p").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			price_search();
+		}
+	});
+
+});
+
+//	최대 가격에 커서 올렸을 때 엔터처리
+$(function() {
+
+	$("#max_p").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			price_search();
+		}
+	});
+
+});
+
+</script>
 </head>
 <body>
 <div class="body">
@@ -85,6 +202,9 @@ body{
 
 	<div style="margin-top: 0px;">
 		<%@include file="content.jsp"%>
-</div>
+	
+	
+
+	</div>
 </body>
 </html>

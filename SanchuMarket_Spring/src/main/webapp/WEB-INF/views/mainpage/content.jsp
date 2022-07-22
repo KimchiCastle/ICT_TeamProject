@@ -34,7 +34,7 @@ padding-top: 10px;
 padding-left: 15px;
 margin-left: 50%;
 transform: translateX(-50%);
-
+display: inline-block;
 }
 
 .a_tag{
@@ -100,9 +100,29 @@ transform: translateX(-50%);
  color: #878793;
 }
 
+.paging_btn{
+	width: 1000px;
+	margin-top: 20px;
+	margin: auto;
+	display: inline-block;
+}
+
+
 </style>
+<script type="text/javascript">
+
+	function page(){
+		
+		var c_idx 		= $("#c_idx").val().trim();
+		
+		
+		console.log(c_idx);
+		
+		
+	}
 
 
+</script>
 
 
 </head>
@@ -123,7 +143,7 @@ transform: translateX(-50%);
 	
 	<!-- 상품 -->
 	<div class="product_list">
-	<a class="a_tag" href="../product/poduct_detail.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
+	<a class="a_tag" href="../product/insert_form.do?p_idx=${ vo.p_idx }&p_name=${ vo.p_name }">
 	
 		<!-- 상품이미지 -->
 		<c:forEach var="image" items="${ vo.image_list }">
@@ -142,7 +162,32 @@ transform: translateX(-50%);
 	</c:forEach>
 	
 	
+	
+	<div class="paging_btn" >
+<%-- 		<input type="button" id="c_idx" value="${ param.c_idx }">
+		<input type="button" id="" value="${ param.searchtext }">
+		<input type="button" id="" value="${ param.min_p }">
+		<input type="button" id="" value="${ param.max_p }"> --%>
+		
+		<c:forEach items="${ pageList }" var="p">
+			<a href="list.do?searchtext=${ param.searchtext }&c_idx=${ param.c_idx }&min_p=${ param.min_p }&max_p=${ param.max_p }&page=${ p }">${ p }</a>
+		</c:forEach>
+	<%-- 	 --%>
+		
+		
+		
+	<!-- 	
+		<input type="button" onclick="page();" value="1">
+		<a onclick="page();">2</a>&nbsp;&nbsp;
+		<a onclick="page();">3</a>&nbsp;&nbsp;
+		<a onclick="page();">4</a>&nbsp;&nbsp;
+		<a onclick="page();">5</a>&nbsp;&nbsp; -->
+		
+		
+		 
 	</div>
+	</div>
+	
 </div>
 </body>
 </html>
