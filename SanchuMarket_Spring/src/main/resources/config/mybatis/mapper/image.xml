@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="image">
 	
 	<!-- 이미지 등록  -->
-	<insert id="image_insert" parameterType="vo.image.ImageVo">
+	<insert id="image_insert" parameterType="vo.ImageVo">
 		insert into image values(
 		image_idx.nextVal,
 		#{p_idx},
@@ -14,17 +14,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 이미지리스트 전체 조회 -->
-	<select id="image_list" resultType="vo.image.ImageVo">
+	<select id="image_list" resultType="vo.ImageVo">
 		select * from image
 	</select>
 	
 	<!-- 상품목록 1개 에 대한 이미지 -->
-	<select id="image_selectOne" parameterType="int" resultType="vo.image.ImageVo">
+	<select id="image_selectOne" parameterType="int" resultType="vo.ImageVo">
 		select * from image where p_idx=#{p_idx}
 	</select>	
 	
 	<!-- 이미지 idx에 해당하는 파일명 얻기 -->
-	<select id="image_selectOneImage" parameterType="int" resultType="vo.image.ImageVo">
+	<select id="image_selectOneImage" parameterType="int" resultType="vo.ImageVo">
 		select * from image where i_idx=#{i_idx}
 	</select>
 	
