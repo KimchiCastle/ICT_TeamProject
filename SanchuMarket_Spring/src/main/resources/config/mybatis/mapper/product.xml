@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="product">
 	
 	<!-- 이미지 가지고 오기 위한 resultMap -->
-	<resultMap type="vo.product.ProductVo" id="product_map">
+	<resultMap type="vo.ProductVo" id="product_map">
 		<result property="p_idx" column="p_idx"/>
 		
 		<collection property="image_list" 
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
-	<resultMap type="vo.product.ProductVo" id="product_map_all">
+	<resultMap type="vo.ProductVo" id="product_map_all">
 		<result property="p_idx" column="p_idx"/>
 		<collection property="image_list" 
 					column="{p_idx=p_idx}"
@@ -133,7 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 상품등록 -->
-	<insert id="product_insert" parameterType="vo.product.ProductVo">
+	<insert id="product_insert" parameterType="vo.ProductVo">
 		insert into product values(
 		(select nvl(max(p_idx),0)+1 from product),
 		 #{u_idx},
@@ -149,19 +149,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- ResultMap 호출,  섬네일 이미지만 포장함  -->
-	<select id="image_list_p_idx" resultType="vo.image.ImageVo">
+	<select id="image_list_p_idx" resultType="vo.ImageVo">
 		select * from (select * from image where p_idx=#{p_idx} order by i_idx) where ROWNUM  = 1
 	</select>
 	
 	
 	<!-- ResultMap 호출,  이미지데이터 전부 다 포장  -->
-	<select id="image_listAll_p_idx" resultType="vo.image.ImageVo">
+	<select id="image_listAll_p_idx" resultType="vo.ImageVo">
 		select * from image where p_idx=#{p_idx} order by i_idx
 	</select>
 	
 	
 	<!--최근 상품 업로드 게시물 6개 조회-->
-	<select id="recent_product" resultType="vo.product.ProductVo">
+	<select id="recent_product" resultType="vo.ProductVo">
 	<![CDATA[ select * from (select * from product order by #{p_idx} desc) where ROWNUM  <= 6]]>
 	</select>		
 	
@@ -173,7 +173,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 상품정보 수정 -->
-	<update id="product_update" parameterType="vo.product.ProductVo">
+	<update id="product_update" parameterType="vo.ProductVo">
 		update product set 
 		p_name=#{p_name},
 		c_idx=#{c_idx},

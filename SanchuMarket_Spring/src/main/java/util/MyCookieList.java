@@ -8,8 +8,8 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import dao.product.ProductDao;
-import vo.product.ProductVo;
+import dao.ProductDao;
+import vo.ProductVo;
 
 public class MyCookieList {
 	
