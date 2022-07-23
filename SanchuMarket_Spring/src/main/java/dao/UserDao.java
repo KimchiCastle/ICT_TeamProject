@@ -46,6 +46,14 @@ public interface UserDao {
 
 	
 	public int delete(String u_id);
+
+
+	public int updatePwd(UserVo vo);
+
+
+	public String selectIdByNameTel(UserVo vo);
+
+
 	
 	
 }

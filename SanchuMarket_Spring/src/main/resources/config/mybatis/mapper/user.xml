@@ -35,6 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   select count(*) from user_market where u_id=#{u_id} and u_mail=#{u_mail}
 	</select>
 	
+	<select id="findId" resultType="java.lang.String" parameterType="vo.UserVo">
+		select u_id from user_market where u_name=#{u_name} and u_tel=#{u_tel}
+	</select>
+	
 	<!--u_photo/u_like/u_profile은 처음 가입시 null/0-->
 	<insert id="user_insert" parameterType="vo.UserVo">
 	insert into user_market values(
@@ -68,6 +72,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				u_zipcode=#{u_zipcode},
 				u_addr=#{u_addr)
 		where u_idx=#{ u_idx }
+	</update>
+	
+	<!--임시비밀번호로 갱신-->
+	<update id="pwd_update" parameterType="vo.UserVo">
+	   update user_market set u_pwd=#{u_pwd} where u_mail=#{u_mail}
 	</update>
 		
 	<delete id="withdraw_account" parameterType="java.lang.String">
