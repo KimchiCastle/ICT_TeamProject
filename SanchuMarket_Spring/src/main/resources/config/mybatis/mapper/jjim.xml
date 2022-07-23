@@ -4,6 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jjim">
 
+	<!-- 이 상품 찜했는지 조회 -->
 	<select id="jjim_select" resultType="vo.JjimVo"></select>
+	
+	
+	<!-- 상품 찜하기 -->
+	<insert id="jjim_insert" parameterType="java.util.Map">
+		insert into jjim values
+		(
+			(select nvl(max(j_idx),0)+1 from jjim),
+			#{p_idx},
+			#{u_idx}
+		)
+	</insert>	
 	
 </mapper>

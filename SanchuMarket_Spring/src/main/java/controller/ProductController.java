@@ -28,6 +28,7 @@ import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
 import vo.ImageVo;
+import vo.JjimVo;
 import vo.ProductVo;
 import vo.UserVo;
 
@@ -348,10 +349,7 @@ public class ProductController {
 		System.out.println(p_idx);
 		System.out.println(u_idx);
 		
-		Map map = new HashMap();
-		
-		map.put("p_idx", p_idx);
-		map.put("u_idx", u_idx);
+		JjimVo vo = new JjimVo(p_idx, u_idx);
 				
 		
 		

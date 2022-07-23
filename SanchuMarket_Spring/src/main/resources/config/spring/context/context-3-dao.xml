@@ -47,4 +47,10 @@
 		<property name="sqlSession" ref="sqlSession"/>
 	</bean>
 	
+	<!-- 찜하기 -->
+	<bean id="jjim_dao" class="dao.JjimDaoImpl">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	
 </beans>
