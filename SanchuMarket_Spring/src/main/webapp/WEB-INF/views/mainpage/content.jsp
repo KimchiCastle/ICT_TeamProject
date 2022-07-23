@@ -13,96 +13,116 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style type="text/css">
-body{
-  font-family: 'Gowun Dodum', sans-serif;
-}
-
-.main{
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
-	border: 1px solid white;
-	min-width: 1150px;
+	body{
+	  font-family: 'Gowun Dodum', sans-serif;
+	}
 	
-}
-
-.main_content{
-/* margin-top: 131px; */
-width: 1020px;
-height: auto;
-padding-top: 10px;
-padding-left: 15px;
-margin-left: 50%;
-transform: translateX(-50%);
-
-}
-
-.a_tag{
-	text-decoration: none;
-	color: black;
-}
-
-.product_list{
-	width: 187px;
-	height: 260px; 
-	border: 1px solid #d3d3d3;
-	margin-right: 14px;
-	margin-bottom: 15px;
-	float: left;
-}
-
-
-#p_photo{
-	width: 185px;
-	height: 185px;
-	outline: 1px solid #d3d3d3;
-	overflow: hidden;
-	position: relative;
-}
-
-#img{
-	height: 100%;
- 	position: relative; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
-  	left: 50%; 			/* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
-  	transform: translateX(-50%);
-  	z-index: 1;
-}
-.price_tag{
-	width: 100%;
-	height: 75px;
-	padding: 10px 6px 10px 6px;
-	outline: 1px solid #d3d3d3;
-	background-color: white;
+	.main{
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+		border: 1px solid white;
+		min-width: 1150px;
 		
-}
+	}
+	
+	.main_content{
+	/* margin-top: 131px; */
+	width: 1020px;
+	height: auto;
+	padding-top: 10px;
+	padding-left: 15px;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	display: inline-block;
+	}
+	
+	.a_tag{
+		text-decoration: none;
+		color: black;
+	}
+	
+	.product_list{
+		width: 187px;
+		height: 260px; 
+		border: 1px solid #d3d3d3;
+		margin-right: 14px;
+		margin-bottom: 15px;
+		float: left;
+	}
+	
+	
+	#p_photo{
+		width: 185px;
+		height: 185px;
+		outline: 1px solid #d3d3d3;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	#img{
+		height: 100%;
+	 	position: relative; /* 이미지 위치 조정을 위해 절대 위치로 변경 */
+	  	left: 50%; 			/* 이미지를 영역 너비의 50% 만큼 오른쪽으로 이동 */
+	  	transform: translateX(-50%);
+	  	z-index: 1;
+	}
+	.price_tag{
+		width: 100%;
+		height: 75px;
+		padding: 10px 6px 10px 6px;
+		outline: 1px solid #d3d3d3;
+		background-color: white;
+			
+	}
+	
+	#p_name{
+		margin-bottom: 10px;
+		width: 170px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	
+	#p_price{
+		float: left;
+		font-size: 15px;
+		margin-top: 2px;
+		font-weight: bold;
+	}
+	
+	#p_date{
+	 float: right;
+	 font-size: 12px;
+	 font-weight: bold;
+	 text-align: right;
+	 margin-top: 4px;
+	 color: #878793;
+	}
+	
+	.paging_btn{
+		width: 1000px;
+		margin-top: 20px;
+		margin: auto;
+		display: inline-block;
+	}
 
-#p_name{
-	margin-bottom: 10px;
-	width: 170px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-#p_price{
-	float: left;
-	font-size: 15px;
-	margin-top: 2px;
-	font-weight: bold;
-}
-
-#p_date{
- float: right;
- font-size: 12px;
- font-weight: bold;
- text-align: right;
- margin-top: 4px;
- color: #878793;
-}
 
 </style>
+<script type="text/javascript">
+
+	function page(){
+		
+		var c_idx 		= $("#c_idx").val().trim();
+		
+		
+		console.log(c_idx);
+		
+		
+	}
 
 
+</script>
 
 
 </head>
@@ -142,7 +162,32 @@ transform: translateX(-50%);
 	</c:forEach>
 	
 	
+	
+	<div class="paging_btn" >
+<%-- 		<input type="button" id="c_idx" value="${ param.c_idx }">
+		<input type="button" id="" value="${ param.searchtext }">
+		<input type="button" id="" value="${ param.min_p }">
+		<input type="button" id="" value="${ param.max_p }"> --%>
+		
+		<c:forEach items="${ pageList }" var="p">
+			<a href="list.do?searchtext=${ param.searchtext }&c_idx=${ param.c_idx }&min_p=${ param.min_p }&max_p=${ param.max_p }&page=${ p }">${ p }</a>
+		</c:forEach>
+	<%-- 	 --%>
+		
+		
+		
+	<!-- 	
+		<input type="button" onclick="page();" value="1">
+		<a onclick="page();">2</a>&nbsp;&nbsp;
+		<a onclick="page();">3</a>&nbsp;&nbsp;
+		<a onclick="page();">4</a>&nbsp;&nbsp;
+		<a onclick="page();">5</a>&nbsp;&nbsp; -->
+		
+		
+		 
 	</div>
+	</div>
+	
 </div>
 </body>
 </html>

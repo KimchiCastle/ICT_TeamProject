@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,15 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import dao.image.ImageDao;
-import dao.product.ProductDao;
-import dao.user.UserDao;
+import dao.ImageDao;
+import dao.ProductDao;
+import dao.UserDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
-import vo.image.ImageVo;
-import vo.product.ProductVo;
-import vo.user.UserVo;
+import vo.ImageVo;
+import vo.ProductVo;
+import vo.UserVo;
 
 @Controller
 @RequestMapping("/product/")
@@ -63,7 +62,6 @@ public class ProductController {
 	//나중에 쿠키생성은 상품페이지 눌렀을때 만들도록 수정 할예정
 	@RequestMapping("insert_form.do")
 	public String insert_form()  {
-		
 		
 		
 		return "product/product_insert";
@@ -135,13 +133,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping("modify_form.do")
-	public String product_modify_form(Model model){
+	public String product_modify_form(Model model,int p_idx){
 		
 		
 		//나중에 상품 수정시, u_idx 확인절차 넣을 예정
 
 		//임시로 p_idx 1로 설정 파라미터로 받기 수정예정
-		int p_idx=1;
 		
 		//파라미터로 받아온 p_idx로 상품 정보 1개 가져오기
 		ProductVo vo = product_dao.selectList2(p_idx);
@@ -162,14 +159,14 @@ public class ProductController {
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
 	public Map product_modify(
 	@RequestParam(value="imagedata") MultipartFile [] imagedata, int p_idx, String[] change_image,
-	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp
+	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp, int u_idx
 	) {
 		
 		
 		String abs_Path = applicaton.getRealPath("/resources/imgdata/");
 		
 		//나중에 파라미터로 받기
-		int u_idx = 3;
+		
 		
 		List<String> upload_str = new ArrayList<String>();
 		
@@ -343,5 +340,25 @@ public class ProductController {
 		
 		return "product/product_detail";
 	}
+	
+	@RequestMapping("jjimon.do")
+	@ResponseBody
+	public Map jjimon(int p_idx, int u_idx) {
+		
+		System.out.println(p_idx);
+		System.out.println(u_idx);
+		
+		Map map = new HashMap();
+		
+		map.put("p_idx", p_idx);
+		map.put("u_idx", u_idx);
+				
+		
+		
+		
+		return null;
+	}
+	
+	
 	
 }

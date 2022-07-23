@@ -190,7 +190,7 @@
 				
 				if(res.res==true){
 					alert('상품수정 성공!');
-				//	location.href='../mainpage/list.do';
+					location.href='../mainpage/list.do';
 				}
 				
 			},error	: function(err){

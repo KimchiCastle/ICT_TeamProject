@@ -2,23 +2,24 @@ package controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import dao.user.UserDao;
-import vo.user.UserVo;
+import dao.UserDao;
+import vo.AuthVo;
+import vo.UserVo;
 
 @Controller
 @RequestMapping("/user/")
@@ -33,8 +34,13 @@ public class UserController {
 	 @Autowired 
 	 HttpServletRequest request;
 	 
+	 JavaMailSender mailSender;
 	 
 	 
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
 	UserDao user_dao;
 
 	public void setUser_dao(UserDao user_dao) {
@@ -182,12 +188,33 @@ public class UserController {
 		return "user/login_form";
 	}
 	
-	//아이디찾기 
-	/*
-	 * @RequestMapping("find_id.do") public String findIdForm() {
-	 * 
-	 * return "user/find_id"; }
-	 */
+
+	//아이디 찾기
+	@RequestMapping("findId.do")
+	@ResponseBody
+	public Map findId(@RequestParam("name") String u_name, 
+					   @RequestParam("phoneNo") String u_tel) {
+
+			UserVo vo = new UserVo();
+			vo.setU_name(u_name);
+			vo.setU_tel(u_tel);
+
+			String u_id = user_dao.selectIdByNameTel(vo);
+			
+			System.out.println(u_id);
+			
+			Map map = new HashMap();
+
+			if(u_id!=null) {
+				map.put("id","noExist");
+				return map;
+			}else {
+				map.put("id", u_id);
+			}
+			
+			return map;
+	}
+	
 	
 	//비밀번호찾기
 	@RequestMapping("count_emailId.do")
@@ -195,19 +222,17 @@ public class UserController {
 	public Map countEmailId(@RequestParam("id") String u_id, 
 					   @RequestParam("email") String u_email) {
 			
-			System.out.printf("controller_id=%s",u_id);
-			System.out.printf("controller_email=%s",u_email);
-			
+
 			UserVo vo = new UserVo();
 			vo.setU_id(u_id);
 			vo.setU_mail(u_email);
+			
 			int count = user_dao.countForFindPwd(vo);
 			
 			Map map = new HashMap();
-			System.out.printf("count="+count);
+			
 			if(count==0) {
 				map.put("result","noExist");
-				System.out.println("3");
 				return map;
 			}else {
 				map.put("result", "exist");
@@ -217,13 +242,69 @@ public class UserController {
 	}
 	
 	@RequestMapping("sendEmail.do")
-	public boolean sendEmail() {
+	@ResponseBody
+	public Map sendEmail(String email) {
 		
+		boolean bSuccess = false;
+		
+		UserVo vo = user_dao.selectOneByEmail(email);
+		
+		if(vo != null) {
+				
+				Random r = new Random();
+				
+				StringBuffer sb = new StringBuffer();
+				
+				for(int i=0; i<10; i++) {
+					//랜덤으로 boolean을 줘서 무작위로 영문자와 숫자를 생성.
+					r.nextBoolean();
+					
+					//소문자
+					if(r.nextBoolean()==true) {
+						sb.append((char)((int)(r.nextInt(26))+97));
+					}
+					//숫자
+					else {
+						sb.append(r.nextInt(10));
+					}
+				} 	
+				
+				String tempPwd = sb.toString();
+				AuthVo authVo = new AuthVo();
+				String hostMail = authVo.getHostMail();
+				String userMail = email; //받는사람
+				
+			try {
+					StringBuilder stb = new StringBuilder();
+					stb.append(String.format("%s님의 임시 비밀번호는",vo.getU_name()));
+					stb.append(String.format(" %s입니다", tempPwd));
+					
+					SimpleMailMessage message = new SimpleMailMessage();
 
-		 return true;
-		  
+					message.setFrom(hostMail);
+					message.setTo(email);
+					message.setSubject("[상추마켓] 임시 비밀번호 메일입니다.");
+					message.setText(stb.toString());
+					
+					mailSender.send(message);
+					
+					vo.setU_pwd(tempPwd);
+					
+					int res = user_dao.updatePwd(vo);
+					
+					bSuccess = true;
+				   
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+		}
+		
+		Map map = new HashMap();
+		map.put("result", bSuccess); 
+		return map;
 	}
 	
+
 	
 	
 	
