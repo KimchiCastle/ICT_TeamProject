@@ -29,15 +29,20 @@
 	        target = $t[0].href || $t.data("target") || $t.parents('.modal');
 
 		  $(target)
-		    .find("#myName,#myPhone,#myId,#myEmail,#idErrMsg,#pwdErrMsg")
-		       .val('')
-		       .end();
+		    .find("#myName,#myPhone,#myId,#myEmail,#idErrMsg,#pwdErrMsg").val('').end();
+		  
+		  $(target).find('#idErrMsg').html('').end();
+		  $(target).find('#pwdErrMsg').html('').end();
 		  });
+	  
 	});//end document ready
 </script>
 
 <script type="text/javascript">
 
+		//아이디 찾기시 유효성 판단 전역 변수
+		let nameFlag = false;
+		let phoneFlag = false;
 		//비밀번호 찾기시 유효성 판단 전역 변수
 		let emailFlag = false;
 		let idFlag = false;
@@ -51,22 +56,25 @@
 			});
 			
 			$('#myName').on('blur',function(){
+				nameFlag = false;
 				nameCheck();
 			});
 			$('#myPhone').on('blur',function(){
+				phoneFlag = false;
 				phoneCheck();
 			});
 			$('#myEmail').on('blur',function(){
+				emailFlag = false;
 				emailCheck();
 			});
 			
 			$('#myId').on('blur',function(){
+				idFlag = false;
 				idCheck();
 			}); 
 			
 			
 		});//end document.ready	
-
 		
 		
 
@@ -123,10 +131,10 @@
 			if(name==''){
 				
 				$('#idErrMsg').html('필수 입력값입니다.').show();
-				$('#myEmail').focus();
 				return;
 			}
-			
+			nameFlag = true;			
+			$('#idErrMsg').hide();
 		}
 		
 		function phoneCheck(){
@@ -146,6 +154,9 @@
 				$('#myPhone').val('');
 				return;
 			}
+			
+			phoneFlag = true;
+			$('#idErrMsg').hide();
 		}
 	
 		
@@ -153,11 +164,16 @@
 		function findId(){
 			
 			var name = $('#myName').val();
-			var phoneNo = $('#myPhone').val();
+			var phone = $('#myPhone').val();
+			var id = '';
+			
+			if(!nameFlag || !phoneFlag){
+				return;
+			}
 			
 			$.ajax({
 				url : 'findId.do',
-				data : {'name':name,'phoneNo':phoneNo},
+				data : {'name':name,'phone':phone},
 				dataType : 'json',
 				success : function(res){
 					
@@ -170,13 +186,21 @@
 						
 						$("#findIdBtn").hide();
 						$("#idModal").find('input, label').hide();
-						$("#body-form").html('고객님의 아이디는' + res.id + '입니다.');
 						
+						var idContent;
+						/* console.log(res); */
+						/* console.log(res.id); */
+						
+						$.each(res,function() {
+							idContent += res.id;
+						});
+						
+						console.log(idContent);
 						pageInit();
-						
 					}
 				},
 				 error:function(jqXHR,status,exception){
+					 
 				   	  var msg = '';
 				  
 					  if (jqXHR.status == 0) {
@@ -231,6 +255,7 @@
 			
 		//비밀번호 찾기 아이디 유효성 검사
 		function idCheck(){
+			
 			var id = $('#myId').val();
 
 			console.log('아이디체크');
@@ -241,6 +266,7 @@
 				
 				return false;
 			}
+			
 			idFlag = true;
 			$('#pwdErrMsg').hide();
 		}
@@ -337,7 +363,7 @@
 					
 					$("#sendMailBtn").hide();
 					$("#pwdModal").find('input, label').hide();
-					$("#body-form").html(email+'로 임시 비밀번호가 전송되었습니다');
+					$("#pwdBodyForm").html(email+'로 임시 비밀번호가 전송되었습니다');
 					
 					//페이지 초기화(for 모달창 초기화)
 					pageInit();
@@ -409,30 +435,30 @@
    </div>
  </div> 
 <!--아이디찾기-->    
-<a href="#idModal" data-toggle="modal">아이디찾기</a>&nbsp;/
+<a href="#idModal" data-toggle="modal" id="openIdModal">아이디찾기</a>&nbsp;/
 <div class="modal fade" id="idModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" style="width:500px;" role="document">
     <div class="modal-content">
-       <form id="idFind_form" method="post" onsubmit="return findId();">
+      <form>
        	  <!--header-->
 	      <div class="modal-header text-center">
-	        <h4 class="modal-title w-100 font-weight-bold">휴대폰 인증</h4>
+   	        <h4 class="modal-title w-100 font-weight-bold">아이디 찾기</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <!--body-->
 	      <div class="modal-body mx-1">
-	        <div class="md-form mb-5">
+	        <div class="md-form mb-5" id="idBodyForm">
 	          <label style="width:20%;">이름</label>
-	          <input id="myName" name="myName" class="modalInput">
+	          <input id="myName" name="name">
 	        </div>
 	
 	        <div class="md-form mb-4">
 	          <label style="width:20%;">휴대폰번호</label>
-	          <input id="myPhone" name="myPhone" class="modalInput">
+	          <input id="myPhone" name="phone">
 	        </div>
-	      </div>
+	      </div>  
 	      
 	      <span id="idErrMsg" style="margin-left:45px; color:red; display:none;"></span>
 	      
@@ -441,8 +467,7 @@
 	        <input type="button" class="btn btn-indigo" id="findIdBtn" onclick="findId();" value="아이디확인">
 	        <input type="button"  class="modalBtns btn btn-indigo" id="closeBtn" data-dismiss="modal" value="닫기">
 	      </div>
-		      
-       </form>
+		</form>     
     </div>
   </div>
 </div>
@@ -453,7 +478,7 @@
   aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog"  style="width:500px;" role="document">
     <div class="modal-content">
-      <form id="pwdFind_form" method="post" onsubmit="return checkMailId();">
+     <form id="pwdFind_form" method="post" onsubmit="return checkMailId();">
       	  <!--header-->	
 	      <div class="modal-header text-center">
 	        <h4 class="modal-title w-100 font-weight-bold">임시비밀번호 발급</h4>
@@ -462,7 +487,7 @@
 	        </button>
 	      </div>
 	      <!--body-->
-	      <div class="modal-body mx-3" id="body-form">
+	      <div class="modal-body mx-3" id="pwdBodyForm">
 	        <div class="md-form mb-5">
 	          <label style="width:20%;">아이디</label>
 	          <input id="myId" name="id">
@@ -482,7 +507,7 @@
 	        <input type="button"  class="modalBtns btn btn-indigo" id="closeBtn" data-dismiss="modal" value="닫기">
 	      </div>
      
-      </form>
+       </form> 
     </div>
   </div>
 </div>
