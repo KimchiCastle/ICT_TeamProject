@@ -4,12 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jjim">
 
+
 	<!-- 이 상품 찜했는지 조회 -->
-	<select id="jjim_select" resultType="vo.JjimVo"></select>
-	
+	<select id="jjim_select" parameterType="java.util.Map" resultType="vo.JjimVo">
+		select * from jjim where u_idx=#{u_idx} and p_idx=#{p_idx}
+	</select>
 	
 	<!-- 상품 찜하기 -->
-	<insert id="jjim_insert" parameterType="java.util.Map">
+	<insert id="jjim_insert" parameterType="vo.JjimVo">
 		insert into jjim values
 		(
 			(select nvl(max(j_idx),0)+1 from jjim),
@@ -17,5 +19,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{u_idx}
 		)
 	</insert>	
+	
+	<!-- 찜하기 삭제 -->
+	<delete id="jjim_delete" parameterType="vo.JjimVo">
+		delete from jjim where p_idx=#{p_idx} and u_idx=#{u_idx}
+	</delete>
 	
 </mapper>

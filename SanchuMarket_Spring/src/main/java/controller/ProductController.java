@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.ImageDao;
+import dao.JjimDao;
 import dao.ProductDao;
 import dao.UserDao;
 import util.MyFileDelete;
@@ -51,15 +52,18 @@ public class ProductController {
 	ProductDao product_dao;
 	ImageDao image_dao;
 	UserDao user_dao;
+	JjimDao jjim_dao;
 
-	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao) {
+
+	
+	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao, JjimDao jjim_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.image_dao = image_dao;
-		this.user_dao =	user_dao;
+		this.user_dao = user_dao;
+		this.jjim_dao = jjim_dao;
 	}
-	
-	
+
 	//나중에 쿠키생성은 상품페이지 눌렀을때 만들도록 수정 할예정
 	@RequestMapping("insert_form.do")
 	public String insert_form()  {
@@ -296,10 +300,11 @@ public class ProductController {
 	
 	
 	@RequestMapping("poduct_detail.do")
-	public String productList(Model model,
-							  @RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
-							  @RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
-							  ) throws Exception {
+	public String productList(
+			Model model,
+			@RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
+			@RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
+			) throws Exception {
 		
 		
 		//만약 들어온 파라미터 값이 null이 아니면
@@ -320,10 +325,7 @@ public class ProductController {
 					
 				}
 				
-		
-		
 		//p_idx 파라미터로 받아야함, 일단 임시로 1번상품
-		
 		ProductVo vo = product_dao.selectList2(Integer.parseInt(p_idx));
 		
 		UserVo vo2 = user_dao.selectOneByIdx(vo.getU_idx());
@@ -342,21 +344,87 @@ public class ProductController {
 		return "product/product_detail";
 	}
 	
-	@RequestMapping("jjimon.do")
+	
+	/* 현재 본 상품 찜 상태 확인 */
+	@RequestMapping("jjimCheck.do")
 	@ResponseBody
-	public Map jjimon(int p_idx, int u_idx) {
+	public Map jjimCheck(
+			int p_idx, 
+			@RequestParam(value="u_idx", required =false, defaultValue="0") int u_idx) {
 		
-		System.out.println(p_idx);
-		System.out.println(u_idx);
+		//파라미터로 받아온 값 찜테이블에 인서트
+		Map check = new HashMap();
 		
-		JjimVo vo = new JjimVo(p_idx, u_idx);
-				
+		check.put("p_idx", p_idx);
+		check.put("u_idx", u_idx);
 		
 		
+		JjimVo vo = jjim_dao.selectOne(check);
 		
-		return null;
+		Map map = new HashMap();
+		
+		boolean result = (vo!=null);
+		
+		if(result) {
+			
+			map.put("result", result);
+			
+		}else {
+			
+			map.put("result", result);
+			
+		}
+		
+		return map;
 	}
 	
 	
+	@RequestMapping("jjimon.do")
+	@ResponseBody
+	public Map jjimon(JjimVo vo) {
+		
+		//파라미터로 받아온 값 찜테이블에 인서트
+		int res = jjim_dao.insert(vo);
+		
+		Map map = new HashMap();
+		
+		boolean result = (res==1);
+		
+		if(result) {
+			
+			map.put("result", result);
+			
+		}else {
+			
+			map.put("result", result);
+			
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("jjimoff.do")
+	@ResponseBody
+	public Map jjimoff(JjimVo vo) {
+		
+		//파라미터로 받아온 값 찜테이블에 인서트
+		int res = jjim_dao.delete(vo);
+		
+		Map map = new HashMap();
+		
+		boolean result = (res==1);
+		
+		if(result) {
+			
+			map.put("result", result);
+			
+		}else {
+			
+			map.put("result", result);
+			
+		}
+		
+		return map;
+	}
 	
 }

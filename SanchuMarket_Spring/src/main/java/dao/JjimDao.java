@@ -6,8 +6,9 @@ import vo.JjimVo;
 
 public interface JjimDao {
 	
-	public JjimVo selectOne();
+	public JjimVo selectOne(Map map);
 	
 	public int insert(JjimVo vo);
 	
+	public int delete(JjimVo vo);
 }

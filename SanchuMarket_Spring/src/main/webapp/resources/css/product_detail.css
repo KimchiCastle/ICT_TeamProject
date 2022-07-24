@@ -70,5 +70,8 @@
 		font-weight: bold;
 	}
 	
-	
-	
+	#modifyButton{
+		font-size: 25px;
+		width: 200px;
+		height: 50px;
+	}
