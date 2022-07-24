@@ -14,6 +14,43 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<!-- 페이지 들어올때 이상품이 찜이 되어있는지 아닌지 확인 -->
+<script type="text/javascript">
+	
+	$(function(){
+		
+		var p_idx = $("#p_idx").val();
+		var u_idx = $("#u_idx").val();
+		
+		$.ajax({
+			
+			url		: 'jjimCheck.do',
+			type	: 'post',
+			data	: {'p_idx':p_idx, 'u_idx':u_idx},
+			success	: function(res){
+				
+				if(res.result){
+					
+					console.log('찜 있음')
+					$("#jjim_off").css('display','inline-block')
+					
+				}else{
+
+					console.log('찜 없음')
+					$("#jjim_on").css('display','inline-block')
+				
+				}
+				
+			}
+			
+		})
+		
+		
+	});
+
+</script>
+
+<!-- 찜기능 on off 함수 -->
 <script type="text/javascript">
 	
 	function jjimOn(){
@@ -34,8 +71,20 @@
  		$.ajax({
 			
 			url	     : 'jjimon.do',
+			type	 : 'POST',
 			data     : {"p_idx":p_idx, "u_idx":u_idx},
 			success	 : function(res){
+				
+				if(res.result){
+					
+					$("#jjim_on").css('display','none');
+					$("#jjim_off").css('display','inline-block');
+				
+				}else{
+					
+					alert('찜 등록을 실패하였습니다. 관리자에게 문의하세요');
+				
+				}
 				
 			},error	 : function(err){
 				alert('찜 등록을 실패하였습니다. 관리자에게 문의하세요');
@@ -49,6 +98,33 @@
 	
 	function jjimOff(){
 		
+		var p_idx = $("#p_idx").val();
+		var u_idx = $("#u_idx").val().trim();
+		
+		
+		$.ajax({
+			
+			url	     : 'jjimoff.do',
+			type	 : 'POST',
+			data     : {"p_idx":p_idx, "u_idx":u_idx},
+			success	 : function(res){
+				
+				if(res.result){
+					
+					$("#jjim_off").css('display','none');
+					$("#jjim_on").css('display','inline-block');
+				
+				}else{
+					
+					alert('찜 해제을 실패하였습니다. 관리자에게 문의하세요');
+				
+				}
+				
+			},error	 : function(err){
+				alert('찜 해제을 실패하였습니다. 관리자에게 문의하세요');
+			}
+			
+		});
 		
 	}
 
@@ -112,13 +188,17 @@
 			<br>
 			<div style="margin-left:30px; display: inline-block;">${ vo.p_location }</div>
 			<br>
+			<!-- 찜등록 -->
 			<div style="margin-left:30px; margin-top:20px; display: inline-block;">
-				<button type="button" class="btn" onclick="jjimOn();" style="background-color: rgb(200,200,200); width: 75px;">
+				
+				<button type="button" id="jjim_on" class="btn" onclick="jjimOn();" style=" background-color: rgb(200,200,200); width: 75px; display: none;">
 					<span style="color: white; font-size: 20px;">찜 ♥</span>
 				</button>
-				<button type="button" class="btn" onclick="jjimOff();" style="background-color: rgb(156,247,117); width: 75px;">
+				<button type="button" id="jjim_off" class="btn" onclick="jjimOff();" style=" background-color: rgb(156,247,117); width: 75px; display: none;">
 					<span style="color: white; font-size: 20px;">찜 ♥</span>
 				</button>
+				
+				
 			</div>	
 			
 				
@@ -133,9 +213,10 @@
 		
 		</div> <!-- 상품정보 끝 -->
 	<c:if test="${ user.u_idx eq vo.u_idx }">
-	<div align="right">
-		<input type="button" class="btn btn-warning" value="상품수정" style=" font-size:25px; width: 200px; height: 50px;">
-	</div>	
+		<div align="right">
+			<input type="button" class="btn btn-warning" value="상품수정" style="font-size: 25px; width: 200px; height: 50px;"
+			id="modifyButton" onclick="location.href='modify_form.do?p_idx=${ vo.p_idx }'">
+		</div>	
 	</c:if>	
 		
 	</div>

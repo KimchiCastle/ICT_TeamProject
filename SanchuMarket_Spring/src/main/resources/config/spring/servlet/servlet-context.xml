@@ -57,6 +57,7 @@
 		<beans:constructor-arg ref="product_dao"/>
 		<beans:constructor-arg ref="image_dao"/>
 		<beans:constructor-arg ref="user_dao"/>
+		<beans:constructor-arg ref="jjim_dao"/>
 	</beans:bean>
 	
 	<!-- 최근본상품 -->
