@@ -87,10 +87,15 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.update("user.user_update",vo);
 	}
 	
-	//아이디찾기
-	public String selectIdByNameTel(UserVo vo) {
+	//아이디찾기(중복아이디허용)
+	public List<String> selectIdByNameTel(UserVo vo) {
 		
-		return sqlSession.selectOne("user.selectId", vo);
+		/*
+		 * System.out.printf("daoimple의u_name:%s\n",vo.getU_name());
+		 * System.out.printf("daoimple의u_tel:%s\n",vo.getU_tel());
+		 */
+		
+		return sqlSession.selectList("user.findId", vo);
 	}
 	
 	//비밀번호 찾기

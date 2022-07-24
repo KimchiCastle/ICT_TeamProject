@@ -1,13 +1,16 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -87,7 +90,6 @@ public class UserController {
 			result = "N";
 		}
 		
-		System.out.println(result);
 		Map map = new HashMap();
 		
 		map.put("result", result);
@@ -129,6 +131,7 @@ public class UserController {
 		  String u_addr = sb.toString();
 		  
 		  vo.setU_ip(u_ip);
+		  vo.setU_addr(u_addr);
 		 
 		  int res = user_dao.insert(vo);
 		  
@@ -192,29 +195,38 @@ public class UserController {
 	//아이디 찾기
 	@RequestMapping("findId.do")
 	@ResponseBody
-	public Map findId(@RequestParam("name") String u_name, 
-					   @RequestParam("phoneNo") String u_tel) {
+	public String findId(@RequestParam("name") String u_name, 
+					   @RequestParam("phone") String u_tel
+					 ) {
 
 			UserVo vo = new UserVo();
 			vo.setU_name(u_name);
 			vo.setU_tel(u_tel);
-
-			String u_id = user_dao.selectIdByNameTel(vo);
 			
-			System.out.println(u_id);
+			System.out.printf("FindId name:%s",u_name);
+			System.out.printf("FindId tel:%s\n",u_tel);
 			
+			List<String> idList = user_dao.selectIdByNameTel(vo);
 			Map map = new HashMap();
-
-			if(u_id!=null) {
-				map.put("id","noExist");
-				return map;
-			}else {
-				map.put("id", u_id);
-			}
 			
-			return map;
+			JSONObject json = new JSONObject();
+			
+			if(idList.size() >= 1) {
+				
+				for(int i=0; i < idList.size(); i++) {
+													      //정규식 마스킹
+					String id = idList.get(i).replaceAll("(?<=.{5}).", "*");
+					
+					json.put("id" , id);
+					System.out.printf("id=%s\n",id);
+				}
+				
+			}else {
+				json.put("id","noExist");
+			}
+			return json.toJSONString();
 	}
-	
+
 	
 	//비밀번호찾기
 	@RequestMapping("count_emailId.do")

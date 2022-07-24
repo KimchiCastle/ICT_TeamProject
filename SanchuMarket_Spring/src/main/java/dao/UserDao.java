@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import vo.UserVo;
 
@@ -51,7 +52,7 @@ public interface UserDao {
 	public int updatePwd(UserVo vo);
 
 
-	public String selectIdByNameTel(UserVo vo);
+	public List<String> selectIdByNameTel(UserVo vo);
 
 
 	
