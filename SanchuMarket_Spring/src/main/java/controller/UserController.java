@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -170,12 +171,8 @@ public class UserController {
 		 */
 		
 		if(user==null || !u_pwd.equals(user.getU_pwd())) {
-			System.out.println("비번이나 아이디 틀림");
 			bResult = false;
 		}else {
-			System.out.println("로그인성공");
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user );
 			bResult = true;
 		}
 			
@@ -199,7 +196,6 @@ public class UserController {
 	public String findId(@RequestParam("name") String u_name, 
 					   @RequestParam("phone") String u_tel
 					 ) {
-
 			UserVo vo = new UserVo();
 			vo.setU_name(u_name);
 			vo.setU_tel(u_tel);
