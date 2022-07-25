@@ -176,6 +176,8 @@
 				data : {'name':name,'phone':phone},
 				dataType : 'json',
 				success : function(res){
+					//res = {"id":["dkwls****","dkwls*****"]}
+					//          res.id[0]        res.id[1]
 					
 					if(res.id=='noExist'){
 						
@@ -184,18 +186,16 @@
 					}
 					else{
 						
-						$("#findIdBtn").hide();
+					 	$("#findIdBtn").hide();
 						$("#idModal").find('input, label').hide();
 						
-						var idContent;
-						/* console.log(res); */
-						/* console.log(res.id); */
+						const div = document.createElement('div');
 						
-						$.each(res,function() {
-							idContent += res.id;
-						});
-						
-						console.log(idContent);
+						for (var i = 0; i < res.id.length; i++) {
+							$("#idBodyForm").append(div,res.id[i]);
+						}
+							$("#idBodyForm").show();
+						 
 						pageInit();
 					}
 				},
