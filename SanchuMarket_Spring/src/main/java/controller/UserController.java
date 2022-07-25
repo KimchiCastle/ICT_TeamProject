@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -203,12 +204,11 @@ public class UserController {
 			vo.setU_name(u_name);
 			vo.setU_tel(u_tel);
 			
-			System.out.printf("FindId name:%s",u_name);
-			System.out.printf("FindId tel:%s\n",u_tel);
 			
 			List<String> idList = user_dao.selectIdByNameTel(vo);
-			Map map = new HashMap();
+			//Map map = new HashMap();
 			
+			JSONArray jsonArr = new JSONArray();
 			JSONObject json = new JSONObject();
 			
 			if(idList.size() >= 1) {
@@ -217,13 +217,15 @@ public class UserController {
 													      //정규식 마스킹
 					String id = idList.get(i).replaceAll("(?<=.{5}).", "*");
 					
-					json.put("id" , id);
-					System.out.printf("id=%s\n",id);
+//					json.put("id", id);
+					jsonArr.add(id);
 				}
 				
+				json.put("id", jsonArr);
 			}else {
-				json.put("id","noExist");
+				json.put("id", "noExist");
 			}
+			
 			return json.toJSONString();
 	}
 
