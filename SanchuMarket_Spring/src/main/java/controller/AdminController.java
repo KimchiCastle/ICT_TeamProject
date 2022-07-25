@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.AdminDao;
@@ -32,20 +35,14 @@ public class AdminController {
 	}
 
 	@RequestMapping("main_form.do")
-	 public String list() {
+	 public String list(Model model) {
 		 
-		 //쿠키받을때 request
-		//메인페이지에서 형성된 쿠키수만큼의 list길이 기 형성
-			/*
-			 * Cookie[] list = request.getCookies();
-			 * 
-			 * int visitCookieCnt = 0;
-			 * 
-			 * for(int i = 0; list != null && i < list.length; i++) {
-			 * if(list[i].getName().equals("visitCookie")) { visitCookieCnt =
-			 * Integer.parseInt(list[i].getValue()); break; } }
-			 */
-			
+		
+		Map serviceMap = adminService.list();
+		
+		
+		model.addAttribute("serviceMap", serviceMap);
+		
 		 return "admin/mainpage_admin";
 	 }
 	 

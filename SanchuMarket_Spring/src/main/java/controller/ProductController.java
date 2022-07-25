@@ -64,7 +64,7 @@ public class ProductController {
 		this.jjim_dao = jjim_dao;
 	}
 
-	//나중에 쿠키생성은 상품페이지 눌렀을때 만들도록 수정 할예정
+	/* 상품 등록 form 이동 */
 	@RequestMapping("insert_form.do")
 	public String insert_form()  {
 		
@@ -72,34 +72,42 @@ public class ProductController {
 		return "product/product_insert";
 	}
 	
-	// 포스트 타입으로 받음
-	//폼데이터 안에 한꺼번에 많은 데이터가 오기때문에 다 파라미터로 받자..
-	@ResponseBody
+	/* 
+	포스트 타입으로 받음
+	
+	폼데이터 안에 한꺼번에 많은 데이터가 오기때문에 다 파라미터로 받자..   
+	
+	-------------------상품 입력 ------------------- */
+	
 	@RequestMapping(value = "product_insert.do", method = RequestMethod.POST)
+	@ResponseBody
 	public Map product_insert(
 	@RequestParam(value="imagedata") MultipartFile [] imagedata, 
 	int u_idx, String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp) {
 		
+		
 		//파라미터로 받은 ProductVo 생성자를통해 생성
 		String p_status = "거래가능";
+		
 		
 		//상품설명 줄바꿈 하기
 		p_exp = p_exp.replaceAll("\r\n", "<br>");
 		
-		//								 유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
+		//		유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
 		ProductVo productVo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
 		
-		//ProductDB에 Data 넣기
-		//먼저 DB에 넣는 이유는 p_idx를 구하기 위해서
+		
+		/*ProductDB에 Data 넣기
+		먼저 DB에 넣는 이유는 p_idx를 구하기 위해서  */
 		int res1 = product_dao.insert(productVo);
 		int p_idx = product_dao.selectMaxIdx();
 		
-		/* System.out.println(p_idx); */
 		
 		int res2 = 0;
 		
 		//절대경로 구함
 		String abs_path = applicaton.getRealPath("/resources/imgdata/");
+		
 		
 		//for each문 사용 배열을 통해 이미지데이터 들어옴
 		for(MultipartFile img : imagedata) {
@@ -158,10 +166,14 @@ public class ProductController {
 		return "product/product_modify_form";
 	}
 	
-	
+	/*  
 
-	@ResponseBody
+		---------------상품 수정-------------
+	
+	*/
+
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
+	@ResponseBody
 	public Map product_modify(
 	@RequestParam(value="imagedata") MultipartFile [] imagedata, int p_idx, String[] change_image,
 	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp, int u_idx
@@ -180,7 +192,6 @@ public class ProductController {
 			
 			//list에 업로드된 파일명 add
 			upload_str.add(MyFileUpload.myFileUpload(abs_Path, file));
-//			upload_str.add(file.getOriginalFilename());
 			
 		}
 		
@@ -222,7 +233,6 @@ public class ProductController {
 					
 					//수정된 idx가 정수형이며, 초기화됐던 0이 아닐때
 					if (change_image[i].matches("-?\\d+") && Integer.parseInt(change_image[i])!=0 && !change_image[i+1].equals("delPhoto")) {
-//						System.out.printf("%s이 이미지는 수정되었습니다.%s 해당번호에 수정해주세요\n", change_image[i + 1], change_image[i]);
 						
 						/* 
 						 해당 idx에 대한 절대경로 이미지파일 삭제 
@@ -248,7 +258,6 @@ public class ProductController {
 				// 추가된 사진이면
 				} else {
 
-//					System.out.printf("%s이 이미지는 추가되었습니다. %s 해당번호는 추가해주세요\n", change_image[i + 1],change_image[i]);
 					
 					ImageVo imageVo = new ImageVo();
 					imageVo.setP_idx(p_idx);
@@ -266,7 +275,6 @@ public class ProductController {
 			}else {
 				//삭제된 파일이면
 				if(change_image[i].equals("delPhoto")) {
-//					System.out.printf("%s 이 idx에 해당하는 이미지는 삭제되었습니다 삭제해주세요.\n",change_image[i-1]);
 					
 					ImageVo imgFileName = image_dao.selectOneImage(Integer.parseInt(change_image[i-1]));
 					
@@ -283,7 +291,6 @@ public class ProductController {
 		
 		//앞서 선언한, 수정된 정보 포장된 vo객체, DB 업데이트
 		int res2 = product_dao.update(vo);
-		
 		
 		//JsonConverter 사용하기 위한 Map생성
 		Map map = new HashMap();
