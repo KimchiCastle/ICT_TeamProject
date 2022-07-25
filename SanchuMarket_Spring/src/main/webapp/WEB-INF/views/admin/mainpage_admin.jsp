@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,101 +20,104 @@
 <script defer src="../resources/js/chart.js"></script>
 
 <style>
-body{
-font-family: 'Gowun Dodum', sans-serif;
-font-size: 18px;
-
+body {
+	font-family: 'Gowun Dodum', sans-serif;
+	font-size: 18px;
 }
 
-.allbody{
+.allbody {
 	width: 1300px;
 	margin: auto;
 }
 
-#header{
+#header {
+	
 }
 
-#content{
-  background-color: #f2f2f2;
-  min-height: 100%;
+#content {
+	background-color: #f2f2f2;
+	min-height: 100%;
 }
 
-
-label{
-  line-height: 40px;
-  text-align: center;
+label {
+	line-height: 40px;
+	text-align: center;
 }
 
-p{
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
+p {
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
 }
 
-.board-wrapper{
-  background-color: white;
-  height: 400px;
-  margin: 20px;
- 
-} 
-
-#board{
-  width: 390px;
-  height: 350px;
-  display: inline-block;
-  float: left;
-  margin: 20px;
+.board-wrapper {
+	background-color: white;
+	height: 400px;
+	margin: 20px;
 }
 
-#chat{
-  width: 450px;
-  height: 350px;
-  display: inline-block;
-  float: left;
-  margin: 20px;
+#board {
+	width: 390px;
+	height: 350px;
+	display: inline-block;
+	float: left;
+	margin: 20px;
 }
 
-
-#number-wrapper{
-  background-color: white;
-  width: 300px;
-  display: inline-block;
-  margin: 20px;
-   float: left;
+#chat {
+	width: 450px;
+	height: 350px;
+	display: inline-block;
+	float: left;
+	margin: 20px;
 }
 
-#number-table{
-  text-align: center;
+#number-wrapper {
+	background-color: white;
+	width: 300px;
+	display: inline-block;
+	margin: 20px;
+	float: left;
 }
 
-
-th{
-  font-size: 40px;
+#number-table {
+	text-align: center;
 }
 
-
-#doughnut-wrpper{
-  float: left;
-  background-color: white;
-  width: 350px;
-  display: inline-block;
-  margin: 20px;
-  margin-left: 80px;
-  
+th {
+	font-size: 40px;
 }
 
- #line-wrapper{
-  width: 700px;
-  background-color: white;
-  display: inline-block;
-  margin: 20px;
+#doughnut-wrpper {
+	float: left;
+	background-color: white;
+	width: 350px;
+	display: inline-block;
+	margin: 20px;
+	margin-left: 80px;
 }
 
-#line-chart{
-  vertical-align: center;
+#line-wrapper {
+	width: 700px;
+	background-color: white;
+	display: inline-block;
+	margin: 20px;
 }
 
+#line-chart {
+	vertical-align: center;
+}
 
+.product_p_name {
+	
+	display: inline-block;
+	width: 245px;
+	
+	vertical-align: middle;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -126,10 +130,12 @@ th{
 
 	<div class="board-wrapper" id="board">
 	   <label>실시간 상품 업로드 현황</label>
-	   <c:forEach var="product" items="${ map.p_list }">
-	    ${ product.u_name } 
-	    ${ product.p_name } 
-	    ${ product.p_date } 
+	   <c:forEach var="product" items="${ serviceMap.p_list }">
+	   <div style=" cursor: pointer; margin-bottom: 10px;" onclick="location.href='${pageContext.request.contextPath}/product/poduct_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
+		   	<img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="40px" height="40px">
+		   <div class="product_p_name">${ product.p_name }</div>	 
+		    ${ fn:substring(product.p_date,0,10) } 
+	   </div>
 	   </c:forEach>
 	</div>
 	
@@ -150,8 +156,8 @@ th{
 	   </tr>
 	   
 	   <tr>
-	     <th>102건${ map.today_p_count }</th>
-	     <th>34건${ map.today_t_count }</th>
+	     <th>${ serviceMap.today_p_count }건</th>
+	     <th>34건${ serviceMap.today_t_count }</th>
 	   </tr>
 	   
 	 </table> 	

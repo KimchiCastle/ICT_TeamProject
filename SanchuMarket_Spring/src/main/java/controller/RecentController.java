@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class RecentController {
 	
 	@Autowired
 	HttpServletRequest request;
+	
+	@Autowired
+	HttpServletResponse response;
 	
 	
 	ProductDao product_dao;
@@ -103,6 +107,15 @@ public class RecentController {
 		return "sidebar/cookie_list";
 	}
 	
-	
-	
+	@RequestMapping("/del_cookie.do")	
+	public String cookieDelte(String p_idx) {
+			
+		Cookie killCookie = new Cookie(p_idx, null);
+		killCookie.setMaxAge(0);
+		killCookie.setPath("/");
+		response.addCookie(killCookie);
+		
+		
+		return "sidebar/cookie_list";
+	}
 }
