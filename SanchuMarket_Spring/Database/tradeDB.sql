@@ -28,7 +28,7 @@ alter table trade
 insert into trade values(1,'hong123','haha');
 
 
-
+select * from (select * from product order by p_idx desc) where ROWNUM  <= 6
 
 
 

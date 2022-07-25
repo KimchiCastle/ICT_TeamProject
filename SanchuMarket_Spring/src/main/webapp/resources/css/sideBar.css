@@ -42,7 +42,7 @@
 	
 
 	
-	.recentimg{
+	.recent_img{
 		width: 60px;
 		height: 60px;
 		border: 1px solid rgb(240,240,240);
@@ -92,7 +92,8 @@
 		height: 30px;
 		width: 163px;
 	}
-	.recent_text1{
+	.recent_price{
+	
 		position: absolute;
 		top : 30px;
 		right:82px;
@@ -110,6 +111,27 @@
 		width: 163px;
 	}
 	
+	.del_cookie{
+		position: absolute;
+		top : -1px;
+		right:250px;
+		
+		color: white;
+		
+		display:none;
+		
+	}
+	
+	.delbutton{
+		background-color: black;
+		
+		width: 15px;
+		height: 15px;
+		
+		border: none;
+		
+		
+	}
 	
 	
 	#recent_name{
@@ -117,7 +139,13 @@
 		
 	}
 	
-	.recent_hober:hover .recent_content {
+	.recent_hober:hover .recent_content{
+		
+		display: inline;
+		
+		
+	}
+	.recent_hober:hover .del_cookie{
 		
 		display: inline;
 		

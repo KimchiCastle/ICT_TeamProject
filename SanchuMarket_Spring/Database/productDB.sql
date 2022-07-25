@@ -191,7 +191,6 @@ select
 --@@@@@@@@@@@@@@@@@@@Áö¿ì±â@@@@@@@@@@@@@@@@@@@@@@@
 delete from product where p_idx between 1 and 10
 
-
-
+select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 
 */

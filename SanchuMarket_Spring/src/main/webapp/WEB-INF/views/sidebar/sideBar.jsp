@@ -24,16 +24,17 @@
 
 <script type="text/javascript">
 
-  $(function(){
-	 /*  global_page=1; */
-	  slider(0);
-	  
-  });
+
+	$(function(){
+		/*  global_page=1; */
+		slider(0);
+		  
+	});
 
 </script>
 
 
-
+<!-- 쿠키불러오기 -->
 <script type="text/javascript">
 
 
@@ -65,6 +66,12 @@
 	}
 </script>
 
+<!-- 쿠키삭제 -->
+<script type="text/javascript">
+	
+	
+
+</script>
 
 </head>
 <body>

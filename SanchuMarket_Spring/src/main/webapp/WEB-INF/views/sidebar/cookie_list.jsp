@@ -24,9 +24,9 @@
 	
 </style>
 
+<!-- 현재페이지/ 마지막페이지 버튼 활성화 비활성화 -->
 <script type="text/javascript">
 
-	/* 현재페이지/ 마지막페이지 버튼 활성화 비활성화 */
 	if(${ curr_page }>1){
 		
 		$("#btn_left").attr("disabled",false);
@@ -43,35 +43,46 @@
 
 </script>
 
+<!-- 쿠키삭제 -->
+<script type="text/javascript">
+	
+	function del_cookie() {
+		alert('쿠키삭제 합니다.');
+	}
+	
+</script>
 
 </head>
 <body>
 	<c:forEach var="cookielist" items="${ cookielist }">
 		<c:forEach var="recentimg" items="${ cookielist.image_list }">
 			<div class="recent_hober">
-				
-				<div class="recent_content" onclick="location.href='#'">
-				<div style="display: inline;">
-				 <img class="recentimg"
-				src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
-				</div>
-				<div class="recent_text">${ cookielist.p_name }</div>
-				<div class="recent_text1">가격 : <font color="red"><fmt:formatNumber pattern="#,###" value="${ cookielist.p_price }"/></font>원</div>
-				
-				
+				<div class="recent_content">
+					<!-- 최근본상품 화면 -->
+					<div onclick="location.href='${pageContext.request.contextPath}/product/poduct_detail.do?p_idx=${ cookielist.p_idx }&p_name=${ cookielist.p_name }'">
+						<div style="display: inline;">
+						 <img class="recent_img"
+						src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
+						</div>
+						<div class="recent_text">${ cookielist.p_name }</div>
+						<div class="recent_price">가격 : <font color="red"><fmt:formatNumber pattern="#,###" value="${ cookielist.p_price }"/></font>원</div>
+					</div>
+					<!-- 쿠키삭제버튼 -->
+					<div class="del_cookie"><button type="button" class="delbutton" onclick="del_cookie();">x</button></div>
 				</div>
 				
 				
 								
-				<img class="recentimg"
+				<img class="recent_img"
 					src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
 						
 			</div>
 			
-			<div></div>
 			
 		</c:forEach>
 	</c:forEach>
+	
+	<!-- 페이지 이동 버튼 -->
 	<div>
 		<input type="button" id="btn_left" onclick="slider(-1)" value="&lt;" disabled="disabled">
 		<span id="now">${ curr_page }</span>/<c:if test="${ last_page eq 0 }">1
