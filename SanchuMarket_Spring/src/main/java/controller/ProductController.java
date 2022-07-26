@@ -100,6 +100,7 @@ public class ProductController {
 		/*ProductDB에 Data 넣기
 		먼저 DB에 넣는 이유는 p_idx를 구하기 위해서  */
 		int res1 = product_dao.insert(productVo);
+		//구해온 p_idx 변수에 할당
 		int p_idx = product_dao.selectMaxIdx();
 		
 		
@@ -151,7 +152,6 @@ public class ProductController {
 		
 		//나중에 상품 수정시, u_idx 확인절차 넣을 예정
 
-		//임시로 p_idx 1로 설정 파라미터로 받기 수정예정
 		
 		//파라미터로 받아온 p_idx로 상품 정보 1개 가져오기
 		ProductVo vo = product_dao.selectList2(p_idx);
@@ -332,7 +332,7 @@ public class ProductController {
 					
 				}
 				
-		//p_idx 파라미터로 받아야함, 일단 임시로 1번상품
+		//p_idx로 상품 전체 가지고오기, 이미지도 다 가지고옴
 		ProductVo vo = product_dao.selectList2(Integer.parseInt(p_idx));
 		
 		UserVo vo2 = user_dao.selectOneByIdx(vo.getU_idx());
@@ -365,13 +365,21 @@ public class ProductController {
 		check.put("p_idx", p_idx);
 		check.put("u_idx", u_idx);
 		
-		
+		//찜테이블에 이미 찜이 되어있는지 아닌지 체크
 		JjimVo vo = jjim_dao.selectOne(check);
 		
 		Map map = new HashMap();
 		
+		/*	
+			만약 vo가 null이 아니라면
+		 	result에는 true값이 들어있음.
+		 	vo가 null이라면, 즉 찜한게 없다면
+		 	Map에는 false가 들어감 */
 		boolean result = (vo!=null);
 		
+		/*	result가 트루면, 맵에 true값이 포장됨
+			else false값이 포장
+		*/
 		if(result) {
 			
 			map.put("result", result);
@@ -382,6 +390,7 @@ public class ProductController {
 			
 		}
 		
+		// jsonConvertor 로 json 자동으로 포장
 		return map;
 	}
 	
@@ -395,6 +404,9 @@ public class ProductController {
 		
 		Map map = new HashMap();
 		
+		/*	만약 제대로 테이블에 
+		 	값이 인서트 됐다면, result값에는 true 저장
+		 */
 		boolean result = (res==1);
 		
 		if(result) {
@@ -433,5 +445,8 @@ public class ProductController {
 		
 		return map;
 	}
+	
+	
+	
 	
 }
