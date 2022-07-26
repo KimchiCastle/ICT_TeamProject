@@ -25,13 +25,16 @@ import dao.ImageDao;
 import dao.JjimDao;
 import dao.ProductDao;
 import dao.UserDao;
+import dao.VisitDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
+import util.VisitCookie;
 import vo.ImageVo;
 import vo.JjimVo;
 import vo.ProductVo;
 import vo.UserVo;
+import vo.VisitVo;
 
 @Controller
 @RequestMapping("/product/")
@@ -53,15 +56,17 @@ public class ProductController {
 	ImageDao image_dao;
 	UserDao user_dao;
 	JjimDao jjim_dao;
+	VisitDao visit_dao;
+    
 
-
-	
-	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao, JjimDao jjim_dao) {
+	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao, JjimDao jjim_dao,
+			VisitDao visit_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.image_dao = image_dao;
 		this.user_dao = user_dao;
 		this.jjim_dao = jjim_dao;
+		this.visit_dao = visit_dao;
 	}
 
 	/* 상품 등록 form 이동 */
@@ -347,6 +352,34 @@ public class ProductController {
 		model.addAttribute("vo2", vo2);
 		
 		
+		//방문자수 쿠키 호출
+		Cookie visitCookie = VisitCookie.getVisitCookie(request, response, visit_dao);
+		
+		//공통적인 경로로 설정
+		visitCookie.setPath("/sanchumarket/");
+		
+		//쿠키 만료 시간 설정
+		visitCookie.setMaxAge(84000);
+		response.addCookie(visitCookie);
+		//-----------------cookie를 기반으로 visitDB 관리----------------------
+		
+		//DB의 금일 방문자 유무 조회
+		VisitVo visitVo = visit_dao.todayVisitSelect();
+		
+		//DB의 금일 방문자가 0이면 방문자수 default 1로 visitDB record생성
+		if(visitVo == null) {
+			visit_dao.todayVisitInsert();
+		}
+		//금일 방문자가 1명 이상이면 visitDB update
+		else {
+			
+			if(Integer.parseInt(visitCookie.getValue()) == 1) {
+
+				int todayVisitCount = visitVo.getV_count();
+				
+				int res = visit_dao.todayVisitUpdate(++todayVisitCount);
+			}
+		}
 		
 		return "product/product_detail";
 	}

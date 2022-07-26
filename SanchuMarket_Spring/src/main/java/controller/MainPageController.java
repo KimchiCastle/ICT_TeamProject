@@ -6,20 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import common.MyConstant;
 import dao.ProductDao;
+import dao.VisitDao;
 import util.Mytime;
+import util.VisitCookie;
 import vo.ProductVo;
+import vo.VisitVo;
 
 @Controller
 @RequestMapping("/mainpage/")
@@ -36,14 +40,20 @@ public class MainPageController {
 	 @Autowired 
 	 HttpServletRequest request;
 	 
+	 @Autowired
+	 HttpServletResponse response;
+	 
 	 ProductDao product_dao;
+	 VisitDao visit_dao;
 
-	 public MainPageController(ProductDao product_dao) {
-		 super();
-		 this.product_dao = product_dao;
-	 }
-	
-	 @RequestMapping("list.do")
+	public MainPageController(ProductDao product_dao, VisitDao visit_dao) {
+		super();
+		this.product_dao = product_dao;
+		this.visit_dao = visit_dao;
+	}
+
+
+	@RequestMapping("list.do")
 	 public String list(Model model,  @RequestParam(value="c_idx",required = false ,defaultValue="null")String 	c_idx
 			 				 , @RequestParam(value="searchtext", required = false , defaultValue="all") String searchtext
 			 				 , @RequestParam(value="min_p", required = false, defaultValue="no_min" )String min_p
@@ -53,10 +63,38 @@ public class MainPageController {
 			 				)
 	 {
 		 
+
+		//방문자수 쿠키 생성
+		Cookie visitCookie = VisitCookie.getVisitCookie(request, response, visit_dao);
 		
-		 
+		//공통적인 경로로 설정
+		visitCookie.setPath("/sanchumarket/");
 		
+		//쿠키 만료시간 설정
+		visitCookie.setMaxAge(84000);
+		response.addCookie(visitCookie);
+		
+		//-----------------cookie를 기반으로 visitDB 관리----------------------
+		
+		//DB의 금일 방문자 유무 조회
+		VisitVo visitVo = visit_dao.todayVisitSelect();
+		
+		//DB의 금일 방문자가 0이면 방문자수 default 1로 visitDB record생성
+		if(visitVo == null) {
 			
+			visit_dao.todayVisitInsert();
+		}
+		//금일 방문자가 1명 이상이면 visitDB update
+		else {
+			//딱 처음 방문했을떄
+			if(Integer.parseInt(visitCookie.getValue()) == 1) {
+				
+				int todayVisitCount = visitVo.getV_count();
+				
+				int res = visit_dao.todayVisitUpdate(++todayVisitCount);
+			}
+		}
+		
 			//////////////////////////////////////////// 전체목록 가져오기/////////////////////////////////////////
 		 	//	검색어가 비었고					최소가격이 비었고					
 		 	if( searchtext.equals("all") && min_p.equals("no_min") 
@@ -321,6 +359,7 @@ public class MainPageController {
 				model.addAttribute("list", list);
 				
 				System.out.println("상품검색");
+				
 				
 				return "mainpage/mainpage_list";
 

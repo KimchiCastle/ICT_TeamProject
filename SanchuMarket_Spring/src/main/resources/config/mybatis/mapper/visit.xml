@@ -5,15 +5,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="visit">
 
 	<!--admin page호출용 금일 방문자수-->
-  <select id="today_count" resultType="vo.VisitVo">
+  <select id="today_count" resultType="int">
 	select v_count from visit where to_char(v_date,'dd') = to_char(sysdate, 'dd')
+  </select>
+  
+  <!--금일 방문자 유무 조회-->
+  <select id="today_visit" resultType="vo.VisitVo">
+    select * from visit where to_char(v_date,'dd') = to_char(sysdate, 'dd')
   </select>
 
 	<!--금일 첫 방문자-->
-  <insert id="today_visitInsert">
+  <insert id="today_visitInsert" >
     insert into visit values
     (
-	    (select nvl(max(v_idx)+1,1), 
+	    (select nvl(max(v_idx)+1,1)from visit),
 	    1, 
 	    sysdate
 	)
