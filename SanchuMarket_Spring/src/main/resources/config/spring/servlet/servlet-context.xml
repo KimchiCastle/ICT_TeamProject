@@ -38,8 +38,10 @@
 	<!-- controller 수동생성 -->
 	<context:annotation-config/>
 	
+	<!--  -->
 	<beans:bean class="controller.TradeController">
-		<beans:property name="trade_dao" ref="trade_dao"/>
+		<beans:constructor-arg ref="trade_dao"/>
+		<beans:constructor-arg ref="product_dao"/>
 	</beans:bean>
 	<beans:bean class="controller.UserController">
 		<beans:property name="user_dao" ref="user_dao"/>
