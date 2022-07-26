@@ -32,6 +32,7 @@
 	<beans:bean class="controller.TradeController">
 		<beans:constructor-arg ref="trade_dao"/>
 		<beans:constructor-arg ref="product_dao"/>
+		<beans:constructor-arg ref="user_dao"/>
 	</beans:bean>
 	<beans:bean class="controller.UserController">
 		<beans:property name="user_dao" ref="user_dao"/>
@@ -94,7 +95,5 @@
 	       		 <beans:ref  bean="visitCookie_interceptor" />	
 	        </interceptor>
    	 </interceptors>
-    
->>>>>>> f9593033bcd80da53109be49b3d1590f27643d62
 	
 </beans:beans>

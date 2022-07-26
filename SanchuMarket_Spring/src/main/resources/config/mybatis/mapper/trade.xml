@@ -8,5 +8,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="today_count" resultType="int">
 	  select count(*) from trade where to_char(t_date,'dd') = to_char(sysdate, 'dd')
 	</select>
-
+	
+	<insert id="trade_insert" parameterType="vo.TradeVo">
+		insert into trade values(
+		#{p_idx},
+		#{seller},
+		#{buyer},
+		#{t_status},
+		sysdate
+		)
+	</insert>
+	
+	
 </mapper>

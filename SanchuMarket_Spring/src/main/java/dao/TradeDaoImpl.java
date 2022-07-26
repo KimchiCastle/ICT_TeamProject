@@ -23,10 +23,9 @@ public class TradeDaoImpl implements TradeDao{
 	}
 
 
-
 	@Override
 	public int tradeInsert(TradeVo vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("trade.trade_insert",vo);
 	}
 }
