@@ -243,8 +243,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!--최근 상품 업로드 게시물 6개 조회-->
-	<select id="recent_product" resultType="vo.ProductVo">
-	<![CDATA[ select * from (select * from product order by #{p_idx} desc) where ROWNUM  <= 6]]>
+	<select id="recent_product_six" resultMap="product_map">
+	<![CDATA[ select * from (select * from product order by p_idx desc) where ROWNUM  <= 6]]>
 	</select>		
 	
 	<!--admin mainpage금일 상품 업로드량-->
@@ -266,7 +266,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where p_idx=#{p_idx}
 	</update>
 
-
+	<!-- 거래정보 수정 -->
+	<update id="product_status_update" parameterType="java.util.Map">
+		update product set p_status=#{p_status} where p_idx=#{p_idx}
+	</update>
 
 </mapper>
 

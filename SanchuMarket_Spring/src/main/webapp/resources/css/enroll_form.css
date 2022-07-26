@@ -116,7 +116,7 @@ h3 {
  .ui-button:hover,
  .ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b; } 
 
- .ui-widget-header .ui-icon { background-image: url('./btns.png'); } 
+ /* .ui-widget-header .ui-icon { background-image: url('./btns.png'); }  */
 
  .ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px; } 
 

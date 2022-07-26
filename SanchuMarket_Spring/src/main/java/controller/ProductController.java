@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.ImageDao;
+import dao.JjimDao;
 import dao.ProductDao;
 import dao.UserDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
 import vo.ImageVo;
+import vo.JjimVo;
 import vo.ProductVo;
 import vo.UserVo;
 
@@ -39,7 +41,7 @@ public class ProductController {
 	HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	HttpServletResponse response;	
 	
 	@Autowired
 	HttpSession session;
@@ -50,16 +52,19 @@ public class ProductController {
 	ProductDao product_dao;
 	ImageDao image_dao;
 	UserDao user_dao;
+	JjimDao jjim_dao;
 
-	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao) {
+
+	
+	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao, JjimDao jjim_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.image_dao = image_dao;
-		this.user_dao =	user_dao;
+		this.user_dao = user_dao;
+		this.jjim_dao = jjim_dao;
 	}
-	
-	
-	//나중에 쿠키생성은 상품페이지 눌렀을때 만들도록 수정 할예정
+
+	/* 상품 등록 form 이동 */
 	@RequestMapping("insert_form.do")
 	public String insert_form()  {
 		
@@ -67,34 +72,43 @@ public class ProductController {
 		return "product/product_insert";
 	}
 	
-	// 포스트 타입으로 받음
-	//폼데이터 안에 한꺼번에 많은 데이터가 오기때문에 다 파라미터로 받자..
-	@ResponseBody
+	/* 
+	포스트 타입으로 받음
+	
+	폼데이터 안에 한꺼번에 많은 데이터가 오기때문에 다 파라미터로 받자..   
+	
+	-------------------상품 입력 ------------------- */
+	
 	@RequestMapping(value = "product_insert.do", method = RequestMethod.POST)
+	@ResponseBody
 	public Map product_insert(
 	@RequestParam(value="imagedata") MultipartFile [] imagedata, 
 	int u_idx, String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp) {
 		
+		
 		//파라미터로 받은 ProductVo 생성자를통해 생성
 		String p_status = "거래가능";
+		
 		
 		//상품설명 줄바꿈 하기
 		p_exp = p_exp.replaceAll("\r\n", "<br>");
 		
-		//								 유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
+		//		유저정보,카테고리,상풍명, 가격,  상품상태,  상품설명, 거래지역, 클릭수, 판매여부
 		ProductVo productVo = new ProductVo(u_idx, c_idx, p_name, p_price, p_condition, p_exp, p_location,0,p_status);
 		
-		//ProductDB에 Data 넣기
-		//먼저 DB에 넣는 이유는 p_idx를 구하기 위해서
+		
+		/*ProductDB에 Data 넣기
+		먼저 DB에 넣는 이유는 p_idx를 구하기 위해서  */
 		int res1 = product_dao.insert(productVo);
+		//구해온 p_idx 변수에 할당
 		int p_idx = product_dao.selectMaxIdx();
 		
-		/* System.out.println(p_idx); */
 		
 		int res2 = 0;
 		
 		//절대경로 구함
 		String abs_path = applicaton.getRealPath("/resources/imgdata/");
+		
 		
 		//for each문 사용 배열을 통해 이미지데이터 들어옴
 		for(MultipartFile img : imagedata) {
@@ -138,7 +152,6 @@ public class ProductController {
 		
 		//나중에 상품 수정시, u_idx 확인절차 넣을 예정
 
-		//임시로 p_idx 1로 설정 파라미터로 받기 수정예정
 		
 		//파라미터로 받아온 p_idx로 상품 정보 1개 가져오기
 		ProductVo vo = product_dao.selectList2(p_idx);
@@ -153,10 +166,14 @@ public class ProductController {
 		return "product/product_modify_form";
 	}
 	
-	
+	/*  
 
-	@ResponseBody
+		---------------상품 수정-------------
+	
+	*/
+
 	@RequestMapping(value = "product_modify.do", method = RequestMethod.POST)
+	@ResponseBody
 	public Map product_modify(
 	@RequestParam(value="imagedata") MultipartFile [] imagedata, int p_idx, String[] change_image,
 	String p_name, int c_idx, String p_location, String p_condition, int p_price, String p_exp, int u_idx
@@ -175,7 +192,6 @@ public class ProductController {
 			
 			//list에 업로드된 파일명 add
 			upload_str.add(MyFileUpload.myFileUpload(abs_Path, file));
-//			upload_str.add(file.getOriginalFilename());
 			
 		}
 		
@@ -217,7 +233,6 @@ public class ProductController {
 					
 					//수정된 idx가 정수형이며, 초기화됐던 0이 아닐때
 					if (change_image[i].matches("-?\\d+") && Integer.parseInt(change_image[i])!=0 && !change_image[i+1].equals("delPhoto")) {
-//						System.out.printf("%s이 이미지는 수정되었습니다.%s 해당번호에 수정해주세요\n", change_image[i + 1], change_image[i]);
 						
 						/* 
 						 해당 idx에 대한 절대경로 이미지파일 삭제 
@@ -243,7 +258,6 @@ public class ProductController {
 				// 추가된 사진이면
 				} else {
 
-//					System.out.printf("%s이 이미지는 추가되었습니다. %s 해당번호는 추가해주세요\n", change_image[i + 1],change_image[i]);
 					
 					ImageVo imageVo = new ImageVo();
 					imageVo.setP_idx(p_idx);
@@ -261,7 +275,6 @@ public class ProductController {
 			}else {
 				//삭제된 파일이면
 				if(change_image[i].equals("delPhoto")) {
-//					System.out.printf("%s 이 idx에 해당하는 이미지는 삭제되었습니다 삭제해주세요.\n",change_image[i-1]);
 					
 					ImageVo imgFileName = image_dao.selectOneImage(Integer.parseInt(change_image[i-1]));
 					
@@ -279,7 +292,6 @@ public class ProductController {
 		//앞서 선언한, 수정된 정보 포장된 vo객체, DB 업데이트
 		int res2 = product_dao.update(vo);
 		
-		
 		//JsonConverter 사용하기 위한 Map생성
 		Map map = new HashMap();
 
@@ -294,11 +306,12 @@ public class ProductController {
 	}
 	
 	
-	@RequestMapping("poduct_detail.do")
-	public String productList(Model model,
-							  @RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
-							  @RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
-							  ) throws Exception {
+	@RequestMapping("product_detail.do")
+	public String productList(
+			Model model,
+			@RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
+			@RequestParam(value ="p_name",required = false, defaultValue="null")String p_name
+			) throws Exception {
 		
 		
 		//만약 들어온 파라미터 값이 null이 아니면
@@ -319,10 +332,7 @@ public class ProductController {
 					
 				}
 				
-		
-		
-		//p_idx 파라미터로 받아야함, 일단 임시로 1번상품
-		
+		//p_idx로 상품 전체 가지고오기, 이미지도 다 가지고옴
 		ProductVo vo = product_dao.selectList2(Integer.parseInt(p_idx));
 		
 		UserVo vo2 = user_dao.selectOneByIdx(vo.getU_idx());
@@ -341,23 +351,101 @@ public class ProductController {
 		return "product/product_detail";
 	}
 	
-	@RequestMapping("jjimon.do")
+	
+	/* 현재 본 상품 찜 상태 확인 */
+	@RequestMapping("jjimCheck.do")
 	@ResponseBody
-	public Map jjimon(int p_idx, int u_idx) {
+	public Map jjimCheck(
+			int p_idx, 
+			@RequestParam(value="u_idx", required =false, defaultValue="0") int u_idx) {
 		
-		System.out.println(p_idx);
-		System.out.println(u_idx);
+		//파라미터로 받아온 값 찜테이블에 인서트
+		Map check = new HashMap();
+		
+		check.put("p_idx", p_idx);
+		check.put("u_idx", u_idx);
+		
+		//찜테이블에 이미 찜이 되어있는지 아닌지 체크
+		JjimVo vo = jjim_dao.selectOne(check);
 		
 		Map map = new HashMap();
 		
-		map.put("p_idx", p_idx);
-		map.put("u_idx", u_idx);
-				
+		/*	
+			만약 vo가 null이 아니라면
+		 	result에는 true값이 들어있음.
+		 	vo가 null이라면, 즉 찜한게 없다면
+		 	Map에는 false가 들어감 */
+		boolean result = (vo!=null);
 		
+		/*	result가 트루면, 맵에 true값이 포장됨
+			else false값이 포장
+		*/
+		if(result) {
+			
+			map.put("result", result);
+			
+		}else {
+			
+			map.put("result", result);
+			
+		}
 		
-		
-		return null;
+		// jsonConvertor 로 json 자동으로 포장
+		return map;
 	}
+	
+	
+	@RequestMapping("jjimon.do")
+	@ResponseBody
+	public Map jjimon(JjimVo vo) {
+		
+		//파라미터로 받아온 값 찜테이블에 인서트
+		int res = jjim_dao.insert(vo);
+		
+		Map map = new HashMap();
+		
+		/*	만약 제대로 테이블에 
+		 	값이 인서트 됐다면, result값에는 true 저장
+		 */
+		boolean result = (res==1);
+		
+		if(result) {
+			
+			map.put("result", result);
+			
+		}else {
+			
+			map.put("result", result);
+			
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("jjimoff.do")
+	@ResponseBody
+	public Map jjimoff(JjimVo vo) {
+		
+		//파라미터로 받아온 값 찜테이블에 인서트
+		int res = jjim_dao.delete(vo);
+		
+		Map map = new HashMap();
+		
+		boolean result = (res==1);
+		
+		if(result) {
+			
+			map.put("result", result);
+			
+		}else {
+			
+			map.put("result", result);
+			
+		}
+		
+		return map;
+	}
+	
 	
 	
 	

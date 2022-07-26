@@ -23,27 +23,24 @@
 	
 	<context:component-scan base-package="com.ict.sanchumarket" />
 	
-	<!--로그인, 권한 체크용 interceptor-->
-	   <interceptors>
-        <interceptor>
-            <mapping path="/user/login.do"></mapping>
-            <beans:bean id="loginInterceptor" class="interceptor.LoginInterceptor"></beans:bean>
-        </interceptor>
-        <interceptor>
-            <mapping path="/admin/**"></mapping>
-            <beans:bean id="AdminInterceptor" class="interceptor.AdminInterceptor"></beans:bean>
-        </interceptor>
-    </interceptors>
+	
 	
 	<!-- controller 수동생성 -->
 	<context:annotation-config/>
 	
+	<!-- 거래체크 -->
 	<beans:bean class="controller.TradeController">
-		<beans:property name="trade_dao" ref="trade_dao"/>
+		<beans:constructor-arg ref="trade_dao"/>
+		<beans:constructor-arg ref="product_dao"/>
 	</beans:bean>
 	<beans:bean class="controller.UserController">
 		<beans:property name="user_dao" ref="user_dao"/>
 	</beans:bean>
+	
+	<beans:bean class="controller.EmailController">
+		<beans:property name="mailSender" ref="mailSender"/>
+	</beans:bean>
+	
 	<beans:bean class="controller.VisitController">
 		<beans:property name="visit_dao" ref="visit_dao"/>
 	</beans:bean>	
@@ -56,6 +53,7 @@
 		<beans:constructor-arg ref="product_dao"/>
 		<beans:constructor-arg ref="image_dao"/>
 		<beans:constructor-arg ref="user_dao"/>
+		<beans:constructor-arg ref="jjim_dao"/>
 	</beans:bean>
 	
 	<!-- 최근본상품 -->
@@ -80,26 +78,23 @@
 	<beans:bean class="controller.MainPageController">
 		<beans:constructor-arg ref="product_dao"/>
 	</beans:bean>
-	
-	<!--메일링-->
-	 <context:component-scan base-package="spring.service" /> 
-	
-	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<beans:property name="host" value="smtp.gmail.com"/>
-		<beans:property name="port" value="587"/>
-		<beans:property name="defaultEncoding" value="utf-8"/>
-		<beans:property name="username" value="dkwlsdl8@google.com"/>
-		<beans:property name="password" value="idavrgvsciqeajim"/>
-		<beans:property name="javaMailProperties">
-			<beans:props>
-				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
-				<beans:prop key="mail.smtp.auth">true</beans:prop> <!-- 2단계본인인증을 했으니 보안적으로 true라고 준다 -->
-				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-				<beans:prop key="mail.debug">true</beans:prop>
-			</beans:props>
-		</beans:property>
-	</beans:bean>
-	
 
+	<!--권한 체크용, 방문자 쿠키 조회용 interceptor-->
+	<beans:bean id="admin_interceptor" class="interceptor.AdminInterceptor"></beans:bean> 
+	<beans:bean id="visitCookie_interceptor" class="interceptor.VisitCookieInterceptor"></beans:bean> 
+	  
+	   <interceptors>
+	        <interceptor>
+	            <mapping path="/admin/main_form.do"></mapping>
+	             <beans:ref  bean="admin_interceptor" />
+	        </interceptor>
+	        <interceptor>
+	            <mapping path="/mainpage/list.do"></mapping>
+	            <mapping path="/admin/**"></mapping>
+	       		 <beans:ref  bean="visitCookie_interceptor" />	
+	        </interceptor>
+   	 </interceptors>
+    
+>>>>>>> f9593033bcd80da53109be49b3d1590f27643d62
 	
 </beans:beans>

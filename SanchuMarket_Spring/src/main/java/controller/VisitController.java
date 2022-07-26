@@ -14,10 +14,30 @@ public class VisitController {
 	public void setVisit_dao(VisitDao visit_dao) {
 		this.visit_dao = visit_dao;
 	}
-
-	public String todayVisitCount() {
+	
+	//admin 방문자수 통계 조회
+	@RequestMapping("todayVisitCount.do")
+	public int todayVisitCount() {
 		
-		return "";
+		int count = visit_dao.todayVisitCount();
+		
+		return count;
+	}
+	
+	@RequestMapping("todayVisitInsert.do")
+	public int todayVisitInsert() {
+		
+		int res = visit_dao.todayVisitInsert();
+		
+		return res;
+	}
+	
+	@RequestMapping("todayVisitUpdate.do")
+	public int todayVisitUpdate(int count) {
+		
+		int res = visit_dao.todayVisitUpdate(count);
+		
+		return res;
 	}
 
 }

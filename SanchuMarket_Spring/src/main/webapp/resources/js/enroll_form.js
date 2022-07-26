@@ -139,7 +139,7 @@
 			//비밀번호1 유효성 체크 함수
   		function checkPwd(){
 	
-	        if(pwdFlag) return true;
+	     /*   if(pwdFlag) return true;*/
 
 	        var pwd1 = $("#u_pwd1").val();
 	        var pwd2 = $("#u_pwd2").val();
@@ -148,14 +148,12 @@
 	        var oInput = $("#u_pwd1");
 			
 	        if (pwd1 == '') {
-	        	console.log("1");
 	            showErrorMsg(oMsg1,"필수정보입니다.");
 	            setFocusToInputObject(oInput);
 	            return;
 	        }
 	        
 	        if(!isValidPwd(pwd1)){
-	        	console.log("2");
 	        	showErrorMsg(oMsg1,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 	            setFocusToInputObject(oInput);
 	            return;
@@ -163,17 +161,14 @@
 	        
 	        
 	        if( pwd2 != '' && (pwd1 != pwd2)){
-	        	console.log("3");
 	        	showErrorMsg(oMsg2,"비밀번호가 일치하지 않습니다.");
 	        	return;
 	        }
 	        
 	        if( pwd1==pwd2 ){
-	        	console.log("4");
 	        	hideMsg(oMsg2);
 	        	return;
 	        }
-	       		 console.log("5");
 	        	showSuccessMsg(oMsg1,"사용 가능한 비밀번호입니다.");
 	        	hideMsg(oMsg1);
 	        	return;
@@ -234,10 +229,11 @@
 	        }else {
 	            oMsg.html("비밀번호가 일치합니다");
 	            hideMsg(oMsg);
-	            return;
 	        }
        		pwdFlag = true;
        } 
+
+
 
 		//이메일 유효성 체크 함수
 	    function checkEmail(){
@@ -288,7 +284,7 @@
 		//id유효성 체크 함수
 	  	function checkId(event){
 	  		
-	  		if(idFlag) return true;
+	  		/*if(idFlag) return true;*/
 
 	        var id = $("#u_id").val();
 	        var oMsg = $("#idMsg");
@@ -317,22 +313,19 @@
 	                	if (event == "first") {
 	                	  showSuccessMsg(oMsg, "사용 가능한 아이디입니다.");
 						  hideMsg(oMsg);
-	                	  return;
 	                	}
 	                }else{
                       showErrorMsg(oMsg,"존재하는 아이디입니다.");//호출하고 직후만 메시지 띄우려고..?
-                      return;
 	                 }
 					
                     idFlag = true;
                     
                     if ( id == '') {
                   	  showErrorMsg(oMsg,'필수정보입니다.');
-                        setFocusToInputObject(oInput);	         
+                        setFocusToInputObject(oInput);	   
+ 						idFlag = false;      
                         return;
                     }
-
-	                 
 	            }
 	        });//end ajax
 	        return true;
@@ -365,20 +358,18 @@
 	            url: "check_nickname.do?u_nickname=" + nickname,
 	            success : function(data) {
 					//db에 존재하는 닉네임 없으면 data=y 넘어옴
-	                if (data == "Y") {
+	                if (data.result == "Y" ) {
 	                	 if (event == "first") {
 	                		 showSuccessMsg(oMsg, "사용 가능한 닉네임입니다.");
-	                		
-	                     } else {
-	                         hideMsg(oMsg);//호출하고 직후만 메시지 띄우려고..?
-	                     }
-	                   
+							hideMsg(oMsg);
+	                     } 
 	                } else { 
 	                    showErrorMsg(oMsg, "이미 사용중인 닉네임입니다.");
 	                    setFocusToInputObject(oInput);
 	                }
 	            }//end success
 	        });//end ajax
+			hideMsg(oMsg);
 	        return true;
 	      }//end function
 	  	
@@ -433,11 +424,11 @@
 	   //메시지 표시, 가입버튼 활성화
 		function submitClose() {
         submitFlag = true;
-        $("#enroll_btn").attr("disabled",true);
+        $("#enroll_btn").attr("disabled",false);
        }
 		
 		function submitOpen() {
-	        $("#enroll_btn").attr("disabled",false);
+	        $("#enroll_btn").attr("disabled",true);
 	    }
 
 	    function hideMsg(obj) {
@@ -507,13 +498,16 @@
 	    
  	    //회원가입 실행
  	    function enroll(){ 
- 	    	
+	
+ 	    	console.log(idFlag);
+ 	    	console.log(pwdFlag);
+
 	        if(idFlag && pwdFlag) {
-	          
+	           console.log('2');
 	           submitClose();
 	       	   $("#enroll_form").submit();
 	        }else {
-	      
+	      		 console.log('3');
 	           submitOpen();
 	           return false;
 	        }

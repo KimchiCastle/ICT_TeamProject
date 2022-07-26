@@ -151,6 +151,19 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.update("product.product_update",vo);
 	}
 
+	//Admin 페이지 최근상품 6개 조회
+	@Override
+	public List<ProductVo> select_recent_product() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.recent_product_six");
+	}
+
+	@Override
+	public int statusUpdate(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("product.product_status_update",map);
+	}
+
 	
 
 	

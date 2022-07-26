@@ -135,11 +135,32 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		'25251'           --postcode
 		
 		);
+insert into user_market 
+values( (select nvl(max(u_idx)+1,1) from user_market),		  
+		'haha',   	 	 	  --아이디
+		'1234',	    		  --비번
+		'김하하',	    	  --이름
+		'하하',		   		  --닉네임
+		'1993-06-18', 		  --생년월일
+		'서울시 마포구',	  --주소
+		sysdate,			  --가입일자
+		0,					  --평점
+		'안녕난하하야',		  --자기소개
+		null,				  --사진
+		'010-4567-8901',	  --전화번호
+		'haha12@naver.com',   --메일
+		'일반회원'	,		  --회원등급
+		'111-111-111' ,  --ip
+		'25251'           --postcode
+		
+		);
 
 ---조회용
 select * from user_market;
 
-select count(*) from user_market where u_id='hong123' and u_mail='hongkill@gmail.com'
+  select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
+
+select u_id from user_market where u_name='서아진' and u_tel='010-5852-1068'
 
 
 */

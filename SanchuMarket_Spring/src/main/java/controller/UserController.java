@@ -1,18 +1,19 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,8 +33,6 @@ public class UserController {
 		  
 	 @Autowired 
 	 HttpServletRequest request;
-	 
-	 
 	 
 	UserDao user_dao;
 
@@ -81,7 +80,6 @@ public class UserController {
 			result = "N";
 		}
 		
-		System.out.println(result);
 		Map map = new HashMap();
 		
 		map.put("result", result);
@@ -123,6 +121,7 @@ public class UserController {
 		  String u_addr = sb.toString();
 		  
 		  vo.setU_ip(u_ip);
+		  vo.setU_addr(u_addr);
 		 
 		  int res = user_dao.insert(vo);
 		  
@@ -160,12 +159,8 @@ public class UserController {
 		 */
 		
 		if(user==null || !u_pwd.equals(user.getU_pwd())) {
-			System.out.println("비번이나 아이디 틀림");
 			bResult = false;
 		}else {
-			System.out.println("로그인성공");
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user );
 			bResult = true;
 		}
 			
@@ -182,12 +177,42 @@ public class UserController {
 		return "user/login_form";
 	}
 	
-	//아이디찾기 
-	/*
-	 * @RequestMapping("find_id.do") public String findIdForm() {
-	 * 
-	 * return "user/find_id"; }
-	 */
+
+	//아이디 찾기
+	@RequestMapping("findId.do")
+	@ResponseBody
+	public String findId(@RequestParam("name") String u_name, 
+					   @RequestParam("phone") String u_tel
+					 ) {
+			UserVo vo = new UserVo();
+			vo.setU_name(u_name);
+			vo.setU_tel(u_tel);
+			
+			
+			List<String> idList = user_dao.selectIdByNameTel(vo);
+			//Map map = new HashMap();
+			
+			JSONArray jsonArr = new JSONArray();
+			JSONObject json = new JSONObject();
+			
+			if(idList.size() >= 1) {
+				
+				for(int i=0; i < idList.size(); i++) {
+													      //정규식 마스킹
+					String id = idList.get(i).replaceAll("(?<=.{5}).", "*");
+					
+//					json.put("id", id);
+					jsonArr.add(id);
+				}
+				
+				json.put("id", jsonArr);
+			}else {
+				json.put("id", "noExist");
+			}
+			
+			return json.toJSONString();
+	}
+
 	
 	//비밀번호찾기
 	@RequestMapping("count_emailId.do")
@@ -195,19 +220,17 @@ public class UserController {
 	public Map countEmailId(@RequestParam("id") String u_id, 
 					   @RequestParam("email") String u_email) {
 			
-			System.out.printf("controller_id=%s",u_id);
-			System.out.printf("controller_email=%s",u_email);
-			
+
 			UserVo vo = new UserVo();
 			vo.setU_id(u_id);
 			vo.setU_mail(u_email);
+			
 			int count = user_dao.countForFindPwd(vo);
 			
 			Map map = new HashMap();
-			System.out.printf("count="+count);
+			
 			if(count==0) {
 				map.put("result","noExist");
-				System.out.println("3");
 				return map;
 			}else {
 				map.put("result", "exist");
@@ -216,14 +239,8 @@ public class UserController {
 			return map;
 	}
 	
-	@RequestMapping("sendEmail.do")
-	public boolean sendEmail() {
-		
 
-		 return true;
-		  
-	}
-	
+
 	
 	
 	

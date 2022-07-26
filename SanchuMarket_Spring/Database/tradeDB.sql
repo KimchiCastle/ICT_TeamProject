@@ -10,9 +10,10 @@ drop table trade cascade constraints
 
 create table trade
 (
-	p_idx	int,	--상품정보
-	seller	varchar2(100),	--판매자
-	buyer	varchar2(100),	--구매자
+	p_idx		int,	--상품정보
+	seller		varchar2(100),	--판매자
+	buyer		varchar2(100),	--구매자
+	t_status	varchar2(100),	--거래상태
 	t_date  date
 )
 
@@ -29,6 +30,8 @@ insert into trade values(1,'hong123','haha');
 
 
 
+---최근 6개 거래량
+select * from (select * from product order by p_idx desc) where ROWNUM  <= 6
 
 
 

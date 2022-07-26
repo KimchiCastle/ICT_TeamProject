@@ -26,11 +26,11 @@ public interface ProductDao {
 	// 카테고리별 조회
 	public List<ProductVo> selectList_cate(Map map);
 		
-	//u_idx 유저정보 넘김
+	//u_idx 유저정보 넘김 회원이 올린 상품조회
 	public List<ProductVo> selectList(int u_idx);
 	
 	
-	//상품정보 넘김
+	//상품정보 넘김 이미지 전부 가져옴
 	public ProductVo selectList2(int p_idx);
 	
 	//상품정보와 상품이미지 하나만 가져오기
@@ -58,9 +58,14 @@ public interface ProductDao {
 	//가격 범위검색
 	public List<ProductVo> select_price_search(Map map);
 
+	//최근 올라온 상품 6개 조회
+	public List<ProductVo> select_recent_product();
 	
 	// 상품 수정
 	public int update(ProductVo vo);
+	
+	//
+	public int statusUpdate(Map map);
 
 	
 	

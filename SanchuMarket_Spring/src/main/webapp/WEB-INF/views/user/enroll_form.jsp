@@ -71,7 +71,7 @@
                 <div>
                     <h3 class="join_title"><label for="u_pwd1">비밀번호</label></h3>
                     <span class="box int_pass">
-                       <input type="password" id="u_pwd1" name="u_pwd1" class="int" maxlength="20" autocomplete="off">
+                       <input type="password" id="u_pwd1" class="int" maxlength="20" autocomplete="off">
                         <i class="fa fa-eye fa-lg"></i>
                     </span>
                     <span class="error_next_box" id="pwd1Msg"></span>
@@ -81,7 +81,7 @@
                 <div>
                     <h3 class="join_title"><label for="u_pwd2">비밀번호 재확인</label></h3>
                     <div class="box int_pass_check">
-                       <input type="password" id="u_pwd2" name="u_pwd2" class="int" maxlength="20" autocomplete="off">
+                       <input type="password" id="u_pwd2" name="u_pwd" class="int" maxlength="20" autocomplete="off">
  					      <i class="fa fa-eye fa-lg"></i>
                     </div>
                     <span class="error_next_box" id="pwd2Msg"></span>
@@ -116,7 +116,7 @@
                 <div>
                     <h3 class="join_title"><label for="email">이메일</label></h3>
                     <span class="box int_email">
-                        <input type="text" id="u_email" name="u_email" class="int" maxlength="100" required>
+                        <input type="text" id="u_email" name="u_mail" class="int" maxlength="100" required>
                     </span>
                     <span class="error_next_box" id="emailMsg"></span>    
                 </div>
@@ -153,10 +153,7 @@
 					</span>  
 					 
 					 <span id="addrMsg" style="display:none"></span>
-			  
 			     
-
-
                 <!-- JOIN BTN-->
                 <div class="btn_area">
                     <button type="button" id="enroll_btn" onclick="enroll();">
@@ -229,7 +226,7 @@
     function initLayerPosition(){
         var width = 300; //우편번호서비스가 들어갈 element의 width
         var height = 400; //우편번호서비스가 들어갈 element의 height
-     /*    var borderWidth = 1; */ //샘플에서 사용하는 border의 두께
+       var borderWidth = 1;  //샘플에서 사용하는 border의 두께
 
         // 위에서 선언한 값들을 실제 element에 넣는다.
         element_layer.style.width = width + 'px';
