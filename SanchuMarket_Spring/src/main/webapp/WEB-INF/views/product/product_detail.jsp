@@ -20,7 +20,7 @@
 	$(function(){
 		
 		var p_idx = $("#p_idx").val();
-		var u_idx = $("#u_idx").val();
+		var u_idx = $("#buyer_u_idx").val();
 		
 		$.ajax({
 			
@@ -57,7 +57,7 @@
 		
 		
 		var p_idx = $("#p_idx").val();
-		var u_idx = $("#u_idx").val().trim();
+		var u_idx = $("#buyer_u_idx").val().trim();
 		
 		if(u_idx==''){
 			
@@ -99,7 +99,7 @@
 	function jjimOff(){
 		
 		var p_idx = $("#p_idx").val();
-		var u_idx = $("#u_idx").val().trim();
+		var u_idx = $("#buyer_u_idx").val().trim();
 		
 		
 		$.ajax({

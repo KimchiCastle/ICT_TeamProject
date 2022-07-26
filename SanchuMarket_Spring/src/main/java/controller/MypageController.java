@@ -38,8 +38,14 @@ public class MypageController {
 		//로그인 정보 읽어오기
 		UserVo u_idx = (UserVo) session.getAttribute("u_idx");
 		
-		return"mypage_main";
+		return"mypage/mypage_main";
 	}
 	
-
+	@RequestMapping("myjjim.do")
+	public String jjim_list(int u_idx) {
+		
+		return "mypage/jjim_list";
+	}
+	
+	
 }

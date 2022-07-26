@@ -1,17 +1,21 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.ProductDao;
 import util.MyCookieList;
@@ -107,15 +111,20 @@ public class RecentController {
 		return "sidebar/cookie_list";
 	}
 	
-	@RequestMapping("/del_cookie.do")	
-	public String cookieDelte(String p_idx) {
+	@RequestMapping("/del_cookie.do")
+	@ResponseBody
+	public Map cookieDelte(String p_idx) {
 			
 		Cookie killCookie = new Cookie(p_idx, null);
 		killCookie.setMaxAge(0);
-		killCookie.setPath("/");
+		killCookie.setPath("/sanchumarket/");
 		response.addCookie(killCookie);
 		
+		Map map = new HashMap();
 		
-		return "sidebar/cookie_list";
+		
+		map.put("result", true);
+		
+		return map;
 	}
 }
