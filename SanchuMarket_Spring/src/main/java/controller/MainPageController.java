@@ -377,4 +377,18 @@ public class MainPageController {
 		return "mainpage/mainpage_list";
 	 }	
 	 
+	 
+	 @RequestMapping("/logout.do")
+	 public String logout() {
+		 
+		 HttpSession session =request.getSession();
+		 
+		 
+		 
+		 session.removeAttribute("user");
+		 
+		 
+		 return "redirect:list.do";
+	 }
+	 
 }
