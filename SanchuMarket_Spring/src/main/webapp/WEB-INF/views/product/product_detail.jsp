@@ -162,6 +162,11 @@
 						"p_idx":p_idx},
 			success : function(res){
 				
+				if(res.result){
+					window.location.reload();
+				}else{
+					alert('상품 구매시 문제가 발생했습니다. 관리자에게 문의하세요.');
+				}
 				
 			},
 			error	: function(err){

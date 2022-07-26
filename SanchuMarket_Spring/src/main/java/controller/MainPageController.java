@@ -42,17 +42,14 @@ public class MainPageController {
 	 HttpServletResponse response;
 	 
 	 ProductDao product_dao;
-
-	 public MainPageController(ProductDao product_dao) {
-		 super();
-		 this.product_dao = product_dao;
-	 }
-	 
 	 VisitDao visit_dao;
-	
-	 public void setVisit_dao(VisitDao visit_dao) {
+
+	public MainPageController(ProductDao product_dao, VisitDao visit_dao) {
+		super();
+		this.product_dao = product_dao;
 		this.visit_dao = visit_dao;
 	}
+
 
 	@RequestMapping("list.do")
 	 public String list(Model model,  @RequestParam(value="c_idx",required = false ,defaultValue="null")String 	c_idx
@@ -394,5 +391,19 @@ public class MainPageController {
 		
 		return "mainpage/mainpage_list";
 	 }	
+	 
+	 
+	 @RequestMapping("/logout.do")
+	 public String logout() {
+		 
+		 HttpSession session =request.getSession();
+		 
+		 
+		 
+		 session.removeAttribute("user");
+		 
+		 
+		 return "redirect:list.do";
+	 }
 	 
 }

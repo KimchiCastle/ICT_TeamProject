@@ -32,7 +32,9 @@
 	<beans:bean class="controller.TradeController">
 		<beans:constructor-arg ref="trade_dao"/>
 		<beans:constructor-arg ref="product_dao"/>
+		<beans:constructor-arg ref="user_dao"/>
 	</beans:bean>
+	
 	<beans:bean class="controller.UserController">
 		<beans:property name="user_dao" ref="user_dao"/>
 	</beans:bean>
@@ -41,9 +43,6 @@
 		<beans:property name="mailSender" ref="mailSender"/>
 	</beans:bean>
 	
-	<beans:bean class="controller.VisitController">
-		<beans:property name="visit_dao" ref="visit_dao"/>
-	</beans:bean>	
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>
 	</beans:bean>	
@@ -80,6 +79,7 @@
 		<beans:constructor-arg ref="product_dao"/>
 		<beans:constructor-arg ref="visit_dao"/>
 	</beans:bean>
+	
 
 	<!--권한 체크용, 방문자 쿠키 조회용 interceptor-->
 	<beans:bean id="admin_interceptor" class="interceptor.AdminInterceptor"></beans:bean> 
@@ -90,6 +90,5 @@
 	             <beans:ref  bean="admin_interceptor" />
 	        </interceptor>
    	 </interceptors>
-    
 	
 </beans:beans>

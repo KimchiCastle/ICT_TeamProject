@@ -25,6 +25,7 @@ import dao.ImageDao;
 import dao.JjimDao;
 import dao.ProductDao;
 import dao.UserDao;
+import dao.VisitDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
@@ -54,15 +55,17 @@ public class ProductController {
 	ImageDao image_dao;
 	UserDao user_dao;
 	JjimDao jjim_dao;
+	VisitDao visit_dao;
     
 
-	
-	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao, JjimDao jjim_dao) {
+	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao, JjimDao jjim_dao,
+			VisitDao visit_dao) {
 		super();
 		this.product_dao = product_dao;
 		this.image_dao = image_dao;
 		this.user_dao = user_dao;
 		this.jjim_dao = jjim_dao;
+		this.visit_dao = visit_dao;
 	}
 
 	/* 상품 등록 form 이동 */

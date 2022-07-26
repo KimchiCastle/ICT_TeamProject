@@ -198,13 +198,8 @@ $(function() {
 	
 	
 	
+		<%@include file="content.jsp"%>
 </div>
 
-	<div style="margin-top: 0px;">
-		<%@include file="content.jsp"%>
-	
-	
-
-	</div>
 </body>
 </html>
