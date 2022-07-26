@@ -18,7 +18,7 @@
 body{
 	margin-top: 0px;
 	font-family: 'Gowun Dodum', sans-serif;
-	min-width: 1150px;
+	min-width: 800px;
 }
 
 
@@ -43,7 +43,7 @@ header{
 	position: fixed;
 	left: 50%;
 	transform: translateX( -50% );
-	width: 1150px;
+	width: 1080px;
 	margin: auto;
 	margin-top: 20px;
 	height: 54px;
@@ -318,6 +318,13 @@ li, ul{
 			<input id="max_p" type="text" oninput="numberMaxLength(this);" value="${ param.max_p }" placeholder="최대가격" style="font-size: 15px;">
 			<img id="p_searchicon" src="${ pageContext.request.contextPath }/resources/image/saerch-icon.png" onclick="price_search();">
 		</div>
+		
+		<c:if test="${ not empty sessionScope.user }">
+			<div style="float: right; margin-right: 62px;">
+				
+				<a class="btn" onclick="location.href='../mainpage/logout.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;로그아웃</a>
+			</div>
+		</c:if>
 		
 	</div>
 	<!-- 고정형 사이드바 -->

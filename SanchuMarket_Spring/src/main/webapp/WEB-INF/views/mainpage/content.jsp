@@ -15,25 +15,27 @@
 <style type="text/css">
 	body{
 	  font-family: 'Gowun Dodum', sans-serif;
+	
 	}
 	
 	.main{
 		margin-left: auto;
 		margin-right: auto;
-		width: 100%;
+		
 		border: 1px solid white;
-		min-width: 1150px;
+		
 		
 	}
 	
 	.main_content{
 	/* margin-top: 131px; */
-	width: 1020px;
+	width: 1035px;   
 	height: auto;
 	padding-top: 10px;
-	padding-left: 15px;
-	margin-left: 50%;
-	transform: translateX(-50%);
+	padding-left: 15px; 
+	
+	
+	
 	display: inline-block;
 	}
 	
@@ -101,7 +103,7 @@
 	}
 	
 	.paging_btn{
-		width: 1000px;
+		width: auto; 
 		margin-top: 20px;
 		margin: auto;
 		display: inline-block;
