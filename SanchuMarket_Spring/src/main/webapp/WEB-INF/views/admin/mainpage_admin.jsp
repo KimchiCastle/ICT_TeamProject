@@ -131,7 +131,7 @@ th {
 	<div class="board-wrapper" id="board">
 	   <label>실시간 상품 업로드 현황</label>
 	   <c:forEach var="product" items="${ serviceMap.p_list }">
-	   <div style=" cursor: pointer; margin-bottom: 10px;" onclick="location.href='${pageContext.request.contextPath}/product/poduct_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
+	   <div style=" cursor: pointer; margin-bottom: 10px;" onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
 		   	<img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="40px" height="40px">
 		   <div class="product_p_name">${ product.p_name }</div>	 
 		    ${ fn:substring(product.p_date,0,10) } 
@@ -157,7 +157,7 @@ th {
 	   
 	   <tr>
 	     <th>${ serviceMap.today_p_count }건</th>
-	     <th>34건${ serviceMap.today_t_count }</th>
+	     <th>${ serviceMap.today_t_count }건</th>
 	   </tr>
 	   
 	 </table> 	

@@ -322,6 +322,12 @@ li, ul{
 		<c:if test="${ not empty sessionScope.user }">
 			<div style="float: right; margin-right: 62px;">
 				
+				<a class="btn" onclick="location.href='../mypage/myjjim.do?u_idx=${ user.u_idx }'"><img src="${ pageContext.request.contextPath }/resources/image/cart.png" width="30px">&nbsp;찜 보기</a>
+			</div>
+		</c:if>
+		<c:if test="${ not empty sessionScope.user }">
+			<div style="float: right; margin-right: 52px;">
+				
 				<a class="btn" onclick="location.href='../mainpage/logout.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;로그아웃</a>
 			</div>
 		</c:if>

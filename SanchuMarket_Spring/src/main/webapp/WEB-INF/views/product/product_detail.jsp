@@ -20,7 +20,7 @@
 	$(function(){
 		
 		var p_idx = $("#p_idx").val();
-		var u_idx = $("#u_idx").val();
+		var u_idx = $("#buyer_u_idx").val();
 		
 		$.ajax({
 			
@@ -57,7 +57,7 @@
 		
 		
 		var p_idx = $("#p_idx").val();
-		var u_idx = $("#u_idx").val().trim();
+		var u_idx = $("#buyer_u_idx").val().trim();
 		
 		if(u_idx==''){
 			
@@ -99,7 +99,7 @@
 	function jjimOff(){
 		
 		var p_idx = $("#p_idx").val();
-		var u_idx = $("#u_idx").val().trim();
+		var u_idx = $("#buyer_u_idx").val().trim();
 		
 		
 		$.ajax({
@@ -173,13 +173,44 @@
 				alert('상품 구매시 문제가 발생했습니다. 관리자에게 문의하세요.');
 			}
 			
-		})
+		});
 		
 		
 		
 	}
 
 </script>
+
+<script type="text/javascript">
+	
+	function sell(p_idx){
+		
+		if(!confirm('상품을 판매하시겠습니까?')) return;
+		
+		$.ajax({
+			
+			url		: 'product_sell.do',
+			type	: 'POST',
+			data	: {"p_idx" : p_idx},
+			success	: function(res){
+				
+				
+				
+			},
+			error	: function(err){
+				
+				alert("상품판매시 문제가 발생했습니다. 관리자에게 문의하세요.");
+				
+			}
+			
+			
+		});		
+		
+		
+	}
+	
+</script>
+
 
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/product_detail.css">
 
@@ -266,7 +297,7 @@
 			<c:if test="${ vo.p_status eq '거래중'}">
 				<!-- 판매자는 판매하기 버튼이 보이게 -->
 				<c:if test="${ vo.u_idx eq user.u_idx}">
-					<button type="button" class="btn" onclick="sell();" style=" background-color: rgb(240,240,240); width: 100px;">
+					<button type="button" class="btn" onclick="sell(${ vo.p_idx });" style=" background-color: red; width: 100px;">
 						<span style="color: black; font-size: 20px;">판매하기</span>
 					</button>
 				</c:if>

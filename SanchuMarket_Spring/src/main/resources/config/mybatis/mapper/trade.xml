@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--금일 상품 거래량-->
 	<select id="today_count" resultType="int">
-	  select count(*) from trade where to_char(t_date,'dd') = to_char(sysdate, 'dd')
+	  select count(*) from trade where to_char(t_date,'dd') = to_char(sysdate, 'dd') and t_status = '판매완료'
 	</select>
 	
 	<insert id="trade_insert" parameterType="vo.TradeVo">
@@ -19,5 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<update id="trade_update" parameterType="java.util.Map">
+		update trade set t_status=#{p_status}, t_date=sysdate where p_idx=#{p_idx}
+	</update>
 	
 </mapper>
