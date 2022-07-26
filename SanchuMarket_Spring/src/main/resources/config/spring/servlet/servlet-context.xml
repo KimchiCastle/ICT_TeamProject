@@ -24,27 +24,29 @@
 	<context:component-scan base-package="com.ict.sanchumarket" />
 	
 	
+	
 	<!-- controller 수동생성 -->
 	<context:annotation-config/>
 	
+	<!-- 거래체크 -->
 	<beans:bean class="controller.TradeController">
-		<beans:property name="trade_dao" ref="trade_dao"/>
+		<beans:constructor-arg ref="trade_dao"/>
+		<beans:constructor-arg ref="product_dao"/>
 	</beans:bean>
 	<beans:bean class="controller.UserController">
 		<beans:property name="user_dao" ref="user_dao"/>
+	</beans:bean>
+	
+	<beans:bean class="controller.EmailController">
 		<beans:property name="mailSender" ref="mailSender"/>
 	</beans:bean>
+	
 	<beans:bean class="controller.VisitController">
 		<beans:property name="visit_dao" ref="visit_dao"/>
 	</beans:bean>	
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>
 	</beans:bean>	
-	
-	<!--mail컨트롤러-->
-	<beans:bean class="controller.EmailController">
-		<beans:property name="mailSender" ref="mailSender"/>
-	</beans:bean>
 	
 	<!-- 상품등록 관련 컨트롤러 -->
 	<beans:bean class="controller.ProductController">
@@ -76,7 +78,7 @@
 	<beans:bean class="controller.MainPageController">
 		<beans:constructor-arg ref="product_dao"/>
 	</beans:bean>
-	
+
 	<!--권한 체크용, 방문자 쿠키 조회용 interceptor-->
 	<beans:bean id="admin_interceptor" class="interceptor.AdminInterceptor"></beans:bean> 
 	<beans:bean id="visitCookie_interceptor" class="interceptor.VisitCookieInterceptor"></beans:bean> 
@@ -93,5 +95,6 @@
 	        </interceptor>
    	 </interceptors>
     
+>>>>>>> f9593033bcd80da53109be49b3d1590f27643d62
 	
 </beans:beans>

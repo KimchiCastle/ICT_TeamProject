@@ -2,6 +2,8 @@ package dao;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.TradeVo;
+
 public class TradeDaoImpl implements TradeDao{
 
 	SqlSession sqlSession;
@@ -18,5 +20,13 @@ public class TradeDaoImpl implements TradeDao{
 	public int todayTradeCount() {
 		
 		return sqlSession.selectOne("trade.today_count");
+	}
+
+
+
+	@Override
+	public int tradeInsert(TradeVo vo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
