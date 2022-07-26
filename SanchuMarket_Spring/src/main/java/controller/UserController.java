@@ -145,29 +145,28 @@ public class UserController {
 	@ResponseBody
 	public Map login(UserVo vo) {
 		
+	
 		String u_id = vo.getU_id();
 		String u_pwd = vo.getU_pwd();
-		
+
 		UserVo user =  user_dao.selectOneById(u_id);
-		
+
 		boolean bResult = false;
-		
-		/*
-		 * if(user==null) { bResult = false; }
-		 * 
-		 * if(!u_pwd.equals(user.getU_pwd())) {  bResult = false; }
-		 */
-		
+
 		if(user==null || !u_pwd.equals(user.getU_pwd())) {
+			System.out.println("비번이나 아이디 틀림");
 			bResult = false;
 		}else {
+			System.out.println("로그인성공");
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user );
 			bResult = true;
 		}
-			
+
 		Map map = new HashMap();
-		
+
 		map.put("bResult", bResult);
-		
+
 		return map;
 	}
 	

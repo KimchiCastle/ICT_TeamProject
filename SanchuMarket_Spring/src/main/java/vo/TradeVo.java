@@ -8,6 +8,19 @@ public class TradeVo {
 	String t_status; 	// 거래상태
 	String t_date;		// 거래날짜
 
+	
+	public TradeVo() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public TradeVo(int p_idx, String seller, String buyer, String t_status) {
+		super();
+		this.p_idx = p_idx;
+		this.seller = seller;
+		this.buyer = buyer;
+		this.t_status = t_status;
+	}
+
 	public int getP_idx() {
 		return p_idx;
 	}
