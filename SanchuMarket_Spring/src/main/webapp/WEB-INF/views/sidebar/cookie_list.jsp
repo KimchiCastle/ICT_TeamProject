@@ -46,10 +46,24 @@
 <!-- 쿠키삭제 -->
 <script type="text/javascript">
 	
-	function del_cookie() {
-		alert('쿠키삭제 합니다.');
+	function del_cookie(p_idx) {
+		
+		$.ajax({
+			url		 : '${pageContext.request.contextPath}/del_cookie.do',
+			type	 : 'POST',
+			data	 : {'p_idx':p_idx},
+			dataType : 'json',
+			success	 : function(res) {
+				
+				if(res.result){
+					window.location.reload();
+				}
+				
+			}
+			
+		});
+		
 	}
-	
 </script>
 
 </head>
@@ -59,7 +73,7 @@
 			<div class="recent_hober">
 				<div class="recent_content">
 					<!-- 최근본상품 화면 -->
-					<div onclick="location.href='${pageContext.request.contextPath}/product/poduct_detail.do?p_idx=${ cookielist.p_idx }&p_name=${ cookielist.p_name }'">
+					<div onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ cookielist.p_idx }&p_name=${ cookielist.p_name }'">
 						<div style="display: inline;">
 						 <img class="recent_img"
 						src="${ pageContext.request.contextPath }/resources/imgdata/${ recentimg.imagedata }">
@@ -68,7 +82,7 @@
 						<div class="recent_price">가격 : <font color="red"><fmt:formatNumber pattern="#,###" value="${ cookielist.p_price }"/></font>원</div>
 					</div>
 					<!-- 쿠키삭제버튼 -->
-					<div class="del_cookie"><button type="button" class="delbutton" onclick="del_cookie();">x</button></div>
+					<div class="del_cookie"><button type="button" class="delbutton" onclick="del_cookie(${ cookielist.p_idx });">x</button></div>
 				</div>
 				
 				
