@@ -63,6 +63,9 @@ public interface ProductDao {
 	
 	// 상품 수정
 	public int update(ProductVo vo);
+	
+	//
+	public int statusUpdate(Map map);
 
 	
 	

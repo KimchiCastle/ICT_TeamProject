@@ -155,7 +155,13 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<ProductVo> select_recent_product() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("recent_product_six");
+		return sqlSession.selectList("product.recent_product_six");
+	}
+
+	@Override
+	public int statusUpdate(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("product.product_status_update",map);
 	}
 
 	

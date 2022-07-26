@@ -56,9 +56,10 @@ public class TradeController {
 		//p_idx로 해당 상품 p_status '거래중'으로 변경하기
 		Map updateMap = new HashMap();
 		
-		updateMap.put("", updateMap)
+		updateMap.put("p_idx", p_idx);
+		updateMap.put("p_status", "거래중");
 		
-		int res = product_dao.update();
+		 int res = product_dao.statusUpdate(updateMap);
 		
 		/*
 			받아온 u_idx들로 판매자, 구매자 id 가지고 오기

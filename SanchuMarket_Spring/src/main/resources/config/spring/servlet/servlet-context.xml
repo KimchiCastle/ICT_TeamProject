@@ -23,11 +23,22 @@
 	
 	<context:component-scan base-package="com.ict.sanchumarket" />
 	
+	<!--로그인, 권한 체크용 interceptor-->
+	   <interceptors>
+        <interceptor>
+            <mapping path="/user/login.do"></mapping>
+            <beans:bean id="loginInterceptor" class="interceptor.LoginInterceptor"></beans:bean>
+        </interceptor>
+        <interceptor>
+            <mapping path="/admin/**"></mapping>
+            <beans:bean id="AdminInterceptor" class="interceptor.AdminInterceptor"></beans:bean>
+        </interceptor>
+    </interceptors>
 	
 	<!-- controller 수동생성 -->
 	<context:annotation-config/>
 	
-	<!--  -->
+	<!-- 거래체크 -->
 	<beans:bean class="controller.TradeController">
 		<beans:constructor-arg ref="trade_dao"/>
 		<beans:constructor-arg ref="product_dao"/>
@@ -42,11 +53,6 @@
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>
 	</beans:bean>	
-	
-	<!--mail컨트롤러-->
-	<beans:bean class="controller.EmailController">
-		<beans:property name="mailSender" ref="mailSender"/>
-	</beans:bean>
 	
 	<!-- 상품등록 관련 컨트롤러 -->
 	<beans:bean class="controller.ProductController">
@@ -78,57 +84,6 @@
 	<beans:bean class="controller.MainPageController">
 		<beans:constructor-arg ref="product_dao"/>
 	</beans:bean>
-	
-	<!--로그인, 권한 체크용 interceptor-->
-	   <interceptors>
-        <interceptor>
-            <mapping path="/user/login.do"></mapping>
-            <beans:bean id="loginInterceptor" class="interceptor.LoginInterceptor"></beans:bean>
-        </interceptor>
-        <interceptor>
-            <mapping path="/admin/**"></mapping>
-            <beans:bean id="AdminInterceptor" class="interceptor.AdminInterceptor"></beans:bean>
-        </interceptor>
-    </interceptors>
-    
-    
-	<!--Interceptor-->
-	<context:component-scan base-package="interceptor" />
-	
-	<!-- interceptor 는 등록된 순서대로 순차적으로 실행 된다 -->
-	<interceptors>
-	 	
-	 	<!-- 세션이 있는지 검사하는 인터셉터 -->
-		<interceptor>
-			
-			<!-- 세션에 있어야 되는 페이지 -->
-			<mapping path="/*"/>
-			
-			<!-- 세션 검사를 하지 않는 페이지 -->
-			<!-- exclude-mapping 는 spring 3.2 이상에서 사용 가능하므로 spring-mvc-4.3.xsd 를 수정해 주어야 합니다. -->
-			<exclude-mapping path="/enroll.do"/>
-			<exclude-mapping path="/login"/>
-			<exclude-mapping path="/LoginInterceptor"/>
-			
-			<exclude-mapping path="/req/*"/>
-			
-			<beans:bean class="com.spring.interceptor.SessionInterceptor" />
-			
-		</interceptor>
-		
-		<!-- 로그인을 처리하는 인터셉터 - 구지 안해도 된다. 다만 인터셉터 2개인 경우의예를 위해서. -->
-		<interceptor>
-			<!-- path 에 있는 서블릿이 호출될때 ref 에 참조되어 있는 interceprot 를 샐행하여 세션을 관리한다. -->
-			<mapping path="/LoginInterceptor"/>
-			<beans:bean class="interceptor.LoginInteceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/VisitCookieInterceptor"/>
-			<beans:bean class="interceptor.VisitCookieInterceptor" />
-		</interceptor>
-		
-	</interceptors>
 	
 	
 </beans:beans>
