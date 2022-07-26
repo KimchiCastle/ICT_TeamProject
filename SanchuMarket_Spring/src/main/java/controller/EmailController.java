@@ -1,33 +1,98 @@
 package controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import dao.UserDao;
 import service.MailService;
+import vo.AuthVo;
+import vo.UserVo;
 
 @Controller
+@RequestMapping("/user/")
 public class EmailController {
 
-	@Autowired
-	MailService mailService;
-
-
-	//DB작업이 필요한 만큼 DAO들 선언해야함
-	
-	//아이디와 이메일이 같으면 특정한 메일이 가게..
-	@RequestMapping("/noticeMail.do")
-	public String sendEmail(String id, String email, Model model) {
-		
-		String addr = "dkwlsdl8@google.com";
-		
-		String subject = "비밀번호 찾기 메일";
-		
-		String body = "";
-		
-		mailService.sendEmail(email, addr, subject, body);
-		
-		return "";
+	 JavaMailSender mailSender;
+ 
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
 	}
+
+	UserDao user_dao;
+
+	public void setUser_dao(UserDao user_dao) {
+		this.user_dao = user_dao;
+	}
+
+	@RequestMapping("sendEmail.do")
+	@ResponseBody
+	public Map sendEmail(String email) {
+		
+		boolean bSuccess = false;
+		
+		UserVo vo = user_dao.selectOneByEmail(email);
+		
+		if(vo != null) {
+				
+				Random r = new Random();
+				
+				StringBuffer sb = new StringBuffer();
+				
+				for(int i=0; i<10; i++) {
+					//랜덤으로 boolean을 줘서 무작위로 영문자와 숫자를 생성.
+					r.nextBoolean();
+					
+					//소문자
+					if(r.nextBoolean()==true) {
+						sb.append((char)((int)(r.nextInt(26))+97));
+					}
+					//숫자
+					else {
+						sb.append(r.nextInt(10));
+					}
+				} 	
+				
+				String tempPwd = sb.toString();
+				AuthVo authVo = new AuthVo();
+				String hostMail = authVo.getHostMail();
+				String userMail = email; //받는사람
+				
+			try {
+					StringBuilder stb = new StringBuilder();
+					stb.append(String.format("%s님의 임시 비밀번호는",vo.getU_name()));
+					stb.append(String.format(" %s입니다", tempPwd));
+					
+					SimpleMailMessage message = new SimpleMailMessage();
+
+					message.setFrom(hostMail);
+					message.setTo(email);
+					message.setSubject("[상추마켓] 임시 비밀번호 메일입니다.");
+					message.setText(stb.toString());
+					
+					mailSender.send(message);
+					
+					vo.setU_pwd(tempPwd);
+					
+					int res = user_dao.updatePwd(vo);
+					
+					bSuccess = true;
+				   
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+		}
+		
+		Map map = new HashMap();
+		map.put("result", bSuccess); 
+		return map;
+	}
+	
 }

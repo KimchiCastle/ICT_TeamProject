@@ -41,7 +41,7 @@ public class ProductController {
 	HttpServletRequest request;
 	
 	@Autowired
-	HttpServletResponse response;
+	HttpServletResponse response;	
 	
 	@Autowired
 	HttpSession session;
@@ -306,7 +306,7 @@ public class ProductController {
 	}
 	
 	
-	@RequestMapping("poduct_detail.do")
+	@RequestMapping("product_detail.do")
 	public String productList(
 			Model model,
 			@RequestParam(value ="p_idx",required = false, defaultValue="null") String p_idx,
