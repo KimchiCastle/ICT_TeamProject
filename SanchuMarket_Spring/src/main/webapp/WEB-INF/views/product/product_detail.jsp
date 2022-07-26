@@ -131,6 +131,28 @@
 
 </script>
 
+<!-- 거래하기기능 -->
+<script type="text/javascript">
+
+	function trade(){
+		
+		var product_u_idx = $("#product_u_idx").val();
+		var u_idx = $("#u_idx").val();
+		
+		if(u_idx==''){
+			
+			if(confirm("로그인후 이용가능 합니다.\n로그인 하시겠습니까?")==false) return;
+			
+			location.href="../user/login_form.do?url=" + encodeURIComponent(location.href);
+			
+			return;
+		}
+		
+		
+	}
+
+</script>
+
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/product_detail.css">
 
 </head>
@@ -139,6 +161,7 @@
 <div id="root">
 	<%@ include file="../mainpage/header&sidebar.jsp"%>
 	<input type="hidden" id="p_idx" value="${ vo.p_idx }">
+	<input type="hidden" id="product_u_idx" value="${ vo.u_idx }">
 	<input type="hidden" id="u_idx" value="${ user.u_idx }">
 	<div id="box" align="left">
 		<div class="container">
@@ -184,7 +207,7 @@
 			<div id="user_img">
 				<img src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="100px" height="100px" style="margin-top:5px; border-radius: 50px;">
 			</div>
-			<div id="u_nickname">${ vo2.u_nickname }</div>
+			<div id="u_nickname"><a href="../sellerpage/list.do?u_idx=${vo.u_idx}" style="text-decoration: none; color: black;">${ vo2.u_nickname }</a></div>
 			<br>
 			<div style="margin-left:30px; display: inline-block;">${ vo.p_location }</div>
 			<br>
@@ -197,24 +220,26 @@
 				<button type="button" id="jjim_off" class="btn" onclick="jjimOff();" style=" background-color: rgb(156,247,117); width: 75px; display: none;">
 					<span style="color: white; font-size: 20px;">찜 ♥</span>
 				</button>
-				
-				
 			</div>	
-			
+			<div style="display: inline-block;">
+				<button type="button" class="btn" onclick="trade();" style=" background-color: rgb(240,240,240); width: 100px;">
+					<span style="color: black; font-size: 20px;">거래하기</span>
+				</button>
+			</div>
 				
 		</div><!-- 회원정보 끝 -->
 		
 		<div style=" margin:auto; clear: both; width: 800px;">
 		
-		<div style="width: 800px;"><span id="p_name">${ vo.p_name }</span></div>
-		<div><span>${ vo.p_time }</span></div>
-		<div><span id="p_price"><fmt:formatNumber pattern="#,###" value="${vo.p_price}"></fmt:formatNumber></span>&nbsp;원</div>
-		<div style="margin-top: 50px;">${ vo.p_exp }</div>
+			<div style="width: 800px;"><span id="p_name">${ vo.p_name }</span></div>
+			<div><span>${ vo.p_time }</span></div>
+			<div><span id="p_price"><fmt:formatNumber pattern="#,###" value="${vo.p_price}"></fmt:formatNumber></span>&nbsp;원</div>
+			<div style="margin-top: 50px;">${ vo.p_exp }</div>
 		
 		</div> <!-- 상품정보 끝 -->
 	<c:if test="${ user.u_idx eq vo.u_idx }">
 		<div align="right">
-			<input type="button" class="btn btn-warning" value="상품수정" style="font-size: 25px; width: 200px; height: 50px;"
+			<input type="button" class="btn btn-warning" value="상품수정" style=""
 			id="modifyButton" onclick="location.href='modify_form.do?p_idx=${ vo.p_idx }'">
 		</div>	
 	</c:if>	

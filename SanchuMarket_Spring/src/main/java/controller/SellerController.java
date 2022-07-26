@@ -16,11 +16,9 @@ import vo.UserVo;
 @RequestMapping("/sellerpage/")
 public class SellerController {
 	
-	
 	ProductDao product_dao;
 	
 	UserDao user_dao;
-	
 	
 	public SellerController(ProductDao product_dao, UserDao user_dao) {
 		super();
@@ -30,9 +28,7 @@ public class SellerController {
 
 
 	@RequestMapping("list.do")
-	public String seller_list(Model model ) {
-		
-		int u_idx = 1;
+	public String seller_list(Model model, int u_idx) {
 		
 		//판매자가 올린 판매상품 전체 조회
 		List<ProductVo> product_list = product_dao.selectList(u_idx);
@@ -51,8 +47,8 @@ public class SellerController {
 		//구한 값 다시 판매자 정보에 넣음
 		user_info.setU_regdate(u_time);
 		
-		//
-		model.addAttribute("product_list",product_list);
+		//content 를 include 했기때문에 list이름으로 request binding 해야 한다.
+		model.addAttribute("list",product_list);
 		model.addAttribute("user_info",user_info);
 
 		
