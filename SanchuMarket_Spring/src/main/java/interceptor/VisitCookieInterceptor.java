@@ -12,7 +12,7 @@ import vo.UserVo;
 
 public class VisitCookieInterceptor implements HandlerInterceptor{
 
-	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminInterceptor.class);
 	 
 	@Override
 	    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
