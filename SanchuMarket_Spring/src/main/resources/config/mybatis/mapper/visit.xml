@@ -4,9 +4,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="visit">
 
-	<!--admin page 금일 방문자수-->
+	<!--admin page호출용 금일 방문자수-->
   <select id="today_count" resultType="vo.VisitVo">
-	select count(*) from visit where to_char(,'dd') = to_char(sysdate, 'dd')
+	select v_count from visit where to_char(v_date,'dd') = to_char(sysdate, 'dd')
   </select>
 
+	<!--금일 첫 방문자-->
+  <insert id="today_visitInsert">
+    insert into visit values
+    (
+	    (select nvl(max(v_idx)+1,1), 
+	    1, 
+	    sysdate
+	)
+  </insert>
+  
+  <!--첫방문자 이후는 해당 일자의 count만 update-->
+  <update id="today_visitUpdate" parameterType="int">
+    update visit set
+    (
+      v_count=#{v_count}
+    )
+    where to_char(v_date,'dd') = to_char(sysdate, 'dd')
+  </update>
+  
 </mapper>
