@@ -35,8 +35,6 @@ select * from (select * from product order by p_idx desc) where ROWNUM  <= 6
 
 select * from trade
 
-update product set p_status='거래가능' where p_idx=6
-
 
 */
 

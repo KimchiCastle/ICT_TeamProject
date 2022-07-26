@@ -53,12 +53,6 @@ public class TradeController {
 			int	buyer_u_idx,	
 			int p_idx) {
 		
-		
-		System.out.println(seller_u_idx);
-		System.out.println(buyer_u_idx);
-		System.out.println(p_idx);
-
-		
 		//p_idx로 해당 상품 p_status '거래중'으로 변경하기
 		Map updateMap = new HashMap();
 		
@@ -104,5 +98,44 @@ public class TradeController {
 		return resultmap;
 	}
 	 
-	 
+	
+	@RequestMapping("product_sell.do")
+	@ResponseBody
+	public Map product_sell(int p_idx) {
+		
+		//p_idx로 해당 상품 p_status '판매완료'로 변경하기
+		Map updateMap = new HashMap();
+		
+		String p_status = "판매완료";
+		
+		updateMap.put("p_idx", p_idx);
+		updateMap.put("p_status", p_status);
+		
+		//상품 테이블 업데이트
+		int res = product_dao.statusUpdate(updateMap);
+		
+		//거래 테이블 업데이트
+		int res2 = trade_dao.statusUpdate(updateMap);
+		
+		//	ajax 리턴용 Map 생성
+		Map resultmap = new HashMap();
+		
+		boolean result = false;
+		
+		if(res==1 && res2==1) {
+			result = true;
+			
+			resultmap.put("result", result);
+			
+		}else {
+			
+			resultmap.put("result", result);
+			
+		}
+		
+		return resultmap;
+	}
+	
+	
+	
 }

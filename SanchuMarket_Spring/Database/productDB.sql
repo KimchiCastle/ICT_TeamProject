@@ -128,6 +128,8 @@ select * from (select * from product_user order by p_idx asc) where ROWNUM  <= 6
 
 select * from product 
 
+update product set p_status='°Å·¡Áß' where p_idx=6
+
 select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 
 insert into product values(

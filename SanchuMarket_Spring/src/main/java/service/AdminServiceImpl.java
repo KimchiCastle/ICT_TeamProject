@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
 		int today_p_count = product_dao.todayProductCount();
 		
 		//금일 거래량
-//		int today_t_count = trade_dao.todayTradeCount();
+		int today_t_count = trade_dao.todayTradeCount();
 		
 		//금일 방문자수
 //		int today_v_count = visit_dao.todayVisitCount();
@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("p_list", p_list);
 //		map.put("ch_list", ch_list);
 		map.put("today_p_count",today_p_count);
-//		map.put("today_t_count",today_t_count);
+		map.put("today_t_count",today_t_count);
 //		map.put("today_v_count",today_v_count);
 //		map.put("today_u_count",today_u_count);
 		
