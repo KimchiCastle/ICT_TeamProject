@@ -48,19 +48,73 @@
 ## 🎨 화면 구상
 ---
 
-[오븐](https://ovenapp.io/view/rapRTRKLth68syfLn03wypVPe3rcHxCG/wJE6j)
+## [오븐](https://ovenapp.io/view/rapRTRKLth68syfLn03wypVPe3rcHxCG/wJE6j)
+
+
 ![ovenMain](https://user-images.githubusercontent.com/88763803/180354758-52341404-a7f0-4f24-93fc-0a41f2ab87d0.png)
 
 
 ## : 구현한 기능
 ---
 1. 로그인/회원가입
-2. 상품 전체조회 
-3. 상품 검색기능 (카테고리별, 키워드별)
-4. 상품 등록 (이미지 미리보기 기능)
-5. 상품 수정 (이미지 수정 기능)
-6. 최근 본 상품(쿠키 사용)
+2. 아이디/비밀번호찾기(메일API 사용)
+3. 관리자 페이지
+4. 상품 전체조회 
+5. 상품 검색기능 (카테고리별, 키워드별)
+6. 상품 등록 (이미지 미리보기 기능)
+7. 상품 수정 (이미지 수정 기능)
+8. 최근 본 상품(쿠키 사용)
+9. 상품 상세확인(이미지슬라이드)
 
 ---
 
 ## : 구현 이미지
+
+
+### 메인페이지
+![1 메인화면](https://user-images.githubusercontent.com/88763803/181046401-28993f8e-6639-4e8b-bbb9-ea0967bd3057.png)
+
+
+### 로그인
+![2 로그인](https://user-images.githubusercontent.com/88763803/181046739-692ef93c-51b2-452b-a9df-fae4be88073c.png)
+
+
+### 아이디 찾기(ajax)
+![3 아이디찾기](https://user-images.githubusercontent.com/88763803/181047197-06b4f65a-87c5-457f-b183-3ccaa33e0591.png)
+
+
+### 비밀번호 찾기 (메일API)
+![4 비밀번호찾기](https://user-images.githubusercontent.com/88763803/181047362-7c2a6e23-c542-4768-bffc-016a3ad093a1.png)
+
+
+### 회원가입
+![5 회원가입_1](https://user-images.githubusercontent.com/88763803/181047517-65046478-681a-4bb1-8c24-4ed2645457da.png)
+![5 회원가입_2](https://user-images.githubusercontent.com/88763803/181047568-3a4bf374-1d18-42d6-aeda-b39f36b85353.png)
+
+
+### 관리자페이지 (구현중)
+![6 관리자페이지](https://user-images.githubusercontent.com/88763803/181048376-0f504df0-031f-4ed4-bdf1-3a417c22c6b8.png)
+
+
+### 상세페이지 및 최근 본 상품
+![7 물품상세페이지](https://user-images.githubusercontent.com/88763803/181047678-d7051579-af6d-492d-bff8-09b236216d6b.png)
+
+
+### 상세페이지2
+![9 물품상세페이지2](https://user-images.githubusercontent.com/88763803/181047820-1e44e106-fbcf-4010-8340-b5493c1f3d9f.png)
+
+
+### 검색기능
+![10 검색기능](https://user-images.githubusercontent.com/88763803/181047922-fbde16a5-3806-4933-a936-e477eeed35a6.png)
+
+### 판매자 상세 페이지
+![11 판매자상세페이지](https://user-images.githubusercontent.com/88763803/181048010-5260d9d4-472b-40e8-8e7b-7a57ea1d52d3.png)
+
+
+### 물품등록
+![12 물품등록](https://user-images.githubusercontent.com/88763803/181048127-daaf21f8-5d33-41c7-a521-081ad29ce4cb.png)
+![13 물품등록2](https://user-images.githubusercontent.com/88763803/181048183-cb45f51d-e6b8-475c-bf1e-e2d95d76eadd.png)
+
+
+### 물품수정
+![13 상품수정](https://user-images.githubusercontent.com/88763803/181049512-165c590c-153b-4267-bb51-a4b233213812.png)
