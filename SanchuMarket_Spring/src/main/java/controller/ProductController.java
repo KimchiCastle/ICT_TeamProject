@@ -32,6 +32,7 @@ import vo.ImageVo;
 import vo.JjimVo;
 import vo.ProductVo;
 import vo.UserVo;
+import vo.VisitVo;
 
 @Controller
 @RequestMapping("/product/")
@@ -53,7 +54,7 @@ public class ProductController {
 	ImageDao image_dao;
 	UserDao user_dao;
 	JjimDao jjim_dao;
-
+    
 
 	
 	public ProductController(ProductDao product_dao, ImageDao image_dao, UserDao user_dao, JjimDao jjim_dao) {
@@ -345,6 +346,27 @@ public class ProductController {
 		//유저정보와, 상품정보 둘다 binding
 		model.addAttribute("vo", vo);
 		model.addAttribute("vo2", vo2);
+		
+		//-----------------cookie를 기반으로 visitDB 관리----------------------
+		
+		//DB의 금일 방문자 유무 조회
+		VisitVo visitVo = visit_dao.todayVisitSelect();
+		
+		//DB의 금일 방문자가 0이면 방문자수 default 1로 visitDB record생성
+		if(visitVo == null) {
+			
+			visit_dao.todayVisitInsert();
+		}
+		//금일 방문자가 1명 이상이면 visitDB update
+		else {
+			
+			if(Integer.parseInt(visitCookie.getValue()) == 1) {
+				
+				int todayVisitCount = visitVo.getV_count();
+				
+				int res = visit_dao.todayVisitUpdate(++todayVisitCount);
+			}
+		}
 		
 		
 		

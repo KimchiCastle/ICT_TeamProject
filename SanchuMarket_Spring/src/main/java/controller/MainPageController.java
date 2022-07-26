@@ -6,18 +6,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import common.MyConstant;
 import dao.ProductDao;
+import dao.VisitDao;
 import util.Mytime;
 import vo.ProductVo;
 
@@ -36,14 +38,23 @@ public class MainPageController {
 	 @Autowired 
 	 HttpServletRequest request;
 	 
+	 @Autowired
+	 HttpServletResponse response;
+	 
 	 ProductDao product_dao;
 
 	 public MainPageController(ProductDao product_dao) {
 		 super();
 		 this.product_dao = product_dao;
 	 }
+	 
+	 VisitDao visit_dao;
 	
-	 @RequestMapping("list.do")
+	 public void setVisit_dao(VisitDao visit_dao) {
+		this.visit_dao = visit_dao;
+	}
+
+	@RequestMapping("list.do")
 	 public String list(Model model,  @RequestParam(value="c_idx",required = false ,defaultValue="null")String 	c_idx
 			 				 , @RequestParam(value="searchtext", required = false , defaultValue="all") String searchtext
 			 				 , @RequestParam(value="min_p", required = false, defaultValue="no_min" )String min_p
@@ -321,6 +332,13 @@ public class MainPageController {
 				model.addAttribute("list", list);
 				
 				System.out.println("상품검색");
+				
+				//-----------------cookie를 기반으로 visitDB 관리----------------------
+				
+				Cookie visitCookie = new Cookie("visitCookie","1");
+				visitCookie.setPath("/sanchumarket/");
+				response.addCookie(visitCookie);
+				
 				
 				return "mainpage/mainpage_list";
 

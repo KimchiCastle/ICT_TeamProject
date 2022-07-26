@@ -54,6 +54,7 @@
 		<beans:constructor-arg ref="image_dao"/>
 		<beans:constructor-arg ref="user_dao"/>
 		<beans:constructor-arg ref="jjim_dao"/>
+		<beans:constructor-arg ref="visit_dao"/>
 	</beans:bean>
 	
 	<!-- 최근본상품 -->
@@ -77,24 +78,18 @@
 	
 	<beans:bean class="controller.MainPageController">
 		<beans:constructor-arg ref="product_dao"/>
+		<beans:constructor-arg ref="visit_dao"/>
 	</beans:bean>
 
 	<!--권한 체크용, 방문자 쿠키 조회용 interceptor-->
 	<beans:bean id="admin_interceptor" class="interceptor.AdminInterceptor"></beans:bean> 
-	<beans:bean id="visitCookie_interceptor" class="interceptor.VisitCookieInterceptor"></beans:bean> 
 	  
 	   <interceptors>
 	        <interceptor>
 	            <mapping path="/admin/main_form.do"></mapping>
 	             <beans:ref  bean="admin_interceptor" />
 	        </interceptor>
-	        <interceptor>
-	            <mapping path="/mainpage/list.do"></mapping>
-	            <mapping path="/admin/**"></mapping>
-	       		 <beans:ref  bean="visitCookie_interceptor" />	
-	        </interceptor>
    	 </interceptors>
     
->>>>>>> f9593033bcd80da53109be49b3d1590f27643d62
 	
 </beans:beans>
