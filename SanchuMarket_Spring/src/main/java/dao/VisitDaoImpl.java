@@ -34,7 +34,7 @@ public class VisitDaoImpl implements VisitDao{
 	//인터셉터에서 쿠키value가 1인 쿠키가 있을때 + 금일 방문자수가 존재할때
 	public int todayVisitUpdate(int count) {
 		
-		return sqlSession.update("visit.today_visitUpdate");
+		return sqlSession.update("visit.today_visitUpdate",count);
 	}
 
 	

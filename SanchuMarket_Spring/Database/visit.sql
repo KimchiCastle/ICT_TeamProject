@@ -5,3 +5,9 @@ create table visit
   v_date date
 )
 
+alter table visit 
+  add constraint pk_v_idx_visit primary key(v_idx);
+
+  select * from visit
+insert into visit values(1,1,sysdate);
+select * from visit where to_char(v_date,'dd') = to_char(sysdate, 'dd')

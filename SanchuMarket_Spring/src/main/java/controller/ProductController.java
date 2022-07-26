@@ -29,6 +29,7 @@ import dao.VisitDao;
 import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
+import util.VisitCookie;
 import vo.ImageVo;
 import vo.JjimVo;
 import vo.ProductVo;
@@ -350,6 +351,16 @@ public class ProductController {
 		model.addAttribute("vo", vo);
 		model.addAttribute("vo2", vo2);
 		
+		
+		//방문자수 쿠키 호출
+		Cookie visitCookie = VisitCookie.getVisitCookie(request, response, visit_dao);
+		
+		//공통적인 경로로 설정
+		visitCookie.setPath("/sanchumarket/");
+		
+		//쿠키 만료 시간 설정
+		visitCookie.setMaxAge(84000);
+		response.addCookie(visitCookie);
 		//-----------------cookie를 기반으로 visitDB 관리----------------------
 		
 		//DB의 금일 방문자 유무 조회
@@ -357,21 +368,18 @@ public class ProductController {
 		
 		//DB의 금일 방문자가 0이면 방문자수 default 1로 visitDB record생성
 		if(visitVo == null) {
-			
 			visit_dao.todayVisitInsert();
 		}
 		//금일 방문자가 1명 이상이면 visitDB update
 		else {
 			
 			if(Integer.parseInt(visitCookie.getValue()) == 1) {
-				
+
 				int todayVisitCount = visitVo.getV_count();
 				
 				int res = visit_dao.todayVisitUpdate(++todayVisitCount);
 			}
 		}
-		
-		
 		
 		return "product/product_detail";
 	}

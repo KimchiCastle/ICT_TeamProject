@@ -171,7 +171,7 @@ th {
 	   </tr>
 	   
 	   <tr>
-	     <th>562명</th>
+	     <th>${ serviceMap.today_v_count }</th>
 	     <th>13명</th>
 	   </tr>
 	   

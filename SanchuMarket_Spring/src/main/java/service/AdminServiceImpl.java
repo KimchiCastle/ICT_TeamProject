@@ -45,7 +45,7 @@ public class AdminServiceImpl implements AdminService {
 //		int today_t_count = trade_dao.todayTradeCount();
 		
 		//금일 방문자수
-//		int today_v_count = visit_dao.todayVisitCount();
+		int today_v_count = visit_dao.todayVisitCount();
 		
 		//금일 가입자수
 //		int today_u_count = user_dao.todayEnrollCount();
@@ -56,7 +56,7 @@ public class AdminServiceImpl implements AdminService {
 //		map.put("ch_list", ch_list);
 		map.put("today_p_count",today_p_count);
 //		map.put("today_t_count",today_t_count);
-//		map.put("today_v_count",today_v_count);
+		map.put("today_v_count",today_v_count);
 //		map.put("today_u_count",today_u_count);
 		
 		//service의 모든 joinpoint들이 advice로 넘어가는 로깅이 1.234초 후에 뜬다. 

@@ -21,7 +21,9 @@ import common.MyConstant;
 import dao.ProductDao;
 import dao.VisitDao;
 import util.Mytime;
+import util.VisitCookie;
 import vo.ProductVo;
+import vo.VisitVo;
 
 @Controller
 @RequestMapping("/mainpage/")
@@ -61,10 +63,38 @@ public class MainPageController {
 			 				)
 	 {
 		 
+
+		//방문자수 쿠키 생성
+		Cookie visitCookie = VisitCookie.getVisitCookie(request, response, visit_dao);
 		
-		 
+		//공통적인 경로로 설정
+		visitCookie.setPath("/sanchumarket/");
 		
+		//쿠키 만료시간 설정
+		visitCookie.setMaxAge(84000);
+		response.addCookie(visitCookie);
+		
+		//-----------------cookie를 기반으로 visitDB 관리----------------------
+		
+		//DB의 금일 방문자 유무 조회
+		VisitVo visitVo = visit_dao.todayVisitSelect();
+		
+		//DB의 금일 방문자가 0이면 방문자수 default 1로 visitDB record생성
+		if(visitVo == null) {
 			
+			visit_dao.todayVisitInsert();
+		}
+		//금일 방문자가 1명 이상이면 visitDB update
+		else {
+			//딱 처음 방문했을떄
+			if(Integer.parseInt(visitCookie.getValue()) == 1) {
+				
+				int todayVisitCount = visitVo.getV_count();
+				
+				int res = visit_dao.todayVisitUpdate(++todayVisitCount);
+			}
+		}
+		
 			//////////////////////////////////////////// 전체목록 가져오기/////////////////////////////////////////
 		 	//	검색어가 비었고					최소가격이 비었고					
 		 	if( searchtext.equals("all") && min_p.equals("no_min") 
@@ -329,12 +359,6 @@ public class MainPageController {
 				model.addAttribute("list", list);
 				
 				System.out.println("상품검색");
-				
-				//-----------------cookie를 기반으로 visitDB 관리----------------------
-				
-				Cookie visitCookie = new Cookie("visitCookie","1");
-				visitCookie.setPath("/sanchumarket/");
-				response.addCookie(visitCookie);
 				
 				
 				return "mainpage/mainpage_list";

@@ -51,6 +51,15 @@ alter table user_market
 	add constraint ck_user_market_u_grade 
 	check( u_grade in( '일반회원','사업자','관리자' ) )
 	
+-----check제약 삭제+재생성(7/27)--------
+alter table user_market
+    drop constraint	ck_user_market_u_grade
+    
+alter table user_market
+     add constraint ck_user_market_u_grade
+     check( u_grade in('일반회원','관리자'))
+    
+	
 --------check 제약2 (7/6 수정)-------
 alter table user_market
     add constraint ck_user_market_u_status
