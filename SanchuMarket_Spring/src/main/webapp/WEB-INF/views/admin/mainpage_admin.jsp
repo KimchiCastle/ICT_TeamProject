@@ -17,7 +17,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <!--chartJS CDN-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script defer src="../resources/js/chart.js"></script>
 
 <style>
 body {
