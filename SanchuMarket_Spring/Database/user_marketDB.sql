@@ -171,6 +171,6 @@ select * from user_market;
 
 select u_id from user_market where u_name='서아진' and u_tel='010-5852-1068'
 
-
+update user_market set u_grade='관리자' where u_idx=2;
 */
 

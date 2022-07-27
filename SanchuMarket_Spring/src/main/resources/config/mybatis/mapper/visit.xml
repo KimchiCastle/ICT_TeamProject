@@ -26,11 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!--첫방문자 이후는 해당 일자의 count만 update-->
   <update id="today_visitUpdate" parameterType="int">
-    update visit set
-    (
-      v_count=#{v_count}
-    )
-    where to_char(v_date,'dd') = to_char(sysdate, 'dd')
+    update visit set v_count=#{v_count} where to_char(v_date,'dd') = to_char(sysdate, 'dd')
   </update>
   
 </mapper>

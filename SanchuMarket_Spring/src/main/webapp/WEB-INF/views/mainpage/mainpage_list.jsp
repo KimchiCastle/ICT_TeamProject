@@ -66,9 +66,10 @@ $(function() {
 	$(".searchtext").on("keyup", function(key) {
 		if (key.keyCode == 13) {
 			send1();
+			
 		}
 	});
-
+	
 });
 	
 

@@ -1,5 +1,6 @@
 package interceptor;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,21 +19,25 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 	    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 	            throws Exception {
 		 	
-	 	HttpSession session = request.getSession();
-	 	UserVo user = (UserVo)session.getAttribute("user");
-	 	
-	 	if (user != null) {
+	 		UserVo user;
 	 		
-	 		if(user.getU_grade() == "관리자") {
-	 			
-	 			return true;
-	 		}
-        }
-        // 여기까지 내려왔다면 세션에 user 속성값이 없다는 뜻이므로 로그인 화면으로 리다이렉트 !
-        response.sendRedirect(request.getContextPath() + "/login");
-        return false;
-		 	
+			try {
+				user = (UserVo)request.getSession().getAttribute("user");
+
+				String u_grade = (String)user.getU_grade();
+			 	
+				if((user==null) || !u_grade.equals("관리자")) {
+			 		response.sendRedirect("../user/login_form.do?reason=onlyadmin");
+			 		return false;
+			 	}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				response.sendRedirect("../user/login_form.do?reason=session_timeout");
+				return false;
+			}
+		
 	        
-	    }
+			return super.preHandle(request, response, handler);
+	 }
 
 }

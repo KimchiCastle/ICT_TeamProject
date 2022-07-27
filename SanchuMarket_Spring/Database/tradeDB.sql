@@ -26,9 +26,6 @@ alter table trade
 	
 
 
-insert into trade values(1,'hong123','haha');
-
-
 
 ---최근 6개 거래량
 select * from (select * from product order by p_idx desc) where ROWNUM  <= 6
