@@ -19,19 +19,23 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 	            throws Exception {
 		 	
 	 	HttpSession session = request.getSession();
-	 	UserVo user = (UserVo)session.getAttribute("user");
 	 	
-	 	if (user != null) {
-	 		
-	 		if(user.getU_grade() == "관리자") {
-	 			
-	 			return true;
-	 		}
-        }
-        // 여기까지 내려왔다면 세션에 user 속성값이 없다는 뜻이므로 로그인 화면으로 리다이렉트 !
-        response.sendRedirect(request.getContextPath() + "/login");
-        return false;
-		 	
+	 	UserVo userVo;
+	 	
+		try {
+			userVo = (UserVo)session.getAttribute("user");
+			
+			System.out.println(userVo.getU_grade());
+			if((userVo==null) || !userVo.getU_grade().equals("관리자")) {
+		 		response.sendRedirect("../user/login_form.do?reason=onlyadmin");
+		 		return false;
+		 	}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	 	return super.preHandle(request, response, handler);
 	        
 	    }
 

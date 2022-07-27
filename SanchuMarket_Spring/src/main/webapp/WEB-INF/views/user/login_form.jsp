@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +34,12 @@
 		  
 		  $(target).find('#idErrMsg').html('').end();
 		  $(target).find('#pwdErrMsg').html('').end();
-		  });
+		  
+		  });//end modal init
 	  
 	});//end document ready
+	
+	
 </script>
 
 <script type="text/javascript">
@@ -73,10 +77,26 @@
 				idCheck();
 			}); 
 			
+			setTimeout(showMessage(),1000);
 			
 		});//end document.ready	
 		
-		
+		function showMessage(){
+			 
+			  if('${ user }' != null){
+				  
+				  var u_id = '${user.u_id}';
+				  var u_pwd = '${user.u_pwd}';
+				  
+				  $("#u_id").val(u_id);
+				  $("#u_pwd").val(u_pwd);
+				  return;
+			  }
+			  
+			  if("${ param.reason eq 'onlyadmin'}"=="true"){
+				  alert('접근 제한 페이지입니다.');
+			  }
+		}
 
 		//로그인
 		function send(){
@@ -413,6 +433,7 @@
 
 <body class="text-center">
 
+<!--로그인폼-->
  <div id="box">
    <div id="form">
     <a href="../mainpage/list.do"><img class="mb-4" src="../resources/image/상추마켓.png" alt="" width="300" height="100"></a>
@@ -434,6 +455,7 @@
       </label>
    </div>
  </div> 
+ 
 <!--아이디찾기-->    
 <a href="#idModal" data-toggle="modal" id="openIdModal">아이디찾기</a>&nbsp;/
 <div class="modal fade" id="idModal" tabindex="-1" role="dialog">
