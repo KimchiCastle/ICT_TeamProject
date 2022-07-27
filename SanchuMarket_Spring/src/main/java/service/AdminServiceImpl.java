@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
 		int today_v_count = visit_dao.todayVisitCount();
 		
 		//금일 가입자수
-//		int today_u_count = user_dao.todayEnrollCount();
+		int today_u_count = user_dao.todayEnrollCount();
 
 		Map map = new HashMap();
 		
@@ -57,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("today_p_count",today_p_count);
 		map.put("today_t_count",today_t_count);
 		map.put("today_v_count",today_v_count);
-//		map.put("today_u_count",today_u_count);
+		map.put("today_u_count",today_u_count);
 		
 		//service의 모든 joinpoint들이 advice로 넘어가는 로깅이 1.234초 후에 뜬다. 
 		//list메소드 호출 간격을 1.234초 유지시키는것.

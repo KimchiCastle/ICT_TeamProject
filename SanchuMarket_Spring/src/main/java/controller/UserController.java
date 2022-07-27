@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -149,10 +149,15 @@ public class UserController {
 		if (userVo == null || !u_pwd.equals(userVo.getU_pwd())) {
 			System.out.println("비번이나 아이디 틀림");
 			bResult = false;
-		} else {
-			System.out.println("로그인성공");
+		} 
+		//로그인 성공시 세션과 쿠키 할당
+		else {
+			//1. 세션 할당
 			HttpSession session = request.getSession();
 			session.setAttribute("user", userVo);
+			
+			//2. 쿠키 할당
+			
 			bResult = true;
 		}
 

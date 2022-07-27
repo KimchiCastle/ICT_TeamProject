@@ -171,8 +171,8 @@ th {
 	   </tr>
 	   
 	   <tr>
-	     <th>${ serviceMap.today_v_count }</th>
-	     <th>13명</th>
+	     <th>${ serviceMap.today_v_count }명</th>
+	     <th>${ serviceMap.today_u_count }명</th>
 	   </tr>
 	   
 	 </table> 	

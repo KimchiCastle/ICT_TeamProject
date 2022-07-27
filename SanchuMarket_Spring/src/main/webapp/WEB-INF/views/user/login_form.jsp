@@ -24,6 +24,8 @@
   //모달창 input data 초기화 
   $(function(){
 	  
+		setTimeout(showMessage(),1000);
+	  
 	  $('[data-dismiss=modal]').on('click', function () {
 		  
 	    var $t = $(this),
@@ -77,7 +79,7 @@
 				idCheck();
 			}); 
 			
-			setTimeout(showMessage(),1000);
+		
 			
 		});//end document.ready	
 		
@@ -95,6 +97,11 @@
 			  
 			  if("${ param.reason eq 'onlyadmin'}"=="true"){
 				  alert('접근 제한 페이지입니다.');
+			  }
+			  
+			  if("${ param.reason eq 'session_timeout'}"=="true"){
+				  console.log('세션만료');
+				  alert('세션이 만료됐습니다.');
 			  }
 		}
 

@@ -1,5 +1,6 @@
 package interceptor;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,25 +19,25 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 	    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 	            throws Exception {
 		 	
-	 	HttpSession session = request.getSession();
-	 	
-	 	UserVo userVo;
-	 	
-		try {
-			userVo = (UserVo)session.getAttribute("user");
-			
-			System.out.println(userVo.getU_grade());
-			if((userVo==null) || !userVo.getU_grade().equals("包府磊")) {
-		 		response.sendRedirect("../user/login_form.do?reason=onlyadmin");
-		 		return false;
-		 	}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	 		UserVo user;
+	 		
+			try {
+				user = (UserVo)request.getSession().getAttribute("user");
 
-	 	return super.preHandle(request, response, handler);
+				String u_grade = (String)user.getU_grade();
+			 	
+				if((user==null) || !u_grade.equals("包府磊")) {
+			 		response.sendRedirect("../user/login_form.do?reason=onlyadmin");
+			 		return false;
+			 	}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				response.sendRedirect("../user/login_form.do?reason=session_timeout");
+				return false;
+			}
+		
 	        
-	    }
+			return super.preHandle(request, response, handler);
+	 }
 
 }
