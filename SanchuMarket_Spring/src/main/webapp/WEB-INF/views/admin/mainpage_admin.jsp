@@ -7,119 +7,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <!--bootStrap-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <!--jquery-->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> -->
 <!--google font CDN-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-<!--chartJS CDN-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
-<style>
-body {
-	font-family: 'Gowun Dodum', sans-serif;
-	font-size: 18px;
-}
-
-.allbody {
-	width: 1300px;
-	margin: auto;
-}
-
-#header {
-	
-}
-
-#content {
-	background-color: #f2f2f2;
-	min-height: 100%;
-}
-
-label {
-	line-height: 40px;
-	text-align: center;
-}
-
-p {
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-}
-
-.board-wrapper {
-	background-color: white;
-	height: 400px;
-	margin: 20px;
-}
-
-#board {
-	width: 390px;
-	height: 350px;
-	display: inline-block;
-	float: left;
-	margin: 20px;
-}
-
-#chat {
-	width: 450px;
-	height: 350px;
-	display: inline-block;
-	float: left;
-	margin: 20px;
-}
-
-#number-wrapper {
-	background-color: white;
-	width: 300px;
-	display: inline-block;
-	margin: 20px;
-	float: left;
-}
-
-#number-table {
-	text-align: center;
-}
-
-th {
-	font-size: 40px;
-}
-
-#doughnut-wrpper {
-	float: left;
-	background-color: white;
-	width: 350px;
-	display: inline-block;
-	margin: 20px;
-	margin-left: 80px;
-}
-
-#line-wrapper {
-	width: 700px;
-	background-color: white;
-	display: inline-block;
-	margin: 20px;
-}
-
-#line-chart {
-	vertical-align: center;
-}
-
-.product_p_name {
-	
-	display: inline-block;
-	width: 245px;
-	
-	vertical-align: middle;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-</style>
+<!--CSS-->
+<link rel="stylesheet" href="../resources/css/admin_form.css">
+<link rel="stylesheet" href="../resources/css/admin_header_form.css">
 
 <script>
+
+$(function(){
 new Chart(document.getElementById("doughnut-chart"), {
     type: 'doughnut',
     data: {
@@ -129,7 +35,7 @@ new Chart(document.getElementById("doughnut-chart"), {
           label: "Population (millions)",
           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#f8f398","#afc5ff"],
           data: [2478,5267,734,784,433,200,100]
-        }
+        } 
       ]
     },
     options: {
@@ -166,7 +72,7 @@ new Chart(document.getElementById("line-chart"), {
   }
 });
 
-
+});//end document ready
 </script>
 </head>
 <body>
@@ -239,8 +145,8 @@ new Chart(document.getElementById("line-chart"), {
   </div><!--end content-->
 </div>
 <div class="b-example-divider"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<!--chartJS CDN-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 </body>
 </html>

@@ -167,6 +167,17 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 ---조회용
 select * from user_market;
 
+select to_char(u_regdate,'mm') as month, count(*) as tot
+	from user_market
+	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
+	group by to_char(u_regdate,'mm')
+
+
+
+
+  
+ 
+
   select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 
 select u_id from user_market where u_name='서아진' and u_tel='010-5852-1068'

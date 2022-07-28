@@ -45,6 +45,15 @@ public class AdminController {
 		
 		 return "admin/mainpage_admin";
 	 }
+	//유저관리
+	@RequestMapping("user_listForm.do")
+	public String userList() {
+		
+		return "admin/user_list";
+	}
+	
+		
+	
 	 
 	 
 	
