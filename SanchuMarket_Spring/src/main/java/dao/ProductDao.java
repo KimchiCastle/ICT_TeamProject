@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 import java.util.Map;
 
+import vo.CategoryVo;
 import vo.ProductVo;
 
 public interface ProductDao {
@@ -36,8 +37,16 @@ public interface ProductDao {
 	//상품정보와 상품이미지 하나만 가져오기
 	public ProductVo selectListproduct(int p_idx);
 
+	//최근 상품 조회(mainpage_admin)
+	public List<ProductVo> selectRecentList();
+		
+	
+	public int todayProductCount();
+		
+	
 	// 상품등록 메서드
 	public int insert(ProductVo vo);
+	
 		
 	//상품검색
 	public List<ProductVo> select_search(Map map);
@@ -49,20 +58,21 @@ public interface ProductDao {
 
 	//가격 범위검색
 	public List<ProductVo> select_price_search(Map map);
+
+	//최근 올라온 상품 6개 조회
+	public List<ProductVo> select_recent_product();
 	
 	// 상품 수정
 	public int update(ProductVo vo);
 	
-	//
+	//상품 상태 수정
 	public int statusUpdate(Map map);
-
-
 	
+	//카테고리에 해당하는 상품 개수 받아오기
+	public List<CategoryVo> select_category_cnt();
 	
+	//전체 카티고리가 총 몇갠지 받아오기
+	public List<CategoryVo> select_category_list();
 
-
-//	//상품리스트 테스트
-//	public List<ProductVo> select();
-//	
 	
 }
