@@ -2,6 +2,9 @@ package controller;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +33,7 @@ import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
 import util.VisitCookie;
+import vo.CategoryVo;
 import vo.ImageVo;
 import vo.JjimVo;
 import vo.ProductVo;
@@ -319,23 +323,64 @@ public class ProductController {
 			) throws Exception {
 		
 		
+		
+		//현재 상품 DB에 있는 카테고리별 상품개수 가지고옥
+		List<CategoryVo> c_list = product_dao.select_category_cnt();//4
+		//[3,4,5,6]
+		
+		//현재 카테고리 DB에 있는 수 받아오기
+		List<CategoryVo>list = product_dao.select_category_list();//6
+		
+		
+		List<Integer> categorysize = new ArrayList<Integer>();
+		
+		List<Integer> list3 = new ArrayList<Integer>();
+		
+		for(int i=0; i<list.size(); i++) {
+			list2.add(i+1);
+		}
+		
+		for(int i=0; i<c_list.size(); i++) {
+			list3.add(c_list.get(i).getC_idx());
+		}
+		
+		
+		for(int i=0; i<list2.size(); i++) {
+			
+			if(!list3.contains(list2.get(i))) {
+				CategoryVo vo = new CategoryVo(i+1, 0);
+				
+				c_list.add(vo);
+			}
+			
+		}
+		
+		
+		for(CategoryVo vo : c_list) {
+			
+			System.out.println(vo.getC_idx());
+			
+		}
+		
+		
+		
 		//만약 들어온 파라미터 값이 null이 아니면
-				if(!p_idx.equals("null")) {
-					
-					
-					//쿠키 생성 key = p_idx , value = p_name
-					//한글(유니코드문제)로 쿠키에 들어가지 못하기 때문에 URLEncoder 사용
-					Cookie cookie = new Cookie(p_idx, URLEncoder.encode(p_name, "utf-8"));
-					
-					
-					//쿠키는 지정한 경로의 하위경로에서만 쿠키에 접근 가능
-					cookie.setPath("/sanchumarket/");
-					
-					
-					//쿠키응답
-					response.addCookie(cookie);
-					
-				}
+		if(!p_idx.equals("null")) {
+			
+			
+			//쿠키 생성 key = p_idx , value = p_name
+			//한글(유니코드문제)로 쿠키에 들어가지 못하기 때문에 URLEncoder 사용
+			Cookie cookie = new Cookie(p_idx, URLEncoder.encode(p_name, "utf-8"));
+			
+			
+			//쿠키는 지정한 경로의 하위경로에서만 쿠키에 접근 가능
+			cookie.setPath("/sanchumarket/");
+			
+			
+			//쿠키응답
+			response.addCookie(cookie);
+			
+		}
 				
 		//p_idx로 상품 전체 가지고오기, 이미지도 다 가지고옴
 		ProductVo vo = product_dao.selectList2(Integer.parseInt(p_idx));

@@ -252,8 +252,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 	</select>
 	
+	<!-- 상품 DB에 각 카테고리에 해당하는 상품 받아오기 -->
+	<select id="product_categorycnt" resultType="vo.CategoryVo">
+		select 
+			c_idx, 
+			count(*) category_cnt
+		 from product 
+		 group by c_idx
+		 order by c_idx
+	</select>
 
-
+	<!-- 카테고리가 총 몇개있는지 받아오기 -->
+	<select id="product_categorynum" resultType="vo.CategoryVo">
+		select * from category
+	</select>
+	
 	<!-- 상품정보 수정 -->
 	<update id="product_update" parameterType="vo.ProductVo">
 		update product set 
