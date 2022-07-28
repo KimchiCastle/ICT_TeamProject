@@ -60,9 +60,6 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectOne("product_rowtotal_c_idx",c_idx);
 	}
 
-
-
-
 	
 	// 카테고리별 조회 
 	@Override
@@ -92,20 +89,6 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectOne("product.product_p_idx_one",p_idx);
 	}
 	
-	
-	//최근 상품 업로드 게시물 6개 조회
-	@Override
-	public List<ProductVo> selectRecentList() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("product.recent_product");
-	}
-
-	//admin mainpage금일 상품 업로드량
-	@Override
-	public int todayProductCount() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("product.today_count");
-	}
 
 	//상품 등록
 	@Override
@@ -151,12 +134,6 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.update("product.product_update",vo);
 	}
 
-	//Admin 페이지 최근상품 6개 조회
-	@Override
-	public List<ProductVo> select_recent_product() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("product.recent_product_six");
-	}
 
 	@Override
 	public int statusUpdate(Map map) {

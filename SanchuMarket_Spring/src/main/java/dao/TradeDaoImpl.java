@@ -16,14 +16,6 @@ public class TradeDaoImpl implements TradeDao{
 		this.sqlSession = sqlSession;
 	}
 
-
-	//admin mainpage 금일 거래량
-	public int todayTradeCount() {
-		
-		return sqlSession.selectOne("trade.today_count");
-	}
-
-
 	@Override
 	public int tradeInsert(TradeVo vo) {
 		// TODO Auto-generated method stub
