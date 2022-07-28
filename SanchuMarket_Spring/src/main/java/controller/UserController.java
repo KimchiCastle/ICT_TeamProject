@@ -178,6 +178,8 @@ public class UserController {
 	@RequestMapping("findId.do")
 	@ResponseBody
 	public String findId(@RequestParam("name") String u_name, @RequestParam("phone") String u_tel) {
+		
+		
 		UserVo vo = new UserVo();
 		vo.setU_name(u_name);
 		vo.setU_tel(u_tel);
@@ -194,7 +196,6 @@ public class UserController {
 				// 정규식 마스킹
 				String id = idList.get(i).replaceAll("(?<=.{5}).", "*");
 
-//					json.put("id", id);
 				jsonArr.add(id);
 			}
 

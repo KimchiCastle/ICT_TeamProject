@@ -1,0 +1,10 @@
+@charset "UTF-8";
+body {
+	font-family: 'Gowun Dodum', sans-serif;
+	font-size: 18px;
+}
+
+.container {
+	width: 1300px;
+	margin: auto;
+}

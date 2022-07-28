@@ -9,7 +9,6 @@ import dao.ProductDao;
 import dao.TradeDao;
 import dao.UserDao;
 import dao.VisitDao;
-import vo.ChatVo;
 import vo.ProductVo;
 
 public class AdminServiceImpl implements AdminService {
@@ -49,6 +48,9 @@ public class AdminServiceImpl implements AdminService {
 		
 		//금일 가입자수
 		int today_u_count = user_dao.todayEnrollCount();
+		
+		//년도별 회원 가입탈퇴수
+		//Map annual_enroll_count = user_dao.countAnnualEnroll();
 
 		Map map = new HashMap();
 		
