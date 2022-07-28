@@ -29,12 +29,19 @@ $(function(){
 new Chart(document.getElementById("doughnut-chart"), {
     type: 'doughnut',
     data: {
-      labels: ["남성의류", "여성의류", "도서/문구", "도서/문구", "음반/악기","가전","뷰티/미용"],
+      labels: ["남성의류", "여성의류", "도서/문구", "음반/악기","가전","뷰티/미용"],
       datasets: [
         {
           label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#f8f398","#afc5ff"],
-          data: [2478,5267,734,784,433,200,100]
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#c45850","#f8f398","#afc5ff"],
+          data: [
+        	  ${ serviceMap.category_list[0].category_cnt },
+        	  ${ serviceMap.category_list[1].category_cnt },
+        	  ${ serviceMap.category_list[2].category_cnt },
+        	  ${ serviceMap.category_list[3].category_cnt },
+        	  ${ serviceMap.category_list[4].category_cnt },
+        	  ${ serviceMap.category_list[5].category_cnt }
+        	  ]
         } 
       ]
     },

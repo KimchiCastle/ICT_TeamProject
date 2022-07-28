@@ -323,44 +323,7 @@ public class ProductController {
 			) throws Exception {
 		
 		
-		
-		//현재 상품 DB에 있는 카테고리별 상품개수 가지고옥
-		List<CategoryVo> c_list = product_dao.select_category_cnt();//4
-		//[3,4,5,6]
-		
-		//현재 카테고리 DB에 있는 수 받아오기
-		List<CategoryVo>list = product_dao.select_category_list();//6
-		
-		
-		List<Integer> categorysize = new ArrayList<Integer>();
-		
-		List<Integer> list3 = new ArrayList<Integer>();
-		
-		for(int i=0; i<list.size(); i++) {
-			list2.add(i+1);
-		}
-		
-		for(int i=0; i<c_list.size(); i++) {
-			list3.add(c_list.get(i).getC_idx());
-		}
-		
-		
-		for(int i=0; i<list2.size(); i++) {
-			
-			if(!list3.contains(list2.get(i))) {
-				CategoryVo vo = new CategoryVo(i+1, 0);
-				
-				c_list.add(vo);
-			}
-			
-		}
-		
-		
-		for(CategoryVo vo : c_list) {
-			
-			System.out.println(vo.getC_idx());
-			
-		}
+
 		
 		
 		
