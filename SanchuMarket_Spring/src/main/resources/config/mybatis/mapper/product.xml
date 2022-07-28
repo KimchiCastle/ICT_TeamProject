@@ -174,13 +174,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		where no between #{ start } and #{ end }
 
-
-
-
-
-
-
-
 <!--   		select p.*,
   		
 		  	to_number(floor((sysdate-p_date)*24*60*60)) as p_time

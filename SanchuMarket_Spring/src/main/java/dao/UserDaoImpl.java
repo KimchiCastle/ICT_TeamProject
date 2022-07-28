@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -108,6 +109,12 @@ public class UserDaoImpl implements UserDao{
 		
 		return sqlSession.delete("user.withdraw_account", u_id);
 		
+	}
+
+	//vo객체를 비효율적으로 만들지 않기 위해 map으로 포장.
+	public Map<String,String> countAnnualEnroll() {
+		
+		return sqlSession.selectMap("user.count_enroll","");
 	}
 
 

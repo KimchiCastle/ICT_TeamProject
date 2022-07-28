@@ -94,15 +94,6 @@
 				  $("#u_pwd").val(u_pwd);
 				  return;
 			  }
-			  
-			  if("${ param.reason eq 'onlyadmin'}"=="true"){
-				  alert('접근 제한 페이지입니다.');
-			  }
-			  
-			  if("${ param.reason eq 'session_timeout'}"=="true"){
-				  console.log('세션만료');
-				  alert('세션이 만료됐습니다.');
-			  }
 		}
 
 		//로그인

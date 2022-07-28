@@ -1,7 +1,7 @@
 package dao;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import vo.UserVo;
 
@@ -53,7 +53,9 @@ public interface UserDao {
 
 
 	public List<String> selectIdByNameTel(UserVo vo);
-
+	
+	public Map countAnnualEnroll();
+	
 
 	
 	

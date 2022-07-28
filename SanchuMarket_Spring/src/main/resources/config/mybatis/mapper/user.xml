@@ -40,6 +40,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select u_id from user_market where u_name=#{u_name} and u_tel=#{u_tel}
 	</select>
 	
+	<!--admin 가입 회원 연도별 조회-->
+	<select id="count_enroll" resultMap="mapList">
+		select to_char(u_regdate},'mm') as month, count(*) as tot
+		from user_market
+		where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
+		group by to_char(u_regdate,'mm')
+	</select>
+	
+	<resultMap type="map" id="mapList"></resultMap>
+	
+	
 	<!--u_photo/u_like/u_profile은 처음 가입시 null/0-->
 	<insert id="user_insert" parameterType="vo.UserVo">
 	insert into user_market values(
