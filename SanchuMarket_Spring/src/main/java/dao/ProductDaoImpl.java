@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.CategoryVo;
 import vo.ProductVo;
 
 public class ProductDaoImpl implements ProductDao {
@@ -162,6 +163,22 @@ public class ProductDaoImpl implements ProductDao {
 	public int statusUpdate(Map map) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("product.product_status_update",map);
+	}
+	
+	
+	//카테고리에 해당하는 상품 개수 받아오기
+	@Override
+	public List<CategoryVo> select_category_cnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product_categorycnt");
+	}
+	
+	
+	//전체 카티고리가 총 몇갠지 받아오기
+	@Override
+	public List<CategoryVo> select_category_list() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product_categorynum");
 	}
 
 	

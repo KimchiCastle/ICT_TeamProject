@@ -181,12 +181,28 @@ select
 
 
 
+--- 조인
+select p.c_idx
+from product p full outer join category c on p.c_idx = c.c_idx
+group by p.c_idx
+
+
+-- 있는 것 만 나옴
+select c_idx,count(*) category_cnt
+	
+   from product group by c_idx 
+order by c_idx
+		
+			
+select c_idx from product
 
 
 
 
-
-
+  select to_char(u_regdate,'mm') as month, count(*) as tot
+   from user_market
+   where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
+   group by to_char(u_regdate,'mm')
 
 
 
