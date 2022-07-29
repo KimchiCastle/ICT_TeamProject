@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dao.AdminDao;
 import dao.ChatDao;
 import dao.ProductDao;
 import dao.TradeDao;
@@ -17,41 +18,30 @@ import vo.ProductVo;
 
 public class AdminServiceImpl implements AdminService {
 
-	ProductDao product_dao;
-	ChatDao chat_dao;
-	TradeDao trade_dao;
-	UserDao user_dao;
-	VisitDao visit_dao;
 	
+	AdminDao admin_dao;
 	
-	public AdminServiceImpl(ProductDao product_dao, ChatDao chat_dao, TradeDao trade_dao, UserDao user_dao,
-			VisitDao visit_dao) {
-		super();
-		this.product_dao = product_dao;
-		this.chat_dao = chat_dao;
-		this.trade_dao = trade_dao;
-		this.user_dao = user_dao;
-		this.visit_dao = visit_dao;
+	public void setAdmin_dao(AdminDao admin_dao) {
+		this.admin_dao = admin_dao;
 	}
 
 	@Override
 	public Map list() {
 		
-		//실시간 상품&채팅 업로드(list한칸 안에 최근 vo객체 하나 들어가있음(최대 6개))
-		List<ProductVo> p_list = product_dao.select_recent_product();
-//		List<ChatVo> ch_list = chat_dao.SelectRecentList();
+		//실시간 상품 업로드(list한칸 안에 최근 vo객체 하나 들어가있음(최대 6개))
+		List<ProductVo> p_list = admin_dao.select_recent_product();
 		
 		//금일 상품업로드
-		int today_p_count = product_dao.todayProductCount();
+		int today_p_count = admin_dao.todayProductCount();
 		
 		//금일 거래량
-		int today_t_count = trade_dao.todayTradeCount();
+		int today_t_count = admin_dao.todayTradeCount();
 		
 		//금일 방문자수
-		int today_v_count = visit_dao.todayVisitCount();
+		int today_v_count = admin_dao.todayVisitCount();
 		
 		//금일 가입자수
-		int today_u_count = user_dao.todayEnrollCount();
+		int today_u_count = admin_dao.todayEnrollCount();
 		
 		
 		/*
@@ -111,7 +101,7 @@ public class AdminServiceImpl implements AdminService {
 	
 		
 		//년도별 회원 가입탈퇴수
-		//Map annual_enroll_count = user_dao.countAnnualEnroll();
+		//Map annual_enroll_count = admin_dao.countAnnualEnroll();
 
 		Map map = new HashMap();
 		

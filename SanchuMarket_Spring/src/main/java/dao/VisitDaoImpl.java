@@ -13,11 +13,6 @@ public class VisitDaoImpl implements VisitDao{
 		this.sqlSession = sqlSession;
 	}
 
-	//admin mainpage 금일 방문자수 통계
-	public int todayVisitCount() {
-		
-		return sqlSession.selectOne("visit.today_count");
-	}
 	
 	//금일 첫 방문자 유무 조회
 	public VisitVo todayVisitSelect() {

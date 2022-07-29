@@ -5,11 +5,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<bean id="adminService" class="service.AdminServiceImpl">
-	    <constructor-arg ref="product_dao"/>
-	    <constructor-arg ref="chat_dao"/>
-	    <constructor-arg ref="trade_dao"/>
-	    <constructor-arg ref="user_dao"/>
-	    <constructor-arg ref="visit_dao"/>
+	  <property name="admin_dao" ref="admin_dao"></property>
 	</bean>
 	
 </beans>

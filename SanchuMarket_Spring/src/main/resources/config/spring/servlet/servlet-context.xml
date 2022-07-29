@@ -45,6 +45,7 @@
 	
 	<beans:bean class="controller.AdminController">
 		<beans:property name="adminService" ref="adminService"/>
+		<beans:property name="admin_dao" ref="admin_dao"/>
 	</beans:bean>	
 	
 	<!-- 상품등록 관련 컨트롤러 -->
