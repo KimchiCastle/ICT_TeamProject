@@ -62,8 +62,6 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 
-
-
 	
 	// 카테고리별 조회 
 	@Override
@@ -72,7 +70,7 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectList("product.product_c_idx", map);
 	}
 
-	//회원
+	//회원이 올린 상품 전체 조회
 	@Override
 	public List<ProductVo> selectList(int u_idx) {
 		// TODO Auto-generated method stub
@@ -85,8 +83,8 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_p_idx",p_idx);
 	}
-	
-	//상품정보와 상품이미지 하나만 가져오기
+	 
+	//상품정보와 상품이미지 하나만 가져오기 p_idx 넣음
 	@Override
 	public ProductVo selectListproduct(int p_idx) {
 		// TODO Auto-generated method stub
@@ -158,7 +156,9 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.recent_product_six");
 	}
-
+	
+	
+	//거래상태 업데이트
 	@Override
 	public int statusUpdate(Map map) {
 		// TODO Auto-generated method stub

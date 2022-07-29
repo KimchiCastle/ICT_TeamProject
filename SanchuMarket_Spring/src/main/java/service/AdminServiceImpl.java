@@ -1,6 +1,8 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +64,6 @@ public class AdminServiceImpl implements AdminService {
 		
 		//현재 상품 DB에 있는 카테고리별 상품개수 가지고옥
 		List<CategoryVo> category_list = product_dao.select_category_cnt();//4
-		//[3,4,5,6]
 		
 		//현재 카테고리 DB에 있는 수 받아오기
 		List<CategoryVo> list = product_dao.select_category_list();//6
@@ -84,12 +85,28 @@ public class AdminServiceImpl implements AdminService {
 		
 		for(int i=0; i<categorysize.size(); i++) {
 			
+			//
 			if(!productsize.contains(categorysize.get(i))) {
 				CategoryVo vo = new CategoryVo(i+1, 0);
 				category_list.add(vo);
 			}
 			
 		}
+		
+		//객체 정렬하기
+		Collections.sort(category_list, new Comparator<CategoryVo>() {
+
+			@Override
+			public int compare(CategoryVo o1, CategoryVo o2) {
+				// TODO Auto-generated method stub
+				
+				return o1.getC_idx()-o2.getC_idx();
+			}
+		});
+		
+		
+	
+		
 		
 	
 		

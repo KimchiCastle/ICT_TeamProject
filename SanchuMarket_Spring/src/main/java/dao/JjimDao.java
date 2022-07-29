@@ -1,10 +1,13 @@
 package dao;
 
+import java.util.List;
 import java.util.Map;
 
 import vo.JjimVo;
 
 public interface JjimDao {
+	
+	public List<JjimVo> selectList(int u_idx);
 	
 	public JjimVo selectOne(Map map);
 	
