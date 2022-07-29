@@ -8,11 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import dao.AdminDao;
-import dao.ChatDao;
-import dao.ProductDao;
-import dao.TradeDao;
-import dao.UserDao;
-import dao.VisitDao;
 import vo.CategoryVo;
 import vo.ProductVo;
 
@@ -53,10 +48,10 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 		//현재 상품 DB에 있는 카테고리별 상품개수 가지고옥
-		List<CategoryVo> category_list = product_dao.select_category_cnt();//4
+		List<CategoryVo> category_list = admin_dao.select_category_cnt();//4
 		
 		//현재 카테고리 DB에 있는 수 받아오기
-		List<CategoryVo> list = product_dao.select_category_list();//6
+		List<CategoryVo> list = admin_dao.select_category_list();//6
 		
 		// 카테고리 사이즈 크기 지정
 		List<Integer> categorysize = new ArrayList<Integer>();

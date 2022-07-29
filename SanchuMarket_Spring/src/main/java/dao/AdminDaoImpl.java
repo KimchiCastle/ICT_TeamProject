@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.CategoryVo;
 import vo.ProductVo;
 
 public class AdminDaoImpl implements AdminDao{
@@ -58,6 +59,21 @@ public class AdminDaoImpl implements AdminDao{
 	public Map<String,String> countAnnualEnroll() {
 		
 		return sqlSession.selectMap("user.count_enroll","");
+	}
+	
+	//카테고리에 해당하는 상품 개수 받아오기
+	@Override
+	public List<CategoryVo> select_category_cnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product_categorycnt");
+	}
+	
+	
+	//전체 카티고리가 총 몇갠지 받아오기
+	@Override
+	public List<CategoryVo> select_category_list() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product_categorynum");
 	}
 
 
