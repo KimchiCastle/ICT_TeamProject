@@ -114,7 +114,6 @@ $(function(){
 	        <th>주소</th>
 	      </tr>
 	    </thead>
-	 <c:if test=${ }>   
 	  <c:forEach var="list" items="">
 	    <tbody>
 	      <tr>
@@ -126,7 +125,6 @@ $(function(){
 	        <td></td>
 	    </tbody>    
 	  </c:forEach>
-    </c:if>
     </table>
   </div>
 
