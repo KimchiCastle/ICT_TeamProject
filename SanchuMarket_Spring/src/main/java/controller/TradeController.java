@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.ProductDao;
@@ -136,6 +137,40 @@ public class TradeController {
 		return resultmap;
 	}
 	
+	@RequestMapping("tradeCheck.do")
+	@ResponseBody
+	public Map tradeCheck(int p_idx, 
+			@RequestParam(value="u_idx", required=false, defaultValue="0") int u_idx) {
+		
+		Map map = new HashMap();
+		
+		boolean result = false;
+		System.out.println(u_idx);
+		if(u_idx==0) {
+			map.put("result", result);
+			
+			return map;
+		}
+		
+		//파라미터로 받아온 u_idx로 회원정보 가지고오기
+		UserVo uservo = user_dao.selectOneByIdx(u_idx);
+		
+		System.out.println(uservo.getU_nickname());
+		
+		//거래 테이블 조회용 map 선언
+		Map selectMap = new HashMap();
+		selectMap.put("buyer", uservo.getU_nickname());
+		selectMap.put("p_idx", p_idx);
+		
+		//거래테이블 조회
+		TradeVo tradeVo = trade_dao.select_user(selectMap);
+		
+		result = (tradeVo!=null);
+		
+		map.put("result", result);
+		
+		return map;
+	}
 	
 	
 }

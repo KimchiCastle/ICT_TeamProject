@@ -32,6 +32,9 @@ select * from (select * from product order by p_idx desc) where ROWNUM  <= 6
 
 select * from trade
 
+select * from ( select * from trade where t_status = '판매완료' order by t_date )	where ROWNUM <= 6
+
+
 
 */
 

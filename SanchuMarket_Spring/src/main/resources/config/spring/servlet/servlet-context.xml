@@ -41,6 +41,7 @@
 	
 	<beans:bean class="controller.EmailController">
 		<beans:property name="mailSender" ref="mailSender"/>
+		<beans:property name="user_dao" ref="user_dao"/>
 	</beans:bean>
 	
 	<beans:bean class="controller.AdminController">

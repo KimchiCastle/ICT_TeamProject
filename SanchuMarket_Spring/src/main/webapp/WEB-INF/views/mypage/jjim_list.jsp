@@ -35,10 +35,10 @@
 	
 	function deljjim(p_idx){
 		
-		var u_idx = ${ param.u_idx }.val();
+		var u_idx = ${ param.u_idx };
 		
 		$.ajax({
-			uri		: '${pagecContext}/jjimoff.do',
+			url		: '${ pageContext.request.contextPath }/product/jjimoff.do',
 			type 	:  'POST',
 			data	: {'p_idx':p_idx, 'u_idx':u_idx },
 			success	: function(res){
@@ -76,14 +76,20 @@
 			<td></td>
 		</tr>
 		
+		<c:if test="${ empty product_list }">
+			<tr>
+				<td colspan="5"><span style=" color:red;">찜한 상품이 존재하지 않습니다.</span></td>
+			</tr>
+		</c:if>
+		
 		<c:forEach var="product" items="${ product_list }">
 			<c:set var="i" value="${i+1}"/>
-			<tr onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
-				<td >${ i }</td>
-				<td><img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="50px" height="50px"></td>
-				<td align="left">${ product.p_name }</td>
-				<td><fmt:formatNumber pattern="#,###" value="${ product.p_price }"/>&nbsp;원</td>
-				<td> 
+			<tr style="cursor: pointer;">
+				<td style="vertical-align: middle;" onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">${ i }</td>
+				<td onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'"><img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="50px" height="50px"></td>
+				<td onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'" style="vertical-align: middle;" align="left">${ product.p_name }</td>
+				<td onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'" style="vertical-align: middle;" ><fmt:formatNumber pattern="#,###" value="${ product.p_price }"/>&nbsp;원</td>
+				<td style="vertical-align: middle;"> 
 					<button type="button" class="btn btn-Warnning" onclick="deljjim(${ product.p_idx });">삭제</button>
 				 </td>
 			</tr>

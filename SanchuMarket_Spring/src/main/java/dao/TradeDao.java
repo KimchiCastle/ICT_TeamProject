@@ -10,6 +10,8 @@ public interface TradeDao {
 	
 	public int tradeInsert(TradeVo vo);
 
-	public int statusUpdate(Map Map);
+	public int statusUpdate(Map map);
+
+	public TradeVo select_user(Map map);
 
 }
