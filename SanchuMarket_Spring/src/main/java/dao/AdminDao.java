@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 import java.util.Map;
 
+import vo.CategoryVo;
 import vo.ProductVo;
 
 public interface AdminDao {
@@ -28,5 +29,12 @@ public interface AdminDao {
 	
 	//년도별 가입자수
 	public Map countAnnualEnroll();
+	
+	//카테고리에 해당하는 상품 개수 받아오기
+	public List<CategoryVo> select_category_cnt();
+	
+	//전체 카티고리가 총 몇갠지 받아오기
+	public List<CategoryVo> select_category_list();
+	
 
 }

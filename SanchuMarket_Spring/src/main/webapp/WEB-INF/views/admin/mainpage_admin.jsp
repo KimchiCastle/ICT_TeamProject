@@ -40,7 +40,7 @@ new Chart(document.getElementById("doughnut-chart"), {
         	  ${ serviceMap.category_list[2].category_cnt },
         	  ${ serviceMap.category_list[3].category_cnt },
         	  ${ serviceMap.category_list[4].category_cnt },
-        	  ${ serviceMap.category_list[5].category_cnt }
+        	  ${ serviceMap.category_list[5].category_cnt },
         	  ]
         } 
       ]

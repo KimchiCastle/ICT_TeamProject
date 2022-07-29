@@ -68,11 +68,7 @@ public interface ProductDao {
 	//상품 상태 수정
 	public int statusUpdate(Map map);
 	
-	//카테고리에 해당하는 상품 개수 받아오기
-	public List<CategoryVo> select_category_cnt();
-	
-	//전체 카티고리가 총 몇갠지 받아오기
-	public List<CategoryVo> select_category_list();
+
 
 	
 }

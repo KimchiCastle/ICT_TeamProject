@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import vo.CategoryVo;
 import vo.ProductVo;
 
-public class ProductDaoImpl implements ProductDao {
+public  class ProductDaoImpl implements ProductDao {
 
 	SqlSession sqlSession;
 	
@@ -61,6 +61,7 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectOne("product_rowtotal_c_idx",c_idx);
 	}
 
+
 	
 	// 카테고리별 조회 
 	@Override
@@ -69,7 +70,7 @@ public class ProductDaoImpl implements ProductDao {
 		return sqlSession.selectList("product.product_c_idx", map);
 	}
 
-	//회원
+	//회원이 올린 상품 전체 조회
 	@Override
 	public List<ProductVo> selectList(int u_idx) {
 		// TODO Auto-generated method stub
@@ -82,8 +83,8 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product.product_p_idx",p_idx);
 	}
-	
-	//상품정보와 상품이미지 하나만 가져오기
+	 
+	//상품정보와 상품이미지 하나만 가져오기 p_idx 넣음
 	@Override
 	public ProductVo selectListproduct(int p_idx) {
 		// TODO Auto-generated method stub
@@ -136,6 +137,15 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 
+	//Admin 페이지 최근상품 6개 조회
+	@Override
+	public List<ProductVo> select_recent_product() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.recent_product_six");
+	}
+	
+	
+	//거래상태 업데이트
 	@Override
 	public int statusUpdate(Map map) {
 		// TODO Auto-generated method stub
@@ -143,19 +153,17 @@ public class ProductDaoImpl implements ProductDao {
 	}
 	
 	
-	//카테고리에 해당하는 상품 개수 받아오기
+
 	@Override
-	public List<CategoryVo> select_category_cnt() {
+	public List<ProductVo> selectRecentList() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product_categorycnt");
+		return null;
 	}
-	
-	
-	//전체 카티고리가 총 몇갠지 받아오기
+
 	@Override
-	public List<CategoryVo> select_category_list() {
+	public int todayProductCount() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product_categorynum");
+		return 0;
 	}
 
 	
