@@ -294,7 +294,7 @@ li, ul{
 			<div class="btn_place">
 				<a class="btn" onclick="location.href='../product/insert_form.do'"><img src="${ pageContext.request.contextPath }/resources/image/sell.png" width="30px">&nbsp;판매하기</a>
 				 &nbsp;&nbsp;|&nbsp;
-				<a class="btn" onclick="location.href='../mypage/list.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;마이페이지</a>
+				<a class="btn" onclick="location.href='../sellerpage/list.do?u_idx=${user.u_idx}'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;마이페이지</a>
 			</div>
 		</c:if>
 	
@@ -322,12 +322,11 @@ li, ul{
 		<c:if test="${ not empty sessionScope.user }">
 			<div style="float: right; margin-right: 62px;">
 				
-				<a class="btn" onclick="location.href='../mypage/myjjim.do?u_idx=${ user.u_idx }'"><img src="${ pageContext.request.contextPath }/resources/image/cart.png" width="30px">&nbsp;찜 보기</a>
+				<a class="btn" onclick="location.href='../mypage/myjjim.do?u_idx=${ user.u_idx }'"><img src="${ pageContext.request.contextPath }/resources/image/cart.png" width="30px">&nbsp;장바구니</a>
 			</div>
 		</c:if>
 		<c:if test="${ not empty sessionScope.user }">
 			<div style="float: right; margin-right: 52px;">
-				
 				<a class="btn" onclick="location.href='../mainpage/logout.do'"><img src="${ pageContext.request.contextPath }/resources/image/mypage.png" width="30px">&nbsp;로그아웃</a>
 			</div>
 		</c:if>

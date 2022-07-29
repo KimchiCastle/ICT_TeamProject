@@ -6,9 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--금일 상품 거래량-->
 	<select id="today_count" resultType="int">
-	  select count(*) from trade where to_char(t_date,'dd') = to_char(sysdate, 'dd') and t_status = '판매완료'
+		select count(*) from trade where to_char(t_date,'dd') = to_char(sysdate, 'dd') and t_status = '판매완료'
 	</select>
 	
+	<!-- 최근 거래 상품 6개 -->
+	<select id="trade_count_six" resultType="vo.TradeVo">
+		<![CDATA[  select * from ( select * from trade where t_status = '판매완료' order by t_date )where ROWNUM <= 6 ]]>
+	</select>
+	
+	<select id="trade_select" parameterType="java.util.Map" resultType="vo.TradeVo">
+		select * from trade where p_idx=#{p_idx} and buyer=#{buyer}
+	</select>
+	
+	<!-- 테이블에 등록 -->
 	<insert id="trade_insert" parameterType="vo.TradeVo">
 		insert into trade values(
 		#{p_idx},
@@ -19,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 거래 업데이트 -->
 	<update id="trade_update" parameterType="java.util.Map">
 		update trade set t_status=#{p_status}, t_date=sysdate where p_idx=#{p_idx}
 	</update>

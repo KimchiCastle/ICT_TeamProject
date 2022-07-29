@@ -8,211 +8,20 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>상추마켓</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!-- 페이지 들어올때 이상품이 찜이 되어있는지 아닌지 확인 -->
-<script type="text/javascript">
-	
-	$(function(){
-		
-		var p_idx = $("#p_idx").val();
-		var u_idx = $("#buyer_u_idx").val();
-		
-		$.ajax({
-			
-			url		: 'jjimCheck.do',
-			type	: 'post',
-			data	: {'p_idx':p_idx, 'u_idx':u_idx},
-			success	: function(res){
-				
-				if(res.result){
-					
-					console.log('찜 있음')
-					$("#jjim_off").css('display','inline-block')
-					
-				}else{
-
-					console.log('찜 없음')
-					$("#jjim_on").css('display','inline-block')
-				
-				}
-				
-			}
-			
-		})
-		
-		
-	});
-
-</script>
-
-<!-- 찜기능 on off 함수 -->
-<script type="text/javascript">
-	
-	function jjimOn(){
-		
-		
-		var p_idx = $("#p_idx").val();
-		var u_idx = $("#buyer_u_idx").val().trim();
-		
-		if(u_idx==''){
-			
-			if(confirm("로그인후 이용가능 합니다.\n로그인 하시겠습니까?")==false) return;
-			
-			location.href="../user/login_form.do?url=" + encodeURIComponent(location.href);
-			
-			return;
-		}
-		
- 		$.ajax({
-			
-			url	     : 'jjimon.do',
-			type	 : 'POST',
-			data     : {"p_idx":p_idx, "u_idx":u_idx},
-			success	 : function(res){
-				
-				if(res.result){
-					
-					$("#jjim_on").css('display','none');
-					$("#jjim_off").css('display','inline-block');
-				
-				}else{
-					
-					alert('찜 등록을 실패하였습니다. 관리자에게 문의하세요');
-				
-				}
-				
-			},error	 : function(err){
-				alert('찜 등록을 실패하였습니다. 관리자에게 문의하세요');
-			}
-			
-		});
-		
-		
-		
-	}
-	
-	function jjimOff(){
-		
-		var p_idx = $("#p_idx").val();
-		var u_idx = $("#buyer_u_idx").val().trim();
-		
-		
-		$.ajax({
-			
-			url	     : 'jjimoff.do',
-			type	 : 'POST',
-			data     : {"p_idx":p_idx, "u_idx":u_idx},
-			success	 : function(res){
-				
-				if(res.result){
-					
-					$("#jjim_off").css('display','none');
-					$("#jjim_on").css('display','inline-block');
-				
-				}else{
-					
-					alert('찜 해제을 실패하였습니다. 관리자에게 문의하세요');
-				
-				}
-				
-			},error	 : function(err){
-				alert('찜 해제을 실패하였습니다. 관리자에게 문의하세요');
-			}
-			
-		});
-		
-	}
-
-
-</script>
-
-<!-- 거래하기기능 -->
-<script type="text/javascript">
-
-	function trade(p_idx){
-		
-		var seller_u_idx = $("#seller_u_idx").val();
-		var buyer_u_idx = $("#buyer_u_idx").val();
-		
-		if(buyer_u_idx==''){
-			
-			if(confirm("로그인후 이용가능 합니다.\n로그인 하시겠습니까?")==false) return;
-			
-			location.href="../user/login_form.do?url=" + encodeURIComponent(location.href);
-			
-			return;
-		}
-		
-		if(!confirm('상품을 구매하시겠습니까?')) return;
-		
-		
-		$.ajax({
-		
-			url		:  'trade.do',
-			type	: 'POST',
-			dataType: 'json',
-			data	: {
-						"seller_u_idx":seller_u_idx, 
-						"buyer_u_idx":buyer_u_idx, 
-						"p_idx":p_idx},
-			success : function(res){
-				
-				if(res.result){
-					window.location.reload();
-				}else{
-					alert('상품 구매시 문제가 발생했습니다. 관리자에게 문의하세요.');
-				}
-				
-			},
-			error	: function(err){
-				alert('상품 구매시 문제가 발생했습니다. 관리자에게 문의하세요.');
-			}
-			
-		});
-		
-		
-		
-	}
-
-</script>
-
-<script type="text/javascript">
-	
-	function sell(p_idx){
-		
-		if(!confirm('상품을 판매하시겠습니까?')) return;
-		
-		$.ajax({
-			
-			url		: 'product_sell.do',
-			type	: 'POST',
-			data	: {"p_idx" : p_idx},
-			success	: function(res){
-				
-				
-				
-			},
-			error	: function(err){
-				
-				alert("상품판매시 문제가 발생했습니다. 관리자에게 문의하세요.");
-				
-			}
-			
-			
-		});		
-		
-		
-	}
-	
-</script>
-
 
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/product_detail.css">
+
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/product_detail.js"></script>	
+
+
+
 
 </head>
 <body>
@@ -304,10 +113,15 @@
 				
 				<!-- 다른사람들에겐 얼럿띄우기 -->
 				<c:if test="${ vo.u_idx ne user.u_idx }">
-					<button type="button" class="btn" onclick="alert('거래중인 상품입니다.')" style=" background-color: rgb(240,240,240); width: 100px;">
+					<button type="button" class="btn" onclick="alert('거래중인 상품입니다.')" id="trade_on"
+					style=" background-color: rgb(240,240,240); width: 100px; display: none;">
 						<span style="color: black; font-size: 20px;">거래중</span>
 					</button>
 				</c:if>
+				<button type="button" class="btn" onclick="alert('거래중취소합니다.')" id="cancel_trade"
+				style=" background-color: rgb(240,240,240); width: 100px; display: none;">
+					<span style="color: black; font-size: 20px;">취소하기</span>
+				</button>
 			</c:if>
 			</div>
 			
@@ -350,6 +164,8 @@
 			id="modifyButton" onclick="location.href='modify_form.do?p_idx=${ vo.p_idx }'">
 		</div>	
 	</c:if>	
+	
+	<div style="min-height: 200px;"></div>
 		
 	</div>
 	

@@ -43,7 +43,7 @@
 		font-family: 맑은굴림;
 	}
 
-.report_box{
+	.report_box{
 		
 	
 		display: inline-block;
@@ -59,10 +59,6 @@
 		
 		text-align: left;
 		
-	}
-	
-	.btn{
-		width: 80px;
 	}
 	
 	/* 쉐도우 효과*/

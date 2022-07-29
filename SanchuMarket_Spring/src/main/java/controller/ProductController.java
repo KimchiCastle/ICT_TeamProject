@@ -37,6 +37,7 @@ import vo.CategoryVo;
 import vo.ImageVo;
 import vo.JjimVo;
 import vo.ProductVo;
+import vo.TradeVo;
 import vo.UserVo;
 import vo.VisitVo;
 
@@ -487,7 +488,6 @@ public class ProductController {
 		return map;
 	}
 	
-	
-	
+
 	
 }

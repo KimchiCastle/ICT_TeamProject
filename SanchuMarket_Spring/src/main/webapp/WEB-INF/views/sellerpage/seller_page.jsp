@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +74,7 @@
 <body >
 
 
-<%@ include file="report_popup.jsp" %>
+
 
 <div>
 	<%@ include file="../mainpage/header&sidebar.jsp"%>
@@ -96,7 +99,7 @@
 						<div id="u_like">회원 평점 : ${ user_info.u_like }</div>
 					</div>
 					<div id="seller-info3">
-						
+						${ user_info.u_profile }
 					</div>
 					<div id="seller-info4">
 							<div style="cursor: pointer; margin-top: 10px;"
@@ -110,7 +113,7 @@
 							</div>
 							
 							</div>
-						</div>
+					</div>
 				</div>
 				
 			</div>
@@ -124,12 +127,21 @@
 
 		</div>
 		<%@ include file="../mainpage/content.jsp"%>
-
+		
+		<div align="center" style="min-height: 200px;">
+			<c:if test="${ user.u_idx eq user_info.u_idx }">
+			<button class="btn" onclick="myInfoModify();"
+			style="background-color: #ccffcc; width: 150px; height: 50px; outline: none;">
+				<span style="font-size: 22px;">개인정보수정</span>
+			</button>
+			</c:if>
+		</div>
+		
 	</div>
 
 </div>
 
-
+<%@ include file="report_popup.jsp" %>
 
 
 

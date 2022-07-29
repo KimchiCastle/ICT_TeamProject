@@ -10,9 +10,6 @@
       href="${ pageContext.request.contextPath }/resources/css/product_insert.css">
 
 
-
-
-
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -250,7 +247,9 @@
 			</table>
 
 		</div>
-
+	
+	<div style="min-height: 200px;"></div>
+	
 	</div>
 
 </body>

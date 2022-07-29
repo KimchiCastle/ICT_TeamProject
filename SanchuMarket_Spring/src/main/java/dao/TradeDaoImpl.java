@@ -28,6 +28,12 @@ public class TradeDaoImpl implements TradeDao{
 		// TODO Auto-generated method stub
 		return sqlSession.update("trade.trade_update", map);
 	}
+
+	@Override
+	public TradeVo select_user(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("trade.trade_select",map);
+	}
 	
 	
 	
