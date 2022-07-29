@@ -36,9 +36,6 @@ public interface UserDao {
 	//비밀번호 찾기시 아이디,이메일 존재 여부
 	public int countForFindPwd(UserVo vo);
 	
-	//admin mainpage 금일 가입수
-	public int todayEnrollCount();
-	
 		
 	public int insert(UserVo vo);
 		
@@ -54,7 +51,7 @@ public interface UserDao {
 
 	public List<String> selectIdByNameTel(UserVo vo);
 	
-	public Map countAnnualEnroll();
+	
 	
 
 	

@@ -104,47 +104,29 @@ $(function(){
   <!-- Table starts here -->
   <table id="table" class="table table-hover table-mc-light-blue">
   
-  <c:forEach var="list" items="">
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tbody>    
-      
-  
-  </c:forEach>
-  
-      <thead>
-        <tr>
-          <th>no</th>
-          <th>이름</th>
-          <th>아이디</th>
-          <th>link</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        <tr>
-          <td data-title="ID">1</td>
-          <td data-title="Name">Material Design Color Palette</td>
-          <td data-title="Link">
-            <a href="https://github.com/zavoloklom/material-design-color-palette" target="_blank">GitHub</a>
-          </td>
-          <td data-title="Status">Completed</td>
-        </tr>
-        
-      </tbody>
+	   <thead>
+	      <tr>
+	        <th>no</th>
+	        <th>이름</th>
+	        <th>아이디</th>
+	        <th>link</th>
+	        <th>전화번호</th>
+	        <th>주소</th>
+	      </tr>
+	    </thead>
+	 <c:if test=${ }>   
+	  <c:forEach var="list" items="">
+	    <tbody>
+	      <tr>
+	        <td></td>
+	        <td></td>
+	        <td></td>
+	        <td></td>
+	        <td></td>
+	        <td></td>
+	    </tbody>    
+	  </c:forEach>
+    </c:if>
     </table>
   </div>
 

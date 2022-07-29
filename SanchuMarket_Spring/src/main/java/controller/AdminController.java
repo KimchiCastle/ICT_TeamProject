@@ -28,7 +28,13 @@ public class AdminController {
 	 @Autowired 
 	 HttpServletRequest request;
 	 
-	 AdminService adminService;
+	 AdminDao admin_dao;
+	 
+	 public void setAdmin_dao(AdminDao admin_dao) {
+		this.admin_dao = admin_dao;
+	}
+	 
+	AdminService adminService;
 
 	 public void setAdminService(AdminService adminService) {
 		this.adminService = adminService;

@@ -70,12 +70,6 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("user.check_emailAndId",vo);
 	}
 	
-	//admin mainpage 금일 가입수
-	public int todayEnrollCount() {
-		
-		return sqlSession.selectOne("user.enroll_count");
-	}
-		
 	
 	public int insert(UserVo vo) {
 
@@ -110,18 +104,6 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.delete("user.withdraw_account", u_id);
 		
 	}
-
-	//vo객체를 비효율적으로 만들지 않기 위해 map으로 포장.
-	public Map<String,String> countAnnualEnroll() {
-		
-		return sqlSession.selectMap("user.count_enroll","");
-	}
-
-
-
-
-
-	
 
 	
 }
