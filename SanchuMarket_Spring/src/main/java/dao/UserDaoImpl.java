@@ -85,11 +85,6 @@ public class UserDaoImpl implements UserDao{
 	//아이디찾기(중복아이디허용)
 	public List<String> selectIdByNameTel(UserVo vo) {
 		
-		/*
-		 * System.out.printf("daoimple의u_name:%s\n",vo.getU_name());
-		 * System.out.printf("daoimple의u_tel:%s\n",vo.getU_tel());
-		 */
-		
 		return sqlSession.selectList("user.findId", vo);
 	}
 	
@@ -103,6 +98,14 @@ public class UserDaoImpl implements UserDao{
 		
 		return sqlSession.delete("user.withdraw_account", u_id);
 		
+	}
+
+
+	//회원탈퇴시 비밀번호 조회
+	@Override
+	public UserVo selectOneByPwd(String u_pwd) {
+		
+		return sqlSession.selectOne("user.check_pwd",u_pwd);
 	}
 
 	

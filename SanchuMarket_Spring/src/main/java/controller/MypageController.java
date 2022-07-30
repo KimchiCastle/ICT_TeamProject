@@ -48,15 +48,6 @@ public class MypageController {
 	}
 
 	
-	@RequestMapping("list.do")
-	public String list(Model model) {
-		
-		//로그인 정보 읽어오기
-		UserVo u_idx = (UserVo) session.getAttribute("u_idx");
-		
-		return"mypage/mypage_main";
-	}
-	
 	@RequestMapping("myjjim.do")
 	public String jjim_list(Model model, int u_idx) {
 		
@@ -76,6 +67,20 @@ public class MypageController {
 		
 		return "mypage/jjim_list";
 	}
+	
+	
+	@RequestMapping("myInfoModify_form.do")
+	public String infoModify(Model model,int u_idx) {
+		
+		//유저정보 받아오기
+		UserVo vo = user_dao.selectOneByIdx(u_idx);
+		
+		model.addAttribute("vo",vo);
+		
+		
+		return "mypage/mypage_modify";
+	}
+	
 	
 	
 }

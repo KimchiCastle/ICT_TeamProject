@@ -50,6 +50,9 @@ public interface UserDao {
 
 
 	public List<String> selectIdByNameTel(UserVo vo);
+
+
+	public UserVo selectOneByPwd(String u_pwd);
 	
 	
 	

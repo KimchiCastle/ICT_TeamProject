@@ -89,6 +89,10 @@
 	            <mapping path="/admin/main_form.do"></mapping>
 	             <beans:ref  bean="admin_interceptor" />
 	        </interceptor>
+	        <interceptor>
+	        	<mapping path="/mypage/myInfoModify_form.do"/>
+	        	<beans:ref bean="admin_interceptor"/>
+	        </interceptor>
    	 </interceptors>
 	
 </beans:beans>

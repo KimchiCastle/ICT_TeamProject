@@ -126,6 +126,25 @@
 
 </script>
 
+<script type="text/javascript">
+	
+	$(function(){
+		
+		setTimeout(showMesseage,500);
+		
+	});
+	
+	function showMesseage(){
+		
+		if('${param.reason eq "fail"}'=='true'){
+			alert('잘못된 접근입니다.');
+		}
+		
+	}
+
+</script>
+
+
 
 </head>
 <body>

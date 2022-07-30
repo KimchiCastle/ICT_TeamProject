@@ -210,10 +210,9 @@ i{
 
  #enroll_btn {
     width: 100px;
-    height: 50px;
+	height: 50px;
   /*   text-align: middle; */
    
-    padding: 21px 0 17px;
     border: 0;
     cursor: pointer;
     color: white;
@@ -224,9 +223,8 @@ i{
 } 
 
   #revoke_btn{
-    width: 100px;
+   width: 100px;
     height: 50px;
-    padding: 21px 0 17px;
     border: 0;
     cursor: pointer;
     color: white;

@@ -499,15 +499,11 @@
  	    //회원가입 실행
  	    function enroll(){ 
 	
- 	    	console.log(idFlag);
- 	    	console.log(pwdFlag);
 
 	        if(idFlag && pwdFlag) {
-	           console.log('2');
 	           submitClose();
 	       	   $("#enroll_form").submit();
 	        }else {
-	      		 console.log('3');
 	           submitOpen();
 	           return false;
 	        }

@@ -33,15 +33,6 @@ body{
 <script type="text/javascript">
 
 
-function page(page){
-	
-	
-	
-}
-
-
-
-
 
 
 function send1() {
