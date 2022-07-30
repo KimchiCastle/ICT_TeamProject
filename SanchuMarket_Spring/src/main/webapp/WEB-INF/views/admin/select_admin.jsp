@@ -5,6 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+
 <style type="text/css">
    
    body{
@@ -22,45 +23,55 @@
    }
    
    #custom_page{
+     font-size: 30px;
      position: absolute;
      top : 220px;
      left: 300px;
-     display: inline-block;
+     display:table;
      width:200px;
-     height: 90px;
-     background-color: #118a7e;
-     color: white;
+     height: 80px;
+     opacity: 0.7;
+     color: #118a7e;
      cursor:pointer;
      text-align: center;
      vertical-align: center;
      margin: auto;	
      border-radius: 3px;
+     border:2px solid #118a7e;
    }
    
    #custom_page:hover{
      background-color: #9accc7;
+     opacity: 0.6;	
    }
    
    #admin_page{
      position: absolute;
      top : 220px;
      right: 300px;
-     display: inline-blo
-     display: inline-block;
+     display:table;
+     font-size: 30px;
      width:200px;
-     height: 90px;
-     background-color: #118a7e;
-     color: white;
+     height: 80px;
+     opacity: 0.7;
+     color:  #118a7e;
 	 cursor:pointer;
      text-align: center;
      margin: auto;
      border-radius: 3px;
+     border:2px solid #118a7e;
    }
    
     #admin_page:hover{
      background-color: #9accc7;
+     opacity: 0.6;
    }
-
+   
+   span{
+    display:table-cell;
+	vertical-align:middle;
+   }
+   
 
 </style>
 </head>
@@ -71,10 +82,10 @@
 <div id="page">
 
   <div id="custom_page" onclick="location.href='../mainpage/list.do'">
-     <h4>마켓 홈</h4>
+    <span>마켓 홈</span>
   </div>
   <div id="admin_page" onclick="location.href='main_form.do'">
-     <h4>관리자 홈</h4>
+    <span>관리자 홈</span>
   </div>
 
 </div>

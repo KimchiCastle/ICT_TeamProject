@@ -19,6 +19,21 @@
 <link rel="stylesheet" href="../resources/css/table_form.css">
 <link rel="stylesheet" href="../resources/css/admin_header_form.css">
 
+<style>
+  #title-form{
+    margin: auto;
+    display: table;
+    
+  }
+  #title{
+    font-size:30px;
+    text-align:center;
+    display:table-cell;
+	vertical-align:middle;	
+	margin: 20px;
+  }
+
+</style>
 <script>
 $(document).ready(function() {
 
@@ -80,8 +95,8 @@ $(document).ready(function() {
 $(function(){
 
 	var d = new Date();
-	var strDate = d.getFullYear() + "." + (d.getMonth()+1) + "." + d.getDate() + " 유저 현황";
-	$("h2").html(strDate);
+	var strDate = d.getFullYear() + "." + (d.getMonth()+1) + "." + d.getDate() + " 회원 목록";
+	$("#title").html(strDate);
 	
 	
 })
@@ -96,38 +111,42 @@ $(function(){
 </div>
 
 <div id="demo">
-  <h2></h2>
-  
+  <div id="title-form">
+  <span id="title"></span>
+  </div>
+  <br>
   <!-- Responsive table starts here -->
   <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
   <div class="table-responsive-vertical shadow-z-1">
   <!-- Table starts here -->
   <table id="table" class="table table-hover table-mc-light-blue">
   
-	   <thead>
 	      <tr>
-	        <th>no</th>
-	        <th>이름</th>
-	        <th>아이디</th>
-	        <th>link</th>
-	        <th>전화번호</th>
-	        <th>주소</th>
+	        <th style="width:5%">번호</th>
+	        <th style="width:8%">이름</th>
+	        <th style="width:10%">아이디</th>
+	        <th style="width:12%">전화번호</th>
+	        <th style="width:20%">주소</th>
+	        <th style="width:8%">상태</th>
 	      </tr>
-	    </thead>
-	  <c:forEach var="list" items="">
-	    <tbody>
-	      <tr>
-	        <td></td>
-	        <td></td>
-	        <td></td>
-	        <td></td>
-	        <td></td>
-	        <td></td>
-	    </tbody>    
+	    
+	  <c:forEach var="list" items="${ userList }">
+	      <tr onclick="location.href=''">
+	        <td>${list.no}</td>
+	        <td>${list.u_name}</td>
+	        <td>${list.u_id}</td>
+	        <td>${list.u_tel}</td>
+	        <td>${list.u_addr}</td>
+	        <td>${list.u_status}</td>
+	      </tr>  
 	  </c:forEach>
     </table>
+    
+      <div style="text-align: center; font-size: 20px;">
+         ${ pageMenu }   
+     </div>
   </div>
-
+</div>
 
 </body>
 </html>

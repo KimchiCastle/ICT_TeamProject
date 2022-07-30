@@ -27,6 +27,8 @@
 	 //스크립트 문서 배치 
 	  let idFlag = false;
 	  let pwdFlag = false;
+	  let emailFlag = false;
+	  let nickFlag = false;
 	  let submitFlag = false;
 	
 	 $(document).ready(function(){ 
@@ -59,6 +61,7 @@
 	    		checkName();
 	    	}) 
 	    	$("#u_email").blur(function(){
+				emailFlag = false;
 	    		checkEmail();
 	    	})
 	    	$("#u_id").blur(function(){
@@ -91,6 +94,7 @@
 	    	 
 	    	 
 	    	$("#u_nickname").blur(function(){
+				nickFlag = false;
 	    		checkNickname("first");
 	    	})
 	    	$("#u_tel").blur(function(){
@@ -264,14 +268,15 @@
 	                if (data.result == "Y") {
 	                	 if (event == "first") {
 	                		 showSuccessMsg(oMsg, "사용 가능한 이메일입니다.");
-	                		
 	                     } else {
 	                         hideMsg(oMsg);//호출하고 직후만 메시지 띄우려고..?
 	                     }
-	                   
+						emailFlag = true;	                    
+
 	                } else { 
 	                    showErrorMsg(oMsg, "이미 사용중인 이메일입니다.");
 	                    setFocusToInputObject(oInput);
+						return;
 	                }
 	            }//end success
 	        });//end ajax
@@ -360,15 +365,20 @@
 					//db에 존재하는 닉네임 없으면 data=y 넘어옴
 	                if (data.result == "Y" ) {
 	                	 if (event == "first") {
+							 nickFlag = true;
 	                		 showSuccessMsg(oMsg, "사용 가능한 닉네임입니다.");
-							hideMsg(oMsg);
+							 hideMsg(oMsg);
 	                     } 
-	                } else { 
+	                } 
+					else 
+					{ 
 	                    showErrorMsg(oMsg, "이미 사용중인 닉네임입니다.");
 	                    setFocusToInputObject(oInput);
+						return;
 	                }
 	            }//end success
 	        });//end ajax
+			
 			hideMsg(oMsg);
 	        return true;
 	      }//end function
@@ -501,13 +511,14 @@
 	
  	    	console.log(idFlag);
  	    	console.log(pwdFlag);
+			console.log(nickFlag);
+			console.log(emailFlag);
 
-	        if(idFlag && pwdFlag) {
-	           console.log('2');
+	        if(idFlag && pwdFlag && nickFlag && emailFlag) {
+	           
 	           submitClose();
 	       	   $("#enroll_form").submit();
 	        }else {
-	      		 console.log('3');
 	           submitOpen();
 	           return false;
 	        }
