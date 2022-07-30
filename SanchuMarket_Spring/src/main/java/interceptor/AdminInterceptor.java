@@ -19,26 +19,47 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 	    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 	            throws Exception {
 		 	
-	 		UserVo user;
-	 		
-			try {
-				user = (UserVo)request.getSession().getAttribute("user");
+			UserVo user = (UserVo) request.getSession().getAttribute("user");
 
-				String u_grade = (String)user.getU_grade();
-			 	
-				if((user==null) || !u_grade.equals("관리자")) {
-			 		response.sendRedirect("../user/login_form.do");
-			 		return false;
-			 	}
-				//session이 없을때 user라는 세션이 만들어지다가 오류 발생...
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				response.sendRedirect("../user/login_form.do");
+			if ((user == null)) {
+				response.sendRedirect("../user/login_form.do?reason=fail");
 				return false;
 			}
-		
-	        
+			
+			//요청한 파라미터 읽어오기
+			String uri = request.getRequestURI();
+			
+			//어드민페이지 접근시
+			if(uri.contains("admin")) {
+				
+				// 회원 등급 알아오기
+				String u_grade = (String) user.getU_grade();
+				
+				// 관리자가 아닐때
+				if (!u_grade.equals("관리자")) {
+					
+					response.sendRedirect("../mainpage/list.do?reason=fail");
+					
+				}
+				
+			}else if(uri.contains("mypage")) {
+				
+				// 세션에서 받아온 u_idx
+				int u_idx = user.getU_idx();
+				
+				// 파라미터에 입력된 u_idx
+				int param_u_idx = Integer.parseInt(request.getParameter("u_idx"));
+				
+				//회원이 다른회원의 정보를 접근하려 할때!
+				if(u_idx!=param_u_idx) {
+					response.sendRedirect("../mainpage/list.do?reason=fail");
+				}
+				
+				
+			}
+			
+
 			return super.preHandle(request, response, handler);
-	 }
+		}
 
 }

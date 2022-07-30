@@ -20,55 +20,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
 
-<script type="text/javascript">
-	
-	function onReport(){
-		
-		center_modify_popup();
-		$(".shadow").show();
-	}
-	
-	function center_modify_popup(){
-		
-		//윈도우 폭구하는 함수
-		var w_width = $(window).width();
-		//윈도우 높이 구하는 함수
-		var w_height = $(window).height();
-		
-		var r_width  = $("#report_popup").width();
-		var r_height = $("#report_popup").height();
-		
-		
-		var left = w_width/2 - r_width/2;
-		var top  = w_height/2 - r_height/2;
-		
-		/* 위치 css를 JSON으로 처리한다. */
-		//css : Map방식 속성값 지정
-		$("#report_popup").css({ 'left':left, 'top':top });
-		
-		$("#report_popup").show();
-	}
-	
-	function hide_report_popup(){
-		
-		
-		$("#report_popup").hide();
-		$(".shadow").hide();
-		
-	}
-	/* checkbox 하나만 선택되는 함수 */
-	function doOpenCheck(chk){
-	    var obj = document.getElementsByName("report");
-	    for(var i=0; i<obj.length; i++){
-	        if(obj[i] != chk){
-	            obj[i].checked = false;
-	        }
-	    }
-	}
-	
-	
-</script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/seller_page.js"></script>
 
+	
 
 </head>
 <body >
@@ -109,8 +63,7 @@
 									width="15px" height="15px"><span
 									style="font-size: 15px; color: rgb(180, 180, 180)">신고하기</span>
 								
-							<div class="shadow">
-							</div>
+							
 							
 							</div>
 					</div>
@@ -130,20 +83,28 @@
 		
 		<div align="center" style="min-height: 200px;">
 			<c:if test="${ user.u_idx eq user_info.u_idx }">
-			<button class="btn" onclick="myInfoModify();"
+			<button class="btn" onclick="myInfoModify(${user.u_idx});"
 			style="background-color: #ccffcc; width: 150px; height: 50px; outline: none;">
-				<span style="font-size: 22px;">개인정보수정</span>
+				<span style="font-size: 22px; color: gray;">개인정보수정</span>
+			</button>
+			
+			<button class="btn" onclick="show_pwdcheck();"
+			style="background-color: #ffaaaa; width: 150px; height: 50px; outline: none;">
+				<span style="font-size: 22px; color: white;">회원탈퇴</span>
 			</button>
 			</c:if>
+			
+			
 		</div>
 		
 	</div>
 
 </div>
 
+<%@ include file="password_check.jsp" %>
 <%@ include file="report_popup.jsp" %>
 
-
+<div class="shadow"></div>
 
 
 </body>

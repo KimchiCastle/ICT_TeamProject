@@ -24,7 +24,11 @@
   //모달창 input data 초기화 
   $(function(){
 	  
+		setTimeout(showfail(),500);
 		setTimeout(showMessage(),1000);
+		
+		
+		
 	  
 	  $('[data-dismiss=modal]').on('click', function () {
 		  
@@ -95,7 +99,19 @@
 				  return;
 			  }
 		}
-
+		
+		
+		//잘못된 접근 함수
+		function showfail(){
+			
+			if('${param.reason eq "fail" }'=='true'){
+				alert('잘못된 접근입니다.');
+				return;
+			}
+			
+		}
+		
+		
 		//로그인
 		function send(){
 		

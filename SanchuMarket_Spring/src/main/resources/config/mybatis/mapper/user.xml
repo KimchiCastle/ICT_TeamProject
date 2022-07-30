@@ -63,6 +63,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   select count(*) from user_market where u_id=#{u_id} and u_mail=#{u_mail}
 	</select>
 	
+	<select id="check_pwd" resultType="vo.UserVo" parameterType="java.lang.String">
+	   select * from user_market where u_pwd=#{u_pwd}
+	</select>
+	
+	
 	<!--아이디찾기-->
 	<select id="findId" resultType="java.lang.String" parameterType="vo.UserVo">
 		select u_id from user_market where u_name=#{u_name} and u_tel=#{u_tel}

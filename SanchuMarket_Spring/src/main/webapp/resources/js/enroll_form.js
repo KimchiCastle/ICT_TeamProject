@@ -509,13 +509,15 @@
  	    //회원가입 실행
  	    function enroll(){ 
 	
+
+	        if(idFlag && pwdFlag) {
  	    	console.log(idFlag);
  	    	console.log(pwdFlag);
 			console.log(nickFlag);
 			console.log(emailFlag);
 
 	        if(idFlag && pwdFlag && nickFlag && emailFlag) {
-	           
+
 	           submitClose();
 	       	   $("#enroll_form").submit();
 	        }else {
@@ -523,3 +525,4 @@
 	           return false;
 	        }
         }
+	}

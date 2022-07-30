@@ -105,6 +105,29 @@ public class UserController {
 
 		return map;
 	}
+	
+	//마이페이지 탈퇴시 비밀번호 조회
+	@RequestMapping("check_pwd.do")
+	@ResponseBody
+	public Map checkPwd(String u_pwd) {
+		
+		UserVo vo = user_dao.selectOneByPwd(u_pwd);
+		
+		String result = "";
+		
+		// 비밀번호로 계정 조회 실패시 탈퇴 불가 
+		if (vo == null) {
+			result = "Y";
+		} else {
+			result = "N";
+		}
+		
+		Map map = new HashMap();
+		
+		map.put("result", result);
+		
+		return map;
+	}
 
 	@RequestMapping("enroll.do")
 	public String enroll(String detail, String address, UserVo vo, Model model) {

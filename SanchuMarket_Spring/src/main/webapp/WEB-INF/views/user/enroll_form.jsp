@@ -156,10 +156,10 @@
 			     
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="button" id="enroll_btn" onclick="enroll();">
+                    <button type="button" class="btn" id="enroll_btn" onclick="enroll();">
                         <span>가입</span>
                     </button>
-                    <button type="button" id="revoke_btn" onclick= "location.href='../mainpage/list.do'">
+                    <button type="button" class="btn" id="revoke_btn" onclick= "location.href='../mainpage/list.do'">
                         <span>취소</span>
                     </button>
                 </div>
