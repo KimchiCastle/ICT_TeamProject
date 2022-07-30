@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
 
 mybatis-config.xml
-context-7-mailauth.xml
+/spring/context-7-mailauth.xml
 log4j.xml
 
 lecture
