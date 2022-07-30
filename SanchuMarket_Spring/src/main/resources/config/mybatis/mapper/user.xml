@@ -4,9 +4,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 	
-	<!-- 관리자 페이지 회원목록 조회  -->
-	<select id="user_list" resultType="vo.UserVo">
-		select * from user_market where u_grade='일반회원' order by u_idx
+	<!-- 관리자페이지 회원목록 5개씩조회  -->
+	<select id="user_conditionList" parameterType="java.util.Map" resultType="vo.UserVo" >
+		
+		<!-- 얘는 5개 조회 됨 -->
+		select 
+			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status 
+		from
+		(
+		select 
+			p.*, 
+			rank() over(order by u_idx) no 
+			from(select * from user_market where u_grade='일반회원')p
+		)			
+		where no between #{start} and #{end}
+<!--
+		얘는 4개가 조회 됨~
+		
+ 		select 
+			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status 
+		from
+		(
+		select 
+			p.*, 
+			rank() over(order by u_idx) no from(select * from user_market)p
+		)			
+		where no between #{start} and #{end} and u_grade='일반회원' -->
+	</select>
+	
+	<!--paging을 위한 전체 유저수-->
+	<select id="user_list" resultType="int">
+	   select count(*) from user_market where u_grade='일반회원'
 	</select>
 	
 	<select id="user_idx" resultType="vo.UserVo">

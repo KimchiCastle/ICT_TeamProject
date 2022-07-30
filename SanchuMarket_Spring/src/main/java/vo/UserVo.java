@@ -26,6 +26,17 @@ public class UserVo {
 	int u_month;
 	int u_tot;
 
+	// 임시컬럼
+	int no;
+	
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
 	public int getU_month() {
 		return u_month;
 	}

@@ -76,7 +76,7 @@ new Chart(document.getElementById("line-chart"), {
         borderColor: "#e8c3b9",
         fill: false
      },{
-        data: [6,3,2,2,7,26,82,172,312,433,111,222],
+        data: [6,3,2,2,7,26,44,5,20,60,30,50],
         label: "탈퇴회원",
         borderColor: "#c45850",
         fill: false

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import vo.CategoryVo;
 import vo.ProductVo;
@@ -35,6 +36,13 @@ public interface AdminDao {
 	
 	//전체 카티고리가 총 몇갠지 받아오기
 	public List<CategoryVo> select_category_list();
+	
+	//유저관리 - 페이징을 위한 5개 조건으로 유저 조회
+	public List<UserVo> select_userList(Map map);
+	
+	////유저관리 - 페이징을 위한 start-end count
+	public int count_userList();
+
 	
 
 }
