@@ -99,5 +99,9 @@
     .form-control{
       display: inline-block;
     }
+    
+    #loginMsg{
+      color: red;
+    }
 
     

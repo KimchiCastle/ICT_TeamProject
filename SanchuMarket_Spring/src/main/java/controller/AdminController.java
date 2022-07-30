@@ -51,6 +51,13 @@ public class AdminController {
 		
 		 return "admin/mainpage_admin";
 	 }
+	
+	//admin page호출시 두 경로 제공
+	@RequestMapping("select_admin_form.do")
+	public String selectList() {
+		
+		return "admin/select_admin";
+	}
 	//유저관리
 	@RequestMapping("user_listForm.do")
 	public String userList() {

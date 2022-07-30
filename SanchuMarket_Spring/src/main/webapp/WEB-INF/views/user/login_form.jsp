@@ -107,14 +107,17 @@
 			  url:'login.do', 
 			  data:{'u_id':u_id, 'u_pwd':u_pwd},
 			  dataType:'json',
-			  success:function(res){ //res = bResult
+			  success:function(res){
 		
-				  if(!res.bResult){//bResult=false
+				  if(res.result=="login_failed"){
 					  $('#loginMsg').html('아이디나 비밀번호가 일치하지 않습니다.');
 				  	  return;
-				  }else{
-					 console.log("로그인실패");
+				  }
+				  else if(res.result=="user"){
 					 location.href = '../mainpage/list.do';
+				  }
+				  else if(res.result=="admin"){
+					 location.href = '../admin/select_admin_form.do';
 				  }
 			  },
 			  //jqXHR:자바스크립트 에러 처리 객체

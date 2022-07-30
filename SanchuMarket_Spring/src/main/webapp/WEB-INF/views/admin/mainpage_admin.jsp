@@ -59,7 +59,19 @@ new Chart(document.getElementById("line-chart"), {
     labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
     datasets: [{ 
         
-        data: [40,20,10,16,24,38,74,167,508,784,555,444],
+        data: [
+        	${ serviceMap.annual_enrollList[0].u_tot },
+        	${ serviceMap.annual_enrollList[1].u_tot },
+        	${ serviceMap.annual_enrollList[2].u_tot },
+        	${ serviceMap.annual_enrollList[3].u_tot },
+        	${ serviceMap.annual_enrollList[4].u_tot },
+        	${ serviceMap.annual_enrollList[5].u_tot },
+        	${ serviceMap.annual_enrollList[6].u_tot },
+        	${ serviceMap.annual_enrollList[7].u_tot },
+        	${ serviceMap.annual_enrollList[8].u_tot },
+        	${ serviceMap.annual_enrollList[9].u_tot },
+        	${ serviceMap.annual_enrollList[10].u_tot },
+        	${ serviceMap.annual_enrollList[11].u_tot }],
         label: "가입회원",
         borderColor: "#e8c3b9",
         fill: false

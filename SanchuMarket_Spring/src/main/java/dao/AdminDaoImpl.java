@@ -1,12 +1,12 @@
 package dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import vo.CategoryVo;
 import vo.ProductVo;
+import vo.UserVo;
 
 public class AdminDaoImpl implements AdminDao{
 
@@ -55,10 +55,9 @@ public class AdminDaoImpl implements AdminDao{
 		return sqlSession.selectOne("user.enroll_count");
 	}	
 	
-	//vo객체를 비효율적으로 만들지 않기 위해 map으로 포장.
-	public Map<String,String> countAnnualEnroll() {
+	public List<UserVo> countAnnualEnroll() {
 		
-		return sqlSession.selectMap("user.count_enroll","");
+		return sqlSession.selectList("user.annual_enroll_count");
 	}
 	
 	//카테고리에 해당하는 상품 개수 받아오기

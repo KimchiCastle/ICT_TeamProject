@@ -22,6 +22,25 @@ public class UserVo {
 	int u_likecount; // 찜 수
 
 	String u_time; // 회원가입 날짜 알기
+	
+	int u_month;
+	int u_tot;
+
+	public int getU_month() {
+		return u_month;
+	}
+
+	public void setU_month(int u_month) {
+		this.u_month = u_month;
+	}
+
+	public int getU_tot() {
+		return u_tot;
+	}
+
+	public void setU_tot(int u_tot) {
+		this.u_tot = u_tot;
+	}
 
 	public UserVo() {
 

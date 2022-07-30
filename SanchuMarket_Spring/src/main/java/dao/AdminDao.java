@@ -1,10 +1,10 @@
 package dao;
 
 import java.util.List;
-import java.util.Map;
 
 import vo.CategoryVo;
 import vo.ProductVo;
+import vo.UserVo;
 
 public interface AdminDao {
 
@@ -28,7 +28,7 @@ public interface AdminDao {
 	public int todayEnrollCount();
 	
 	//년도별 가입자수
-	public Map countAnnualEnroll();
+	public List<UserVo> countAnnualEnroll();
 	
 	//카테고리에 해당하는 상품 개수 받아오기
 	public List<CategoryVo> select_category_cnt();
