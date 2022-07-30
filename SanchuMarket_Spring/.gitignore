@@ -3,6 +3,7 @@
 
 mybatis-config.xml
 /spring/context-7-mailauth.xml
+context-7-mailauth.xml
 log4j.xml
 
 lecture
