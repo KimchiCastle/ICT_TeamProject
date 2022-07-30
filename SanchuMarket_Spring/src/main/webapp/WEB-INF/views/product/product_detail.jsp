@@ -104,11 +104,15 @@
 			<div style="display: inline-block;">
 			<!-- 상품이 거래중이면 -->
 			<c:if test="${ vo.p_status eq '거래중'}">
-				<!-- 판매자는 판매하기 버튼이 보이게 -->
+				<!-- 판매자는 판매하기와 취소하기 버튼 보이게 -->
 				<c:if test="${ vo.u_idx eq user.u_idx}">
 					<button type="button" class="btn" onclick="sell(${ vo.p_idx });" style=" background-color: red; width: 100px;">
 						<span style="color: black; font-size: 20px;">판매하기</span>
 					</button>
+					<button type="button" class="btn" onclick="cancelTrade(${ vo.p_idx });"
+				style=" background-color: rgb(240,240,240); width: 100px;">
+					<span style="color: black; font-size: 20px;">취소하기</span>
+				</button>
 				</c:if>
 				
 				<!-- 다른사람들에겐 얼럿띄우기 -->
@@ -118,7 +122,8 @@
 						<span style="color: black; font-size: 20px;">거래중</span>
 					</button>
 				</c:if>
-				<button type="button" class="btn" onclick="alert('거래중취소합니다.')" id="cancel_trade"
+				<!-- 구매자일때는 취소가능 -->
+				<button type="button" class="btn" onclick="cancelTrade(${ vo.p_idx });" id="cancel_trade"
 				style=" background-color: rgb(240,240,240); width: 100px; display: none;">
 					<span style="color: black; font-size: 20px;">취소하기</span>
 				</button>
@@ -127,7 +132,8 @@
 			
 			<c:if test="${ vo.p_status eq '판매완료'}">
 			<div style="display: inline-block;">
-				<button type="button" class="btn" style=" background-color: rgb(240,240,240); width: 100px;">
+				<button type="button" onclick="alert('판매가 완료되었습니다.')" class="btn" 
+				style=" background-color: #ccccff; width: 100px;">
 					<span style="color: black; font-size: 20px;">판매완료</span>
 				</button>
 			</div>

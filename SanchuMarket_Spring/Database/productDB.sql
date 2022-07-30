@@ -194,7 +194,7 @@ select c_idx,count(*) category_cnt
 order by c_idx
 		
 			
-select c_idx from product
+update product set p_status='거래가능' where p_idx = 7
 
 
 

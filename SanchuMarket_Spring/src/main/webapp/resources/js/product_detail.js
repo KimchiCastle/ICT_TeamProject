@@ -146,6 +146,12 @@
 			return;
 		}
 		
+		if(seller_u_idx==buyer_u_idx){
+			alert('본인이 올린 상품은 구매할 수 없습니다.');
+			return false;
+		}
+		
+		
 		if(!confirm('상품을 구매하시겠습니까?')) return;
 		
 		
@@ -176,6 +182,37 @@
 		
 		
 	}
+	
+	function cancelTrade(p_idx){
+		
+		if(!confirm('거래를 취소 하시겠습니까?')) return false;
+		
+		$.ajax({
+			
+			url		: 'tradeCancel.do',
+			data	: {'p_idx':p_idx},
+			type	: 'POST',
+			success	: function(res){
+				
+				if(res.result){
+					window.location.reload();
+				}else{
+					alert('거래취소를 실패했습니다. 관리자에게 문의하세요.');	
+				}
+				
+			},
+			error	: function(err){
+				alert('거래취소를 실패했습니다. 관리자에게 문의하세요.');
+			}
+			
+			
+		})
+		
+		
+		
+	}
+	
+	
 	
 	//판매하기
 	function sell(p_idx){

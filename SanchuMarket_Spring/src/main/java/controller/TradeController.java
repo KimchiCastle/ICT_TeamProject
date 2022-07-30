@@ -172,5 +172,31 @@ public class TradeController {
 		return map;
 	}
 	
-	
+	@RequestMapping("tradeCancel.do")
+	@ResponseBody
+	public Map tradeCancel(int p_idx) {
+		
+		
+		int res = trade_dao.delete(p_idx);
+		
+		Map map = new HashMap();
+		
+		boolean result = (res==1);
+		
+		map.put("result", result);
+		
+		//거래테이블이 삭제가 완료되면..
+		if(result) {
+			
+			Map map2 = new HashMap();
+			
+			map2.put("p_idx", p_idx);
+			map2.put("p_status", "거래가능");
+			
+			int res2 = product_dao.statusUpdate(map2);
+		}
+		
+		return map;
+		
+	}
 }
