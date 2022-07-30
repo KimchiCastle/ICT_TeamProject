@@ -167,16 +167,18 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 ---조회용
 select * from user_market;
 
+update user_market set u_pwd='1234' where u_id='dkwlsdl8'
+
 select to_char(u_regdate,'mm') as month, count(*) as tot
 	from user_market
 	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
-	group by to_char(u_regdate,'mm')
+	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
 
 
 
 
   
- 
+ select * from user_market where u_grade='일반회원' order by u_idx
 
   select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 

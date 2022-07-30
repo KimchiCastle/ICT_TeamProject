@@ -13,3 +13,5 @@ insert into visit values(1,1,sysdate);
 select * from visit where to_char(v_date,'dd') = to_char(sysdate, 'dd')
 
   update visit set v_count=3 where to_char(v_date,'dd') = to_char(sysdate, 'dd')
+  
+  select nvl(max(v_count),0)as v_count from visit where to_char(v_date,'dd') = to_char(sysdate, 'dd')

@@ -144,26 +144,33 @@ public class UserController {
 
 		UserVo userVo = user_dao.selectOneById(u_id);
 
-		boolean bResult = false;
+		String result = "";
 
+		//로그인 정보 조회 실패
 		if (userVo == null || !u_pwd.equals(userVo.getU_pwd())) {
 			System.out.println("비번이나 아이디 틀림");
-			bResult = false;
+			result = "login_failed";
 		} 
-		//로그인 성공시 세션과 쿠키 할당
-		else {
-			//1. 세션 할당
+		//일반회원
+		else if(userVo.getU_grade().equals("일반회원")){
+			System.out.println("일반회원");
 			HttpSession session = request.getSession();
 			session.setAttribute("user", userVo);
-			
-			//2. 쿠키 할당
-			
-			bResult = true;
+			result = "user";
 		}
+		//관리자
+		else if(userVo.getU_grade().equals("관리자")){
+			System.out.println("관리자");
+			HttpSession session = request.getSession();
+			session.setAttribute("user", userVo);
+			result = "admin";
+		}
+		
 
-		Map map = new HashMap();
+			Map map = new HashMap();
 
-		map.put("bResult", bResult);
+			map.put("result", result);
+
 
 		return map;
 	}
