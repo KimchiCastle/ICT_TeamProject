@@ -14,4 +14,6 @@ public interface TradeDao {
 
 	public TradeVo select_user(Map map);
 
+	public int delete(int p_idx);
+
 }

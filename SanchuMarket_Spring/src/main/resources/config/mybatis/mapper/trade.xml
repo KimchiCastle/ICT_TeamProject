@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[  select * from ( select * from trade where t_status = '판매완료' order by t_date )where ROWNUM <= 6 ]]>
 	</select>
 	
+	<!-- 구매자가 구매하는지?? -->
 	<select id="trade_select" parameterType="java.util.Map" resultType="vo.TradeVo">
 		select * from trade where p_idx=#{p_idx} and buyer=#{buyer}
 	</select>
@@ -33,5 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="trade_update" parameterType="java.util.Map">
 		update trade set t_status=#{p_status}, t_date=sysdate where p_idx=#{p_idx}
 	</update>
+	
+	<!-- 거래취소 -->
+	<delete id="trade_cancel" parameterType="int">
+		delete from trade where p_idx=#{p_idx}
+	</delete>
+	
 	
 </mapper>
