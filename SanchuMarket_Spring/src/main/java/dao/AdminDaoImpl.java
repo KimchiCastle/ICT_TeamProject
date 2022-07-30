@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -64,7 +65,7 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<CategoryVo> select_category_cnt() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product_categorycnt");
+		return sqlSession.selectList("product.product_categorycnt");
 	}
 	
 	
@@ -72,7 +73,19 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public List<CategoryVo> select_category_list() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product_categorynum");
+		return sqlSession.selectList("product.product_categorynum");
+	}
+	
+	//유저관리 - 페이징을 위한 start-end 조건으로 유저 조회
+	public List<UserVo> select_userList(Map map){
+		
+		return sqlSession.selectList("user.user_conditionList", map);
+	}
+	
+	//유저관리 - 페이징을 위한 start-end count
+	public int count_userList() {
+		
+		return sqlSession.selectOne("user.user_list");
 	}
 
 

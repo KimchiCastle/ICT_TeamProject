@@ -46,8 +46,6 @@ public class AdminServiceImpl implements AdminService {
 		*/
 		
 		
-		
-		
 		//현재 상품 DB에 있는 카테고리별 상품개수 가지고옥
 		List<CategoryVo> category_list = admin_dao.select_category_cnt();//4
 		
@@ -91,33 +89,34 @@ public class AdminServiceImpl implements AdminService {
 		});
 		
 		
-			//년도별 회원 가입수
-			List<UserVo> annual_enrollList = admin_dao.countAnnualEnroll();//DB에서불러온randomVO
-			List<Integer> list2 = new ArrayList<>();//list의 월과 비교하기 위한 임시 배열
-			
-			for(int i = 0; i < annual_enrollList.size(); i++) {
-				list2.add(annual_enrollList.get(i).getU_month());
-			}
-			
-			//DB에서 불러온 list의 월이 12월 중 없으면 새로 월 주입(tot를 0으로 설정)
-			for(int i = 1; i <= 12; i++) {
-				if(!list2.contains(i)) {
-					UserVo vo = new UserVo();
-					vo.setU_month(i);
-					vo.setU_tot(0);
-					annual_enrollList.add(vo);
-				}
-			}
+		//년도별 회원 가입수
+		List<UserVo> annual_enrollList = admin_dao.countAnnualEnroll();//DB에서불러온randomVO
+		List<Integer> list2 = new ArrayList<>();//list의 월과 비교하기 위한 임시 배열
 		
-			//월 정렬
-			Collections.sort(annual_enrollList,new Comparator<UserVo>() {
+		for(int i = 0; i < annual_enrollList.size(); i++) {
+			list2.add(annual_enrollList.get(i).getU_month());
+		}
+		
+		//DB에서 불러온 list의 월이 12월 중 없으면 새로 월 주입(tot를 0으로 설정)
+		for(int i = 1; i <= 12; i++) {
+			if(!list2.contains(i)) {
+				UserVo vo = new UserVo();
+				vo.setU_month(i);
+				vo.setU_tot(0);
+				annual_enrollList.add(vo);
+			}
+		}
+	
+		//월 정렬
+		Collections.sort(annual_enrollList,new Comparator<UserVo>() {
+			
+			@Override
+			public int compare(UserVo o1, UserVo o2) {
 				
-				@Override
-				public int compare(UserVo o1, UserVo o2) {
-					
-					return (o1.getU_month())-(o2.getU_month());
-				}
-			});
+				return (o1.getU_month())-(o2.getU_month());
+			}
+		});
+			
 
 		Map map = new HashMap();
 		
@@ -129,14 +128,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("today_u_count",today_u_count);
 		map.put("annual_enrollList", annual_enrollList);
 		
-		
-		//service의 모든 joinpoint들이 advice로 넘어가는 로깅이 1.234초 후에 뜬다. 
-		//list메소드 호출 간격을 1.234초 유지시키는것.
-		/*
-		 * try { Thread.sleep(1234); } catch (InterruptedException e) {
-		 * e.printStackTrace(); }
-		 */
-		
+	
 		return map;
 	}
 

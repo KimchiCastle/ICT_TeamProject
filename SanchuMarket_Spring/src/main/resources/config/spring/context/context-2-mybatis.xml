@@ -8,10 +8,8 @@
 	<bean id="factoryBean" 
 	        class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds" />
-		<property name="configLocation"
-		          value="classpath:config/mybatis/mybatis-config.xml"/>
+		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml"/>
 	</bean>
-	
 	
 	<!--  SqlSession sqlSession 생성 
 	      SqlSessionTemplate  template;

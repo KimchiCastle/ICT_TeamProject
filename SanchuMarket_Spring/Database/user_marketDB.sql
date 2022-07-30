@@ -175,8 +175,7 @@ select to_char(u_regdate,'mm') as month, count(*) as tot
 	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
 
 
-
-
+select u_idx, u_name, u_id, u_tel, u_addr, u_status from user_market where u_grade='일반회원' order by u_idx
   
  select * from user_market where u_grade='일반회원' order by u_idx
 
@@ -185,5 +184,29 @@ select to_char(u_regdate,'mm') as month, count(*) as tot
 select u_id from user_market where u_name='서아진' and u_tel='010-5852-1068'
 
 update user_market set u_grade='관리자' where u_idx=2;
+
+select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'일반회원')u_status from
+		(
+		select p.*, rank() over(order by u_idx)no from(select * from user_market)p
+		)			
+		where no between 1 and 5 and u_grade='일반회원'
+
+
+
+select 
+			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status 
+		from
+		(
+		select 
+			p.*, 
+			rank() over(order by u_idx) no 
+			from(select * from user_market where u_grade='일반회원')p
+		)			
+		where no between 1 and 5
+
+
+select * from user_market
+
+
 */
 
