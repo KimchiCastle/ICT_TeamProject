@@ -115,6 +115,8 @@
 		$("#u_pwd").val('');
 		$("#u_pwdcheck").val('');
 		
+		$("#result_text").html('');
+		
 		$("#password_check").hide();
 		$(".shadow").hide();
 		window.scrollTo(0,document.body.scrollHeight); 
@@ -179,50 +181,97 @@
 	
 	
 	
-	function withdrawl(){
+	function withdrawl(u_idx){
 		
-		var u_pwd = $("#u_pwd").val();
-		var p_idx = $("#p_idx").val();
+		var u_pwd = $("#u_pwd").val().trim();
+		
+		if(u_pwd==''){
+			$("#result_text").css('color','red');
+			$("#result_text").html('비밀번호를 입력하세요.');
+			return;
+			
+		}
 		
 		if(pwdFlag == false){
+			$("#result_text").css('color','red');
 			$("#result_text").html('비밀번호가 일치하지 않습니다.');
 			return;
 		}
 		
 		$.ajax({
 			url:"../user/check_pwd.do",
-			data: {"u_pwd":u_pwd,"p_idx":p_idx},
+			data: {'u_pwd':u_pwd,'u_idx':u_idx},
 			dataType: "json",
 			success: function(res){
 				
-				if(res.result=="Y")
+				if(res.result=="Y"){
+					
+					console.log(res.result);
+					
+					withdrawlCheck(u_idx);
+					
+				}else{
+					
+					console.log(res.result);
+					
+					$("#result_text").css('color','red');
+					$("#result_text").html('유효하지 않은 비밀번호 입니다.');
+					return;
+					
+				}
 			},
-			error:function(jqXHR,status,exception){
+			error:function(err){
 					 
-				   	  var msg = '';
-				  
-					  if (jqXHR.status == 0) {
-						msg = 'Not connect.\n Verify Network.';
-				      }else if (jqXHR.status == 400) {
-			        	msg = 'Server understood the request, but request content was invalid. [400]'
-					  }else if (jqXHR.status == 404) {
-				    	msg = 'Requested page not found. [404]';            
-				      }else if (jqXHR.status == 500) {
-				        msg = 'Internal Server Error [500].';            
-				      }else if (exception == 'parsererror') {                
-				    	msg = 'Requested JSON parse failed.';            
-				      }else if (exception == 'timeout') {                
-				    	msg = 'Time out error.';            
-				      }else if (exception == 'abort') {                
-				    	msg = 'Ajax request aborted.';            
-				      }else {                
-				        msg = 'Uncaught Error.\n' + jqXHR.responseText;            
-				      }
-					  alert(msg);
-					}
+				$("#result_text").html('유효하지 않은 비밀번호 입니다.');
+				   
+			}
 		})//end ajax
 	}
 	
+	function withdrawlCheck(u_idx){
+		
+		if(!confirm('정말 탈퇴하시겠습니까?')) {
+			hide_password_popup();
+			return false;
+		}
+		
+		var u_status = "탈퇴";
+		
+		$.ajax({
+			
+			url		: '../user/user_updateStatus.do',
+			type	: 'POST',
+			data	: {
+			'u_idx':u_idx, 
+			'u_status':u_status
+			},
+			success : function(res){
+				
+				if(res.result){
+					
+					
+					alert('탈퇴되었습니다. 메인화면으로 이동합니다.');
+					location.href='../mainpage/logout.do';
+					
+				}else{
+					
+					alert('문제가 발생했습니다. 관리자에게 문의하세요.')
+					
+				}
+				
+				
+			},error	: function(err){
+				
+				alert('문제가 발생했습니다. 관리자에게 문의하세요.')
+				
+			}
+		});
+		
+		
+		
+		
+		
+	}
 	
 	
 	
