@@ -103,9 +103,16 @@ public class UserDaoImpl implements UserDao{
 
 	//회원탈퇴시 비밀번호 조회
 	@Override
-	public UserVo selectOneByPwd(String u_pwd) {
+	public UserVo selectOneByPwd(Map check) {
 		
-		return sqlSession.selectOne("user.check_pwd",u_pwd);
+		return sqlSession.selectOne("user.check_pwd", check);
+	}
+
+
+	@Override
+	public int updateStatus(Map updateMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("user.user_status_update",updateMap);
 	}
 
 	
