@@ -126,7 +126,7 @@
 			  success:function(res){
 				
 				  if(res.fail_reason=='fail_id'){
-					  alert('로그인 할 수 없는 아이디입니다.');
+					  $('#loginMsg').html('로그인 할 수 없는 아이디입니다.');
 					  return;
 				  }
 				  
@@ -140,6 +140,7 @@
 				  else if(res.result=="admin"){
 					 location.href = '../admin/select_admin_form.do';
 				  }
+				  
 			  },
 			  //jqXHR:자바스크립트 에러 처리 객체
 			  error:function(jqXHR, exception){

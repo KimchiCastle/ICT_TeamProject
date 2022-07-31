@@ -166,10 +166,14 @@
 						"p_idx":p_idx},
 			success : function(res){
 				
-				if(res.result){
+				
+				if(res.result==1){
 					window.location.reload();
-				}else{
+				}else if(res.result==0){
 					alert('상품 구매시 문제가 발생했습니다. 관리자에게 문의하세요.');
+				}else if(res.result==2){
+					alert('탈퇴한 회원의 상품입니다.');
+					return;
 				}
 				
 			},
