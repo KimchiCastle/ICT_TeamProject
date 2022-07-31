@@ -61,7 +61,6 @@
 <body >
 
 <div id="password_check">
-	<input type="hidden" value="${ param.p_idx }">
 	<div align="right" style="margin: auto;  ">
 		<button type="button" id="password_x" onclick="hide_password_popup();">x</button>
 	</div>
@@ -79,7 +78,7 @@
 	<div align="center" id="result"><span id="result_text"></span></div>
 	<div style="margin-top:10px; margin-bottom:10px; border-bottom: 1px solid rgb(220,220,220);"></div>	
 	<div align="center">
-		<button type="button" class="btn" style="outline: none; min-width: 70px" onclick="withdrawl();">탈퇴하기</button>
+		<button type="button" class="btn" style="outline: none; min-width: 70px" onclick="withdrawl(${ user.u_idx });">탈퇴하기</button>
 		<button type="button" class="btn" style="outline: none; min-width: 70px" onclick="hide_password_popup();">취소</button>
 	</div>
 </div>

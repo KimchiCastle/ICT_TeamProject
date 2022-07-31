@@ -124,7 +124,12 @@
 			  data:{'u_id':u_id, 'u_pwd':u_pwd},
 			  dataType:'json',
 			  success:function(res){
-		
+				
+				  if(res.fail_reason=='fail_id'){
+					  alert('로그인 할 수 없는 아이디입니다.');
+					  return;
+				  }
+				  
 				  if(res.result=="login_failed"){
 					  $('#loginMsg').html('아이디나 비밀번호가 일치하지 않습니다.');
 				  	  return;

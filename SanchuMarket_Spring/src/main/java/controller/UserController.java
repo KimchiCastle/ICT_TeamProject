@@ -109,17 +109,23 @@ public class UserController {
 	//마이페이지 탈퇴시 비밀번호 조회
 	@RequestMapping("check_pwd.do")
 	@ResponseBody
-	public Map checkPwd(String u_pwd) {
+	public Map checkPwd(String u_pwd,
+		@RequestParam(value="u_idx", required=false, defaultValue="0") int u_idx) {
 		
-		UserVo vo = user_dao.selectOneByPwd(u_pwd);
+		Map check = new HashMap();
+		
+		check.put("u_pwd", u_pwd);
+		check.put("u_idx", u_idx);
+		
+		UserVo vo = user_dao.selectOneByPwd(check);
 		
 		String result = "";
 		
 		// 비밀번호로 계정 조회 실패시 탈퇴 불가 
 		if (vo == null) {
-			result = "Y";
-		} else {
 			result = "N";
+		} else {
+			result = "Y";
 		}
 		
 		Map map = new HashMap();
@@ -171,28 +177,42 @@ public class UserController {
 
 		//로그인 정보 조회 실패
 		if (userVo == null || !u_pwd.equals(userVo.getU_pwd())) {
-			System.out.println("비번이나 아이디 틀림");
+//			System.out.println("비번이나 아이디 틀림");
 			result = "login_failed";
-		} 
+		}
 		//일반회원
 		else if(userVo.getU_grade().equals("일반회원")){
-			System.out.println("일반회원");
+//			System.out.println("일반회원");
 			HttpSession session = request.getSession();
 			session.setAttribute("user", userVo);
 			result = "user";
 		}
 		//관리자
 		else if(userVo.getU_grade().equals("관리자")){
-			System.out.println("관리자");
+//			System.out.println("관리자");
 			HttpSession session = request.getSession();
 			session.setAttribute("user", userVo);
 			result = "admin";
 		}
 		
+		// 탈퇴된 회원이나 활동 정지된 회원 로그인 못하게
+		if (userVo.getU_status().equals("정지") || userVo.getU_status().equals("탈퇴")) {
+			
+			Map fail = new HashMap();
+			
+			String fail_reason = "fail_id";
+			
+			fail.put("fail_reason", fail_reason);
+			
+			return fail;
+			
+		}
+		
+		
 
-			Map map = new HashMap();
+		Map map = new HashMap();
 
-			map.put("result", result);
+		map.put("result", result);
 
 
 		return map;
@@ -257,6 +277,28 @@ public class UserController {
 			map.put("result", "exist");
 		}
 
+		return map;
+	}
+	
+	//회원상태 업데이트
+	@RequestMapping("user_updateStatus.do")
+	@ResponseBody
+	public Map user_updateStatus(int u_idx, String u_status) {
+		
+		Map updateMap = new HashMap();
+		
+		updateMap.put("u_status", u_status);
+		updateMap.put("u_idx", u_idx);
+		
+		int res = user_dao.updateStatus(updateMap);
+		
+		boolean result = (res==1);
+		
+		Map map = new HashMap();
+		
+		map.put("result", result);
+		
+		
 		return map;
 	}
 

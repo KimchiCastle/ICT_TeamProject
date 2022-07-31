@@ -63,8 +63,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   select count(*) from user_market where u_id=#{u_id} and u_mail=#{u_mail}
 	</select>
 	
-	<select id="check_pwd" resultType="vo.UserVo" parameterType="java.lang.String">
-	   select * from user_market where u_pwd=#{u_pwd}
+	<!-- 탈퇴시 비밀번호 체크 -->
+	<select id="check_pwd" resultType="vo.UserVo" parameterType="java.util.Map">
+	   select * from user_market where u_pwd=#{u_pwd} and u_idx=#{u_idx}
 	</select>
 	
 	
@@ -107,15 +108,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert> 
 	
 	<update id="user_update" parameterType="vo.UserVo">
-		update user 
+		update user_market
 			set 
 				u_name=#{u_name},
 				u_id=#{u_id},
 				u_pwd=#{u_pwd},
 				u_zipcode=#{u_zipcode},
 				u_addr=#{u_addr)
-		where u_idx=#{ u_idx }
+		where u_idx=#{u_idx}
 	</update>
+	
+	<!-- 회원상태 업데이트 -->
+	<update id="user_status_update">
+		update user_market 
+			set
+				u_status=#{u_status}
+			where u_idx=#{ u_idx }
+	</update>
+	
 	
 	<!--임시비밀번호로 갱신-->
 	<update id="pwd_update" parameterType="vo.UserVo">
