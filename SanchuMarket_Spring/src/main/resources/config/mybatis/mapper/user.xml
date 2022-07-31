@@ -82,6 +82,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
 	</select>
 	
+	<!--admin 탈퇴 회원 연도별 조회-->
+	<select id="annual_withdrawl_count" resultType="vo.UserVo">
+	select to_char(u_regdate,'mm') as u_month, count(*) as u_tot
+	from user_market
+	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
+	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
+	</select>
+	
 	
 	<!--u_photo/u_like/u_profile은 처음 가입시 null/0-->
 	<insert id="user_insert" parameterType="vo.UserVo">
