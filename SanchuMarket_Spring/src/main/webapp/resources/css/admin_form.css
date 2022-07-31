@@ -1,8 +1,10 @@
+
 @charset "UTF-8";
 body {
 	font-family: 'Gowun Dodum', sans-serif;
 	font-size: 18px;
 }
+
 
 .allbody {
 	width: 1300px;
@@ -10,73 +12,76 @@ body {
 }
 
 #content {
-	background-color: #f2f2f2;
+	background-color: rgb(229, 229, 229);
 	min-height: 100%;
 }
 
 label {
-	line-height: 40px;
-	text-align: center;
+  height: 40px;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.7);
 }
 
-p {
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-}
 
-.board-wrapper {
+.container{
 	background-color: white;
-	height: 400px;
-	margin: 20px;
+	padding: 5px;
+	border: 1px solid #ced4da;
 }
 
 #board {
 	width: 390px;
 	height: 350px;
-	display: inline-block;
+	margin	: 20px;
 	float: left;
-	margin: 20px;
 }
 
 #chat {
-	width: 450px;
+	width: 600px;
 	height: 350px;
-	display: inline-block;
-	float: left;
 	margin: 20px;
+	clear: both;
+	border: 1px solid #ced4da;
 }
 
 #number-wrapper {
 	background-color: white;
-	width: 300px;
+	width: 250px;
+	height: 250px;
 	display: inline-block;
 	margin: 20px;
-	float: left;
+	font-size: 16px;
+	border: 1px solid #ced4da;
 }
 
 #number-table {
 	text-align: center;
+	height: 120px;
 }
 
 th {
-	font-size: 40px;
+	font-size: 38px;
 }
 
 #doughnut-wrpper {
-	float: left;
 	background-color: white;
-	width: 350px;
+	width: 250px;
 	display: inline-block;
 	margin: 20px;
-	margin-left: 80px;
+	margin-left: 50px;
+	margin-right: 50px;
+	border: 1px solid #ced4da;
 }
 
 #line-wrapper {
-	width: 700px;
+	width: 500px;
 	background-color: white;
 	display: inline-block;
 	margin: 20px;
+	border: 1px solid #ced4da;
 }
 
 #line-chart {
@@ -86,10 +91,29 @@ th {
 .product_p_name {
 	
 	display: inline-block;
-	width: 245px;
-	
+	width: 200px;
 	vertical-align: middle;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+#report{
+  display:inline-block;
+  width: 300px;
+  height: 400px;
+  overflow-y: scroll;
+   height:200px;
+}
+
+
+
+p {
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#report_user{
+	font-size: 10px;
 }

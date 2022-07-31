@@ -8,15 +8,8 @@ body {
 }
 
 .container {
-	width: 1300px;
+	width:100%;
 	margin: auto;
 }
 
-.form-control{
-	margin-top: 14px;
-}
 
-.rounded-circle{
-	
-	margin-top: 14px;
-}

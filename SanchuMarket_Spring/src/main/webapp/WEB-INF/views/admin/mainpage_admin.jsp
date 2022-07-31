@@ -96,7 +96,7 @@ new Chart(document.getElementById("line-chart"), {
 </head>
 <body>
 <div class="allbody">
-<div id="header">
+<div id="header1">
   <%@include file="header.jsp"%>
 </div>
 
@@ -104,23 +104,31 @@ new Chart(document.getElementById("line-chart"), {
 
 	<div class="board-wrapper" id="board">
 	   <label>실시간 상품 업로드 현황</label>
+	   <table></table>
 	   <c:forEach var="product" items="${ serviceMap.p_list }">
-	   <div style=" cursor: pointer; margin-bottom: 10px;" onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
-		   	<img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="40px" height="40px">
-		   <div class="product_p_name">${ product.p_name }</div>	 
-		    ${ fn:substring(product.p_date,0,10) } 
+	   <div style=" cursor: pointer; margin-bottom: 10px; margin-left:3px;" onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
+		   	<img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="35px" height="40px">
+		   <div class="product_p_name">${ product.p_name } </div> 	 
+		    ${ fn:substring(product.p_date,0,10) }
+		   
 	   </div>
 	   </c:forEach>
 	</div>
 	
-	<div class="board-wrapper" id="chat" >
-	   <label>실시간 채팅문의 현황</label>
-	   <c:forEach var="chat" items="${ map.ch_list }">
-	    ${ chat.u_name } 
-	    ${ chat.ch_message } 
-	    ${ chat.ch_date } 
-	   </c:forEach>
-	</div>
+<!-- 	<div class="board-wrapper" id="chat" >
+	  
+	</div> -->
+	
+<!-- <div id="report">
+
+<div class="scroll type1">
+ <p>신고 처리 회원</p>
+ <span id="report_user">이름 아이디 사유</span>
+</div>
+
+</div> -->
+
+	
 	
 	<div id="number-wrapper">
 	  <table class="table" id="number-table">
@@ -134,12 +142,7 @@ new Chart(document.getElementById("line-chart"), {
 	     <th>${ serviceMap.today_t_count }건</th>
 	   </tr>
 	   
-	 </table> 	
-	</div>
-	
-	<div id="number-wrapper">
-	  <table class="table" id="number-table">
-	   <tr>
+	    <tr>
 	     <td>금일 방문수</td>
 	     <td>금일 가입수</td>
 	   </tr>
@@ -148,11 +151,9 @@ new Chart(document.getElementById("line-chart"), {
 	     <th>${ serviceMap.today_v_count }명</th>
 	     <th>${ serviceMap.today_u_count }명</th>
 	   </tr>
-	   
 	 </table> 	
 	</div>
 	
-
 	<div id="doughnut-wrpper">
 		<canvas id="doughnut-chart"></canvas>
 	</div>
