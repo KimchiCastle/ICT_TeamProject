@@ -193,8 +193,8 @@ select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'일반회원')u_stat
 
 
 
-select 
-			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status 
+
+	select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status, u_grade
 		from
 		(
 		select 

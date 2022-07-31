@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<!-- 얘는 5개 조회 됨 -->
 		select 
-			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status 
+			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
 		from
 		(
 		select 

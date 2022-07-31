@@ -84,12 +84,7 @@ public class AdminController {
 	    
 	    List<UserVo> userList = admin_dao.select_userList(map);
 	    
-	    System.out.println(userList.size());
-	    
 	    for(int i = 0; i < userList.size(); i++) {
-	    	System.out.printf("username:%s\n",userList.get(i).getU_name());
-	    	System.out.printf("userid:%s\n",userList.get(i).getU_id());
-	    	System.out.printf("userstatus:%s\n",userList.get(i).getU_status());
 	    }
 	    
 		model.addAttribute("userList", userList);
