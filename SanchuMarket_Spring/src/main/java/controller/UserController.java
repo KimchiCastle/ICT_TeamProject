@@ -174,7 +174,24 @@ public class UserController {
 		UserVo userVo = user_dao.selectOneById(u_id);
 
 		String result = "";
-
+		
+//		 탈퇴된 회원이나 활동 정지된 회원 로그인 못하게
+		if(userVo != null) {
+			
+			if (userVo.getU_status().equals("정지") || userVo.getU_status().equals("탈퇴")) {
+				
+				Map fail = new HashMap();
+				
+				String fail_reason = "fail_id";
+				
+				fail.put("fail_reason", fail_reason);
+				
+				return fail;
+				
+			}
+			
+		}
+		
 		//로그인 정보 조회 실패
 		if (userVo == null || !u_pwd.equals(userVo.getU_pwd())) {
 //			System.out.println("비번이나 아이디 틀림");
@@ -195,20 +212,7 @@ public class UserController {
 			result = "admin";
 		}
 		
-		// 탈퇴된 회원이나 활동 정지된 회원 로그인 못하게
-		if (userVo.getU_status().equals("정지") || userVo.getU_status().equals("탈퇴")) {
-			
-			Map fail = new HashMap();
-			
-			String fail_reason = "fail_id";
-			
-			fail.put("fail_reason", fail_reason);
-			
-			return fail;
-			
-		}
-		
-		
+
 
 		Map map = new HashMap();
 

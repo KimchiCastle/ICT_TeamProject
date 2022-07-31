@@ -46,13 +46,34 @@ public class TradeController {
 		this.user_dao = user_dao;
 	}
 
-
+	
 	@RequestMapping("trade.do")
 	@ResponseBody
 	public Map tradeStart(
 			int seller_u_idx,
 			int	buyer_u_idx,	
 			int p_idx) {
+		
+		//	ajax 리턴용 Map 생성
+		Map resultmap = new HashMap();
+		
+		int result = 0;
+		
+		UserVo sellerVo = user_dao.selectOneByIdx(seller_u_idx);
+		UserVo buyerVo = user_dao.selectOneByIdx(buyer_u_idx);
+		
+		//판매자의 회원 상태 확인
+		
+		if(sellerVo.getU_status().equals("정지") || sellerVo.getU_status().equals("탈퇴")) {
+			
+			result = 2;
+			
+			resultmap.put("result", result);
+			
+			return resultmap;
+			
+		}
+		
 		
 		//p_idx로 해당 상품 p_status '거래중'으로 변경하기
 		Map updateMap = new HashMap();
@@ -68,8 +89,6 @@ public class TradeController {
 			받아온 u_idx들로 판매자, 구매자 닉네임 가지고 오기
 			거래 테이블에 넣기(상품상태추가했음)
 		 */
-		UserVo sellerVo = user_dao.selectOneByIdx(seller_u_idx);
-		UserVo buyerVo = user_dao.selectOneByIdx(buyer_u_idx);
 		
 		String seller = sellerVo.getU_nickname();
 		String buyer = buyerVo.getU_nickname();
@@ -79,13 +98,9 @@ public class TradeController {
 		int res2 = trade_dao.tradeInsert(tradeVo);
 		
 		
-		//	ajax 리턴용 Map 생성
-		Map resultmap = new HashMap();
-		
-		boolean result = false;
 		
 		if(res==1 && res2==1) {
-			result = true;
+			result = 1;
 			
 			resultmap.put("result", result);
 			
@@ -99,6 +114,8 @@ public class TradeController {
 		return resultmap;
 	}
 	 
+	
+	
 	
 	@RequestMapping("product_sell.do")
 	@ResponseBody
@@ -136,6 +153,9 @@ public class TradeController {
 		
 		return resultmap;
 	}
+	
+	
+	
 	
 	@RequestMapping("tradeCheck.do")
 	@ResponseBody
