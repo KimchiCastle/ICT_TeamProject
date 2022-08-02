@@ -14,3 +14,5 @@ alter table withdrawl
 	from withdrawl
 	where to_char(w_date,'yy')=to_char(sysdate,'yy') 
 	group by to_char(w_date,'mm') order by to_char(w_date,'mm') asc
+	
+	

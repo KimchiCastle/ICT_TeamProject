@@ -118,9 +118,9 @@ public class UserDaoImpl implements UserDao{
 	
 	//회원 상태 업데이트 2
 	@Override
-	public int insertStatus(WithdrawlVo vo) {
+	public int insertWithdrawl(WithdrawlVo vo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("user.insert_status",vo);
+		return sqlSession.update("user.insert_Withdrawl",vo);
 	}
 
 	//회원정보 수정, 이미지도 같이

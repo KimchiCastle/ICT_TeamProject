@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.UserDao;
 import vo.UserVo;
+import vo.WithdrawlVo;
 
 @Controller
 @RequestMapping("/user/")
@@ -293,6 +294,15 @@ public class UserController {
 		
 		updateMap.put("u_status", u_status);
 		updateMap.put("u_idx", u_idx);
+		
+		
+		if(u_status.equals("Ε»Επ")) {
+			WithdrawlVo vo = new WithdrawlVo();
+			vo.setU_idx(u_idx);
+			
+			int res2 = user_dao.insertWithdrawl(vo);
+			
+		}
 		
 		int res = user_dao.updateStatus(updateMap);
 		
