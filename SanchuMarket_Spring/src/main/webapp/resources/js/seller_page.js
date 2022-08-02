@@ -72,9 +72,25 @@
 		
 	}
 	
-	function send_report(){
+	function send_report(event){
 		
+		var report_reason;
 		
+		if(event.target.checked)  {
+   		 report_reason = event.target.value;
+  		}else{
+	     report_reason = null;
+		} 
+		
+		console.log(report_reason);
+	
+	    if(report_reason!=null){
+		
+		location.href = "report.do?report_reason="+report_reason;
+	}
+}
+
+
 	}
 	
 
