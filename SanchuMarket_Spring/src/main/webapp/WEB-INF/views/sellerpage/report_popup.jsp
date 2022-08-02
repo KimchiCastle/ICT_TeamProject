@@ -38,7 +38,7 @@
 		</div>
 		
 		<div align="center">
-			<input class="btn" type="button" value="신고하기" onclick="send_report();">
+			<input class="btn" type="button" value="신고하기" onclick="send_report(this);">
 			<input class="btn" type="button" value="취소" onclick="hide_report_popup();">
 		</div>
 	</div>
