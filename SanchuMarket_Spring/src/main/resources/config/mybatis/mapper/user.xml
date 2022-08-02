@@ -4,25 +4,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 	
-	<!-- 관리자페이지 회원목록 5개씩조회  -->
+<!-- 관리자페이지 회원 목록 검색 조건별로 5개씩조회  -->
 	<select id="user_conditionList" parameterType="java.util.Map" resultType="vo.UserVo" >
 		
 		<!-- 얘는 5개 조회 됨 -->
-		select 
-			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
+		select *
 		from
-		(
-		select 
-			p.*, 
-			rank() over(order by u_idx) no 
-			from(select * from user_market where u_grade='일반회원')p
-		)			
+			(
+			select 
+				rank() over(order by u_idx) no, 
+				u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
+			from(select * from user_market where u_grade='일반회원')
+			 <trim prefix="where"  prefixOverrides="or">
+		         <if test="u_id!=null">
+		             u_id like '%' || #{ u_id } || '%' 
+		         </if>
+		          <if test="u_name!=null">
+		             or u_name like '%' || #{ u_name } || '%'
+		         </if>
+		          <if test="u_nickname!=null">
+		             or u_nickname like '%' || #{ u_nickname } || '%'
+		         </if>
+		         <if test="u_tel!=null">
+		             or u_tel like '%' || #{ u_tel } || '%'
+		         </if>
+		         <if test="u_status!=null">
+		             or u_status like '%' || #{ u_status } || '%'
+		         </if>
+			 </trim>
+			)			
 		where no between #{start} and #{end}
+
 	</select>
 	
-	<!--paging을 위한 전체 유저수-->
-	<select id="user_list" resultType="int">
-	   select count(*) from user_market where u_grade='일반회원'
+	<!--검색 조건별로 paging을 위한 전체 유저 count-->
+	<select id="user_list" resultType="int" parameterType="java.util.Map">
+	  
+	     select nvl(count(*),0) from user_market
+	      <trim prefix="where"  prefixOverrides="or|and">
+		         
+		         <if test="u_id!=null">
+			             u_id like '%' || #{ u_id } || '%' 
+			         </if>
+			          <if test="u_name!=null">
+			             or u_name like '%' || #{ u_name } || '%'
+			         </if>
+			          <if test="u_nickname!=null">
+			             or u_nickname like '%' || #{ u_nickname } || '%'
+			         </if>
+			         <if test="u_tel!=null">
+			             or u_tel like '%' || #{ u_tel } || '%'
+			         </if>
+			         <if test="u_status!=null">
+			             or u_status like '%' || #{ u_status } || '%'
+			         </if>
+			         and u_grade='일반회원'
+		     </trim>
+	     
+	   
+	   
+        
 	</select>
 	
 	<select id="user_idx" resultType="vo.UserVo">
