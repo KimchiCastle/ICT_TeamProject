@@ -205,9 +205,15 @@ select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'일반회원')u_stat
 			)			
 		where no between 1 and 5
 
-select count(*) from user_market where u_name='홍길동' and u_grade='일반회원'
+update user_market set u_profile = '안녕' where u_idx = 6
 
-update user_market set 
+	select to_char(u_regdate,'mm') as u_month, count(*) as u_tot
+	from user_market
+	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
+	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
+
+delete from user_market where u_idx in (1,3,4,5)
+update user_market set where 
 
 */
 

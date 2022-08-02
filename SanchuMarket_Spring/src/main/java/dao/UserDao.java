@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import vo.UserVo;
+import vo.WithdrawlVo;
 
 public interface UserDao {
 
@@ -56,6 +57,9 @@ public interface UserDao {
 
 	//회원상태 업데이트
 	public int updateStatus(Map updateMap);
+	
+	//회원상태 업데이트2
+	public int insertStatus(WithdrawlVo vo);
 
 	//회원정보 수정
 	public int updateInfo(UserVo userVo);

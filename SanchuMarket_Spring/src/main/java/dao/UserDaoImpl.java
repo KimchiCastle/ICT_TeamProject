@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import vo.UserVo;
+import vo.WithdrawlVo;
 
 public class UserDaoImpl implements UserDao{
 
@@ -108,11 +109,18 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("user.check_pwd", check);
 	}
 
-	//회원 상태 업데이트
+	//회원 상태 업데이트 1
 	@Override
 	public int updateStatus(Map updateMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("user.user_status_update",updateMap);
+	}
+	
+	//회원 상태 업데이트 2
+	@Override
+	public int insertStatus(WithdrawlVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("user.insert_status",vo);
 	}
 
 	//회원정보 수정, 이미지도 같이
