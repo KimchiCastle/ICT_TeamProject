@@ -37,13 +37,7 @@ public interface ProductDao {
 	//상품정보와 상품이미지 하나만 가져오기
 	public ProductVo selectListproduct(int p_idx);
 
-	//최근 상품 조회(mainpage_admin)
-	public List<ProductVo> selectRecentList();
-		
-	
-	public int todayProductCount();
-		
-	
+
 	// 상품등록 메서드
 	public int insert(ProductVo vo);
 	
@@ -67,6 +61,8 @@ public interface ProductDao {
 	
 	//상품 상태 수정
 	public int statusUpdate(Map map);
+
+	public int updateClick(int p_idx);
 	
 
 

@@ -149,21 +149,14 @@ public  class ProductDaoImpl implements ProductDao {
 	@Override
 	public int statusUpdate(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("product.product_status_update",map);
+		return sqlSession.update("product.product_status_update", map);
 	}
 	
-	
-
+	//조회수증가
 	@Override
-	public List<ProductVo> selectRecentList() {
+	public int updateClick(int p_idx) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int todayProductCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("product.product_click_update", p_idx);
 	}
 
 	

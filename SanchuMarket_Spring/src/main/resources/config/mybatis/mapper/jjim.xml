@@ -31,4 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from jjim where p_idx=#{p_idx} and u_idx=#{u_idx}
 	</delete>
 	
+	<!-- 찜하기 카운트 조회 -->
+	<select id="jjim_count" resultType="vo.JjimVo">
+		select count(*) count from jjim where p_idx=#{p_idx}
+	</select>
+	
 </mapper>

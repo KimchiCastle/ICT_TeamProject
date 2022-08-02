@@ -81,7 +81,12 @@
 		<div>
 
 			<hr>
-			<h3 style="margin: 0px; padding-left: 15px;">판매자가 올린 상품</h3>
+			<c:if test="${ user.u_idx ne user_info.u_idx }">
+				<h3 style="margin: 0px; padding-left: 15px;">판매자가 올린 상품</h3>
+			</c:if>
+			<c:if test="${ user.u_idx eq user_info.u_idx }">
+				<h3 style="margin: 0px; padding-left: 15px;">내가 올린 상품</h3>
+			</c:if>
 
 		</div>
 		<%@ include file="../mainpage/content.jsp"%>

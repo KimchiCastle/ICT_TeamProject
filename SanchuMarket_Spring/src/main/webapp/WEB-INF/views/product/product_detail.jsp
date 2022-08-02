@@ -73,7 +73,12 @@
 
 		<div id="user_info">
 			<div id="user_img">
-				<img src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="100px" height="100px" style="margin-top:5px; border-radius: 50px;">
+				<c:if test="${ vo2.u_photo eq 'no_file' }">
+					<img src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="100px" height="100px" style="margin-top:5px; border-radius: 50px;">
+				</c:if>
+				<c:if test="${ vo2.u_photo ne 'no_file' }">
+					<img src="${ pageContext.request.contextPath }/resources/imgdata/${ vo2.u_photo }" width="100px" height="100px" style="margin-top:5px; border-radius: 50px;">
+				</c:if>
 			</div>
 			<div id="u_nickname"><a href="../sellerpage/list.do?u_idx=${vo.u_idx}" style="text-decoration: none; color: black;">${ vo2.u_nickname }</a></div>
 			<br>
@@ -144,25 +149,27 @@
 		<div style=" margin:auto; clear: both; width: 800px;">
 		
 			<div style="width: 800px;"><span id="p_name">${ vo.p_name }</span></div>
-			<div style="display: inline-block; min-width: 100px;"><span>
+			<div style="display: inline-block;"><span class="product_info">
 			<c:if test="${ vo.c_idx eq 1}">
-				남성의류
+				남성의류 ∙
 			</c:if> <c:if test="${ vo.c_idx eq 2}">
-				여성의류
+				여성의류 ∙
 			</c:if> <c:if test="${ vo.c_idx eq 3}">
-				도서/문구
+				도서/문구 ∙
 			</c:if> <c:if test="${ vo.c_idx eq 4}">
-				음반/악기
+				음반/악기 ∙
 			</c:if> <c:if test="${ vo.c_idx eq 5}">
-				가전
+				가전 ∙
 			</c:if> <c:if test="${ vo.c_idx eq 6}">
-				뷰티/미용
+				뷰티/미용 ∙
 			</c:if>
 					</span></div>
-			<div style="display: inline-block;"><span>${ vo.p_time }</span></div>
+			<div style="display: inline-block;"><span class="product_info"> ${ vo.p_time }</span></div>
 			<div><span id="p_price"><fmt:formatNumber pattern="#,###" value="${vo.p_price}"></fmt:formatNumber></span>&nbsp;원</div>
-			<div style="margin-top: 50px;">${ vo.p_exp }</div>
-		
+			<div style="margin-top: 30px; margin-bottom: 10px;">${ vo.p_exp }</div>
+			<div style="display: inline-block;"><span class="product_info" id="jjim_count"></span></div>
+			<div style="display: inline-block;"><span class="product_info">조회 ${ vo.p_click }</span></div>
+			<div style="border-bottom: 1px solid rgb(220,220,220); margin-bottom: 30px; margin-top: 30px; "></div>
 		</div> <!-- 상품정보 끝 -->
 	<c:if test="${ user.u_idx eq vo.u_idx }">
 		<div align="right">

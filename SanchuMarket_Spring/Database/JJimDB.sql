@@ -30,6 +30,7 @@ alter table jjim
 select * from jjim where u_idx=1
 insert into jjim values( 1,1,1)
 
+select count(*) count from jjim where p_idx = 1
 
 select * from jjim where u_idx=3 and p_idx=4
 
