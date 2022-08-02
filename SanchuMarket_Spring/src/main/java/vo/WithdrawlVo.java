@@ -21,12 +21,7 @@ public class WithdrawlVo {
 	public void setW_month(int w_month) {
 		this.w_month = w_month;
 	}
-	public int getw_tot() {
-		return w_tot;
-	}
-	public void setw_tot(int w_tot) {
-		this.w_tot = w_tot;
-	}
+
 	public int getU_idx() {
 		return u_idx;
 	}
