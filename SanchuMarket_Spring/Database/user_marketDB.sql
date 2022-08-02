@@ -46,10 +46,6 @@ alter table user_market
 	add constraint uq_user_market_u_mail unique(u_mail);	
 
 
---------check 제약--------
-alter table user_market
-	add constraint ck_user_market_u_grade 
-	check( u_grade in( '일반회원','사업자','관리자' ) )
 	
 -----check제약 삭제+재생성(7/27)--------
 alter table user_market
@@ -63,7 +59,7 @@ alter table user_market
 --------check 제약2 (7/6 수정)-------
 alter table user_market
     add constraint ck_user_market_u_status
-    check( u_status in('활동', '탈퇴'))	
+    check( u_status in('활동', '탈퇴','정지'))	
     
 ---check제약 조건명 수정---	
 ALTER TABLE user_market 
@@ -97,13 +93,15 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		sysdate,			  --가입일자
 		5,					  --평점
 		'방가방가~',		  --자기소개
-		null,				  --사진
+		'no_file',			  --사진
 		'010-1234-5678',	  --전화번호
 		'hongkill@gmail.com', --메일
-		'일반회원',		  --회원등급
-		'111-111-111',   --ip
-		'25231'           --postcode
-		);
+		'일반회원',		 	  --회원등급
+		'111.111.111.111',    --ip
+		'25231',          	  --postcode
+		'활동',   	  		  --회원상태
+		0   	  			  --회원추천카운트
+		); 
 
 
 insert into user_market 
@@ -117,12 +115,14 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		sysdate,			  --가입일자
 		5,					  --평점
 		'관리자 아이디',	  --자기소개
-		null,				  --사진
+		'no_file',				  --사진
 		'010-1234-5678',	  --전화번호
 		'admin123@gmail.com', --메일
-		'일반회원',			  --회원등급
-		'111-111-111',   --ip
-		'23231'           --postcode
+		'관리자',			  --회원등급
+		'111-111-111',        --ip
+		'23231',          	  --postcode
+		'활동', 			  --회원상태
+		0 				  	  --회원추천카운트
 		);
 
 insert into user_market 
@@ -136,33 +136,17 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 		sysdate,			  --가입일자
 		0,					  --평점
 		'안녕난하하야',		  --자기소개
-		null,				  --사진
+		'no_file',			  --사진
 		'010-4567-8901',	  --전화번호
 		'haha12@naver.com',   --메일
 		'일반회원'	,		  --회원등급
-		'111-111-111' ,  --ip
-		'25251'           --postcode
+		'111-111-111' , 	  --ip
+		'25251',         	  --postcode
+		'활동',	 			  --회원상태
+		0	 				  --회원추천카운트
 		
 		);
-insert into user_market 
-values( (select nvl(max(u_idx)+1,1) from user_market),		  
-		'haha',   	 	 	  --아이디
-		'1234',	    		  --비번
-		'김하하',	    	  --이름
-		'하하',		   		  --닉네임
-		'1993-06-18', 		  --생년월일
-		'서울시 마포구',	  --주소
-		sysdate,			  --가입일자
-		0,					  --평점
-		'안녕난하하야',		  --자기소개
-		null,				  --사진
-		'010-4567-8901',	  --전화번호
-		'haha12@naver.com',   --메일
-		'일반회원'	,		  --회원등급
-		'111-111-111' ,  --ip
-		'25251'           --postcode
-		
-		);
+
 
 ---조회용
 select * from user_market;
@@ -223,6 +207,7 @@ select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'일반회원')u_stat
 
 select count(*) from user_market where u_name='홍길동' and u_grade='일반회원'
 
+update user_market set 
 
 */
 

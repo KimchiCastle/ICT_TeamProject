@@ -38,7 +38,12 @@
 		<div id="seller-box" >
 			
 			<div id="seller-pictrue">
-				이미지
+				<c:if test="${ user_info.u_photo ne 'no_file' }">
+					<img src="${ pageContext.request.contextPath }/resources/imgdata/${user_info.u_photo}" width="100%" height="100%">
+				</c:if>
+				<c:if test="${ user_info.u_photo eq 'no_file' }">
+					<img src="${ pageContext.request.contextPath }/resources/image/image_upload.png" width="100%" height="100%">
+				</c:if>
 			</div> 
 			<div  id="seller-page1">
 				

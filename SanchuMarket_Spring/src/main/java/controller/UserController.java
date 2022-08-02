@@ -296,10 +296,6 @@ public class UserController {
 		
 		int res = user_dao.updateStatus(updateMap);
 		
-		if(u_status=="Ε»Επ") {
-			user_dao.insertWithdrawl(u_idx);
-		}
-		
 		boolean result = (res==1);
 		
 		Map map = new HashMap();
@@ -307,7 +303,7 @@ public class UserController {
 		map.put("result", result);
 		
 		
-		return map;
+		return map;	
 	}
 
 }

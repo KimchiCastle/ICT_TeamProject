@@ -29,6 +29,53 @@ public class UserVo {
 	// 임시컬럼
 	int no;
 	
+	
+	
+	//insert용
+	public UserVo(String u_id, String u_pwd, String u_name, String u_nickname, String u_birth, String u_addr,
+			String postcode, String u_tel, String u_mail, String u_ip) {
+		super();
+		this.u_id = u_id;
+		this.u_pwd = u_pwd;
+		this.u_name = u_name;
+		this.u_nickname = u_nickname;
+		this.u_birth = u_birth;
+		this.u_addr = u_addr;
+		this.u_tel = u_tel;
+		this.u_mail = u_mail;
+		this.u_ip = u_ip;
+		this.postcode = postcode;
+	}
+	
+	// 회원정보 수정용 이미지도 같이 수정
+	public UserVo(int u_idx, String u_name, String u_birth, String u_addr, String u_profile, String u_photo,
+			String u_tel, String postcode) {
+		super();
+		this.u_idx = u_idx;
+		this.u_name = u_name;
+		this.u_birth = u_birth;
+		this.u_addr = u_addr;
+		this.u_profile = u_profile;
+		this.u_photo = u_photo;
+		this.u_tel = u_tel;
+		this.postcode = postcode;
+	}
+	
+	// 회원정보 수정용 이미지 빼고 수정
+	public UserVo(int u_idx, String u_name, String u_birth, String u_addr, String u_profile,
+			String u_tel, String postcode) {
+		super();
+		this.u_idx = u_idx;
+		this.u_name = u_name;
+		this.u_birth = u_birth;
+		this.u_addr = u_addr;
+		this.u_profile = u_profile;
+		this.u_tel = u_tel;
+		this.postcode = postcode;
+	}
+	
+	
+	
 	public int getNo() {
 		return no;
 	}
@@ -69,25 +116,7 @@ public class UserVo {
 		this.u_time = u_time;
 	}
 
-//insert용
-	public UserVo(String u_id, String u_pwd, String u_name, String u_nickname, String u_birth, String u_addr,
-			String postcode, String u_tel, String u_mail, String u_ip) {
-		super();
-		this.u_id = u_id;
-		this.u_pwd = u_pwd;
-		this.u_name = u_name;
-		this.u_nickname = u_nickname;
-		this.u_birth = u_birth;
-		this.u_addr = u_addr;
-		this.u_tel = u_tel;
-		this.u_mail = u_mail;
-		this.u_ip = u_ip;
-		this.postcode = postcode;
-	}
 
-	public UserVo(int u_idx2, String u_name2, String u_id2, String u_pwd2, String u_zipcode, String u_addr2) {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getU_idx() {
 		return u_idx;
