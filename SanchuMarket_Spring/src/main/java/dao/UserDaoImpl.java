@@ -115,5 +115,12 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.update("user.user_status_update",updateMap);
 	}
 
+
+	@Override
+	public int insertWithdrawl(int u_idx) {
+
+		return sqlSession.insert("user.insert_withdrawl",u_idx);
+	}
+
 	
 }

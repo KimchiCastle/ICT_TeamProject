@@ -4,37 +4,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 	
-	<!-- 관리자페이지 회원목록 5개씩조회  -->
+	<!-- 관리자페이지 회원 목록 검색 조건별로 5개씩조회  -->
 	<select id="user_conditionList" parameterType="java.util.Map" resultType="vo.UserVo" >
 		
 		<!-- 얘는 5개 조회 됨 -->
-		select 
-			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
+		select *
 		from
-		(
-		select 
-			p.*, 
-			rank() over(order by u_idx) no 
-			from(select * from user_market where u_grade='일반회원')p
-		)			
+			(
+			select 
+				rank() over(order by u_idx) no, 
+				u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
+			from(select * from user_market where u_grade='일반회원')
+			 <trim prefix="where"  prefixOverrides="or">
+		         <if test="u_id!=null">
+		             u_id like '%' || #{ u_id } || '%' 
+		         </if>
+		          <if test="u_name!=null">
+		             or u_name like '%' || #{ u_name } || '%'
+		         </if>
+		          <if test="u_nickname!=null">
+		             or u_nickname like '%' || #{ u_nickname } || '%'
+		         </if>
+		         <if test="u_tel!=null">
+		             or u_tel like '%' || #{ u_tel } || '%'
+		         </if>
+		         <if test="u_status!=null">
+		             or u_status like '%' || #{ u_status } || '%'
+		         </if>
+			 </trim>
+			)			
 		where no between #{start} and #{end}
-<!--
-		얘는 4개가 조회 됨~
-		
- 		select 
-			no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status 
-		from
-		(
-		select 
-			p.*, 
-			rank() over(order by u_idx) no from(select * from user_market)p
-		)			
-		where no between #{start} and #{end} and u_grade='일반회원' -->
+
 	</select>
 	
-	<!--paging을 위한 전체 유저수-->
-	<select id="user_list" resultType="int">
-	   select count(*) from user_market where u_grade='일반회원'
+	<!--검색 조건별로 paging을 위한 전체 유저 count-->
+	<select id="user_list" resultType="int" parameterType="java.util.Map">
+	  
+	     select nvl(count(*),0) from user_market
+	      <trim prefix="where"  prefixOverrides="or|and">
+		         
+		         <if test="u_id!=null">
+			             u_id like '%' || #{ u_id } || '%' 
+			         </if>
+			          <if test="u_name!=null">
+			             or u_name like '%' || #{ u_name } || '%'
+			         </if>
+			          <if test="u_nickname!=null">
+			             or u_nickname like '%' || #{ u_nickname } || '%'
+			         </if>
+			         <if test="u_tel!=null">
+			             or u_tel like '%' || #{ u_tel } || '%'
+			         </if>
+			         <if test="u_status!=null">
+			             or u_status like '%' || #{ u_status } || '%'
+			         </if>
+			         and u_grade='일반회원'
+		     </trim>
+	     
+	   
+	   
+        
 	</select>
 	
 	<select id="user_idx" resultType="vo.UserVo">
@@ -84,10 +113,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--admin 탈퇴 회원 연도별 조회-->
 	<select id="annual_withdrawl_count" resultType="vo.UserVo">
-	select to_char(u_regdate,'mm') as u_month, count(*) as u_tot
-	from user_market
-	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
-	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
+	select to_char(w_date,'mm') as w_month, count(*) as w_tot
+	from withdrawl
+	where to_char(w_date,'yy')=to_char(sysdate,'yy') 
+	group by to_char(w_date,'mm') order by to_char(w_date,'mm') asc
+	</select>
+	
+	<!--admin 신고 회원 조회-->
+	<select id="report_userList">
+	  select * from user_market where u_status
 	</select>
 	
 	
@@ -134,6 +168,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where u_idx=#{ u_idx }
 	</update>
 	
+	<!--탈퇴 업데이트시 탈퇴DB 갱신-->
+	<insert id="insert_withdrawl" parameterType="int">
+       insert into withdrawl values
+       (
+         #{u_idx},
+         sysdate
+       )
+       	
+ 	</insert>
 	
 	<!--임시비밀번호로 갱신-->
 	<update id="pwd_update" parameterType="vo.UserVo">

@@ -56,6 +56,9 @@ public interface UserDao {
 
 
 	public int updateStatus(Map updateMap);
+
+
+	public int insertWithdrawl(int u_idx);
 	
 	
 	

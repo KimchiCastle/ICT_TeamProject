@@ -20,6 +20,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <!--CSS-->
 <link rel="stylesheet" href="../resources/css/admin_user_list.css">
+<link rel="stylesheet" href="../resources/css/admin_header_form.css">
+<!--select picker-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
+<!-- Latest compiled and minified JavaScript 한국어 번역 파일 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/i18n/defaults-ko_KR.min.js"></script>
 
 <script>
 
@@ -30,13 +35,56 @@ $(function(){
 	var strDate = d.getFullYear() + "." + (d.getMonth()+1) + "." + d.getDate() + " 회원 목록";
 	$("#title").html(strDate);
 	
-	
 })
+
+
+ $(function(){
+	 
+	 //검색 엔터 처리
+	 $('#body').on('keyup',function(e){
+			if(e.keyCode==13){
+				find();
+			}
+		});
+	 
+	  //검색했던 데이터 잔존
+	  if("${ not empty param.search }"=="true"){
+	      $("#search").val("${ param.search }");
+	  }
+	  
+	  //전체보기면 검색어 지우기
+	  if("${ empty param.search  or param.search eq 'all'}"=="true"){
+		  $("#search_text").val("");
+	  }
+	  
+  });
+
+
+function find(){
+	
+	var search = $("#search").val();
+	var search_text = $("#search_text").val().trim();
+	
+	//전체보기가 아닌데 검색어가 비어있는 경우 
+	if(search_text=='' && search!='all'){
+		alert('검색어를 입력하세요');
+		 $("#search_text").val('');
+		 $("#search_text").focus();
+	}
+	
+	  //검색요청
+	  location.href="user_listForm.do?search=" + search + "&search_text=" + encodeURIComponent(search_text);
+	  
+}//end find()
+
 
 </script>
 
+
+
+
 </head>
-<body>
+<body id="body">
 <div id="header">
   <%@include file="header.jsp"%>
 </div>
@@ -73,31 +121,18 @@ $(function(){
 	  </c:forEach>
     </table>
     
-    <form class="navbar-form navbar-left" action="">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-    
-     
-    
-    <div class="flex-shrink-0 dropdown" style="width:300px;">
-     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-toggle="dropdown" aria-expanded="false">
-      <img src="../resources/image/상추.png" alt="mdo" width="32" height="32" class="rounded-circle">
-      </a>
-   	 <ul class="dropdown-menu">
-       <li><a class="dropdown-item" >닉네임</a></li>
-       <li><a class="dropdown-item" >아이디</a></li>
-       <li><a class="dropdown-item" >활동상태</a></li>
-       <li><a class="dropdown-item">전화번호</a></li>
-    </ul>
-   </div>
-   
+	    <div style="text-align: center;  margin-bottom: 20px;">
+          <select id="search" value="${ empty param.search ? 'all' : param.search }">
+              <option value="all">전체</option>
+              <option value="u_id">아이디</option>
+              <option value="u_name">이름</option>
+              <option value="u_nickname">닉네임</option>
+              <option value="u_tel">전화번호</option> 
+              <option value="u_status">상태</option> 
+          </select>
+          <input id="search_text"  value="${ param.search_text }">
+          <input type="button" id="find_btn" value="검색" onclick="find();">
+     </div>
       <div id="page-form">
          ${ pageMenu }   
      </div>

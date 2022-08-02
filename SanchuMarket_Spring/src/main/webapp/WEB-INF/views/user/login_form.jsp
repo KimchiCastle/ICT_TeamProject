@@ -27,8 +27,6 @@
 		setTimeout(showfail(),500);
 		setTimeout(showMessage(),1000);
 		
-		
-		
 	  
 	  $('[data-dismiss=modal]').on('click', function () {
 		  

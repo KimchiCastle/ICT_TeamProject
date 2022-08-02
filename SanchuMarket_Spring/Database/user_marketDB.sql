@@ -192,8 +192,6 @@ select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'일반회원')u_stat
 		where no between 1 and 5 and u_grade='일반회원'
 
 
-
-
 	select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status, u_grade
 		from
 		(
@@ -203,9 +201,27 @@ select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'일반회원')u_stat
 			from(select * from user_market where u_grade='일반회원')p
 		)			
 		where no between 1 and 5
+		
+   update user_market set u_photo = 'no_file'
+   
+     select nvl(count(*),0)
+       from (select * from user_market where u_grade='일반회원')
+		where u_id like '%' || 'dkwls' || '%' 
+		         
+	   select u_id, u_grade from user_market where u_grade='일반회원' and u_id like '%' || 'dkwls' || '%'        
 
+		select *
+		from
+			(
+			select 
+			    rank() over(order by u_idx) no,
+				u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
+			from(select * from user_market where u_grade='일반회원')
+			where u_name like '%' || '홍길동' || '%' 
+			)			
+		where no between 1 and 5
 
-select * from user_market
+select count(*) from user_market where u_name='홍길동' and u_grade='일반회원'
 
 
 */

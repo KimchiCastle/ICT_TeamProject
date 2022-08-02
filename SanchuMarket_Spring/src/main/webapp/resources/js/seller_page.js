@@ -53,12 +53,16 @@
 	
 	/* checkbox 하나만 선택되는 함수 */
 	function doOpenCheck(chk){
+	
 	    var obj = document.getElementsByName("report");
+	    
 	    for(var i=0; i<obj.length; i++){
 	        if(obj[i] != chk){
 	            obj[i].checked = false;
 	        }
 	    }
+	    
+	    
 	}
 	
 	
