@@ -61,8 +61,6 @@
 	            obj[i].checked = false;
 	        }
 	    }
-	    
-	    
 	}
 	
 	
@@ -71,6 +69,11 @@
 		if(!confirm('회원정보를 수정하시겠습니까?')) return false;
 		
 		location.href='../mypage/myInfoModify_form.do?u_idx='+u_idx;
+		
+	}
+	
+	function send_report(){
+		
 		
 	}
 	
@@ -84,8 +87,6 @@
 		}else{
 			return false;
 		}
-		
-		
 	}
 	
 	function center_password_popup(){
