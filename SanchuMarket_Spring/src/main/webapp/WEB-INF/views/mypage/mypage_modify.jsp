@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,39 +18,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <!--date picker-->
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<!--비밀번호 토글 아이콘-->
-<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
 <!--JavaScript-->
-<script type="text/javascript" src="../resources/js/enroll_form.js"></script>
+<script type="text/javascript" src="../resources/js/myinfo_modify.js"></script>
 <!--CSS-->
 <link rel="stylesheet" 
       href="${ pageContext.request.contextPath }/resources/css/enroll_form.css">
 
-<script type="text/javascript">
-
-
-//enrollAction에서 실패시 redirect되는 parameter 받기
- function showMessage(){
-	 
-	  if("${param.reason}" == "failed_enroll"){
-		  alert('회원가입에 실패했습니다. 관리자에게 문의하세요');
-		  return false;
-	  } 
-	  
-  idFlag = false;
-  pwdFlag = false;
-  submitFlag = false;
- }
-
-</script>
-
 </head>
-<body style="background-color: white;">
+<body >
+
+<form enctype="multipart/form-data" id="imgform" method="POST">
+	<input type="file" id="u_photo" style="display: none;" accept=".jpg, .jpeg, .png"> 
+</form>
 
 
-<form id="enroll_form" method="POST" action="enroll.do">
-	<div id="header" style="padding-top:100px;">
+		<div id="header" style="padding-top:100px;">
            <span id="title">회원정보수정</span>
         </div>
 
@@ -68,44 +53,58 @@
                     </span>
                     <span class="error_next_box" id="idMsg"></span>
                 </div>
-
-                <!-- PWD1 -->
                
 
                 <!-- NAME -->
                 <div>
                     <h3 class="join_title"><label for="name">이름</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="u_name" name="u_name" class="int" maxlength="20">
+                        <input type="text" id="u_name" name="u_name" class="int" value="${ vo.u_name }" maxlength="20">
                     </span>
                     <span class="error_next_box" id="nameMsg"></span>	
                 </div>
                 
-                <!-- NICKNAME -->
-                <div>
-                    <h3 class="join_title"><label for="name">닉네임</label></h3>
-                    <span class="box int_name">
-                        <input type="text" id="u_nickname" name="u_nickname" class="int" maxlength="20" required>
-                    </span>
-                    <span class="error_next_box" id="nickMsg"></span>
-                </div>
-
                 <!-- BIRTH -->
                 <div>
                     <h3 class="join_title"><label>생년월일</label></h3>
-			      	  <input type="text" name="u_birth" id="u_birth" required> 
+			      	  <input type="text" name="u_birth" id="u_birth" value="${ vo.u_birth }" required> 
                     <span class="error_next_box" id="birthMsg"></span>    
                 </div>
               
-
                 <!-- TEL -->
                 <div>
                     <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
                     <span class="box int_mobile">
-                        <input type="tel" id="u_tel" name="u_tel" class="int" maxlength="16" required>
+                        <input type="tel" id="u_tel" name="u_tel" value="${ vo.u_tel }" class="int" maxlength="16" required>
                     </span>
                     <span class="error_next_box" id="telMsg"></span>    
                 </div>
+                
+                <!-- 등록한 사진파일이 없을때 -->
+                <c:if test="${ vo.u_photo eq 'no_file' }">
+	                <div>
+	                	<h3 class="join_title" style="display: inline-block;"><label for="image">이미지</label></h3>
+	                	<button type="button" class="btn" style="margin-left:170px; background-color: #ffaaaa;" onclick="imgdel();"><b>사진삭제</b></button>
+	                	<br>
+	                	<input type="image" id="imgup_sum" src="${ pageContext.request.contextPath }/resources/image/image_upload.png" onclick="imgUpload();" width="300px" height="300px">
+	                </div>
+                </c:if>
+				
+				<!-- 등록한 사진파일이 존재할때 -->
+				<c:if test="${ vo.u_photo ne 'no_file' }">
+					<div>
+	                	<h3 class="join_title" style="display: inline-block;"><label for="image">이미지</label></h3>
+	                	<button type="button" class="btn" style="margin-left:170px; background-color: #ffaaaa;'" onclick="imgdel();"><b>사진삭제</b></button>
+	                	<br>
+	                	<input type="image" id="imgup_sum" src="${ pageContext.request.contextPath }/resources/imgdata/${vo.u_photo}" onclick="imgUpload();" width="300px" height="300px">
+	                </div>
+				</c:if>                
+                
+                <div>
+                	<h3 class="join_title"><label for="image">자기소개</label></h3>
+                	<textarea id="u_profile" style="width:100%; height: 150px; resize:none; padding: 10px;" placeholder="자기소개">${ vo.u_profile }</textarea>
+                </div>
+                
                 
 			    <!-- ADDRESS -->
 				 	 <h3 class="join_title"><label>주소</label></h3>
@@ -133,8 +132,8 @@
 			     
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="button" class="btn" id="enroll_btn" onclick="enroll();">
-                        <span>가입</span>
+                    <button type="button" class="btn" id="enroll_btn" onclick="modify(${vo.u_idx});">
+                        <span>수정</span>
                     </button>
                     <button type="button" class="btn" id="revoke_btn" onclick= "location.href='../mainpage/list.do'">
                         <span>취소</span>
@@ -146,7 +145,6 @@
 
         </div> 
         <!-- wrapper -->
-        </form>
     </body>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

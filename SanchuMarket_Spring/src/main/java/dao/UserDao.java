@@ -51,11 +51,17 @@ public interface UserDao {
 
 	public List<String> selectIdByNameTel(UserVo vo);
 
-
+	//회원탈퇴시 비밀번호 체크
 	public UserVo selectOneByPwd(Map check);
 
-
+	//회원상태 업데이트
 	public int updateStatus(Map updateMap);
+
+	//회원정보 수정
+	public int updateInfo(UserVo userVo);
+
+	//회원정보 수정, 이미지없이
+	public int updateInfoNoImg(UserVo userVo);
 	
 	
 	
