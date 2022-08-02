@@ -18,6 +18,7 @@
 body{
 	margin-top: 0px;
 	font-family: 'Gowun Dodum', sans-serif;
+	
 	min-width: 800px;
 }
 
@@ -126,7 +127,6 @@ li, ul{
 	width: 30px;
 	margin: auto;
 	margin-left: 80px;
-	
 	margin-top: 15px; 
 }
 
@@ -157,6 +157,10 @@ li, ul{
   display: block;
 }
 
+.main_menu{
+  cursor: pointer;
+}
+
 .price_area{
 	display: inline-block;
 	height: 35px;
@@ -184,7 +188,10 @@ li, ul{
 	margin-left: 10px; 
 	width: 25px; 
 	height: 25px; 
+	cursor: pointer;
 }
+
+
 
 </style>
 

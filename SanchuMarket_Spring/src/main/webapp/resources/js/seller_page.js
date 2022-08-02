@@ -53,7 +53,9 @@
 	
 	/* checkbox 하나만 선택되는 함수 */
 	function doOpenCheck(chk){
+	
 	    var obj = document.getElementsByName("report");
+	    
 	    for(var i=0; i<obj.length; i++){
 	        if(obj[i] != chk){
 	            obj[i].checked = false;
@@ -70,6 +72,11 @@
 		
 	}
 	
+	function send_report(){
+		
+		
+	}
+	
 
 	function show_pwdcheck(){
 		
@@ -80,8 +87,6 @@
 		}else{
 			return false;
 		}
-		
-		
 	}
 	
 	function center_password_popup(){

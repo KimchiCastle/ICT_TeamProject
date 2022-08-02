@@ -63,28 +63,68 @@ public class AdminController {
 	
 	//유저관리
 	@RequestMapping("user_listForm.do") //nowPage는 page가 param에 없으면 처음 들어갈때이므로 1의 default값을 가짐.
-	public String userList(@RequestParam(value="page", required=false, defaultValue="1") int nowPage, 
-																						Model model) {
+	public String userList(@RequestParam(value="page", required=false, defaultValue="1")    int nowPage,
+					       @RequestParam(value="search", required=false, defaultValue="all")String search,													
+					       @RequestParam(value="search_text", required=false)String search_text,													
+																			  Model model) {
 		
+		System.out.printf("search:%s\n",search);
+		System.out.printf("search_text:%s\n",search_text);
+		
+		
+		//1.넘어온 페이지를 이용해 페이지의 start/end 갱신
 	    int start = (nowPage-1) * MyConstant.UserList.BLOCK_LIST + 1;
 	    int end = start + MyConstant.UserList.BLOCK_LIST - 1;
 	    
-	    int rowTotal = admin_dao.count_userList();
+	    
+	    Map map = new HashMap();
+	    map.put("start", start);
+	    map.put("end", end);
+	    
+	   
+	    //2-1.검색 결과 필터링 처리
+    	if(!search.equals("all")) {
+		
+    	    if(search.equals("u_id")) {
+    			map.put("u_id", search_text);
+    		}
+    	    else if(search.equals("u_name")) {
+    	    	map.put("u_name", search_text);
+    	    }
+    		else if(search.equals("u_nickname")) {
+				map.put("u_nickname", search_text);
+			}
+    		else if(search.equals("u_tel")) {
+    			map.put("u_tel", search_text);
+    		}
+			else if(search.equals("u_status")) {
+				map.put("u_status", search_text);
+			}
+    	}
+    
+    	 //전체 글 수(필터링 타입, 값에 따라 달라짐)
+	    int rowTotal = admin_dao.count_userList(map);
+	    
+	    System.out.printf("rowTotal:%d\n",rowTotal);
+	    
+	    //2-2.검색 결과에 따른 페이징
+  		String search_filter = String.format("search=%s&search_text=%s", search,search_text);
 	    
 	    String pageMenu = Paging.getPaging("user_listForm.do", 
+	    									search_filter,
 							                nowPage,
 							                rowTotal,
 							                MyConstant.UserList.BLOCK_LIST,
 							                MyConstant.UserList.BLOCK_PAGE
 							                );
 	    
-	    Map map = new HashMap();
-	    map.put("start", start);
-	    map.put("end", end);
-	    
+	    System.out.println(pageMenu);
+	  
+	    //2-3.페이징마다 할당되는 유저 목록 추출
 	    List<UserVo> userList = admin_dao.select_userList(map);
 	    
 	    for(int i = 0; i < userList.size(); i++) {
+	    	System.out.printf("userList의name:%s\n",userList.get(i).getU_name());
 	    }
 	    
 		model.addAttribute("userList", userList);
@@ -92,11 +132,6 @@ public class AdminController {
 		
 		return "admin/user_list";
 	}
-	
-		
-	
-	 
-	 
 	
 	
 }

@@ -76,7 +76,19 @@ new Chart(document.getElementById("line-chart"), {
         borderColor: "#e8c3b9",
         fill: false
      },{
-        data: [6,3,2,2,7,26,44,5,20,60,30,50],
+        data: [
+        	${ serviceMap.annual_withdrawlList[0].w_tot },
+        	${ serviceMap.annual_withdrawlList[1].w_tot },
+        	${ serviceMap.annual_withdrawlList[2].w_tot },
+        	${ serviceMap.annual_withdrawlList[3].w_tot },
+        	${ serviceMap.annual_withdrawlList[4].w_tot },
+        	${ serviceMap.annual_withdrawlList[5].w_tot },
+        	${ serviceMap.annual_withdrawlList[6].w_tot },
+        	${ serviceMap.annual_withdrawlList[7].w_tot },
+        	${ serviceMap.annual_withdrawlList[8].w_tot },
+        	${ serviceMap.annual_withdrawlList[9].w_tot },
+        	${ serviceMap.annual_withdrawlList[10].w_tot },
+,			${ serviceMap.annual_withdrawlList[11].w_tot }],
         label: "탈퇴회원",
         borderColor: "#c45850",
         fill: false
@@ -102,7 +114,7 @@ new Chart(document.getElementById("line-chart"), {
 
 <div id="content">
 
-	<div class="board-wrapper" id="board">
+	<div id="board">
 	   <label>실시간 상품 업로드 현황</label>
 	   <table></table>
 	   <c:forEach var="product" items="${ serviceMap.p_list }">
@@ -110,25 +122,25 @@ new Chart(document.getElementById("line-chart"), {
 		   	<img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="35px" height="40px">
 		   <div class="product_p_name">${ product.p_name } </div> 	 
 		    ${ fn:substring(product.p_date,0,10) }
-		   
 	   </div>
 	   </c:forEach>
 	</div>
 	
-<!-- 	<div class="board-wrapper" id="chat" >
-	  
-	</div> -->
+<div class="report-wrapper"  >
+   <div id="report">
+     <table>  
+	<%--      <c:forEach var="report" items="${ serviceMap. }">
+	        <tr>
+					          
+	        </tr>
+	     </c:forEach> --%>
+	 </table>    
+ 	</div>
+   <div id="report_inf">
+       
+   </div>
 	
-<!-- <div id="report">
-
-<div class="scroll type1">
- <p>신고 처리 회원</p>
- <span id="report_user">이름 아이디 사유</span>
 </div>
-
-</div> -->
-
-	
 	
 	<div id="number-wrapper">
 	  <table class="table" id="number-table">

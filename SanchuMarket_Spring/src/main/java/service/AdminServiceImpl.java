@@ -11,6 +11,7 @@ import dao.AdminDao;
 import vo.CategoryVo;
 import vo.ProductVo;
 import vo.UserVo;
+import vo.WithdrawlVo;
 
 public class AdminServiceImpl implements AdminService {
 
@@ -89,7 +90,7 @@ public class AdminServiceImpl implements AdminService {
 		});
 		
 		
-		//년도별 회원 가입수
+		//1. 년도별 회원 가입수
 		List<UserVo> annual_enrollList = admin_dao.countAnnualEnroll();//DB에서불러온randomVO
 		List<Integer> list2 = new ArrayList<>();//list의 월과 비교하기 위한 임시 배열
 		
@@ -106,6 +107,24 @@ public class AdminServiceImpl implements AdminService {
 				annual_enrollList.add(vo);
 			}
 		}
+		
+		//2. 년도별 회원 탈퇴수
+		List<WithdrawlVo> annual_withdrawlList = admin_dao.countAnnualWithdrawl();//DB에서불러온randomVO
+		List<Integer> list3 = new ArrayList<>();//list의 월과 비교하기 위한 임시 배열
+		
+		for(int i = 0; i < annual_withdrawlList.size(); i++) {
+			list2.add(annual_withdrawlList.get(i).getW_month());
+		}
+		
+		//DB에서 불러온 list의 월이 12월 중 없으면 새로 월 주입(tot를 0으로 설정)
+		for(int i = 1; i <= 12; i++) {
+			if(!list3.contains(i)) {
+				WithdrawlVo vo = new WithdrawlVo();
+				vo.setW_month(i);
+				vo.setW_tot(0);
+				annual_withdrawlList.add(vo);
+			}
+		}
 	
 		//월 정렬
 		Collections.sort(annual_enrollList,new Comparator<UserVo>() {
@@ -114,6 +133,15 @@ public class AdminServiceImpl implements AdminService {
 			public int compare(UserVo o1, UserVo o2) {
 				
 				return (o1.getU_month())-(o2.getU_month());
+			}
+		});
+		
+		Collections.sort(annual_withdrawlList,new Comparator<WithdrawlVo>() {
+			
+			@Override
+			public int compare(WithdrawlVo o1, WithdrawlVo o2) {
+				
+				return (o1.getW_month())-(o2.getW_month());
 			}
 		});
 			
@@ -127,6 +155,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("today_v_count",today_v_count);
 		map.put("today_u_count",today_u_count);
 		map.put("annual_enrollList", annual_enrollList);
+		map.put("annual_withdrawlList", annual_withdrawlList);
 		
 	
 		return map;

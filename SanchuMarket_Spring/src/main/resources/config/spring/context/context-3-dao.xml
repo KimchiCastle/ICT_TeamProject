@@ -10,11 +10,6 @@
 		<property name="sqlSession" ref="sqlSession"/>
 	</bean>
 	
-	<!-- 채팅 -->
-	<bean id="chat_dao" class="dao.ChatDaoImpl">
-		<property name="sqlSession" ref="sqlSession"/>
-	</bean>
-	
 	<!-- 상품 이미지 -->
 	<bean id="image_dao" class="dao.ImageDaoImpl">
 		<constructor-arg  ref="sqlSession"/>

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import vo.CategoryVo;
 import vo.ProductVo;
 import vo.UserVo;
+import vo.WithdrawlVo;
 
 public class AdminDaoImpl implements AdminDao{
 
@@ -56,9 +57,16 @@ public class AdminDaoImpl implements AdminDao{
 		return sqlSession.selectOne("user.enroll_count");
 	}	
 	
+	
 	public List<UserVo> countAnnualEnroll() {
 		
 		return sqlSession.selectList("user.annual_enroll_count");
+	}
+	
+	@Override
+	public List<WithdrawlVo> countAnnualWithdrawl() {
+		
+		return sqlSession.selectList("user.annual_withdrawl_count");
 	}
 	
 	//카테고리에 해당하는 상품 개수 받아오기
@@ -82,11 +90,13 @@ public class AdminDaoImpl implements AdminDao{
 		return sqlSession.selectList("user.user_conditionList", map);
 	}
 	
-	//유저관리 - 페이징을 위한 start-end count
-	public int count_userList() {
+	//유저관리 - 페이징을 위한 start-end를 검색 조건별로 조회
+	public int count_userList(Map map) {
 		
-		return sqlSession.selectOne("user.user_list");
+		return sqlSession.selectOne("user.user_list",map);
 	}
+
+	
 
 
 }
