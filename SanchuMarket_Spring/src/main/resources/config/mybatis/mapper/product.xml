@@ -277,6 +277,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update product set p_status=#{p_status} where p_idx=#{p_idx}
 	</update>
 
+	<!-- 조회수 업데이트 -->
+	<update id="product_click_update" parameterType="int">
+		update product set p_click = p_click+1 where p_idx=#{p_idx}
+	</update>
+
 </mapper>
 
 

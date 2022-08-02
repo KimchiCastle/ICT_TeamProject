@@ -45,6 +45,12 @@ public class JjimDaoImpl implements JjimDao {
 		return sqlSession.delete("jjim.jjim_delete", vo);
 	}
 
+	@Override
+	public JjimVo selectCount(int p_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("jjim.jjim_count", p_idx);
+	}
+
 
 
 }

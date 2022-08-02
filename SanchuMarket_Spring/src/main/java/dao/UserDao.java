@@ -59,7 +59,7 @@ public interface UserDao {
 	public int updateStatus(Map updateMap);
 	
 	//회원상태 업데이트2
-	public int insertStatus(WithdrawlVo vo);
+	public int insertWithdrawl(WithdrawlVo vo);
 
 	//회원정보 수정
 	public int updateInfo(UserVo userVo);

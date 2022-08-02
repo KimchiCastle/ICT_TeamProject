@@ -5,8 +5,11 @@ public class JjimVo {
 	private int j_idx;
 	private int p_idx;
 	private int u_idx;
-
 	
+	private int count;
+	
+	
+
 	public JjimVo() {
 		
 	}
@@ -40,5 +43,14 @@ public class JjimVo {
 	public void setU_idx(int u_idx) {
 		this.u_idx = u_idx;
 	}
+	
+	public int getCount() {
+		return count;
+	}
 
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	
 }

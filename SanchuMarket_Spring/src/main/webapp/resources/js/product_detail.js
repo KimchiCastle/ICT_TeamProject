@@ -6,6 +6,7 @@
 		var p_idx = $("#p_idx").val();
 		var u_idx = $("#buyer_u_idx").val();
 		
+		// user가 찜한 상품인지 체크
 		$.ajax({
 			
 			url		: 'jjimCheck.do',
@@ -24,7 +25,7 @@
 			}
 			
 		});
-		
+		// 거래중 상품인지 확인
 		$.ajax({
 			
 			url		: 'tradeCheck.do',
@@ -39,12 +40,28 @@
 				}
 			},
 			error	: function(err){
-				alert('상품 불러오기에 실패했습니다. 관리자에게 문의 해주세요.')
+				alert('상품정보 불러오기에 실패했습니다. 관리자에게 문의 해주세요.')
 			}
 		
 		
 		
 		});
+		
+		$.ajax({
+			
+			url		: 'jjimCount',
+			type	: 'POST',
+			data	: {'p_idx':p_idx},
+			success	: function(res_data){
+				
+				$("#jjim_count").html(res_data)
+				
+			},
+			error	: function(err){
+				alert('상품정보 불러오기에 실패했습니다.')
+			}
+			
+		})
 		
 		
 		
@@ -79,7 +96,9 @@
 					
 					$("#jjim_on").css('display','none');
 					$("#jjim_off").css('display','inline-block');
-				
+					
+					window.location.reload();
+					
 				}else{
 					
 					alert('찜 등록을 실패하였습니다. 관리자에게 문의하세요');
@@ -115,6 +134,7 @@
 					
 					$("#jjim_off").css('display','none');
 					$("#jjim_on").css('display','inline-block');
+					window.location.reload();
 				
 				}else{
 					

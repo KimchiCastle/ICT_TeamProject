@@ -113,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--admin 탈퇴 회원 연도별 조회-->
 	<select id="annual_withdrawl_count" resultType="vo.WithdrawlVo">
-	select to_char(w_date,'mm') as u_month, count(*) as u_tot
+	select to_char(w_date,'mm') as w_month, count(*) as w_tot
 	from withdrawl
 	where to_char(w_date,'yy')=to_char(sysdate,'yy') 
 	group by to_char(w_date,'mm') order by to_char(w_date,'mm') asc
@@ -162,10 +162,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				u_status=#{u_status}
 			where u_idx=#{ u_idx }
 	</update>
-	
-	<insert id="insert_update" parameterType="vo.WithdrawlVo">
-	   insert into withdrawl 
-	   (select nvl(max(u_idx)+1,1)from withdrawl), 
+	<!-- 회원상태 업데이트2, 탈퇴회원테이블 저장 -->
+	<insert id="insert_Withdrawl" parameterType="vo.WithdrawlVo">
+	   insert into withdrawl values
+		   (
+		   		#{u_idx},
+		   		sysdate
+		   )
 	
 	</insert>
 	<!-- 회원정보수정 -->

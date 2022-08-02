@@ -2,9 +2,6 @@ package controller;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +30,9 @@ import util.MyFileDelete;
 import util.MyFileUpload;
 import util.Mytime;
 import util.VisitCookie;
-import vo.CategoryVo;
 import vo.ImageVo;
 import vo.JjimVo;
 import vo.ProductVo;
-import vo.TradeVo;
 import vo.UserVo;
 import vo.VisitVo;
 
@@ -324,10 +319,6 @@ public class ProductController {
 			) throws Exception {
 		
 		
-
-		
-		
-		
 		//만약 들어온 파라미터 값이 null이 아니면
 		if(!p_idx.equals("null")) {
 			
@@ -339,16 +330,42 @@ public class ProductController {
 			
 			//쿠키는 지정한 경로의 하위경로에서만 쿠키에 접근 가능
 			cookie.setPath("/sanchumarket/");
-			
+			cookie.setMaxAge(84000);
 			
 			//쿠키응답
 			response.addCookie(cookie);
 			
 		}
-				
 		//p_idx로 상품 전체 가지고오기, 이미지도 다 가지고옴
 		ProductVo vo = product_dao.selectList2(Integer.parseInt(p_idx));
 		
+		//---------- 조회수 처리 시작 -------------
+		
+		Cookie cookies [] = request.getCookies();
+		
+		//쿠키 정보 담을 List생성
+		List<String> list = new ArrayList<String>();
+		
+		for(Cookie cookie : cookies) {
+			
+			System.out.println(cookie.getName());
+			
+			list.add(cookie.getName());
+			
+		}
+		
+		//쿠키에 상품정보가 없으면 아래 알고리즘 실행
+		if(!list.contains(p_idx)) {
+			
+			//존재하지 않으면 조회수 증가
+			int clickUp = product_dao.updateClick(Integer.parseInt(p_idx));
+		}
+		
+		
+		//---------- 조회수 처리 종료 -------------
+		
+		
+		//상품을 올린 사용자의 정보도 가지고 오기
 		UserVo vo2 = user_dao.selectOneByIdx(vo.getU_idx());
 		
 		
@@ -488,6 +505,16 @@ public class ProductController {
 		return map;
 	}
 	
-
+	@RequestMapping("jjimCount")
+	public String jjimcount(Model model,int p_idx) {
+		
+		JjimVo vo = jjim_dao.selectCount(p_idx);
+		
+		model.addAttribute("vo",vo);
+		
+		
+		return "product/jjim_count";
+	}
+	
 	
 }

@@ -14,4 +14,6 @@ public interface JjimDao {
 	public int insert(JjimVo vo);
 	
 	public int delete(JjimVo vo);
+
+	public JjimVo selectCount(int p_idx);
 }
