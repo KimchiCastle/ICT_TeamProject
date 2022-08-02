@@ -108,11 +108,25 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("user.check_pwd", check);
 	}
 
-
+	//회원 상태 업데이트
 	@Override
 	public int updateStatus(Map updateMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("user.user_status_update",updateMap);
+	}
+
+	//회원정보 수정, 이미지도 같이
+	@Override
+	public int updateInfo(UserVo userVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("user.user_info_update", userVo);
+	}
+
+	//회원정보 수정, 이미지없이
+	@Override
+	public int updateInfoNoImg(UserVo userVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("user.user_info_update_noImg", userVo);
 	}
 
 	

@@ -27,6 +27,15 @@
 <!-- insert JavaScript -->
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/product_insert.js"></script>
 
+<!-- 회원주소 넣기 -->
+<script type="text/javascript">
+	function myAddr() {
+		
+		$("#p_location").val('${user.u_addr}');
+		
+	}
+</script>
+
 </head>
 <body>
 	<!-- 파일업로드 용 폼 -->
@@ -172,7 +181,7 @@
 						class="pro_info">거래지역<span style="color: red">*</span></span></td>
 					
 					<td align="left">
-						<input type="button" id="myaddr" value="내주소" >
+						<input type="button" id="myaddr" value="내주소" onclick="myAddr();">
 						<input type="button" id="addrfind" value="주소찾기" onclick="addrFind();">
 						<br>
 						<input type="text" id="p_location" class="input-tag" style="margin-top: 5px;" readonly="readonly">

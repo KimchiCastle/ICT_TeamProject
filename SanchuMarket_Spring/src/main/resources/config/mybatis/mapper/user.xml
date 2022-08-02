@@ -127,13 +127,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 회원상태 업데이트 -->
-	<update id="user_status_update">
+	<update id="user_status_update" parameterType="java.util.Map">
 		update user_market 
 			set
 				u_status=#{u_status}
 			where u_idx=#{ u_idx }
 	</update>
 	
+	<!-- 회원정보수정 -->
+	<update id="user_info_update" parameterType="vo.UserVo">
+		update user_market
+			set
+				u_name=#{u_name},
+				u_birth=#{u_birth},
+				u_tel=#{u_tel},
+				u_profile=#{u_profile},
+				u_photo=#{u_photo},
+				postcode=#{postcode},
+				u_addr=#{u_addr}
+		where u_idx=#{u_idx}
+		
+	</update>
+	
+	<!-- 회원정보수정, 이미지수정없음 -->
+	<update id="user_info_update_noImg" parameterType="vo.UserVo">
+		update user_market
+			set
+				u_name=#{u_name},
+				u_birth=#{u_birth},
+				u_tel=#{u_tel},
+				u_profile=#{u_profile},
+				postcode=#{postcode},
+				u_addr=#{u_addr}
+		where u_idx=#{u_idx}
+		
+	</update>
 	
 	<!--임시비밀번호로 갱신-->
 	<update id="pwd_update" parameterType="vo.UserVo">

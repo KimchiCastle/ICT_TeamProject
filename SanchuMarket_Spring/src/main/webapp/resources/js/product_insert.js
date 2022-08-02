@@ -790,6 +790,12 @@
 		formData.append('p_price',p_price);			// 가격
 		formData.append('p_exp',p_exp);				// 상품설명
 		
+		
+		/*	
+			파일 데이터를 ajax처리 하기 위해선
+			반드시 processData,contentType 들을 false 해주기
+		 */
+		
  	 	$.ajax({
 			
 			url 	 : 'product_insert.do',
@@ -809,7 +815,7 @@
 				alert('물품등록에 실패했습니다. 관리자에게 문의하세요.');
 			}
 			
-		}); 
+		});
 		
 		
 	}
