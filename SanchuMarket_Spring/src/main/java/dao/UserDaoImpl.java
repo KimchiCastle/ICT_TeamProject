@@ -123,6 +123,12 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		return sqlSession.update("user.insert_Withdrawl",vo);
 	}
+	//회원 상태 복구
+	@Override
+	public int deleteWithdrawl(WithdrawlVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("user.delete_Withdrawl", vo);
+	}
 
 	//회원정보 수정, 이미지도 같이
 	@Override

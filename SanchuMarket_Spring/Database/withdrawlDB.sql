@@ -6,6 +6,8 @@ create table withdrawl
 
 select * from withdrawl
 
+delete from withdrawl
+
 alter table withdrawl 
 	drop constraint fk_withdrawl_u_idx 
 

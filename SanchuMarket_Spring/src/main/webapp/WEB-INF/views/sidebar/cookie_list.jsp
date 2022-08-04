@@ -43,28 +43,7 @@
 
 </script>
 
-<!-- 쿠키삭제 -->
-<script type="text/javascript">
-	
-	function del_cookie(p_idx) {
-		
-		$.ajax({
-			url		 : '${pageContext.request.contextPath}/del_cookie.do',
-			type	 : 'POST',
-			data	 : {'p_idx':p_idx},
-			dataType : 'json',
-			success	 : function(res) {
-				
-				if(res.result){
-					window.location.reload();
-				}
-				
-			}
-			
-		});
-		
-	}
-</script>
+
 
 </head>
 <body>
