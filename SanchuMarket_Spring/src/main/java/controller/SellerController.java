@@ -55,5 +55,13 @@ public class SellerController {
 		return "sellerpage/seller_page";
 	}
 	
+	@RequestMapping("report.do")
+	public String report(String report_reason) {
+		
+		
+		
+		return "redirect:list.do";
+	}
+	
 	
 }
