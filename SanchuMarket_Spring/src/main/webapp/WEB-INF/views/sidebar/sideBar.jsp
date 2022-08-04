@@ -115,8 +115,39 @@
 <!-- 쿠키삭제 -->
 <script type="text/javascript">
 	
-	
+	function del_cookie(p_idx) {
+		
+		var curr_page = global_page;
+		
+		$.ajax({
+			url		 : '${pageContext.request.contextPath}/del_cookie.do',
+			type	 : 'POST',
+			data	 : {'p_idx':p_idx},
+			dataType : 'json',
+			success	 : function(res) {
+				
+				if(res.result){
 
+					$.ajax({
+						url : "${pageContext.request.contextPath}/list_cookie.do",
+						data : {'curr_page' : curr_page},
+						success : function(res_data) {
+
+							$("#disp").html(res_data);
+
+						}
+
+					});
+					
+					
+					
+				}
+				
+			}
+			
+		});
+		
+	}
 </script>
 
 </head>
@@ -130,11 +161,6 @@
 			</div>
 				<div class="recentView" id="recentView">
 					<div id="disp"></div>
-					<%-- <div>
-						<button onclick="slider(-1)">&lt;</button>
-						<span id="now">1</span>/<span id="total">${ last_page }</span>
-						<button onclick="slider(1)">&gt;</button>
-					</div> --%>
 				</div>
 		</div>
 

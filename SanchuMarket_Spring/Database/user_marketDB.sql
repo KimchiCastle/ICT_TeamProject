@@ -1,4 +1,4 @@
-/*
+
 --실수 했을때 테이블 드랍용
 drop table user_market cascade constraints
 
@@ -215,5 +215,4 @@ update user_market set u_profile = '안녕' where u_idx = 6
 delete from user_market where u_idx=5
 update user_market set where 
 
-*/
 

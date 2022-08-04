@@ -61,11 +61,15 @@ public interface UserDao {
 	//회원상태 업데이트2
 	public int insertWithdrawl(WithdrawlVo vo);
 
+	//회원상태 업데이트, 회원복구
+	public int deleteWithdrawl(WithdrawlVo vo);
+	
 	//회원정보 수정
 	public int updateInfo(UserVo userVo);
 
 	//회원정보 수정, 이미지없이
 	public int updateInfoNoImg(UserVo userVo);
+
 	
 	
 	

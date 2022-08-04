@@ -292,19 +292,32 @@ public class UserController {
 		
 		Map updateMap = new HashMap();
 		
+		System.out.println(u_status);
+		System.out.println(u_idx);
+		
 		updateMap.put("u_status", u_status);
 		updateMap.put("u_idx", u_idx);
 		
-		
+		//탈퇴일땐 탈퇴 회원 테이블에도 저장
 		if(u_status.equals("탈퇴")) {
 			WithdrawlVo vo = new WithdrawlVo();
 			vo.setU_idx(u_idx);
 			
 			int res2 = user_dao.insertWithdrawl(vo);
+		
+		//회원 상태 복구시킬때 탈퇴회원테이블에 삭제
+		}else if(u_status.equals("활동")) {
+			
+			WithdrawlVo vo = new WithdrawlVo();
+			vo.setU_idx(u_idx);
+			
+			int res2 = user_dao.deleteWithdrawl(vo);
 			
 		}
 		
+		//USER 테이블 업데이트
 		int res = user_dao.updateStatus(updateMap);
+		
 		
 		boolean result = (res==1);
 		
@@ -312,6 +325,7 @@ public class UserController {
 		
 		map.put("result", result);
 		
+		System.out.println(result);
 		
 		return map;	
 	}

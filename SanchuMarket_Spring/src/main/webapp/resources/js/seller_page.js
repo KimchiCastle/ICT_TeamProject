@@ -91,7 +91,7 @@
 }
 
 
-	}
+
 	
 
 	function show_pwdcheck(){
@@ -227,13 +227,10 @@
 				
 				if(res.result=="Y"){
 					
-					console.log(res.result);
 					
 					withdrawlCheck(u_idx);
 					
 				}else{
-					
-					console.log(res.result);
 					
 					$("#result_text").css('color','red');
 					$("#result_text").html('유효하지 않은 비밀번호 입니다.');
