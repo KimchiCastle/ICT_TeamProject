@@ -1,4 +1,4 @@
-/*
+
 --실수 했을때 테이블 드랍용
 drop table product cascade constraints
 
@@ -211,4 +211,3 @@ delete from product where p_idx between 1 and 10
 
 select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
 
-*/

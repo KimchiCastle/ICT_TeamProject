@@ -85,6 +85,7 @@
 			return;
 		}
 		
+		
  		$.ajax({
 			
 			url	     : 'jjimon.do',
@@ -97,7 +98,25 @@
 					$("#jjim_on").css('display','none');
 					$("#jjim_off").css('display','inline-block');
 					
-					window.location.reload();
+					
+					$.ajax({
+			
+								url		: 'jjimCount',
+								type	: 'POST',
+								data	: {'p_idx':p_idx},
+								success	: function(res_data){
+									
+									$("#jjim_count").html(res_data)
+									
+								},
+								error	: function(err){
+									alert('상품정보 불러오기에 실패했습니다.')
+								}
+								
+							})
+										
+					
+					
 					
 				}else{
 					
@@ -134,8 +153,25 @@
 					
 					$("#jjim_off").css('display','none');
 					$("#jjim_on").css('display','inline-block');
-					window.location.reload();
-				
+					
+					$.ajax({
+			
+								url		: 'jjimCount',
+								type	: 'POST',
+								data	: {'p_idx':p_idx},
+								success	: function(res_data){
+									
+									$("#jjim_count").html(res_data)
+									
+								},
+								error	: function(err){
+									alert('상품정보 불러오기에 실패했습니다.')
+								}
+								
+						})
+					
+					
+					
 				}else{
 					
 					alert('찜 해제을 실패하였습니다. 관리자에게 문의하세요');
