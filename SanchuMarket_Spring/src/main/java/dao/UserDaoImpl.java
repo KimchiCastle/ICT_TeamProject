@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import vo.ReportVo;
 import vo.UserVo;
 import vo.WithdrawlVo;
 
@@ -135,6 +136,20 @@ public class UserDaoImpl implements UserDao{
 	public int updateInfoNoImg(UserVo userVo) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("user.user_info_update_noImg", userVo);
+	}
+
+
+	@Override
+	public int insertReportedUser(ReportVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("user.insert_report",vo);
+	}
+
+
+	@Override
+	public int checkReportHistory(ReportVo vo) {
+		
+		return sqlSession.selectOne("user.check_reportHistory",vo);
 	}
 
 	

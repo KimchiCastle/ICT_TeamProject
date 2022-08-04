@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		         </if>
 			 </trim>
 			)			
-		where no between #{start} and #{end}
+		where no between #{start} and #{end} 
 
 	</select>
 	
@@ -60,17 +60,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			         </if>
 			         and u_grade='일반회원'
 		     </trim>
-	     
-	   
-	   
-        
 	</select>
 	
 	<select id="user_idx" resultType="vo.UserVo">
 		select * from user_market where u_idx=#{u_idx} 
 	</select>
 	
-	<select id="user_idx_reg" resultType="vo.UserVo">
+	<select id="user_idx_reg" parameterType="int"  resultType="vo.UserVo">
 		select u.*,
 		 to_number(floor((sysdate-u_regdate)*24*60*60)) as u_time
 		 from (select * from user_market) u where u_idx=#{u_idx} 
@@ -210,6 +206,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="enroll_count" resultType="int">
 		select count(*) from user_market where to_char(u_regdate,'dd') = to_char(sysdate, 'dd')	
 	</select>
+	
+	<!--중복 신고 방지-->
+	<select id="check_reportHistory" parameterType="vo.ReportVo">
+		select count(*) from report where u_idx_reported = #{u_idx_reported}
+									and   u_idx_reporting = #{u_idx_reporting}
+	</select>
+	
+	<!--신고-->
+	<insert id="insert_report" parameterType="vo.ReportVo">
+	   insert into report values
+	   (
+	     (select nvl(max(r_idx)+1,1)from report),
+	     #{u_idx_reported},
+	     #{u_idx_reporting},
+	     #{r_reason},
+	     sysdate
+	   )
+	</insert>
+
+
 	
 </mapper>
 

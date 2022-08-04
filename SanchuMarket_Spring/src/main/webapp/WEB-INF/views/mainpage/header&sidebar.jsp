@@ -18,7 +18,6 @@
 body{
 	margin-top: 0px;
 	font-family: 'Gowun Dodum', sans-serif;
-	
 	min-width: 800px;
 }
 

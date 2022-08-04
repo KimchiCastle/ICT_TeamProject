@@ -116,7 +116,6 @@ new Chart(document.getElementById("line-chart"), {
 
 	<div id="board">
 	   <label>실시간 상품 업로드 현황</label>
-	   <table></table>
 	   <c:forEach var="product" items="${ serviceMap.p_list }">
 	   <div style=" cursor: pointer; margin-bottom: 10px; margin-left:3px;" onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
 		   	<img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="35px" height="40px">
@@ -126,21 +125,66 @@ new Chart(document.getElementById("line-chart"), {
 	   </c:forEach>
 	</div>
 	
-<div class="report-wrapper"  >
+ <div class="report-wrapper"  >
    <div id="report">
+   <label style="text-align:center;">실시간 신고 현황</label>
      <table>  
-	<%--      <c:forEach var="report" items="${ serviceMap. }">
-	        <tr>
-					          
-	        </tr>
-	     </c:forEach> --%>
+        <tr>
+		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
+		   <td>웬디</td>        
+		   <td>mimi1234</td>        
+        </tr>
+        <tr>
+		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
+		   <td>공유</td>        
+		   <td>catalina44</td>        
+        </tr>
+        <tr>
+		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
+		   <td>정해인</td>        
+		   <td>apatche11</td>        
+        </tr>
+        <tr>
+		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
+		   <td>원빈</td>        
+		   <td>tomcat55</td>        
+        </tr>
+		<c:forEach var="report_user" items="">
+		    <tr></tr>
+		</c:forEach>
 	 </table>    
  	</div>
+	</div>
    <div id="report_inf">
-       
+       <table>
+	 	   <tr>
+	 	     <td>신고 사유 :</td>
+	 	     <td>광고</td>
+	 	   </tr>
+	 	   
+	 	   <tr>
+	 	     <td>신고 날짜 :</td>
+	 	     <td>2022.07.16</td>
+	 	   </tr>
+	 	   
+	 	   <tr>
+	 	     <td>신고자 :</td>
+	 	     <td>전지현</td>
+	 	   </tr>
+	 	   
+	 	   <tr>
+	 	     <td>총 신고 : </td>
+	 	     <td>1</td>
+	 	   </tr>
+	 	   
+	 	   <tr>
+	 	     <td>활동 상태 :</td>
+	 	     <td>활동</td>
+	 	   </tr>
+	 	   
+	 	</table>
    </div>
 	
-</div>
 	
 	<div id="number-wrapper">
 	  <table class="table" id="number-table">
@@ -176,6 +220,7 @@ new Chart(document.getElementById("line-chart"), {
   
   </div><!--end content-->
 </div>
+
 <div class="b-example-divider"></div>
 <!--chartJS CDN-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
