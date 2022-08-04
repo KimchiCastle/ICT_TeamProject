@@ -212,7 +212,7 @@ update user_market set u_profile = '¾È³ç' where u_idx = 6
 	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
 	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
 
-delete from user_market where u_idx in (1,3,4,5)
+delete from user_market where u_idx=5
 update user_market set where 
 
 */
