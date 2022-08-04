@@ -7,6 +7,9 @@ create table withdrawl
 select * from withdrawl
 
 alter table withdrawl 
+	drop constraint fk_withdrawl_u_idx 
+
+alter table withdrawl 
    add constraint fk_withdrawl_u_idx foreign key(u_idx)
       references user_market(u_idx)
       

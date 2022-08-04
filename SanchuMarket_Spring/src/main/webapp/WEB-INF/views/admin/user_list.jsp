@@ -117,6 +117,14 @@ function find(){
 	        <td>${list.u_tel}</td>
 	        <td>${list.u_addr}</td>
 	        <td>${list.u_status}</td>
+	        <%-- <td>
+	        	<c:if test="${list.u_status eq '활동'}">
+		        	<button type="button">정지</button> 
+	        	</c:if>
+	        	<c:if test="${list.u_status == '정지' || list.u_status == '탈퇴' }">
+		        	<button type="button">활동</button> 
+	        	</c:if>
+	        </td> --%>
 	      </tr>  
 	  </c:forEach>
     </table>

@@ -60,10 +60,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			         </if>
 			         and u_grade='일반회원'
 		     </trim>
-	     
-	   
-	   
-        
 	</select>
 	
 	<select id="user_idx" resultType="vo.UserVo">

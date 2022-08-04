@@ -1,4 +1,4 @@
-/*
+
 --실수 했을때 테이블 드랍용
 drop table JJim cascade constraints
 
@@ -36,8 +36,6 @@ select * from jjim where u_idx=3 and p_idx=4
 
 delete from jjim where p_idx=2 and u_idx=3
 
-
-*/
 
 
 
