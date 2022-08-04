@@ -171,12 +171,32 @@
 			<div style="display: inline-block;"><span class="product_info">조회 ${ vo.p_click }</span></div>
 			<div style="border-bottom: 1px solid rgb(220,220,220); margin-bottom: 30px; margin-top: 30px; "></div>
 		</div> <!-- 상품정보 끝 -->
-	<c:if test="${ user.u_idx eq vo.u_idx }">
-		<div align="right">
-			<input type="button" class="btn btn-warning" value="상품수정" style=""
-			id="modifyButton" onclick="location.href='modify_form.do?p_idx=${ vo.p_idx }'">
-		</div>	
-	</c:if>	
+	
+	<!--수정 삭제 버튼-->
+<c:if test="${ user.u_idx eq vo.u_idx }">
+  <div class="position">
+
+    <div class="svg-wrapper">
+      <svg height="40" width="150" >
+        <rect id="shape" height="40" width="150" />
+        <div id="text">
+          <a href="modify_form.do?p_idx=${ vo.p_idx }"><span class="spot"></span>수정</a>
+        </div>
+      </svg>
+    </div>
+    
+    <div class="svg-wrapper">
+      <svg height="40" width="150">
+        <rect id="shape" height="40" width="150" />
+        <div id="text">
+          <a href="delete_product();"><span class="spot"></span>삭제</a>
+        </div>
+      </svg>
+    </div>
+
+</div>
+
+</c:if>	
 	
 	<div style="min-height: 200px;"></div>
 		

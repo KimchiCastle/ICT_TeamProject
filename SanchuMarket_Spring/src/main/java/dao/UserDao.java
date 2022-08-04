@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 import java.util.Map;
 
+import vo.ReportVo;
 import vo.UserVo;
 import vo.WithdrawlVo;
 
@@ -70,6 +71,11 @@ public interface UserDao {
 	//회원정보 수정, 이미지없이
 	public int updateInfoNoImg(UserVo userVo);
 
+	//신고 이력 조회
+	public int checkReportHistory(ReportVo vo);
+	
+	//신고
+	public int insertReportedUser(ReportVo vo);
 	
 	
 	

@@ -301,9 +301,15 @@
 			
 			
 		});		
-		
-		
 	}
+	
+	function delete_product(idx){
+	  if(!confirm('정말 삭제하시겠습니까?')) return;
+	  
+	  location.href="delete.do?p_idx=" + idx;
+	  return;
+	}
+	
 	
 	
 	

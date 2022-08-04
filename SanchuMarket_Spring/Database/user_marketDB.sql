@@ -151,68 +151,15 @@ values( (select nvl(max(u_idx)+1,1) from user_market),
 ---조회용
 select * from user_market;
 
-update user_market set u_pwd='1234' where u_id='dkwlsdl8'
-
-select to_char(u_regdate,'mm') as month, count(*) as tot
-	from user_market
-	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
-	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
-
-
-select u_idx, u_name, u_id, u_tel, u_addr, u_status from user_market where u_grade='일반회원' order by u_idx
-  
- select * from user_market where u_grade='일반회원' order by u_idx
-
-  select count(*) from product where to_char(p_date,'dd') = to_char(sysdate, 'dd')
-
-select u_id from user_market where u_name='서아진' and u_tel='010-5852-1068'
-
-update user_market set u_grade='관리자' where u_idx=2;
-
-select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'일반회원')u_status from
-		(
-		select p.*, rank() over(order by u_idx)no from(select * from user_market)p
-		)			
-		where no between 1 and 5 and u_grade='일반회원'
-
-
-	select no, u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status, u_grade
-		from
-		(
-		select 
-			p.*, 
-			rank() over(order by u_idx) no 
-			from(select * from user_market where u_grade='일반회원')p
-		)			
-		where no between 1 and 5
-		
-   update user_market set u_photo = 'no_file'
-   
-     select nvl(count(*),0)
-       from (select * from user_market where u_grade='일반회원')
-		where u_id like '%' || 'dkwls' || '%' 
-		         
-	   select u_id, u_grade from user_market where u_grade='일반회원' and u_id like '%' || 'dkwls' || '%'        
-
-		select *
+	select *
 		from
 			(
 			select 
-			    rank() over(order by u_idx) no,
+				rank() over(order by u_idx) no, 
 				u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
 			from(select * from user_market where u_grade='일반회원')
-			where u_name like '%' || '홍길동' || '%' 
+		
 			)			
-		where no between 1 and 5
-
-update user_market set u_profile = '안녕' where u_idx = 6
-
-	select to_char(u_regdate,'mm') as u_month, count(*) as u_tot
-	from user_market
-	where to_char(u_regdate,'yy')=to_char(sysdate,'yy') 
-	group by to_char(u_regdate,'mm') order by to_char(u_regdate,'mm') asc
-
-delete from user_market where u_idx=5
-update user_market set where 
+		where no between 1 and 5 
 
 

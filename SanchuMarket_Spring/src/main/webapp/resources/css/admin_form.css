@@ -14,6 +14,7 @@ body {
 #content {
 	background-color: white;
 	min-height: 100%;
+	width: 100%;
 }
 
 label {
@@ -26,13 +27,13 @@ label {
   border-radius: 0.3;
 }
 
-
+/* 
 .container{
 	background-color: white;
 	padding: 5px;
 	border: 1px solid #ced4da;
 	border-radius: 0.3;
-}
+} */
 
 #board {
 	width: 390px;
@@ -40,7 +41,7 @@ label {
 	margin	: 20px;
 	float: left;
 	overflow-y: auto;
-	font-size:10px;
+	font-size:15px;
 }
 /* .report-wrapper{
    width: 650px;
@@ -52,9 +53,11 @@ label {
   float:left;
   width: 250px;
   height: 400px;
-  overflow-y: auto;
+  overflow-y: scroll;
   border: 1px solid #ced4da;
   border-radius: 0.3;
+  margin-left: 50px;	
+  font-size:15px;
 }
 
 #report_inf{
@@ -64,7 +67,7 @@ label {
   height: 400px;
   border: 1px solid #ced4da;
   border-radius: 0.3;
-	
+  font-size:15px;
 }
 
 #number-wrapper {
@@ -85,7 +88,7 @@ label {
 
 th {
 	font-size: 38px;
-}
+} 
 
 #doughnut-wrpper {
 	background-color: white;
@@ -105,6 +108,7 @@ th {
 	margin: 20px;
 	border: 1px solid #ced4da;
 	border-radius: 0.3;
+	padding: 5px;
 }
 
 #line-chart {
@@ -121,11 +125,21 @@ th {
 	white-space: nowrap;
 }
 
-
-
 p {
 	font-size: 10px;
 	font-weight: bold;
 	text-align: center;
 }
+
+#report>table{
+  border-spacing: 17px;
+  border-collapse: separate;
+}
+#report_inf>table{
+  border-spacing: 25px;
+  border-collapse: separate;
+  font-size: 20px;
+}
+
+
 

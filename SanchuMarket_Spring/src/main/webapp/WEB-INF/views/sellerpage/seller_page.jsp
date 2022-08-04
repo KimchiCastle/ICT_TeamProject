@@ -21,7 +21,18 @@
 
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/seller_page.js"></script>
+<script type="text/javascript">
 
+$(function(){
+	
+	if(${param.reason eq 'report_success'}){
+		alert('신고가 정상적으로 처리됐습니다.');
+	}else if(${ param.reason eq 'report_failed'}){
+		alert('신고가 비정상적으로 처리됐습니다\n 관리자에게 문의바랍니다.')
+	}
+	 
+})
+</script>
 	
 
 </head>
@@ -36,7 +47,8 @@
 <div class="i">
 	<div>
 		<div id="seller-box" >
-			
+			  <input type="hidden" id="u_idx_reported" value="${ user_info.u_idx }"><!--신고당한사람-->
+			  <input type="hidden" id="u_idx_reporting" value="${ user.u_idx }"><!--신고한사람-->
 			<div id="seller-pictrue">
 				<c:if test="${ user_info.u_photo ne 'no_file' }">
 					<img src="${ pageContext.request.contextPath }/resources/imgdata/${user_info.u_photo}" width="100%" height="100%">
@@ -59,7 +71,8 @@
 					</div>
 					<div id="seller-info3">
 						${ user_info.u_profile }
-					</div>
+					</div><!--판매자가 본인이면 신고 버튼 안뜨게-->
+					<c:if test="${ user_info.u_idx ne user.u_idx}">
 					<div id="seller-info4">
 							<div style="cursor: pointer; margin-top: 10px;"
 								onclick="onReport();">
@@ -67,11 +80,9 @@
 									src="${ pageContext.request.contextPath }/resources/image/report_icon.png"
 									width="15px" height="15px"><span
 									style="font-size: 15px; color: rgb(180, 180, 180)">신고하기</span>
-								
-							
-							
 							</div>
 					</div>
+					</c:if>
 				</div>
 				
 			</div>

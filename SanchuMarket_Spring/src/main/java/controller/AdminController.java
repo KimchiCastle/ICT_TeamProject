@@ -68,9 +68,6 @@ public class AdminController {
 					       @RequestParam(value="search_text", required=false)String search_text,													
 																			  Model model) {
 		
-		System.out.printf("search:%s\n",search);
-		System.out.printf("search_text:%s\n",search_text);
-		
 		
 		//1.넘어온 페이지를 이용해 페이지의 start/end 갱신
 	    int start = (nowPage-1) * MyConstant.UserList.BLOCK_LIST + 1;
@@ -105,7 +102,6 @@ public class AdminController {
     	 //전체 글 수(필터링 타입, 값에 따라 달라짐)
 	    int rowTotal = admin_dao.count_userList(map);
 	    
-	    System.out.printf("rowTotal:%d\n",rowTotal);
 	    
 	    //2-2.검색 결과에 따른 페이징
   		String search_filter = String.format("search=%s&search_text=%s", search,search_text);
@@ -118,14 +114,10 @@ public class AdminController {
 							                MyConstant.UserList.BLOCK_PAGE
 							                );
 	    
-	    System.out.println(pageMenu);
 	  
 	    //2-3.페이징마다 할당되는 유저 목록 추출
 	    List<UserVo> userList = admin_dao.select_userList(map);
 	    
-	    for(int i = 0; i < userList.size(); i++) {
-	    	System.out.printf("userList의name:%s\n",userList.get(i).getU_name());
-	    }
 	    
 		model.addAttribute("userList", userList);
 		model.addAttribute("pageMenu", pageMenu);
