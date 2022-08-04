@@ -1,15 +1,19 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.ProductDao;
 import dao.UserDao;
 import util.Mytime;
 import vo.ProductVo;
+import vo.ReportVo;
 import vo.UserVo;
 
 @Controller
@@ -55,12 +59,45 @@ public class SellerController {
 		return "sellerpage/seller_page";
 	}
 	
+
+	@RequestMapping("check_reportHistory.do")
+	@ResponseBody
+	public Map checkReportHistory(ReportVo vo) {
+		
+		//신고자가 동일 인물을 신고한 이력 조회해서
+		int reportCnt = user_dao.checkReportHistory(vo);
+		
+		Map map = new HashMap();
+		boolean bResult = false;
+		
+		//신고 이력이 없을시 true(신고가능)
+		if(reportCnt==0) {
+			bResult = true;
+		}
+		
+		map.put("result", bResult);
+		return map;
+	}
+	
 	@RequestMapping("report.do")
-	public String report(String report_reason) {
+	@ResponseBody
+	public Map report(ReportVo vo) {
 		
 		
+		int res = user_dao.insertReportedUser(vo);
 		
-		return "redirect:list.do";
+		String result;
+		Map map = new HashMap();
+		
+		if(res == 1) {
+			result = "report_success";
+		}else {
+			result = "report_failed";
+		}
+		
+		map.put("result", result);
+		
+		return map;
 	}
 	
 	

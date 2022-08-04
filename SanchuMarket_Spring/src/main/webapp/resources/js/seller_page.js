@@ -1,22 +1,32 @@
-
-
-
-
 	var report_on = false;
 	var password_on = false;
 	
-	
 	function onReport(){
 		
-		if(!report_on){
-			report_on = true;
-			center_modify_popup();
-			$(".shadow").show();
-		}else{
+		var u_idx_reporting = $('#u_idx_reporting').val();
+		var u_idx_reported = $('#u_idx_reported').val();
+	
+		if(u_idx_reporting == ''){
+			alert('로그인 후 이용 가능합니다.');
 			return false;
 		}
 		
-		
+		$.ajax({
+			url: 'check_reportHistory.do',
+			data: {'u_idx_reporting':u_idx_reporting,'u_idx_reported':u_idx_reported},
+			success: function(res){
+				if(res.result==true){
+				
+					report_on = true;
+					center_modify_popup();
+					$(".shadow").show();
+				}
+				else{
+					alert('이미 신고한 회원입니다.');
+					return;
+				}
+			}//end success	
+		});//end ajax
 	}
 	
 	function center_modify_popup(){
@@ -44,8 +54,6 @@
 		
 		report_on= false;
 		
-		
-		
 		$("#report_popup").hide();
 		$(".shadow").hide();
 		
@@ -72,27 +80,24 @@
 		
 	}
 	
-	function send_report(event){
-		
-		var report_reason;
-		
-		if(event.target.checked)  {
-   		 report_reason = event.target.value;
-  		}else{
-	     report_reason = null;
-		} 
-		
-		console.log(report_reason);
+	function send_report(){
 	
-	    if(report_reason!=null){
+		var report_reason = $('input[type=checkbox][name=report]:checked').val();
+		var u_idx_reported = $('#u_idx_reported').val();
+		var u_idx_reporting = $('#u_idx_reporting').val();
 		
-		location.href = "report.do?report_reason="+report_reason;
-	}
+		if(!report_on){
+		    hide_report_popup();
+		}
+	    if(report_reason==null){
+			alert('신고 사유를 선택하세요.');	
+	    }
+	    else{
+			location.href = "report.do?r_reason=" +report_reason 
+								   + "&u_idx_reported=" + u_idx_reported
+								   + "&u_idx_reporting=" +  u_idx_reporting;
+		}
 }
-
-
-	}
-	
 
 	function show_pwdcheck(){
 		
