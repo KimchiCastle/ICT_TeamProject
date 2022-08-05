@@ -82,20 +82,20 @@
 	
 	function send_report(){
 	
-		var report_reason = $('input[type=checkbox][name=report]:checked').val();
+		var r_reason = $('input[type=checkbox][name=report]:checked').val();
 		var u_idx_reported = $('#u_idx_reported').val();
 		var u_idx_reporting = $('#u_idx_reporting').val();
 		
 		if(!report_on){
 		    hide_report_popup();
 		}
-	    if(report_reason==null){
+	    if(r_reason==null){
 			alert('신고 사유를 선택하세요.');	
 	    }
 	    else{
-			location.href = "report.do?r_reason=" +report_reason 
-								   + "&u_idx_reported=" + u_idx_reported
-								   + "&u_idx_reporting=" +  u_idx_reporting;
+			location.href = "report.do?r_reason=" +r_reason 
+									   + "&u_idx_reported=" + u_idx_reported
+									   + "&u_idx_reporting=" +  u_idx_reporting;
 		}
 }
 

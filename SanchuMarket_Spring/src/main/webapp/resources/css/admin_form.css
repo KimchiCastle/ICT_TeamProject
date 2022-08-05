@@ -141,5 +141,7 @@ p {
   font-size: 20px;
 }
 
-
+.report-wrapper{
+  cursor: pointer;
+}
 

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import vo.CategoryVo;
 import vo.ProductVo;
+import vo.ReportVo;
 import vo.UserVo;
 import vo.WithdrawlVo;
 
@@ -46,7 +47,15 @@ public interface AdminDao {
 	
 	////유저관리 - 검색 조건별로 페이징을 위한 start-end count
 	public int count_userList(Map map);
+	
+	//신고 당한 회원 8명 조회
+	public List<ReportVo> select_reportUser();
+	
 
+	//신고 회원별 신고 총 횟수 
+	public int select_reportCnt(int u_idx_reported);
+
+	public ReportVo select_reportUser2(int r_idx);
 	
 
 }

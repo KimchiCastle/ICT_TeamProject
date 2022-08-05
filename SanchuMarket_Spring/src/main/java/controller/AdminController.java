@@ -13,11 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import common.MyConstant;
 import dao.AdminDao;
 import service.AdminService;
 import util.Paging;
+import vo.ReportVo;
 import vo.UserVo;
 
 @Controller
@@ -123,6 +125,19 @@ public class AdminController {
 		model.addAttribute("pageMenu", pageMenu);
 		
 		return "admin/user_list";
+	}
+	
+	//신고 횟수 합산
+	@RequestMapping("check_reportCnt.do")
+	public String reportCnt(int u_idx_reported, int r_idx, Model model){
+		
+		int r_cnt = admin_dao.select_reportCnt(u_idx_reported);
+		ReportVo r_list = admin_dao.select_reportUser2(r_idx);
+		
+		model.addAttribute("r_cnt",r_cnt);
+		model.addAttribute("r_list",r_list);
+		
+		return "admin/report_cnt";
 	}
 	
 	

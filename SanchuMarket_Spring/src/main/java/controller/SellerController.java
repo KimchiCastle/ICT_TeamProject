@@ -74,20 +74,22 @@ public class SellerController {
 		if(reportCnt==0) {
 			bResult = true;
 		}
-		
+		System.out.printf("reportCnt:%d",reportCnt);
+		System.out.printf("result:%s",bResult);
 		map.put("result", bResult);
 		return map;
 	}
 	
 	@RequestMapping("report.do")
-	@ResponseBody
-	public Map report(ReportVo vo) {
+	public String report(ReportVo vo, Model model) {
 		
+		System.out.printf("u_idx_reported:%s\n",vo.getU_idx_reported());
+		System.out.printf("u_idx_reporting:%s\n",vo.getU_idx_reporting());
+		System.out.printf("r_reason:%s\n",vo.getR_reason());
 		
 		int res = user_dao.insertReportedUser(vo);
 		
 		String result;
-		Map map = new HashMap();
 		
 		if(res == 1) {
 			result = "report_success";
@@ -95,9 +97,12 @@ public class SellerController {
 			result = "report_failed";
 		}
 		
-		map.put("result", result);
+		int u_idx = vo.getU_idx_reported();
 		
-		return map;
+		model.addAttribute("u_idx",u_idx);
+		model.addAttribute("result", result);
+		
+		return "redirect:list.do";
 	}
 	
 	
