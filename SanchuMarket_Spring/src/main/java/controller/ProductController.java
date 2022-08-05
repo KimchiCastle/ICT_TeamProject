@@ -112,14 +112,14 @@ public class ProductController {
 		int res2 = 0;
 		
 		//절대경로 구함
-		String abs_path = applicaton.getRealPath("/resources/imgdata/");
+		String absPath = applicaton.getRealPath("/resources/imgdata/");
 		
 		
 		//for each문 사용 배열을 통해 이미지데이터 들어옴
 		for(MultipartFile img : imagedata) {
 			
 			//파일업로드 메서드 사용
-			String img_str = MyFileUpload.myFileUpload(abs_path, img);
+			String img_str = MyFileUpload.myFileUpload(absPath, img);
 			
 			//이미지 Vo 생성
 			ImageVo imageVo = new ImageVo();
@@ -185,7 +185,7 @@ public class ProductController {
 	) {
 		
 		
-		String abs_Path = applicaton.getRealPath("/resources/imgdata/");
+		String absPath = applicaton.getRealPath("/resources/imgdata/");
 		
 		//나중에 파라미터로 받기
 		
@@ -196,7 +196,7 @@ public class ProductController {
 		for(MultipartFile file : imagedata) {
 			
 			//list에 업로드된 파일명 add
-			upload_str.add(MyFileUpload.myFileUpload(abs_Path, file));
+			upload_str.add(MyFileUpload.myFileUpload(absPath, file));
 			
 		}
 		
@@ -246,7 +246,7 @@ public class ProductController {
 						 */
 						ImageVo imgFileName = image_dao.selectOneImage(Integer.parseInt(change_image[i]));
 						
-						MyFileDelete.myFileDelete(abs_Path, imgFileName.getImagedata());
+						MyFileDelete.myFileDelete(absPath, imgFileName.getImagedata());
 						
 						
 						Map updateInfo = new HashMap();
@@ -284,7 +284,7 @@ public class ProductController {
 					ImageVo imgFileName = image_dao.selectOneImage(Integer.parseInt(change_image[i-1]));
 					
 					//실제 파일 삭제
-					MyFileDelete.myFileDelete(abs_Path, imgFileName.getImagedata());
+					MyFileDelete.myFileDelete(absPath, imgFileName.getImagedata());
 					
 					//DB삭제
 					int res = image_dao.deleteImage(Integer.parseInt(change_image[i-1]));
@@ -505,7 +505,7 @@ public class ProductController {
 		return map;
 	}
 	
-	@RequestMapping("jjimCount")
+	@RequestMapping("jjimCount.do")
 	public String jjimcount(Model model,int p_idx) {
 		
 		JjimVo vo = jjim_dao.selectCount(p_idx);
@@ -515,6 +515,69 @@ public class ProductController {
 		
 		return "product/jjim_count";
 	}
+	
+	@RequestMapping("delete.do")
+	@ResponseBody
+	public Map deleteProduct(Model model, int p_idx, int u_idx) {
+		
+		Map map = new HashMap();
+		
+		boolean result = false;
+		
+		
+		UserVo sessionVo = (UserVo)request.getSession().getAttribute("user");
+		
+		//세션에 값이 있을때
+		if(sessionVo != null) {
+			
+			
+			//세션에 있는 값과 받아온 idx값이 일치 하지 않으면
+			if(sessionVo.getU_idx()!=u_idx) {
+				map.put("result", result);
+			
+			//전부 이상이 없을때
+			}else {
+				
+				/*
+				 
+				 상품 idx 해당하는 이미지 전부 삭제,
+				 상품 DB와 이미지 DB 삭제하기
+				 
+				 */
+				
+				//파일 삭제를 위한 절대경로 불러오기
+				String absPath = applicaton.getRealPath("/resources/imgdata/");
+				
+				List<ImageVo> imgList = image_dao.selectOne(p_idx);
+				
+				
+				//반복문을 사용해서, 실제 경로에 있는 이미지 전부 삭제
+				for(ImageVo imgVo : imgList) {
+					
+					MyFileDelete.myFileDelete(absPath, imgVo.getImagedata());
+					
+				}
+				// 해당 idx 이미지 테이블에서 전부 삭제
+				int delimg = image_dao.deleteAllImage(p_idx);
+				
+				//상품
+				int delproduct = product_dao.deleteProduct(p_idx);
+				
+				result = (delimg ==1 && delproduct==1);
+				
+				map.put("result", result);
+				
+			}
+			
+			
+		//세션에 값이 없으면..
+		}else {
+			map.put("result", result);
+		}
+		
+		return map;
+	}
+	
 	
 	
 }

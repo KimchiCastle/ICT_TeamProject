@@ -11,7 +11,7 @@ public interface ImageDao {
 	public int insert(ImageVo vo);
 	
 	//상품에 해당하는 이미지 객체 받아오기
-	public ImageVo selectOne(int p_idx); 
+	public List<ImageVo> selectOne(int p_idx); 
 		
 	//이미지 idx에 해당하는 이미지 파일명 가지고 오기
 	public ImageVo selectOneImage(int i_idx);
@@ -24,4 +24,7 @@ public interface ImageDao {
 	
 	//idx에 해당하는 이미지 삭제
 	public int deleteImage(int i_idx);
+	
+	//상품에 해당하는 이미지 전체삭제
+	public int deleteAllImage(int p_idx);
 }
