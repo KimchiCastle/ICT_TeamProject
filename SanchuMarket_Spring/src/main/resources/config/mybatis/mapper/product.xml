@@ -282,6 +282,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update product set p_click = p_click+1 where p_idx=#{p_idx}
 	</update>
 
+
+	<delete id="product_delete" parameterType="int">
+		delete from product where p_idx=#{p_idx}
+	</delete>
+	
+
+
 </mapper>
 
 

@@ -62,7 +62,11 @@ public interface ProductDao {
 	//상품 상태 수정
 	public int statusUpdate(Map map);
 
+	//조회수 업데이트
 	public int updateClick(int p_idx);
+	
+	//상품삭제
+	public int deleteProduct(int p_idx);
 	
 
 

@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from image where p_idx=#{p_idx}
 	</select>	
 	
+	
 	<!-- 이미지 idx에 해당하는 파일명 얻기 -->
 	<select id="image_selectOneImage" parameterType="int" resultType="vo.ImageVo">
 		select * from image where i_idx=#{i_idx}
@@ -34,6 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="image_datadelete">
 		delete from image where i_idx=#{i_idx}
+	</delete>
+	
+	<delete id="image_alldelete">
+		delete from image where p_idx=#{p_idx}
 	</delete>
 	
 </mapper>

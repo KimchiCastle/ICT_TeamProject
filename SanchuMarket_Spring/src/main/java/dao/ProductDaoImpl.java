@@ -12,7 +12,6 @@ public  class ProductDaoImpl implements ProductDao {
 
 	SqlSession sqlSession;
 	
-	
 	public ProductDaoImpl(SqlSession sqlSession) {
 		super();
 		this.sqlSession = sqlSession;
@@ -60,7 +59,6 @@ public  class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("product_rowtotal_c_idx",c_idx);
 	}
-
 
 	
 	// 카테고리별 조회 
@@ -157,6 +155,13 @@ public  class ProductDaoImpl implements ProductDao {
 	public int updateClick(int p_idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("product.product_click_update", p_idx);
+	}
+	
+	// idx 해당 상품 레코드 삭제
+	@Override
+	public int deleteProduct(int p_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("product.product_delete", p_idx);
 	}
 
 	
