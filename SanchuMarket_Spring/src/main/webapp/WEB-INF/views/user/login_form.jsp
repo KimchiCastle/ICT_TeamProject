@@ -470,11 +470,6 @@
       <input type="password" class="form-control" id="u_pwd" name="u_pwd" placeholder="비밀번호" autocomplete="false">
 	</div>
 	
-    <div class="checkbox mb-3" style="matgin-top:20px;">
-      <label>
-        <input type="checkbox" value="remember-me"> 로그인 상태 유지
-      </label>
-   </div>
  </div> 
  
 <!--아이디찾기-->    

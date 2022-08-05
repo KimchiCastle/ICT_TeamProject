@@ -4,6 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 	
+	
 <!-- 관리자페이지 회원 목록 검색 조건별로 5개씩조회  -->
 	<select id="user_conditionList" parameterType="java.util.Map" resultType="vo.UserVo" >
 		
@@ -217,12 +218,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!--중복 신고 방지-->
-	<select id="check_reportHistory" parameterType="vo.ReportVo">
-		select count(*) from report where u_idx_reported = #{u_idx_reported}
-									and   u_idx_reporting = #{u_idx_reporting}
+	<select id="check_reportHistory" resultType="int"  parameterType="vo.ReportVo">
+		select count(*) from report where u_idx_reported = #{u_idx_reported} and u_idx_reporting = #{u_idx_reporting}
 	</select>
 	
-	<!--신고-->
+	<!--신고 insert-->
 	<insert id="insert_report" parameterType="vo.ReportVo">
 	   insert into report values
 	   (
@@ -233,8 +233,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     sysdate
 	   )
 	</insert>
-
-
+    <resultMap type="vo.ReportVo" id="reportMap">
+	  <result property="u_idx_reported" column="u_idx_reported"/>
+	  <result property="u_idx_reporting" column="u_idx_reporting"/>
+	  <collection property = "userVo_reported"
+	  			  column = "{u_idx=u_idx_reported}"
+	  			  select = "user_informList"
+	  />
+	  <collection property = "userVo_reporting"
+	  			  column = "{u_idx=u_idx_reporting}"
+	  			  select = "user_informList"
+	  />
+	</resultMap>
+	
+	<!--최근 등록된 신고 8건 조회-->
+	<select id="report_userList" resultMap="reportMap">
+	<![CDATA[
+	    select 
+	    r_idx,
+ 		to_char(r_date,'yyyy-mm-dd hh24:mi:ss') r_date,
+ 		u_idx_reported, 
+ 		u_idx_reporting,
+ 		r_reason
+		from (select * from report order by r_date)
+		where rownum <= 8 
+	]]>	
+	</select>
+	
+	<select id="report_userVo" parameterType="int" resultMap="reportMap">
+	    select 
+	    r_idx,
+ 		to_char(r_date,'yyyy-mm-dd hh24:mi:ss') r_date,
+ 		u_idx_reported, 
+ 		u_idx_reporting,
+ 		r_reason
+		from (select * from report order by r_date)
+		where r_idx = #{r_idx}
+	</select>
+	
+	<!--신고된 사람 정보-->
+	<select id="user_informList" resultType="vo.UserVo">
+	  select * from user_market where u_idx=#{u_idx}
+	</select>  
+	
+	
+	<!--유저별 신고 횟수 합산-->
+	<select id="report_sum" parameterType="int" resultType="int">
+	 select	count(u_idx_reported)cnt
+	 from report 
+	 where u_idx_reported = #{u_idx_reported}
+	 group by u_idx_reported 
+	</select>
 	
 </mapper>
 

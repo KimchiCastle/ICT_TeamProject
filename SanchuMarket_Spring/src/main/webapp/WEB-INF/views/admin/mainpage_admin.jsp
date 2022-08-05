@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <!--bootStrap-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <!--jquery-->
@@ -23,7 +22,7 @@
 <link rel="stylesheet" href="../resources/css/admin_form.css">
 <link rel="stylesheet" href="../resources/css/admin_header_form.css">
 
-<script>
+<script type="text/javascript">
 
 $(function(){
 new Chart(document.getElementById("doughnut-chart"), {
@@ -103,88 +102,84 @@ new Chart(document.getElementById("line-chart"), {
   }
 });
 
+
+
+
+
+
+
 });//end document ready
+
+
+
+	
+	function reportView(u_idx_reported,r_idx){
+		
+		$.ajax({
+			
+			url		 : 'check_reportCnt.do',
+			data	 : {'u_idx_reported':u_idx_reported,'r_idx':r_idx},
+			success	 : function(res){
+				
+				$("#report_inf").html(res)
+				
+			}
+			
+		})
+		
+		
+	}
 </script>
+
+
+	
+
+
+
 </head>
 <body>
 <div class="allbody">
 <div id="header1">
   <%@include file="header.jsp"%>
 </div>
-
 <div id="content">
-
+	
 	<div id="board">
 	   <label>실시간 상품 업로드 현황</label>
-	   <c:forEach var="product" items="${ serviceMap.p_list }">
+	  <c:forEach var="product" items="${ serviceMap.p_list }">
 	   <div style=" cursor: pointer; margin-bottom: 10px; margin-left:3px;" onclick="location.href='${pageContext.request.contextPath}/product/product_detail.do?p_idx=${ product.p_idx }&p_name=${ product.p_name }'">
 		   	<img src="${ pageContext.request.contextPath }/resources/imgdata/${ product.image_list[0].imagedata }" width="35px" height="40px">
 		   <div class="product_p_name">${ product.p_name } </div> 	 
 		    ${ fn:substring(product.p_date,0,10) }
 	   </div>
-	   </c:forEach>
+	   </c:forEach> 
 	</div>
 	
  <div class="report-wrapper"  >
    <div id="report">
    <label style="text-align:center;">실시간 신고 현황</label>
      <table>  
-        <tr>
-		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
-		   <td>웬디</td>        
-		   <td>mimi1234</td>        
+    <c:forEach var="report" items="${ serviceMap.r_list }">
+        <tr onclick="javascript:reportView(${report.userVo_reported.u_idx},${report.r_idx});">
+	           		
+	           	<c:if test="${ report.userVo_reported.u_photo eq 'no_file' }">
+	           		<td><img src="../resources/image/avatar.png" width="30" height="30"></td>        
+	           	</c:if>	
+	         	<c:if test="${ report.userVo_reported.u_photo ne 'no_file' }">
+			   		<td><img src="../resources/imgdata/${ report.userVo_reported.u_photo }" width="30" height="30"></td>        
+	         	</c:if>     
+		   <td>${ report.userVo_reported.u_name }</td>        
+		   <td>${ report.userVo_reported.u_id }</td>        
         </tr>
-        <tr>
-		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
-		   <td>공유</td>        
-		   <td>catalina44</td>        
-        </tr>
-        <tr>
-		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
-		   <td>정해인</td>        
-		   <td>apatche11</td>        
-        </tr>
-        <tr>
-		   <td><img src="${ pageContext.request.contextPath }/resources/image/avatar.png" width="20" height="20"></td>        
-		   <td>원빈</td>        
-		   <td>tomcat55</td>        
-        </tr>
-		<c:forEach var="report_user" items="">
-		    <tr></tr>
-		</c:forEach>
+        </c:forEach>
+	
 	 </table>    
  	</div>
 	</div>
-   <div id="report_inf">
-       <table>
-	 	   <tr>
-	 	     <td>신고 사유 :</td>
-	 	     <td>광고</td>
-	 	   </tr>
-	 	   
-	 	   <tr>
-	 	     <td>신고 날짜 :</td>
-	 	     <td>2022.07.16</td>
-	 	   </tr>
-	 	   
-	 	   <tr>
-	 	     <td>신고자 :</td>
-	 	     <td>전지현</td>
-	 	   </tr>
-	 	   
-	 	   <tr>
-	 	     <td>총 신고 : </td>
-	 	     <td>1</td>
-	 	   </tr>
-	 	   
-	 	   <tr>
-	 	     <td>활동 상태 :</td>
-	 	     <td>활동</td>
-	 	   </tr>
-	 	   
-	 	</table>
-   </div>
 	
+   <div id="report_inf">
+      
+   </div>
 	
 	<div id="number-wrapper">
 	  <table class="table" id="number-table">
@@ -194,7 +189,7 @@ new Chart(document.getElementById("line-chart"), {
 	   </tr>
 	   
 	   <tr>
-	     <th>${ serviceMap.today_p_count }건</th>
+	    <th>${ serviceMap.today_p_count }건</th>
 	     <th>${ serviceMap.today_t_count }건</th>
 	   </tr>
 	   
@@ -204,7 +199,7 @@ new Chart(document.getElementById("line-chart"), {
 	   </tr>
 	   
 	   <tr>
-	     <th>${ serviceMap.today_v_count }명</th>
+	    <th>${ serviceMap.today_v_count }명</th>
 	     <th>${ serviceMap.today_u_count }명</th>
 	   </tr>
 	 </table> 	

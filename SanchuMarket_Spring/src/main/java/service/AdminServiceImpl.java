@@ -10,6 +10,7 @@ import java.util.Map;
 import dao.AdminDao;
 import vo.CategoryVo;
 import vo.ProductVo;
+import vo.ReportVo;
 import vo.UserVo;
 import vo.WithdrawlVo;
 
@@ -146,9 +147,14 @@ public class AdminServiceImpl implements AdminService {
 		});
 			
 
+		//신고 회원 조회
+		List<ReportVo> r_list = admin_dao.select_reportUser();
+		
+		
 		Map map = new HashMap();
 		
 		map.put("p_list", p_list);
+		map.put("r_list", r_list);
 		map.put("category_list", category_list);
 		map.put("today_p_count",today_p_count);
 		map.put("today_t_count",today_t_count);

@@ -1,5 +1,7 @@
 package vo;
 
+import java.util.List;
+
 public class ReportVo {
 
 	int r_idx;			
@@ -11,6 +13,23 @@ public class ReportVo {
 	String u_status; 
 	int r_tot;
 	
+	UserVo userVo_reported;
+	UserVo userVo_reporting;
+	
+	
+
+	public UserVo getUserVo_reported() {
+		return userVo_reported;
+	}
+	public void setUserVo_reported(UserVo userVo_reported) {
+		this.userVo_reported = userVo_reported;
+	}
+	public UserVo getUserVo_reporting() {
+		return userVo_reporting;
+	}
+	public void setUserVo_reporting(UserVo userVo_reporting) {
+		this.userVo_reporting = userVo_reporting;
+	}
 	public int getR_idx() {
 		return r_idx;
 	}

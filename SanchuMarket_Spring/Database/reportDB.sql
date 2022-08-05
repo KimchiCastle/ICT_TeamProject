@@ -23,5 +23,46 @@ check( r_reason in ('re_add_cnt','re_fake_cnt','re_inhibit_cnt','re_scam_cnt'))
 	re_inhibit_cnt	int,	-- 거래금지상품(담배/주류/음란물/마약등..)
 	re_scam_cnt		int,	-- 사기(또는 사기치려는 의도)*/
 
+select count(*) from report where u_idx_reported = 2 and  u_idx_reporting = 9
 
+select 
+ 		to_char(r_date,'yyyy-mm-dd hh24:mi:ss')r_date,
+ 		u_idx_reported, u_idx_reporting,
+ 		(select s)
+from 
+		(
+			select * from report order by r_date
+		)
+where  rownum <= 8 
+		
+    select 
+        r_idx,
+ 		to_char(r_date,'yyyy-mm-dd hh24:mi:ss')r_date,
+ 		u_idx_reported, u_idx_reporting
+		from (select * from report order by r_date)
+		where rownum <= 8 
+
+  select *, count(u_idx_reported)
+	  from report 
+	  group by u_idx_reported 
+	  where u_i
+	  dx_reported = 2
+	  
+	  select 
+	    r_idx,
+ 		to_char(r_date,'yyyy-mm-dd hh24:mi:ss') r_date,
+ 		u_idx_reported, 
+ 		u_idx_reporting
+		from (select * from report order by r_date)
+		where r_idx=1
+		
+	 select 
+	    r_idx,
+ 		to_char(r_date,'yyyy-mm-dd hh24:mi:ss') r_date,
+ 		u_idx_reported, 
+ 		u_idx_reporting,
+ 		r_reason
+		from (select * from report order by r_date)
+		where r_idx = 3
+ 
 select * from report

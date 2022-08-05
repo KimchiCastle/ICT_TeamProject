@@ -148,7 +148,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public int insertReportedUser(ReportVo vo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("user.insert_report",vo);
+		return sqlSession.insert("user.insert_report",vo);
 	}
 
 

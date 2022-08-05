@@ -80,7 +80,6 @@ public class RecentController {
 		//마지막페이지 구하는 공식 삼항연산자 사용
 		int last_page = ( (cookielist2.size()%pageSize==0) ? (cookielist2.size()/pageSize) : (cookielist2.size()/pageSize+1) );
 		
-//		System.out.println(last_page);
 		
 		//
 		List<ProductVo> cookielist = new ArrayList<ProductVo>();

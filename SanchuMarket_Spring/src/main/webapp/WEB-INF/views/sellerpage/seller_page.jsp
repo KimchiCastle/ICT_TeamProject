@@ -24,11 +24,13 @@
 <script type="text/javascript">
 
 $(function(){
-	
-	if(${param.reason eq 'report_success'}){
+
+	if('${param.reason eq "report_success"}' == 'true'){
 		alert('신고가 정상적으로 처리됐습니다.');
-	}else if(${ param.reason eq 'report_failed'}){
-		alert('신고가 비정상적으로 처리됐습니다\n 관리자에게 문의바랍니다.')
+		return;
+	}else if('${ param.reason eq "report_failed"}' == 'true'){
+		alert('신고가 비정상적으로 처리됐습니다\n 관리자에게 문의바랍니다.');
+		return;
 	}
 	 
 })

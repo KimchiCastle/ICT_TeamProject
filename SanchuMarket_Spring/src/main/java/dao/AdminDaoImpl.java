@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import vo.CategoryVo;
 import vo.ProductVo;
+import vo.ReportVo;
 import vo.UserVo;
 import vo.WithdrawlVo;
 
@@ -96,7 +97,26 @@ public class AdminDaoImpl implements AdminDao{
 		return sqlSession.selectOne("user.user_list",map);
 	}
 
+	//최근 신고 유저 조회
+	@Override
+	public List<ReportVo> select_reportUser() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("user.report_userList");
+	}
+	//신고 횟수 합산
+	@Override
+	public int select_reportCnt(int u_idx_reported) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("user.report_sum",u_idx_reported);
+	}
 	
+	public ReportVo select_reportUser2(int r_idx) {
+		
+		return sqlSession.selectOne("user.report_userVo",r_idx);
+	}
+
+
+
 
 
 }

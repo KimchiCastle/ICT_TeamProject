@@ -165,7 +165,7 @@ public class TradeController {
 		Map map = new HashMap();
 		
 		boolean result = false;
-		System.out.println(u_idx);
+
 		if(u_idx==0) {
 			map.put("result", result);
 			
@@ -174,8 +174,6 @@ public class TradeController {
 		
 		//파라미터로 받아온 u_idx로 회원정보 가지고오기
 		UserVo uservo = user_dao.selectOneByIdx(u_idx);
-		
-		System.out.println(uservo.getU_nickname());
 		
 		//거래 테이블 조회용 map 선언
 		Map selectMap = new HashMap();
