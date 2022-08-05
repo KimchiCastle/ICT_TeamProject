@@ -189,7 +189,7 @@
       <svg height="40" width="150">
         <rect id="shape" height="40" width="150" />
         <div id="text">
-          <a href="delete_product(${ vo.p_idx });"><span class="spot"></span>삭제</a>
+          <a onclick="delete_product(${vo.p_idx},${ user.u_idx });"><span class="spot"></span>삭제</a>
         </div>
       </svg>
     </div>

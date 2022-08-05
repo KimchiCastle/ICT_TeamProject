@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from
 			(
 			select 
-				rank() over(order by u_idx) no, 
+				rank() over(order by u_idx) no, u_idx,
 				u_name, u_id, u_tel, u_addr, nvl2(u_status,u_status,'활동')u_status
 			from(select * from user_market where u_grade='일반회원')
 			 <trim prefix="where"  prefixOverrides="or">
@@ -159,6 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				u_status=#{u_status}
 			where u_idx=#{ u_idx }
 	</update>
+	
 	<!-- 회원상태 업데이트2, 탈퇴회원테이블 저장 -->
 	<insert id="insert_Withdrawl" parameterType="vo.WithdrawlVo">
 	   insert into withdrawl values
@@ -166,8 +167,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   		#{u_idx},
 		   		sysdate
 		   )
-	
 	</insert>
+	
+	<!-- 회원상태 업데이트3, 탈퇴회원테이블 삭제 -->
+	<delete id="delete_Withdrawl" parameterType="vo.WithdrawlVo">
+		delete from withdrawl where u_idx=#{u_idx}
+	</delete>
+	
+	
+	
+	
 	<!-- 회원정보수정 -->
 	<update id="user_info_update" parameterType="vo.UserVo">
 		update user_market

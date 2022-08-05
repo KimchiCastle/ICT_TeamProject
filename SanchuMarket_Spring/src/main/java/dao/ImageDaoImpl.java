@@ -25,10 +25,10 @@ public class ImageDaoImpl implements ImageDao {
 
 	
 	//상품에 해당하는 이미지 객체 받아오기
-	public ImageVo selectOne(int p_idx) {
+	public List<ImageVo> selectOne(int p_idx) {
 		// TODO Auto-generated method stub
 		
-		return sqlSession.selectOne("image.image_selectOne", p_idx);
+		return sqlSession.selectList("image.image_selectOne", p_idx);
 	}
 	
 	//이미지 idx에 해당하는 이미지 파일명 가지고 오기
@@ -58,6 +58,12 @@ public class ImageDaoImpl implements ImageDao {
 	public int deleteImage(int i_idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("image.image_datadelete", i_idx);
+	}
+
+	@Override
+	public int deleteAllImage(int p_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("image.image_alldelete", p_idx);
 	}
 
 

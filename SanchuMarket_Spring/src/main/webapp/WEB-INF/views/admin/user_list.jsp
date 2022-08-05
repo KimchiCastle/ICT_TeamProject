@@ -24,9 +24,11 @@
 <!--select picker-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
 <!-- Latest compiled and minified JavaScript 한국어 번역 파일 -->
+<!-- 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/i18n/defaults-ko_KR.min.js"></script>
 
-<script>
+ -->
+ <script>
 
 
 $(function(){
@@ -80,7 +82,73 @@ function find(){
 
 </script>
 
+ 
+<!-- 계정 정지시키기, 정지 풀기(탈퇴한 회원도) 자바스크립트 -->
+<script type="text/javascript">
+	
+	function bannedMember(u_idx, u_id){
+		
+		if( !confirm(u_id+' 회원을 정지시키겠습니까?') ) return;
+		
+		var u_status = "정지";
+		
+		$.ajax({
+			
+			url		 : '../user/user_updateStatus.do',
+			type	 : 'POST',
+			data	 : {'u_idx':u_idx, 'u_status':u_status},
+			success : function(res){
+				
+				if(res.result){
+					
+					alert('회원정지 완료!')
+					window.location.reload();
+				}
+				
+			},
+			error	 : function(err){
+				alert('모종의 이유로 실패했습니다.');
+			}
+			
+			
+		})
+		
+		
+		
+	}
+	
+	function clearMember(u_idx, u_id){
+	
+		if( !confirm(u_id+' 회원을 복구시키겠습니까?') ) return;
+		
+		
+		var u_status = "활동";
+		
+		$.ajax({
+			
+			url		 : '../user/user_updateStatus.do',
+			type	 : 'POST',
+			data	 : {'u_idx':u_idx, 'u_status':u_status},
+			success : function(res){
+				
+					if(res.result){
+					
+					alert('복구 완료!')
+					window.location.reload();
+				}
+				
+			},
+			error	 : function(err){
+				alert('모종의 이유로 실패했습니다.');
+			}
+			
+			
+		})
+		
+		
+	}
 
+</script>
 
 
 </head>
@@ -101,30 +169,32 @@ function find(){
   <table id="table" class="table table-hover table-mc-light-blue">
   
 	      <tr>
-	        <th style="width:5%">번호</th>
-	        <th style="width:8%">이름</th>
-	        <th style="width:10%">아이디</th>
-	        <th style="width:12%">전화번호</th>
-	        <th style="width:20%">주소</th>
-	        <th style="width:8%">상태</th>
+	        <th style="width:5%;">번호</th>
+	        <th style="width:8%;">이름</th>
+	        <th style="width:10%;">아이디</th>
+	        <th style="width:12%;">전화번호</th>
+	        <th style="width:20%;">주소</th>
+	        <th style="width:8%;">상태</th>
+	        <th style="width:8%;"></th>
 	      </tr>
 	    
 	  <c:forEach var="list" items="${ userList }">
-	      <tr onmouseover="this.style.background='#acc6aa40'" onmouseout="this.style.background='white'" style="cursor:pointer;"onclick="location.href=''">
-	        <td>${list.no}</td>
-	        <td>${list.u_name}</td>
-	        <td>${list.u_id}</td>
-	        <td>${list.u_tel}</td>
-	        <td>${list.u_addr}</td>
-	        <td>${list.u_status}</td>
-	        <%-- <td>
+	  	
+	      <tr onmouseover="this.style.background='#acc6aa40'" onmouseout="this.style.background='white'" style="cursor:pointer;">
+	        <td style="vertical-align: middle;" onclick="location.href='../sellerpage/list.do?u_idx=${list.u_idx}'">${list.no}</td>
+	        <td style="vertical-align: middle;" onclick="location.href='../sellerpage/list.do?u_idx=${list.u_idx}'">${list.u_name}</td>
+	        <td style="vertical-align: middle;" onclick="location.href='../sellerpage/list.do?u_idx=${list.u_idx}'">${list.u_id}</td>
+	        <td style="vertical-align: middle;" onclick="location.href='../sellerpage/list.do?u_idx=${list.u_idx}'">${list.u_tel}</td>
+	        <td style="vertical-align: middle;" onclick="location.href='../sellerpage/list.do?u_idx=${list.u_idx}'">${list.u_addr}</td>
+	        <td style="vertical-align: middle;" onclick="location.href='../sellerpage/list.do?u_idx=${list.u_idx}'">${list.u_status}</td>
+	        <td>
 	        	<c:if test="${list.u_status eq '활동'}">
-		        	<button type="button">정지</button> 
+		        	<button type="button" class="btn btn-danger" onclick="bannedMember(${ list.u_idx },'${list.u_id}');">정지</button> 
 	        	</c:if>
 	        	<c:if test="${list.u_status == '정지' || list.u_status == '탈퇴' }">
-		        	<button type="button">활동</button> 
+		        	<button type="button" class="btn btn-info" onclick="clearMember(${ list.u_idx },'${list.u_id}');">활동</button> 
 	        	</c:if>
-	        </td> --%>
+	        </td> 
 	      </tr>  
 	  </c:forEach>
     </table>

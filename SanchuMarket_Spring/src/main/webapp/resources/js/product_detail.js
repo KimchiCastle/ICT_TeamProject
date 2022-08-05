@@ -49,7 +49,7 @@
 		
 		$.ajax({
 			
-			url		: 'jjimCount',
+			url		: 'jjimCount.do',
 			type	: 'POST',
 			data	: {'p_idx':p_idx},
 			success	: function(res_data){
@@ -101,7 +101,7 @@
 					
 					$.ajax({
 			
-								url		: 'jjimCount',
+								url		: 'jjimCount.do',
 								type	: 'POST',
 								data	: {'p_idx':p_idx},
 								success	: function(res_data){
@@ -156,7 +156,7 @@
 					
 					$.ajax({
 			
-								url		: 'jjimCount',
+								url		: 'jjimCount.do',
 								type	: 'POST',
 								data	: {'p_idx':p_idx},
 								success	: function(res_data){
@@ -303,11 +303,38 @@
 		});		
 	}
 	
-	function delete_product(idx){
-	  if(!confirm('정말 삭제하시겠습니까?')) return;
+	function delete_product(p_idx, u_idx){
+	  if(!confirm('정말 상품을 삭제하시겠습니까?')) return;
 	  
-	  location.href="delete.do?p_idx=" + idx;
-	  return;
+		
+		$.ajax({
+			
+			url		: 'delete.do',
+			type	: 'POST',
+			data	: {'p_idx':p_idx, 'u_idx':u_idx},
+			success	: function(res){
+				
+				if(res.result){
+					
+					alert('상품을 삭제했습니다.');
+					location.href = '../mainpage/list.do';
+					
+				}else{
+					
+					alert('상품 삭제에 실패했습니다. 관리자에게 문의해주세요.')
+				
+				}
+				
+				
+			},
+			error	: function(err){
+				alert('상품 삭제에 실패했습니다. 관리자에게 문의해주세요.')
+			}
+			
+		})
+
+	
+
 	}
 	
 	

@@ -1,4 +1,4 @@
-/*
+
 --실수 했을때 테이블 드랍용
 drop table user_market cascade constraints
 
@@ -161,5 +161,4 @@ select * from user_market;
 			)			
 		where no between 1 and 5 
 
-*/
 
