@@ -171,6 +171,11 @@ public class MypageController {
 			
 		}
 		
+		//수정 후 새로운 uservo형을 session에 세팅
+		UserVo user = user_dao.selectOneByIdx(userVo.getU_idx());
+		
+		session.removeAttribute("user");
+		session.setAttribute("user", user);
 		
 		result = (res==1);
 		

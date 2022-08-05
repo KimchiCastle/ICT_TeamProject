@@ -333,8 +333,6 @@
 		
 		var form = $("#imgform")[0];
 		
-		alert($("#u_photo")[0].files[0]);
-		
 		var formData = new FormData(form);
 		//form에 이미지추가, 이미지가 있을 때
 		if($("#u_photo")[0].files[0]!=undefined){
@@ -369,9 +367,8 @@
 			success	: function(res){
 				
 				if(res.result){
-					alert('회원정보가 수정되었습니다. 다시 로그인해주세요.');
 					
-					location.href='../mainpage/logout.do';
+					location.href='../sellerpage/list.do?u_idx='+u_idx;
 					
 				}else{
 					alert('회원정보수정중 문제가 발생했습니다. 관리자에게 문의해주세요.');
