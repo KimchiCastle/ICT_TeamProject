@@ -88,7 +88,8 @@
 
 ### 비밀번호 찾기 (메일API)
 ![4 비밀번호찾기](https://user-images.githubusercontent.com/88763803/181047362-7c2a6e23-c542-4768-bffc-016a3ad093a1.png)
-
+![ 비밀번호찾기](https://user-images.githubusercontent.com/88763803/183578255-688aa0df-832b-4dbe-b9be-5be2d0d8f73e.png)
+![ 비밀번호찾기](https://user-images.githubusercontent.com/88763803/183578258-81f4024b-39ad-4a4a-bb99-9bd9a1fa476d.png)
 
 ### 회원가입
 ![5 회원가입_1](https://user-images.githubusercontent.com/88763803/181047517-65046478-681a-4bb1-8c24-4ed2645457da.png)
